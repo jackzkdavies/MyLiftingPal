@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<title>&nbsp;</title>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<!-- <link rel="stylesheet" type="text/css" href="../css/demo.css" /> -->
+		
+		<script type="text/javascript" charset="utf-8" src="../js/cordova.js"></script>
+		
+		<script type="text/javascript" charset="utf-8" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../js/jquery.arctext.js"></script>
+        <script type="text/javascript" charset="utf-8" src="../js/mlp.js"></script> 
+		
+		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+		
+	</head>
+	<body>
+		<!-- Start of first page I -->
+		<div data-role="page" id="page1">
+			<!-- Header -->
+			<div class="header"	data-role="header">
+				<img id="logoImage" src="../images/mlp_logo.png" />		
+				<hr>
+			</div>
+			<!-- /header -->
+			<!-- Content    -->
+			<div class="content" data-role="content">
+			
+				</br>
+				<div class="arc-wrapper">
+				
+					<h3 id="createId">Create</h3>
+					<h1 id="caId">CA</h1>
+					<h2 id="accountId">Account!</h2>
+				</div>
+				</br></br>
+				<div class="arc-wrapper">
+				
+					<h3 id="loginId">Login</h3>
+					<h1 id="lgId">LG</h1>
+					<h2 id="welcomeBackId">WelcomeBack!</h2>
+				</div>
+				</br>
+			</div>
+			<!-- /content -->
+			<!-- footer -->
+			
+			<div class="footer" data-role="footer">
+				<hr>
+				<h4>&copy; 2014 Jack Davies and Taylor Hamling Ltd.</h4>
+			</div>
+			<!-- /footer -->
+		</div>
+		<!-- /page -->
+
+	</body>
+	<script type="text/javascript">
+	var windowWidth = $(window).width();
+	
+	document.getElementById("logoImage").style.width='100%';
+	
+	var cw = $('.arc-wrapper').width();
+	
+	
+	var $createId = $('#createId');
+	$createId.css({'padding-top':cw/15+'px'});
+	$createId.css({'padding-left':cw/7+'px'});
+	$createId.css({'letter-spacing':cw/50+'px'});
+	
+	var $caId = $('#caId');
+	$caId.css({'padding-top':cw/5+'px'});
+	$caId.css({'padding-left':cw/5+'px'});
+	
+	var $accountId = $('#accountId');
+	$accountId.css({'padding-top':cw/2+'px'});
+	$accountId.css({'padding-left':cw/4+'px'});
+	$accountId.css({'font-size':'3vw'});
+	$accountId.css({'letter-spacing':cw/19+'px'});
+	
+	
+	var $loginId = $('#loginId');
+
+	$loginId.css({'padding-top':cw/15+'px'});
+	$loginId.css({'padding-left':cw/4+'px'});
+	$loginId.css({'letter-spacing':cw/30+'px'});
+	
+	var $lgId = $('#lgId');
+	$lgId.css({'padding-top':cw/5+'px'});
+	$lgId.css({'padding-left':cw/5+'px'});
+	
+	var $welcomeBackId = $('#welcomeBackId');
+	$welcomeBackId.css({'padding-top':cw/2+'px'});
+	$welcomeBackId.css({'padding-left':cw/12+'px'});
+	$welcomeBackId.css({'font-size':'3vw'});
+	$welcomeBackId.css({'letter-spacing':cw/50+'px'});
+
+
+
+
+	
+	$('.arc-wrapper').css({'height':cw+'px'});
+	$('.arc-wrapper').css({'font-size':cw+'px'});
+
+	
+	 
+	</script>
+</html>

@@ -1,0 +1,71 @@
+html
+{
+    background-image: url(../images/dips.jpg); 
+    background-position:center center;
+    background-repeat:no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+	width:100%;
+    height:100%;
+}
+.arc-wrapper{
+	position: relative;
+	margin: 0px auto;
+	font-family: 'Montserrat', serif;
+	text-transform: uppercase;
+	width: 20%;
+	background: #999999;
+	border-radius: 50%;
+
+	content: 'S';
+	margin-left:75%;
+
+}
+
+.arc-wrapper h3{
+
+	position: absolute;
+	font-size: 6vw;
+	color: #D26A44;
+	text-shadow: 1px 1px 1px #954c04;
+	margin-left:-175%;
+}
+
+.arc-wrapper h2{
+
+	position: absolute;
+	font-size: 3vw;
+	color: #D26A44;
+	text-shadow: 1px 1px 1px #954c04;
+	margin-left:-175%;
+}
+
+
+.arc-wrapper h1{
+	position: absolute;
+	width: 100%;
+	top: 0;
+	left: 0;
+	font-size: 8vw;
+	text-decoration: underline;
+	margin-top:5%;
+	color: #fff;
+	text-shadow: 1px 1px 1px #954c04;
+}
+
+.content{
+	width:100%;
+	height:100%;
+	
+}
+.footer{
+	position: fixed;
+	text-align: center;
+	bottom:0;
+	width:95%;
+	font: 2.5vw arial, sans-serif;
+	color:white;
+	/* height:12px; */
+}
