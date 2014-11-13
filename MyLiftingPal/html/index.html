@@ -13,54 +13,55 @@
 		<script type="text/javascript" charset="utf-8" src="../js/jquery.min.js"></script>
 		<script type="text/javascript" charset="utf-8" src="../js/jquery.arctext.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/mlp.js"></script> 
+		<script type="text/javascript" charset="utf-8" src="../js/viewSize.js"></script> 
+		
+		<script src='../js/fancyInput.js'></script>
+		<link rel="stylesheet" href="../css/fancyInput.css">
+
 		
 		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 		
 	</head>
 	<body>
-		<!-- Start of first page I -->
-		<div data-role="page" id="page1">
-			<!-- Header -->
-			<div class="header"	data-role="header">
-				<img id="logoImage" src="../images/mlp_logo.png" />		
-				<hr>
-			</div>
-			<!-- /header -->
-			<!-- Content    -->
-			<div class="content" data-role="content">
-			
-				</br>
-				<div class="arc-wrapper">
-				
-					<h3 id="createId">Create</h3>
-					<h1 id="caId">CA</h1>
-					<h2 id="accountId">Account!</h2>
-				</div>
-				</br></br>
-				<div class="arc-wrapper">
-				
-					<h3 id="loginId">Login</h3>
-					<h1 id="lgId">LG</h1>
-					<h2 id="welcomeBackId">WelcomeBack!</h2>
-				</div>
-				</br>
-			</div>
-			<!-- /content -->
-			<!-- footer -->
-			
-			<div class="footer" data-role="footer">
-				<hr>
-				<h4>&copy; 2014 Jack Davies and Taylor Hamling Ltd.</h4>
-			</div>
-			<!-- /footer -->
+
+	<div data-role="page" id="page1">
+
+		<div class="header"	data-role="header">	
+			<img id="logoImage" src="../images/mlp_logo.png" />	
 		</div>
-		<!-- /page -->
+
+		<div class="content" data-role="content">
+			<hr>
+			
+			<div id="createAccButton" class="arc-wrapper">
+				<h3 id="createId">Create</h3>
+				<h1 id="caId">CA</h1>
+				<h2 id="accountId">Account!</h2>
+			</div>
+			
+		</div>
+
+		
+		<div class="footer" data-role="footer">
+			<h4>&copy; 2014 Jack Davies and Taylor Hamling Ltd.</h4>
+		</div>
+		
+		<div class="adds" data-role="adds">
+			<p>add</p>
+		</div>
+		
+	</div>
+
 
 	</body>
 	<script type="text/javascript">
 	var windowWidth = $(window).width();
+	var windowHeight = $(window).height();
 	
-	document.getElementById("logoImage").style.width='100%';
+	$('.content').css({'min-width':windowWidth-20+'px'});
+	$('#page1').css({'min-height':windowHeight-20+'px'});
+	
+	
 	
 	var cw = $('.arc-wrapper').width();
 	
@@ -96,10 +97,20 @@
 	$welcomeBackId.css({'padding-left':cw/12+'px'});
 	$welcomeBackId.css({'font-size':'3vw'});
 	$welcomeBackId.css({'letter-spacing':cw/50+'px'});
+	
+	var $logingButton = $('#logingButton');
+	$logingButton.css({'margin-left':'75%'});
 
+	var $loginInput = $('#loginInput');
+	$loginInput.css({'height':cw+'px'});
+	
 
-
-
+	
+	var contentHeight = $('.content').height();
+	var footerHeight = $('.footer').height();
+	
+	var h = windowHeight-footerHeight;
+	$('.content').css({'min-height':h-logoHeight+'px'});
 	
 	$('.arc-wrapper').css({'height':cw+'px'});
 	$('.arc-wrapper').css({'font-size':cw+'px'});

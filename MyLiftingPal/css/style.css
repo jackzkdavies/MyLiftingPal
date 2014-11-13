@@ -1,6 +1,6 @@
 html
 {
-    background-image: url(../images/dips.jpg); 
+    background-image: url(../images/weights.jpg); 
     background-position:center center;
     background-repeat:no-repeat;
     -webkit-background-size: cover;
@@ -8,8 +8,56 @@ html
     -o-background-size: cover;
     background-size: cover;
 	width:100%;
-    height:100%;
 }
+
+#page1{
+
+	width:100%;
+	border-color:purple;
+	border-width:2px;
+	border-style:solid;
+}
+
+.header{
+	width:100%;
+	background-color:white;
+}
+
+.header #logoImage{
+	width:70%;
+	display:block;
+	margin: 0 auto;
+}
+
+.content{
+	background-color:yellow;
+	width:100%;
+	float:left;
+}
+
+.footer{
+	background-color:blue;
+	margin: 0px auto;
+	text-align: center;
+	float:bottom;
+	font: 8px arial, sans-serif;
+	color:white;
+	/* height:12px; */
+}
+
+.adds{
+	background-color:red;
+	
+	position: fixed;
+    bottom: 0;
+	width: 75%;position: fixed;left: 50%;margin: 0 0 0 -37.5%;
+}
+
+	
+	
+	
+/* Circles and things  */
+
 .arc-wrapper{
 	position: relative;
 	margin: 0px auto;
@@ -53,19 +101,4 @@ html
 	margin-top:5%;
 	color: #fff;
 	text-shadow: 1px 1px 1px #954c04;
-}
-
-.content{
-	width:100%;
-	height:100%;
-	
-}
-.footer{
-	position: fixed;
-	text-align: center;
-	bottom:0;
-	width:95%;
-	font: 2.5vw arial, sans-serif;
-	color:white;
-	/* height:12px; */
 }
