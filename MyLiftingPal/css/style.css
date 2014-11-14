@@ -13,9 +13,9 @@ html
 #page1{
 
 	width:100%;
-	border-color:purple;
-	border-width:2px;
-	border-style:solid;
+	/*border-color:purple;*/
+	/*border-width:2px;*/
+	/*border-style:solid;*/
 }
 
 .header{
@@ -30,16 +30,16 @@ html
 }
 
 .content{
-	background-color:yellow;
+
 	width:100%;
 	float:left;
 }
 
 .footer{
-	background-color:blue;
-	margin: 0px auto;
+	/*background-color:blue;*/
+        width: 100%;
 	text-align: center;
-	float:bottom;
+	float:left;
 	font: 8px arial, sans-serif;
 	color:white;
 	/* height:12px; */
@@ -54,51 +54,69 @@ html
 }
 
 	
-	
-	
-/* Circles and things  */
-
-.arc-wrapper{
-	position: relative;
-	margin: 0px auto;
-	font-family: 'Montserrat', serif;
-	text-transform: uppercase;
-	width: 20%;
-	background: #999999;
-	border-radius: 50%;
-
-	content: 'S';
-	margin-left:75%;
+.createAccount{
+    width: 100%;
 
 }
-
-.arc-wrapper h3{
-
-	position: absolute;
-	font-size: 6vw;
-	color: #D26A44;
-	text-shadow: 1px 1px 1px #954c04;
-	margin-left:-175%;
+#createHeadings{
+    padding-left: 40%;
+    float:left;
+    width:35%;
+   
+}
+#loginButton{
+    text-align: center;
+    float:left;
+    width: 25%;
+    margin-left: 37.5%;
+    background-color: gray;
+    border-radius: 50%;
 }
 
-.arc-wrapper h2{
-
-	position: absolute;
-	font-size: 3vw;
-	color: #D26A44;
-	text-shadow: 1px 1px 1px #954c04;
-	margin-left:-175%;
+#createButton{
+    text-align: center;
+    float:left;
+    width: 25%;
+    background-color: gray;
+    border-radius: 50%;
+}
+#spacer{
+    width:100%;
+    /*background-color: yellowgreen;*/
+    float:left;
 }
 
-
-.arc-wrapper h1{
-	position: absolute;
-	width: 100%;
-	top: 0;
-	left: 0;
-	font-size: 8vw;
-	text-decoration: underline;
-	margin-top:5%;
-	color: #fff;
-	text-shadow: 1px 1px 1px #954c04;
+#loginArea{
+    float: left;
+}
+label{
+    font-size: 6vw;
+    color: #D26A44;
+    text-shadow: 1px 1px 1px #954c04; 
+    text-align: center;
+    
+}
+input {
+    border: 0;
+    outline: 0;
+    background: white;
+    border-bottom: 2px solid black;
+    width: 80%;
+}
+h1{
+    font-size: 9vw;
+    color: #D26A44;
+    text-shadow: 1px 1px 1px #954c04;   
+    
+}
+h2{
+    font-size: 6vw;
+    color: #D26A44;
+    text-shadow: 1px 1px 1px #954c04;   
+    padding-bottom:0;
+}
+h3{
+    font-size: 5vw;
+    color: #D26A44;
+    text-shadow: 1px 1px 1px #954c04;    
 }

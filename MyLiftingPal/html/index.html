@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html>
-	<title>&nbsp;</title>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
-		<link rel="stylesheet" type="text/css" href="../css/style.css" />
-		<!-- <link rel="stylesheet" type="text/css" href="../css/demo.css" /> -->
-		
-		<script type="text/javascript" charset="utf-8" src="../js/cordova.js"></script>
-		
-		<script type="text/javascript" charset="utf-8" src="../js/jquery.min.js"></script>
-		<script type="text/javascript" charset="utf-8" src="../js/jquery.arctext.js"></script>
-        <script type="text/javascript" charset="utf-8" src="../js/mlp.js"></script> 
-		<script type="text/javascript" charset="utf-8" src="../js/viewSize.js"></script> 
-		
-		<script src='../js/fancyInput.js'></script>
-		<link rel="stylesheet" href="../css/fancyInput.css">
+        <head>
+            <title>MLP</title>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1">
 
+            <link rel="stylesheet" type="text/css" href="../css/style.css" />
+            
+            <script type="text/javascript" charset="utf-8" src="../js/niceforms.js"></script>
+            <link rel="stylesheet" type="text/css" href="../css/niceforms-default.css" />
+          
+
+            <script type="text/javascript" charset="utf-8" src="../js/cordova.js"></script>
+            <script type="text/javascript" charset="utf-8" src="../js/jquery.min.js"></script>
+            <script type="text/javascript" charset="utf-8" src="../js/mlp.js"></script> 
+            <script type="text/javascript" charset="utf-8" src="../js/viewSize.js"></script> 
+
+            <script src='../js/fancyInput.js'></script>
+            <link rel="stylesheet" href="../css/fancyInput.css">
+
+
+            <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 		
-		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-		
-	</head>
+        </head>
 	<body>
 
 	<div data-role="page" id="page1">
@@ -32,12 +33,37 @@
 
 		<div class="content" data-role="content">
 			<hr>
-			
-			<div id="createAccButton" class="arc-wrapper">
-				<h3 id="createId">Create</h3>
-				<h1 id="caId">CA</h1>
-				<h2 id="accountId">Account!</h2>
-			</div>
+                        
+                        <div id="spacer"><br></div>
+                        
+                        <div id="createAcc">
+                            <div id="createHeadings">
+                                <h2 id="ca1">Create</h2>
+                                <h3 id="ca2">Account!</h3>
+                            </div>
+
+                            <div id="createButton">
+                                <h1 id="ca3">CA</h1>
+                            </div>
+                        </div>
+                        
+                        <div id="spacer"><br></div>
+                        
+                        <div id="loginArea">
+                            
+                            <dl>
+                                <dt><label for="username">Username</label></dt>
+                                <dd><input type="text" name="email" id="email" size="32" maxlength="128" /></dd>
+                            </dl>
+                            <dl>
+                                <dt><label for="password">Password:</label></dt>
+                                <dd><input type="password" name="password" id="password" size="32" maxlength="32" /></dd>
+                            </dl>
+        
+                            <div id="loginButton">
+                                <h1 id="ca3">LG</h1>
+                            </div>
+                        </div>
 			
 		</div>
 
@@ -47,75 +73,26 @@
 		</div>
 		
 		<div class="adds" data-role="adds">
-			<p>add</p>
+			<p>advert</p>
 		</div>
 		
 	</div>
 
 
 	</body>
+        
 	<script type="text/javascript">
 	var windowWidth = $(window).width();
 	var windowHeight = $(window).height();
 	
-	$('.content').css({'min-width':windowWidth-20+'px'});
-	$('#page1').css({'min-height':windowHeight-20+'px'});
-	
-	
-	
-	var cw = $('.arc-wrapper').width();
-	
-	
-	var $createId = $('#createId');
-	$createId.css({'padding-top':cw/15+'px'});
-	$createId.css({'padding-left':cw/7+'px'});
-	$createId.css({'letter-spacing':cw/50+'px'});
-	
-	var $caId = $('#caId');
-	$caId.css({'padding-top':cw/5+'px'});
-	$caId.css({'padding-left':cw/5+'px'});
-	
-	var $accountId = $('#accountId');
-	$accountId.css({'padding-top':cw/2+'px'});
-	$accountId.css({'padding-left':cw/4+'px'});
-	$accountId.css({'font-size':'3vw'});
-	$accountId.css({'letter-spacing':cw/19+'px'});
-	
-	
-	var $loginId = $('#loginId');
 
-	$loginId.css({'padding-top':cw/15+'px'});
-	$loginId.css({'padding-left':cw/4+'px'});
-	$loginId.css({'letter-spacing':cw/30+'px'});
+	$('#page1').css({'min-height':windowHeight-25+'px'});	
 	
-	var $lgId = $('#lgId');
-	$lgId.css({'padding-top':cw/5+'px'});
-	$lgId.css({'padding-left':cw/5+'px'});
-	
-	var $welcomeBackId = $('#welcomeBackId');
-	$welcomeBackId.css({'padding-top':cw/2+'px'});
-	$welcomeBackId.css({'padding-left':cw/12+'px'});
-	$welcomeBackId.css({'font-size':'3vw'});
-	$welcomeBackId.css({'letter-spacing':cw/50+'px'});
-	
-	var $logingButton = $('#logingButton');
-	$logingButton.css({'margin-left':'75%'});
-
-	var $loginInput = $('#loginInput');
-	$loginInput.css({'height':cw+'px'});
-	
-
-	
-	var contentHeight = $('.content').height();
-	var footerHeight = $('.footer').height();
-	
-	var h = windowHeight-footerHeight;
-	$('.content').css({'min-height':h-logoHeight+'px'});
-	
-	$('.arc-wrapper').css({'height':cw+'px'});
-	$('.arc-wrapper').css({'font-size':cw+'px'});
-
-	
-	 
+        //Layout for create account
+        var headingHeight = $('#ca1').height();
+	$('#ca1').css({'margin-bottom':-headingHeight+'px'});
+        $('#ca1').css({'margin-left':headingHeight/3+'px'});
+        $('#ca1').css({'letter-spacing':headingHeight/8+'px'});
+        $('#ca2').css({'letter-spacing':headingHeight/6+'px'});
 	</script>
 </html>
