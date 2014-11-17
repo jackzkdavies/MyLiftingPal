@@ -30,6 +30,7 @@ h2 {
 h3 {
   width: 100%;
   margin: 5px 0px;
+  border-radius: 7px;
   background-image: -webkit-linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
   background-image: -o-linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
   background-image: linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
@@ -230,6 +231,7 @@ p {
   width: 100%;
 }
 .exersicediv {
+  border-radius: 6px;
   background-image: -webkit-linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
   background-image: -o-linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
   background-image: linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
