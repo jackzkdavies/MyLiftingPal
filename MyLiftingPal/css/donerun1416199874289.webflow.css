@@ -54,6 +54,10 @@ h5 {
 }
 h6 {
   margin: 10px 0px;
+  background-image: -webkit-linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
+  background-image: -o-linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
+  background-image: linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
+  color: rgba(64, 48, 38, 0.89);
   font-size: 12px;
   line-height: 18px;
   font-weight: 700;
@@ -95,6 +99,11 @@ p {
   font-family:'Open Sans', sans-serif;
   line-height: 42px;
   text-align: center;
+}
+.button.exersizeupdate {
+  width: 20%;
+  float: right;
+  border-radius: 3px;
 }
 .subtitle {
   margin-bottom: 41px;
@@ -256,15 +265,62 @@ p {
 .menucont {
   border-radius: 0px 0px 3px 3px;
 }
+.exerciseinfotable {
+  width: 100%;
+  border-radius: 3px;
+  background-image: -webkit-linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
+  background-image: -o-linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
+  background-image: linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
+}
+.exerciseinfotable.exerciseinfotabledata {
+  background-image: -webkit-linear-gradient(rgba(37, 184, 204, 0.24), rgba(37, 184, 204, 0.24));
+  background-image: -o-linear-gradient(rgba(37, 184, 204, 0.24), rgba(37, 184, 204, 0.24));
+  background-image: linear-gradient(rgba(37, 184, 204, 0.24), rgba(37, 184, 204, 0.24));
+}
+.exercisedivname {
+  width: 50%;
+  float: left;
+}
+.exercisesetsdiv {
+  width: 10%;
+  float: left;
+}
+.exxerciserepsdiv {
+  width: 15%;
+  background-image: -webkit-linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
+  background-image: -o-linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
+  background-image: linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
+}
+.exerciserepsdiv {
+  width: 20%;
+  float: left;
+}
+.exerciseweightsdiv {
+  width: 20%;
+  float: left;
+}
+.exerciseupdatediv {
+  width: 20%;
+}
 @media (max-width: 991px) {
   h2 {
     text-shadow: none;
+  }
+  h5 {
+    color: white;
+  }
+  h6 {
+    color: rgba(64, 48, 38, 0.89);
   }
   p {
     text-shadow: none;
   }
   .button {
     width: 40%;
+  }
+  .button.exersizeupdate {
+    width: 20%;
+    padding-left: 20px;
   }
   .field {
     width: 60%;
@@ -279,6 +335,11 @@ p {
     width: auto;
     float: left;
   }
+  .exercisehistorydiv {
+    width: 80%;
+    height: auto;
+    float: left;
+  }
 }
 @media (max-width: 767px) {
   body {
@@ -286,6 +347,9 @@ p {
     text-align: center;
   }
   h2 {
+    text-shadow: none;
+  }
+  h3 {
     text-shadow: none;
   }
   p {
@@ -355,6 +419,12 @@ p {
     width: 100%;
     border-radius: 7px;
   }
+  .button.exersizeupdate {
+    position: static;
+    width: 100%;
+    float: left;
+    clear: none;
+  }
   .subtitle {
     text-shadow: none;
   }
@@ -398,6 +468,15 @@ p {
   }
   .dropdowndiv {
     width: 40%;
+  }
+  .exerciseinfotable.exerciseinfotabledata {
+    border-bottom: 2px none white;
+  }
+  .exercisedivname {
+    width: 50%;
+  }
+  .exercisesetsdiv {
+    width: 10%;
   }
 }
 
