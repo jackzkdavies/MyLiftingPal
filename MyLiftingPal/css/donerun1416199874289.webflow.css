@@ -124,7 +124,7 @@ p {
 }
 .share-text {
   margin-bottom: 12px;
-  color: rgba(241, 235, 247, 0.40);
+  color: rgba(241, 235, 247, 0.4);
   text-shadow: transparent 0px 1px 0px;
 }
 .social-widget {
@@ -233,8 +233,14 @@ p {
 .currentheading {
   text-shadow: none;
 }
+.dropdowndiv {
+  width: 30%;
+}
 @media (max-width: 991px) {
   h2 {
+    text-shadow: none;
+  }
+  p {
     text-shadow: none;
   }
   .button {
@@ -249,6 +255,10 @@ p {
   .exercisecurrent {
     width: 60%;
   }
+  .addnewdropdown {
+    width: auto;
+    float: left;
+  }
 }
 @media (max-width: 767px) {
   body {
@@ -256,6 +266,9 @@ p {
     text-align: center;
   }
   h2 {
+    text-shadow: none;
+  }
+  p {
     text-shadow: none;
   }
   .button {
@@ -299,6 +312,13 @@ p {
   }
   .exercisecurrent {
     width: 100%;
+  }
+  .addnewdropdown {
+    width: auto;
+    float: left;
+  }
+  .dropdowndiv {
+    width: 25%;
   }
 }
 @media (max-width: 479px) {
@@ -351,6 +371,13 @@ p {
   }
   .exercisecurrent {
     width: 100%;
+  }
+  .addnewdropdown {
+    width: auto;
+    float: left;
+  }
+  .dropdowndiv {
+    width: 40%;
   }
 }
 
