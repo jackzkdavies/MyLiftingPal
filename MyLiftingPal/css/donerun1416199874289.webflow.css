@@ -30,7 +30,7 @@ h2 {
 h3 {
   width: 100%;
   margin: 5px 0px;
-  border-radius: 7px;
+  border-radius: 4px;
   background-image: -webkit-linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
   background-image: -o-linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
   background-image: linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
@@ -74,7 +74,7 @@ p {
   height: 54px;
   padding: 4px 29px;
   float: left;
-  border-radius: 7px;
+  border-radius: 4px;
   background-color: #77b2c9;
   -webkit-transition: background-color 300ms ease;
   -o-transition: background-color 300ms ease;
@@ -91,6 +91,7 @@ p {
 }
 .button.signup {
   width: 100%;
+  border-radius: 4px;
   font-family:'Open Sans', sans-serif;
   line-height: 42px;
   text-align: center;
@@ -106,7 +107,7 @@ p {
   height: 54px;
   float: left;
   border: 0px solid black;
-  border-radius: 6px;
+  border-radius: 4px;
   background-color: #ebe8e4;
   box-shadow: transparent 0px 0px 8px 0px inset;
   -webkit-transition: box-shadow 150ms ease;
@@ -121,14 +122,14 @@ p {
 }
 .field.feild2 {
   width: 100%;
-  border-radius: 7px;
+  border-radius: 4px;
 }
 .sign-up-form {
   margin-bottom: 111px;
 }
 .share-text {
   margin-bottom: 12px;
-  color: rgba(241, 235, 247, 0.4);
+  color: rgba(241, 235, 247, 0.40);
   text-shadow: transparent 0px 1px 0px;
 }
 .social-widget {
@@ -231,7 +232,7 @@ p {
   width: 100%;
 }
 .exersicediv {
-  border-radius: 6px;
+  border-radius: 4px;
   background-image: -webkit-linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
   background-image: -o-linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
   background-image: linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
@@ -248,6 +249,12 @@ p {
 }
 .advert {
   width: 50%;
+}
+.logoimage {
+  border-radius: 4px;
+}
+.menucont {
+  border-radius: 4px;
 }
 @media (max-width: 991px) {
   h2 {
