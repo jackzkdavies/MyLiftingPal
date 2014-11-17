@@ -362,9 +362,8 @@ p {
     padding-top: 75px;
   }
   .bodymain {
-    background-image: -webkit-linear-gradient(rgba(109, 163, 173, 0.4), rgba(64, 48, 38, 0.90));
-    background-image: -o-linear-gradient(rgba(109, 163, 173, 0.4), rgba(64, 48, 38, 0.90));
-    background-image: linear-gradient(rgba(109, 163, 173, 0.4), rgba(64, 48, 38, 0.90));
+    background-image: none;
+    background-position: 0% 0%;
     background-size: auto;
     background-repeat: repeat;
     background-attachment: scroll;
