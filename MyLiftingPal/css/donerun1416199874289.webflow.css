@@ -15,6 +15,7 @@ body {
   text-shadow: rgba(0, 0, 0, 0.29) 0px 1px 0px;
 }
 h1 {
+  width: 65%;
   margin: 10px 0px;
   font-size: 68px;
   line-height: 44px;
@@ -53,6 +54,7 @@ h6 {
   font-weight: 700;
 }
 p {
+  width: 100%;
   margin-bottom: 5px;
   font-family:'Open Sans', sans-serif;
   font-size: 16px;
@@ -224,7 +226,17 @@ p {
 .exercisestats {
   width: 100%;
 }
+.exercisecurrent {
+  width: 65%;
+  float: right;
+}
+.currentheading {
+  text-shadow: none;
+}
 @media (max-width: 991px) {
+  h2 {
+    text-shadow: none;
+  }
   .button {
     width: 40%;
   }
@@ -234,11 +246,17 @@ p {
   .content-wrapper {
     width: 81%;
   }
+  .exercisecurrent {
+    width: 60%;
+  }
 }
 @media (max-width: 767px) {
   body {
     padding-top: 47px;
     text-align: center;
+  }
+  h2 {
+    text-shadow: none;
   }
   .button {
     width: 40%;
@@ -279,10 +297,16 @@ p {
     padding-top: 62px;
     padding-bottom: 34px;
   }
+  .exercisecurrent {
+    width: 100%;
+  }
 }
 @media (max-width: 479px) {
   body {
     background-attachment: scroll, fixed;
+  }
+  h2 {
+    text-shadow: none;
   }
   .button {
     width: 100%;
@@ -324,6 +348,9 @@ p {
     background-size: auto;
     background-repeat: repeat;
     background-attachment: scroll;
+  }
+  .exercisecurrent {
+    width: 100%;
   }
 }
 
