@@ -2,11 +2,10 @@ body {
   height: 100%;
   padding-top: 156px;
   background-color: #524237;
-  background-image: -webkit-linear-gradient(rgba(109, 163, 173, 0.4), rgba(64, 48, 38, 0.90)), url('../images/weights.jpg');
-  background-image: linear-gradient(rgba(109, 163, 173, 0.4), rgba(64, 48, 38, 0.90)), url('../images/weights.jpg');
-  background-size: auto, cover;
-  background-repeat: repeat, repeat;
-  background-attachment: scroll, scroll;
+  background-image: url('../images/weights.jpg');
+  background-size: cover;
+  background-repeat: repeat;
+  background-attachment: fixed;
   font-family:'Open Sans', sans-serif;
   color: white;
   font-size: 14px;
@@ -318,8 +317,8 @@ p {
   background-image: linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
 }
 .exerciseinfotable.exerciseinfotabledata {
-  background-image: -webkit-linear-gradient(rgba(37, 184, 204, 0.23), rgba(37, 184, 204, 0.23));
-  background-image: linear-gradient(rgba(37, 184, 204, 0.23), rgba(37, 184, 204, 0.23));
+  background-image: -webkit-linear-gradient(rgba(37, 184, 204, 0.22), rgba(37, 184, 204, 0.22));
+  background-image: linear-gradient(rgba(37, 184, 204, 0.22), rgba(37, 184, 204, 0.22));
 }
 .exercisedivname {
   width: 50%;
@@ -374,6 +373,9 @@ p {
   text-align: center;
 }
 @media (max-width: 991px) {
+  body {
+    background-attachment: fixed;
+  }
   h2 {
     text-shadow: none;
   }
@@ -453,6 +455,7 @@ p {
 @media (max-width: 767px) {
   body {
     padding-top: 47px;
+    background-attachment: fixed;
     text-align: center;
   }
   h2 {
@@ -550,7 +553,10 @@ p {
 }
 @media (max-width: 479px) {
   body {
-    background-attachment: scroll, fixed;
+    background-image: url('../images/weights.jpg'), none;
+    background-size: cover, auto;
+    background-repeat: repeat, repeat;
+    background-attachment: fixed, fixed;
   }
   h2 {
     text-shadow: none;
