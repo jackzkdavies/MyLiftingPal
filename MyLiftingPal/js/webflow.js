@@ -3684,3 +3684,67 @@ Webflow.define('tabs', function($, _) {
   // Export module
   return api;
 });
+/**
+ * ----------------------------------------------------------------------
+ * Webflow: Brand pages on the subdomain
+ */
+Webflow.define('branding', function($, _) {
+  'use strict';
+
+  var api = {};
+  var $html = $('html');
+  var $body = $('body');
+  var location = window.location;
+  var inApp = Webflow.env();
+
+  // -----------------------------------
+  // Module methods
+
+  api.ready = function() {
+    var doBranding = $html.attr("data-wf-status") && location.href.match(/webflow.com|webflowtest.com/);
+
+    if (doBranding) {
+      var $branding = $('<div></div>');
+      var $link = $('<a></a>');
+      $link.attr('href', 'http://webflow.com');
+
+      $branding.css({
+        position: 'fixed',
+        bottom: 0,
+        right: 0,
+        borderTop: '5px solid #2b3239',
+        borderLeft: '5px solid #2b3239',
+        borderTopLeftRadius: '5px',
+        backgroundColor: '#2b3239',
+        padding: '5px 5px 5px 10px',
+        fontFamily: 'Arial',
+        fontSize: '10px',
+        textTransform: 'uppercase'
+
+      });
+
+      $link.css({
+        color: '#AAADB0',
+        textDecoration: 'none'
+      });
+      
+      var $webflowLogo = $('<img>');
+      $webflowLogo.attr('src', 'https://daks2k3a4ib2z.cloudfront.net/54153e6a3d25f2755b1f14ed/5445a4b1944ecdaa4df86d3e_subdomain-brand.svg');
+      $webflowLogo.css({
+        opacity: 0.9,
+        width: '55px',
+        verticalAlign: 'middle',
+        paddingLeft: '4px',
+        paddingBottom: '3px'
+      });
+
+      $branding.text('Built with');
+      $branding.append($webflowLogo);
+      $link.append($branding);
+      $body.append($link);
+    }
+  };
+
+  // Export module
+  return api;
+});
