@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <!-- This site was created in Webflow. http://www.webflow.com-->
 <!-- Last Published: Fri Nov 28 2014 04:48:04 GMT+0000 (UTC) -->
-<html data-wf-site="54697ee94e26f780049e790b" data-wf-page="54697ee94e26f780049e790d">
+<html data-wf-site="54697ee94e26f780049e790b" data-wf-page="5477f763b86e26a2209dc4a2">
 <head>
   <meta charset="utf-8">
-  <title>MyLiftingPal</title>
+  <title>Create Workout - MyLiftingPal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="generator" content="Webflow">
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
@@ -25,13 +25,52 @@
 <body>
   <div class="w-container">
     <div class="w-row">
-      <div class="w-col w-col-8 w-clearfix"><img class="logoimage" src="images/mlp_logo.png" alt="546987585294c14035d7eda7_mlp_logo.png">
-        <p class="subtitle">The new way to accomplish your goals and get ahead in life. Don’t be looking, be looked at.&nbsp;&nbsp;</p>
+      <div class="w-col w-col-8"><img class="logoimage" src="images/mlp_logo.png" alt="546987585294c14035d7eda7_mlp_logo.png">
         <div class="w-form sign-up-form">
-          <form class="w-clearfix" name="wf-form-signup-form" data-name="Signup Form" data-redirect="/main-page">
-            <input class="w-input field feild2" id="email" type="text" placeholder="Enter your email adress" name="email" required="required" data-name="email">
-            <input class="w-input field" id="password" type="email" placeholder="Enter your password" name="password" data-name="password" required="required">
-            <input class="w-button button" type="submit" value="sign in" data-wait="Please wait...">
+          <form name="wf-form-signup-form" data-name="Signup Form">
+            <div class="w-nav" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1">
+              <div class="w-container menucont">
+                <nav class="w-nav-menu" role="navigation"><a class="w-nav-link" href="main-page.html">Return</a><a class="w-nav-link" href="#">Settings</a><a class="w-nav-link" href="#">Sign Out</a>
+                </nav>
+                <div class="w-nav-button">
+                  <div class="w-icon-nav-menu"></div>
+                </div>
+                <div class="dropdowndiv">
+                  <div class="w-dropdown" data-delay="0">
+                    <div class="w-dropdown-toggle createdropdown">
+                      <div class="w-icon-dropdown-toggle"></div>
+                      <div>Create New</div>
+                    </div>
+                    <nav class="w-dropdown-list"><a class="w-dropdown-link" href="create-exercise.html">exercise</a><a class="w-dropdown-link" href="create-workout.html">workout</a><a class="w-dropdown-link" href="create-program.html">program</a>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h4>◄ Mon 17th Nov 2014 ►</h4>
+            <h2>Add Workout</h2>
+            <div class="w-tabs" data-duration-in="300" data-duration-out="100">
+              <div class="w-tab-menu">
+                <a class="w-tab-link w-inline-block createtab" data-w-tab="Create New">
+                  <div><strong>Create New Workout</strong>
+                  </div>
+                </a>
+                <a class="w-tab-link w--current w-inline-block searchtab" data-w-tab="Search">
+                  <div><strong>Search</strong>
+                  </div>
+                </a>
+              </div>
+              <div class="w-tab-content">
+                <div class="w-tab-pane w-clearfix" data-w-tab="Create New">
+                  <input class="w-input field feild2" id="workoutname" type="text" placeholder="Enter workout name" name="workoutname" required="required" data-name="workoutname">
+                  <input class="w-input" id="addexercisetoworkout" type="text" placeholder="Select Exercise to add" name="addexercisetoworkout" required="required" data-name="addexercisetoworkout"><a class="button signup" href="#"><span><strong>Create Workout</strong></span></a>
+                </div>
+                <div class="w-tab-pane w--tab-active w-clearfix" data-w-tab="Search">
+                  <input class="w-input seachexerciseinput" id="workoutsearch" type="text" placeholder="Enter workout name" name="workoutsearch" required="required" data-name="workoutsearch">
+                  <div class="searchresultsdiv">Search result show here&nbsp;</div><a class="button addexercisetocurrentday" href="#"><strong>Add to current day</strong></a>
+                </div>
+              </div>
+            </div>
           </form>
           <div class="w-form-done success-message">
             <p>Thanks! You have been added to our list.&nbsp;</p>
@@ -48,7 +87,7 @@
           <div class="w-form-fail error-message">
             <p>Oops! Something went wrong while submitting the form. :(</p>
           </div>
-        </div><a class="button signup" href="sign-up.html"><span>sign up</span></a>
+        </div>
         <div class="share-text">Share with your friends:&nbsp;</div>
         <div class="w-clearfix social-widget-wrapper">
           <div class="w-widget w-widget-twitter social-widget">
@@ -59,7 +98,7 @@
           </div>
         </div>
       </div>
-      <div class="w-col w-col-4 image-column"><img class="adhomepage" src="images/fakead.png" alt="5469870d5294c14035d7ed9f_fakead.png">
+      <div class="w-col w-col-4 image-column"><img class="advert" src="images/fakead.png" alt="5469870d5294c14035d7ed9f_fakead.png">
       </div>
     </div>
   </div>
