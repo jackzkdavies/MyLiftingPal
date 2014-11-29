@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- This site was created in Webflow. http://www.webflow.com-->
-<!-- Last Published: Fri Nov 28 2014 04:48:04 GMT+0000 (UTC) -->
+<!-- Last Published: Sat Nov 29 2014 00:11:08 GMT+0000 (UTC) -->
 <html data-wf-site="54697ee94e26f780049e790b" data-wf-page="546989c85294c14035d7ee01">
 <head>
   <meta charset="utf-8">
@@ -25,7 +25,7 @@
 <body class="bodymain">
   <div class="w-container">
     <div class="w-row">
-      <div class="w-col w-col-8 w-col-stack"><img class="logoimage" src="images/mlp_logo.png" alt="546987585294c14035d7eda7_mlp_logo.png">
+      <div class="w-col w-col-9 w-col-stack"><img class="logoimage" src="images/mlp_logo.png" alt="546987585294c14035d7eda7_mlp_logo.png">
         <div class="w-nav" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1">
           <div class="w-container menucont">
             <nav class="w-nav-menu" role="navigation"><a class="w-nav-link" href="main-page.html">view</a><a class="w-nav-link" href="#">Settings</a><a class="w-nav-link" href="#">Sign Out</a>
@@ -64,7 +64,7 @@
               <h5>Weight</h5>
             </div>
           </div>
-          <div class="exerciseinfotable exerciseinfotabledata">
+          <div class="w-clearfix exerciseinfotable exerciseinfotabledata">
             <div class="w-clearfix createdexercises">
               <div class="exercisedivname">
                 <h6>Lunges</h6>
@@ -80,9 +80,61 @@
               </div>
               <div class="exerciseweightsdiv">
                 <h6>50kg</h6>
-              </div><a class="button exerciseinputbuttons" href="#">Notes</a><a class="button exerciseinputbuttons" href="#">History</a><a class="button exerciseinputbuttons editbutton" href="#">Edit</a><a class="button exersizeupdate" href="#">Update</a>
-              <div class="containertoappendbuttonaction">When a button is clicked it it will update this div :)</div>
+              </div>
+              <div class="w-tabs tabs" data-duration-in="300" data-duration-out="100">
+                <div class="w-tab-menu">
+                  <a class="w-tab-link w-inline-block recordstab" data-w-tab="RecordsTab">
+                    <div>Records</div>
+                  </a>
+                  <a class="w-tab-link w-inline-block notestab" data-w-tab="NotesTab">
+                    <div>Notes</div>
+                  </a>
+                  <a class="w-tab-link w--current w-inline-block edittab" data-w-tab="EditTab">
+                    <div>edit</div>
+                  </a>
+                </div>
+                <div class="w-tab-content">
+                  <div class="w-tab-pane recordstabwindow" data-w-tab="RecordsTab">History of last exercise</div>
+                  <div class="w-tab-pane notestabcontanter" data-w-tab="NotesTab">My notes</div>
+                  <div class="w-tab-pane w--tab-active edittabcontent" data-w-tab="EditTab"></div>
+                </div>
+              </div><a class="button exersizeupdate" href="#">Update</a>
             </div>
+            <div class="w-clearfix createdexercises">
+              <div class="exercisedivname">
+                <h6>Squat</h6>
+              </div>
+              <div class="exercisesetsdiv">
+                <h6>5</h6>
+              </div>
+              <div class="exerciserepsdiv">
+                <h6>8</h6>
+              </div>
+              <div class="exerciserpediv">
+                <h6>5</h6>
+              </div>
+              <div class="exerciseweightsdiv">
+                <h6>200kg</h6>
+              </div>
+              <div class="w-tabs tabs" data-duration-in="300" data-duration-out="100">
+                <div class="w-tab-menu">
+                  <a class="w-tab-link w-inline-block recordstab" data-w-tab="RecordsTab">
+                    <div>Records</div>
+                  </a>
+                  <a class="w-tab-link w-inline-block notestab" data-w-tab="NotesTab">
+                    <div>Notes</div>
+                  </a>
+                  <a class="w-tab-link w--current w-inline-block edittab" data-w-tab="EditTab">
+                    <div>edit</div>
+                  </a>
+                </div>
+                <div class="w-tab-content">
+                  <div class="w-tab-pane recordstabwindow" data-w-tab="RecordsTab">History of last exercise</div>
+                  <div class="w-tab-pane notestabcontanter" data-w-tab="NotesTab"></div>
+                  <div class="w-tab-pane w--tab-active edittabcontent" data-w-tab="EditTab"></div>
+                </div>
+              </div><a class="button exersizeupdate" href="#">Update</a>
+            </div><a class="button addnewbutton" href="#">+</a>
           </div>
         </div>
         <div class="share-text">Share with your friends:&nbsp;</div>
@@ -95,7 +147,7 @@
           </div>
         </div>
       </div>
-      <div class="w-col w-col-4 w-col-stack image-column">
+      <div class="w-col w-col-3 w-col-stack image-column">
         <div><img class="advert" src="images/fakead.png" alt="5469870d5294c14035d7ed9f_fakead.png">
         </div>
       </div>

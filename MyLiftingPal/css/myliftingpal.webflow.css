@@ -49,15 +49,19 @@ h5 {
   font-size: 16px;
   line-height: 20px;
   font-weight: 700;
+  text-align: center;
 }
 h6 {
   margin: 10px 0px;
+  border: 1px solid white;
+  border-radius: 3px;
   background-image: -webkit-linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
   background-image: linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
-  color: rgba(64, 48, 38, 0.89);
+  color: black;
   font-size: 14px;
   line-height: 18px;
   font-weight: 700;
+  text-align: center;
 }
 p {
   width: 100%;
@@ -98,16 +102,14 @@ p {
   text-align: center;
 }
 .button.exersizeupdate {
-  width: 50%;
+  width: 98%;
   margin-right: 1%;
+  margin-bottom: 1%;
   margin-left: 1%;
   padding-right: 0px;
   padding-left: 0px;
   float: left;
   clear: none;
-  border-style: solid;
-  border-width: 1px;
-  border-color: rgba(64, 48, 38, 0.89);
   border-radius: 3px;
   background-color: #77b2c9;
 }
@@ -125,9 +127,6 @@ p {
   margin-left: 1%;
   padding-right: 0px;
   padding-left: 0px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: rgba(64, 48, 38, 0.89);
   border-radius: 3px;
   background-color: #77b2c9;
   font-size: 16px;
@@ -158,6 +157,20 @@ p {
 }
 .button.backbutton {
   margin-top: 1%;
+}
+.button.addnewbutton {
+  width: 20%;
+  margin-top: 2%;
+  margin-left: 40%;
+  padding-right: 0px;
+  padding-left: 0px;
+  border-radius: 3px;
+  font-size: 50px;
+}
+.button.addnewbutton.w--current {
+  margin-left: 40%;
+  padding-right: 0px;
+  padding-left: 0px;
 }
 .subtitle {
   margin-bottom: 41px;
@@ -290,15 +303,14 @@ p {
 .exercisestats {
   width: 100%;
 }
-.bodymain {
-  border-style: solid;
-  border-width: 3px;
-  border-color: rgba(64, 48, 38, 0.89);
-}
 .exersicediv {
   border-radius: 4px 4px 3px;
-  background-image: -webkit-linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
-  background-image: linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
+  background-color: transparent;
+  background-image: none;
+  background-position: 0% 0%;
+  background-size: auto;
+  background-repeat: repeat;
+  background-attachment: scroll;
 }
 .exercisecurrent {
   width: 65%;
@@ -314,6 +326,7 @@ p {
   width: 50%;
 }
 .logoimage {
+  margin-top: -10%;
   border-radius: 3px 3px 0px 0px;
 }
 .menucont {
@@ -326,8 +339,11 @@ p {
   background-image: linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
 }
 .exerciseinfotable.exerciseinfotabledata {
-  background-image: -webkit-linear-gradient(rgba(37, 184, 204, 0.21), rgba(37, 184, 204, 0.21));
-  background-image: linear-gradient(rgba(37, 184, 204, 0.21), rgba(37, 184, 204, 0.21));
+  background-image: none;
+  background-position: 0% 0%;
+  background-size: auto;
+  background-repeat: repeat;
+  background-attachment: scroll;
 }
 .exercisedivname {
   width: 50%;
@@ -370,8 +386,10 @@ p {
 }
 .createdexercises {
   width: 100%;
-  border-radius: 0px;
-  background-color: rgba(194, 190, 179, 0.59);
+  margin-top: 1%;
+  margin-bottom: 1%;
+  border-radius: 3px;
+  background-color: transparent;
 }
 .containertoappendbuttonaction {
   width: 100%;
@@ -421,6 +439,50 @@ p {
   width: 100%;
   float: left;
 }
+.recordstab {
+  background-color: rgba(194, 190, 179, 0.59);
+}
+.recordstab.w--current {
+  background-color: #77b2c9;
+}
+.notestab {
+  background-color: rgba(194, 190, 179, 0.59);
+}
+.notestab.w--current {
+  background-color: #77b2c9;
+}
+.edittab {
+  border-top-right-radius: 3px;
+  background-color: rgba(194, 190, 179, 0.59);
+}
+.edittab.w--current {
+  background-color: #77b2c9;
+}
+.recordstabwindow {
+  min-height: 75px;
+  margin-bottom: 1%;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  background-color: rgba(119, 178, 201, 0.49);
+}
+.notestabcontanter {
+  min-height: 75px;
+  margin-bottom: 1%;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  background-color: rgba(119, 178, 201, 0.49);
+}
+.edittabcontent {
+  min-height: 75px;
+  margin-bottom: 1%;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  background-color: rgba(119, 178, 201, 0.49);
+}
+.tabs {
+  width: 100%;
+  float: left;
+}
 @media (max-width: 991px) {
   body {
     background-attachment: fixed;
@@ -436,7 +498,7 @@ p {
     font-size: 16px;
   }
   h6 {
-    color: rgba(64, 48, 38, 0.89);
+    color: black;
     font-size: 14px;
   }
   p {
@@ -490,6 +552,17 @@ p {
   .content-wrapper {
     width: 81%;
   }
+  .bodymain {
+    border-style: none;
+  }
+  .exersicediv {
+    background-color: transparent;
+    background-image: none;
+    background-position: 0% 0%;
+    background-size: auto;
+    background-repeat: repeat;
+    background-attachment: scroll;
+  }
   .exercisecurrent {
     width: 60%;
   }
@@ -497,13 +570,25 @@ p {
     width: auto;
     float: left;
   }
+  .logoimage {
+    margin-top: -20%;
+  }
+  .exerciseinfotable.exerciseinfotabledata {
+    background-image: none;
+    background-position: 0% 0%;
+    background-size: auto;
+    background-repeat: repeat;
+    background-attachment: scroll;
+  }
   .exercisehistorydiv {
     width: 100%;
     height: auto;
     float: left;
   }
   .createdexercises {
-    background-color: rgba(194, 190, 179, 0.59);
+    margin-top: 1%;
+    margin-bottom: 1%;
+    background-color: transparent;
   }
   .containertoappendbuttonaction {
     background-color: #77b2c9;
@@ -542,6 +627,7 @@ p {
     text-shadow: none;
   }
   h6 {
+    color: black;
     font-size: 14px;
   }
   p {
@@ -620,6 +706,14 @@ p {
     padding-top: 62px;
     padding-bottom: 34px;
   }
+  .exersicediv {
+    background-color: transparent;
+    background-image: none;
+    background-position: 0% 0%;
+    background-size: auto;
+    background-repeat: repeat;
+    background-attachment: scroll;
+  }
   .exercisecurrent {
     width: 100%;
   }
@@ -629,6 +723,20 @@ p {
   }
   .dropdowndiv {
     width: 25%;
+  }
+  .logoimage {
+    margin-top: -5%;
+  }
+  .exerciseinfotable.exerciseinfotabledata {
+    background-image: none;
+    background-position: 0% 0%;
+    background-size: auto;
+    background-repeat: repeat;
+    background-attachment: scroll;
+  }
+  .createdexercises {
+    margin-top: 1%;
+    margin-bottom: 1%;
   }
 }
 @media (max-width: 479px) {
@@ -649,6 +757,9 @@ p {
     font-weight: 600;
   }
   h6 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: black;
     font-size: 14px;
   }
   p {
@@ -736,7 +847,19 @@ p {
     padding-top: 75px;
   }
   .bodymain {
+    border-style: none;
     background-image: url('../images/weights.jpg');
+    background-size: cover;
+    background-repeat: repeat;
+    background-attachment: fixed;
+  }
+  .exersicediv {
+    background-color: transparent;
+    background-image: none;
+    background-position: 0% 0%;
+    background-size: auto;
+    background-repeat: repeat;
+    background-attachment: scroll;
   }
   .exercisecurrent {
     width: 100%;
@@ -748,8 +871,17 @@ p {
   .dropdowndiv {
     width: 40%;
   }
+  .logoimage {
+    margin-top: -10%;
+  }
   .exerciseinfotable.exerciseinfotabledata {
     border-bottom: 2px none white;
+    background-color: transparent;
+    background-image: none;
+    background-position: 0% 0%;
+    background-size: auto;
+    background-repeat: repeat;
+    background-attachment: scroll;
   }
   .exercisedivname {
     width: 50%;
@@ -758,8 +890,9 @@ p {
     width: 10%;
   }
   .createdexercises {
-    background-image: -webkit-linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
-    background-image: linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
+    margin-top: 1%;
+    margin-bottom: 1%;
+    background-color: transparent;
   }
   .containertoappendbuttonaction {
     width: 98%;
