@@ -410,6 +410,7 @@ p {
 }
 .createtab.w--current {
   margin-bottom: 1%;
+  float: left;
   background-color: #77b2c9;
 }
 .searchtab {
@@ -417,6 +418,7 @@ p {
   margin-top: 1%;
   padding-right: 0px;
   padding-left: 0px;
+  float: left;
   border-radius: 0px 3px 3px 0px;
   background-color: rgba(194, 190, 179, 0.59);
   text-align: center;
