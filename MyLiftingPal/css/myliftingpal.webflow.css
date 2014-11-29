@@ -404,6 +404,7 @@ p {
   margin-top: 1%;
   padding-right: 0px;
   padding-left: 0px;
+  float: left;
   border-radius: 3px 0px 0px 3px;
   background-color: rgba(194, 190, 179, 0.59);
   text-align: center;
@@ -425,11 +426,12 @@ p {
 }
 .searchtab.w--current {
   margin-bottom: 1%;
+  float: left;
   background-color: #77b2c9;
 }
 .seachexerciseinput {
   width: 100%;
-  float: none;
+  float: left;
   clear: none;
 }
 .searchimage {
