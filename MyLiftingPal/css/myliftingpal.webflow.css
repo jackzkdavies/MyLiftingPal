@@ -54,12 +54,21 @@ h5 {
 h6 {
   height: 31px;
   margin: 10px 0px;
+<<<<<<< HEAD
   padding-top: 5px;
   border-radius: 0px;
   background-image: -webkit-linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
   background-image: linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
   color: white;
   font-size: 18px;
+=======
+  border: 1px solid white;
+  border-radius: 3px;
+  background-image: -webkit-linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
+  background-image: linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
+  color: black;
+  font-size: 14px;
+>>>>>>> 3dc9e1db4da34bf67970b8bca8802f596aecf52e
   line-height: 18px;
   font-weight: 700;
   text-align: center;
@@ -173,6 +182,7 @@ p {
   padding-right: 0px;
   padding-left: 0px;
 }
+<<<<<<< HEAD
 .button.detailsbutton {
   position: absolute;
   width: 10%;
@@ -182,6 +192,8 @@ p {
   padding: 0px;
   border-radius: 3px;
 }
+=======
+>>>>>>> 3dc9e1db4da34bf67970b8bca8802f596aecf52e
 .subtitle {
   margin-bottom: 41px;
   font-size: 20px;
@@ -497,6 +509,7 @@ p {
   width: 100%;
   float: left;
 }
+<<<<<<< HEAD
 .showhidetab {
   width: 100%;
   float: left;
@@ -520,6 +533,8 @@ p {
   display: block;
   margin-top: -5px;
 }
+=======
+>>>>>>> 3dc9e1db4da34bf67970b8bca8802f596aecf52e
 @media (max-width: 991px) {
   body {
     background-attachment: fixed;
@@ -535,7 +550,11 @@ p {
     font-size: 16px;
   }
   h6 {
+<<<<<<< HEAD
     color: white;
+=======
+    color: black;
+>>>>>>> 3dc9e1db4da34bf67970b8bca8802f596aecf52e
     font-size: 14px;
   }
   p {
@@ -640,6 +659,7 @@ p {
   .createtab {
     width: 50%;
     border-radius: 3px 0px 0px 3px;
+<<<<<<< HEAD
     background-color: rgba(194, 190, 179, 0.59);
   }
   .createtab.w--current {
@@ -651,16 +671,32 @@ p {
     border-radius: 0px 3px 3px 0px;
     background-color: rgba(194, 190, 179, 0.59);
   }
+=======
+    background-color: rgba(194, 190, 179, 0.59);
+  }
+  .createtab.w--current {
+    margin-bottom: 1%;
+    background-color: #77b2c9;
+    color: white;
+  }
+  .searchtab {
+    border-radius: 0px 3px 3px 0px;
+    background-color: rgba(194, 190, 179, 0.59);
+  }
+>>>>>>> 3dc9e1db4da34bf67970b8bca8802f596aecf52e
   .searchtab.w--current {
     width: 50%;
     margin-bottom: 1%;
     border-radius: 3px;
     background-color: #77b2c9;
   }
+<<<<<<< HEAD
   .detailsbuttontext {
     display: block;
     margin-top: -5px;
   }
+=======
+>>>>>>> 3dc9e1db4da34bf67970b8bca8802f596aecf52e
 }
 @media (max-width: 767px) {
   body {
@@ -675,7 +711,11 @@ p {
     text-shadow: none;
   }
   h6 {
+<<<<<<< HEAD
     color: white;
+=======
+    color: black;
+>>>>>>> 3dc9e1db4da34bf67970b8bca8802f596aecf52e
     font-size: 14px;
   }
   p {
@@ -793,6 +833,7 @@ p {
     margin-top: 1%;
     margin-bottom: 1%;
   }
+<<<<<<< HEAD
   .detailsbuttontext {
     display: block;
     height: 31px;
@@ -802,6 +843,8 @@ p {
     padding-bottom: 0px;
     float: none;
   }
+=======
+>>>>>>> 3dc9e1db4da34bf67970b8bca8802f596aecf52e
 }
 @media (max-width: 479px) {
   body {
@@ -821,6 +864,7 @@ p {
     font-weight: 600;
   }
   h6 {
+<<<<<<< HEAD
     width: 100%;
     margin-top: 10px;
     margin-bottom: 5px;
@@ -828,6 +872,11 @@ p {
     padding-left: 0px;
     float: none;
     color: white;
+=======
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: black;
+>>>>>>> 3dc9e1db4da34bf67970b8bca8802f596aecf52e
     font-size: 14px;
   }
   p {
@@ -956,9 +1005,12 @@ p {
   .logoimage {
     margin-top: -10%;
   }
+<<<<<<< HEAD
   .exerciseinfotable {
     border-radius: 3px;
   }
+=======
+>>>>>>> 3dc9e1db4da34bf67970b8bca8802f596aecf52e
   .exerciseinfotable.exerciseinfotabledata {
     border-bottom: 2px none white;
     background-color: transparent;
@@ -1005,6 +1057,7 @@ p {
   }
   .createdropdown {
     width: 110%;
+<<<<<<< HEAD
   }
   .recordstab {
     display: inline-block;
@@ -1049,6 +1102,8 @@ p {
   }
   .detailsbuttontext {
     margin-top: 0px;
+=======
+>>>>>>> 3dc9e1db4da34bf67970b8bca8802f596aecf52e
   }
 }
 
