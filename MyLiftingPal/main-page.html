@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- This site was created in Webflow. http://www.webflow.com-->
-<!-- Last Published: Fri Nov 28 2014 02:31:16 GMT+0000 (UTC) -->
+<!-- Last Published: Sun Nov 30 2014 01:59:00 GMT+0000 (UTC) -->
 <html data-wf-site="54697ee94e26f780049e790b" data-wf-page="546989c85294c14035d7ee01">
 <head>
   <meta charset="utf-8">
@@ -11,6 +11,7 @@
   <link rel="stylesheet" type="text/css" href="css/webflow.css">
   <link rel="stylesheet" type="text/css" href="css/myliftingpal.webflow.css">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+  <script src="js/main.js"></script>
   <script>
     WebFont.load({
       google: {
@@ -22,85 +23,240 @@
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
   <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
 </head>
-<body class="bodymain">
-  <div class="w-container">
-    <div class="w-row">
-      <div class="w-col w-col-10 w-col-stack"><img class="logoimage" src="images/mlp_logo.png" alt="546987585294c14035d7eda7_mlp_logo.png">
-        <div class="w-nav" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1">
-          <div class="w-container menucont">
-            <nav class="w-nav-menu" role="navigation"><a class="w-nav-link" href="#">View</a><a class="w-nav-link" href="#">Settings</a><a class="w-nav-link" href="#">Sign Out</a>
-            </nav>
-            <div class="w-nav-button">
-              <div class="w-icon-nav-menu"></div>
-            </div>
-            <div class="dropdowndiv">
-              <div class="w-dropdown" data-delay="0">
-                <div class="w-dropdown-toggle">
-                  <div class="w-icon-dropdown-toggle"></div>
-                  <div>Add New</div>
-                </div>
-                <nav class="w-dropdown-list"><a class="w-dropdown-link" href="#">exercise</a><a class="w-dropdown-link" href="#">workout</a><a class="w-dropdown-link" href="#">program</a>
-                </nav>
-              </div>
-            </div>
+<body class="bodymain" onload="myFunction()">
+  <div class="w-row">
+    <div class="w-col w-col-9 w-col-stack"><img class="logoimage" src="images/mlp_logo.png" alt="546987585294c14035d7eda7_mlp_logo.png">
+      <div class="w-nav" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1">
+        <div class="w-container menucont">
+          <nav class="w-nav-menu" role="navigation"><a class="w-nav-link" href="main-page.html">view</a><a class="w-nav-link" href="#">Settings</a><a class="w-nav-link" href="#">Sign Out</a>
+          </nav>
+          <div class="w-nav-button">
+            <div class="w-icon-nav-menu"></div>
           </div>
-        </div>
-        <h4>Mon 17th Nov 2014</h4>
-        <div class="exersicediv">
-          <div class="w-clearfix exerciseinfotable">
-            <div class="exercisedivname">
-              <h5>Exercise</h5>
-            </div>
-            <div class="exercisesetsdiv">
-              <h5>Sets</h5>
-            </div>
-            <div class="exerciserepsdiv">
-              <h5>Reps</h5>
-            </div>
-            <div class="exerciserpediv">
-              <h5>RPE</h5>
-            </div>
-            <div class="exerciseweightsdiv">
-              <h5>Weight</h5>
-            </div>
-          </div>
-          <div class="exerciseinfotable exerciseinfotabledata">
-            <div class="w-clearfix createdexercises">
-              <div class="exercisedivname">
-                <h6>Lunges</h6>
+          <div class="dropdowndiv">
+            <div class="w-dropdown" data-delay="0">
+              <div class="w-dropdown-toggle">
+                <div class="w-icon-dropdown-toggle"></div>
+                <div>Add New</div>
               </div>
-              <div class="exercisesetsdiv">
-                <h6>5</h6>
-              </div>
-              <div class="exerciserepsdiv">
-                <h6>8</h6>
-              </div>
-              <div class="exerciserpediv">
-                <h6>5</h6>
-              </div>
-              <div class="exerciseweightsdiv">
-                <h6>50kg</h6>
-              </div><a class="button exerciseinputbuttons" href="#">Notes</a><a class="button exerciseinputbuttons" href="#">History</a><a class="button exerciseinputbuttons editbutton" href="#">Edit</a><a class="button exersizeupdate" href="#">Update</a>
-              <div class="containertoappendbuttonaction">When a button is clicked it it will update this div :)</div>
+              <nav class="w-dropdown-list"><a class="w-dropdown-link" href="create-exercise.html">exercise</a><a class="w-dropdown-link" href="create-workout.html">workout</a><a class="w-dropdown-link" href="create-program.html">program</a>
+              </nav>
             </div>
-          </div>
-        </div>
-        <div class="share-text">Share with your friends:&nbsp;</div>
-        <div class="w-clearfix social-widget-wrapper">
-          <div class="w-widget w-widget-twitter social-widget">
-            <iframe src="https://platform.twitter.com/widgets/tweet_button.html#url=http%3A%2F%2Fwebflow.com&amp;counturl=webflow.com&amp;text=Check%20out%20this%20site&amp;count=horizontal&amp;size=m&amp;dnt=true" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 110px; height: 20px;"></iframe>
-          </div>
-          <div class="w-widget w-widget-facebook social-widget">
-            <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Ffacebook.com%2Fwebflow&amp;layout=button_count&amp;locale=en_US&amp;action=like&amp;show_faces=false&amp;share=false" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 90px; height: 20px;"></iframe>
           </div>
         </div>
       </div>
-      <div class="w-col w-col-2 w-col-stack image-column">
-        <div><img class="advert" src="images/fakead.png" alt="5469870d5294c14035d7ed9f_fakead.png">
+      <h4>◄ Mon 17th Nov 2014 ►</h4>
+      <div class="exersicediv">
+        <div class="w-clearfix exerciseinfotable">
+          <div class="exercisedivname">
+            <h5>Exercise</h5>
+          </div>
+          <div class="exercisesetsdiv">
+            <h5>Set</h5>
+          </div>
+          <div class="exerciserepsdiv">
+            <h5>Rep</h5>
+          </div>
+          <div class="exerciserpediv">
+            <h5>RPE</h5>
+          </div>
+          <div class="exerciseweightsdiv">
+            <h5>Weight</h5>
+          </div>
+        </div>
+        <div class="w-clearfix exerciseinfotable exerciseinfotabledata">
+          <div class="w-clearfix createdexercises">
+            <div class="w-clearfix exercisedivname"><a class="button detailsbutton" onclick="slideToggle(1)"><strong class="detailsbuttontext">+</strong></a>
+              <h6>Lunges</h6>
+            </div>
+            <div class="exercisesetsdiv">
+              <h6>99/99</h6>
+            </div>
+            <div class="exerciserepsdiv">
+              <h6>99</h6>
+            </div>
+            <div class="exerciserpediv">
+              <h6>10</h6>
+            </div>
+            <div class="exerciseweightsdiv">
+              <h6>999kg</h6>
+            </div>
+            <div class="tabsdiv1">
+              <div class="w-tabs tabs" data-duration-in="300" data-duration-out="100">
+                <div class="w-tab-menu w-clearfix">
+                  <a class="w-tab-link w-inline-block recordstab" data-w-tab="RecordsTab">
+                    <div>Records</div>
+                  </a>
+                  <a class="w-tab-link w-inline-block notestab" data-w-tab="NotesTab">
+                    <div>Notes</div>
+                  </a>
+                  <a class="w-tab-link w--current w-inline-block edittab" data-w-tab="EditTab">
+                    <div>update</div>
+                  </a>
+                </div>
+                <div class="w-tab-content">
+                  <div class="w-tab-pane recordstabwindow" data-w-tab="RecordsTab">History of last exercise</div>
+                  <div class="w-tab-pane notestabcontanter" data-w-tab="NotesTab">My notes</div>
+                  <div class="w-tab-pane w--tab-active edittabcontent" data-w-tab="EditTab">
+                    <div class="w-form">
+                      <form id="email-form" name="email-form" data-name="Email Form">
+                        <label for="currentset">Current Set</label>
+                        <input class="w-input" id="currentset" type="text" placeholder="Enter your set" name="currentset" data-name="currentset">
+                        <label for="Reps">Reps</label>
+                        <input class="w-input" id="Reps" type="email" placeholder="Enter your reps" name="Reps" data-name="Reps" required="required">
+                        <label for="RPE">Rated Perceived Exertion</label>
+                        <input class="w-input" id="RPE" type="email" placeholder="Enter your RPE" name="RPE" data-name="RPE" required="required">
+                        <label for="weight">Weight</label>
+                        <input class="w-input" id="weight" type="email" placeholder="Enter weight" name="weight" data-name="weight" required="required">
+                        <input class="w-button" type="submit" value="Submit" data-wait="Please wait...">
+                      </form>
+                      <div class="w-form-done">
+                        <p>Thank you! Your submission has been received!</p>
+                      </div>
+                      <div class="w-form-fail">
+                        <p>Oops! Something went wrong while submitting the form :(</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-tabs showhidetab" data-duration-in="300" data-duration-out="100"></div>
+          </div>
+          <div class="w-clearfix createdexercises">
+            <div class="w-clearfix exercisedivname"><a class="button detailsbutton" onclick="slideToggle(2)"><strong class="detailsbuttontext">+</strong></a>
+              <h6>Lunges</h6>
+            </div>
+            <div class="exercisesetsdiv">
+              <h6>99/99</h6>
+            </div>
+            <div class="exerciserepsdiv">
+              <h6>99</h6>
+            </div>
+            <div class="exerciserpediv">
+              <h6>10</h6>
+            </div>
+            <div class="exerciseweightsdiv">
+              <h6>999kg</h6>
+            </div>
+            <div class="tabsdiv2">
+              <div class="w-tabs tabs" data-duration-in="300" data-duration-out="100">
+                <div class="w-tab-menu w-clearfix">
+                  <a class="w-tab-link w-inline-block recordstab" data-w-tab="RecordsTab">
+                    <div>Records</div>
+                  </a>
+                  <a class="w-tab-link w-inline-block notestab" data-w-tab="NotesTab">
+                    <div>Notes</div>
+                  </a>
+                  <a class="w-tab-link w--current w-inline-block edittab" data-w-tab="EditTab">
+                    <div>update</div>
+                  </a>
+                </div>
+                <div class="w-tab-content">
+                  <div class="w-tab-pane recordstabwindow" data-w-tab="RecordsTab">History of last exercise</div>
+                  <div class="w-tab-pane notestabcontanter" data-w-tab="NotesTab">My notes</div>
+                  <div class="w-tab-pane w--tab-active edittabcontent" data-w-tab="EditTab">
+                    <div class="w-form">
+                      <form id="email-form" name="email-form" data-name="Email Form">
+                        <label for="currentset-3">Current Set</label>
+                        <input class="w-input" id="currentset-3" type="text" placeholder="Enter your set" name="currentset-3" data-name="Currentset 3">
+                        <label for="Reps-3">Reps 3</label>
+                        <input class="w-input" id="Reps-3" type="email" placeholder="Enter your reps" name="Reps-3" data-name="Reps 3" required="required">
+                        <label for="RPE-3">Rated Perceived Exertion</label>
+                        <input class="w-input" id="RPE-3" type="email" placeholder="Enter your RPE" name="RPE-3" data-name="Rpe 3" required="required">
+                        <label for="weight-3">Weight 3</label>
+                        <input class="w-input" id="weight-3" type="email" placeholder="Enter weight" name="weight-3" data-name="Weight 3" required="required">
+                        <input class="w-button" type="submit" value="Submit" data-wait="Please wait...">
+                      </form>
+                      <div class="w-form-done">
+                        <p>Thank you! Your submission has been received!</p>
+                      </div>
+                      <div class="w-form-fail">
+                        <p>Oops! Something went wrong while submitting the form :(</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-tabs showhidetab" data-duration-in="300" data-duration-out="100"></div>
+          </div>
+          <div class="w-clearfix createdexercises">
+            <div class="w-clearfix exercisedivname"><a class="button detailsbutton" onclick="slideToggle(3)"><strong class="detailsbuttontext">+</strong></a>
+              <h6>Lunges</h6>
+            </div>
+            <div class="exercisesetsdiv">
+              <h6>99/99</h6>
+            </div>
+            <div class="exerciserepsdiv">
+              <h6>99</h6>
+            </div>
+            <div class="exerciserpediv">
+              <h6>10</h6>
+            </div>
+            <div class="exerciseweightsdiv">
+              <h6>999kg</h6>
+            </div>
+            <div class="tabsdiv3">
+              <div class="w-tabs tabs" data-duration-in="300" data-duration-out="100">
+                <div class="w-tab-menu w-clearfix">
+                  <a class="w-tab-link w-inline-block recordstab" data-w-tab="RecordsTab">
+                    <div>Records</div>
+                  </a>
+                  <a class="w-tab-link w-inline-block notestab" data-w-tab="NotesTab">
+                    <div>Notes</div>
+                  </a>
+                  <a class="w-tab-link w--current w-inline-block edittab" data-w-tab="EditTab">
+                    <div>update</div>
+                  </a>
+                </div>
+                <div class="w-tab-content">
+                  <div class="w-tab-pane recordstabwindow" data-w-tab="RecordsTab">History of last exercise</div>
+                  <div class="w-tab-pane notestabcontanter" data-w-tab="NotesTab">My notes</div>
+                  <div class="w-tab-pane w--tab-active edittabcontent" data-w-tab="EditTab">
+                    <div class="w-form">
+                      <form id="email-form" name="email-form" data-name="Email Form">
+                        <label for="currentset-2">Current Set</label>
+                        <input class="w-input" id="currentset-2" type="text" placeholder="Enter your set" name="currentset-2" data-name="Currentset 2">
+                        <label for="Reps-2">Reps 2</label>
+                        <input class="w-input" id="Reps-2" type="email" placeholder="Enter your reps" name="Reps-2" data-name="Reps 2" required="required">
+                        <label for="RPE-2">Rated Perceived Exertion</label>
+                        <input class="w-input" id="RPE-2" type="email" placeholder="Enter your RPE" name="RPE-2" data-name="Rpe 2" required="required">
+                        <label for="weight-2">Weight 2</label>
+                        <input class="w-input" id="weight-2" type="email" placeholder="Enter weight" name="weight-2" data-name="Weight 2" required="required">
+                        <input class="w-button" type="submit" value="Submit" data-wait="Please wait...">
+                      </form>
+                      <div class="w-form-done">
+                        <p>Thank you! Your submission has been received!</p>
+                      </div>
+                      <div class="w-form-fail">
+                        <p>Oops! Something went wrong while submitting the form :(</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-tabs showhidetab" data-duration-in="300" data-duration-out="100"></div>
+          </div><a class="button addnewbutton" href="#">+</a>
+        </div>
+      </div>
+      <div class="share-text">Share with your friends:&nbsp;</div>
+      <div class="w-clearfix social-widget-wrapper">
+        <div class="w-widget w-widget-twitter social-widget">
+          <iframe src="https://platform.twitter.com/widgets/tweet_button.html#url=http%3A%2F%2Fwebflow.com&amp;counturl=webflow.com&amp;text=Check%20out%20this%20site&amp;count=horizontal&amp;size=m&amp;dnt=true" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 110px; height: 20px;"></iframe>
+        </div>
+        <div class="w-widget w-widget-facebook social-widget">
+          <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Ffacebook.com%2Fwebflow&amp;layout=button_count&amp;locale=en_US&amp;action=like&amp;show_faces=false&amp;share=false" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 90px; height: 20px;"></iframe>
         </div>
       </div>
     </div>
+    <div class="w-col w-col-3 w-col-stack image-column">
+      <div><img class="advert" src="images/fakead.png" alt="5469870d5294c14035d7ed9f_fakead.png">
+      </div>
+    </div>
   </div>
+  <div class="w-container"></div>
   <div class="color-section">
     <div class="w-container">
       <div class="footer-section">
