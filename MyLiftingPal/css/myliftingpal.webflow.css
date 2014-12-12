@@ -173,6 +173,15 @@ p {
   padding-right: 0px;
   padding-left: 0px;
 }
+.button.detailsbutton {
+  position: absolute;
+  width: 10%;
+  height: 31px;
+  margin-top: 10px;
+  margin-bottom: 1%;
+  padding: 0px;
+  border-radius: 3px;
+}
 .subtitle {
   margin-bottom: 41px;
   font-size: 20px;
@@ -507,6 +516,10 @@ p {
 .hidetabcontent {
   height: 0px;
 }
+.detailsbuttontext {
+  display: block;
+  margin-top: -5px;
+}
 @media (max-width: 991px) {
   body {
     background-attachment: fixed;
@@ -522,7 +535,7 @@ p {
     font-size: 16px;
   }
   h6 {
-    color: black;
+    color: white;
     font-size: 14px;
   }
   p {
@@ -569,6 +582,13 @@ p {
     background-color: #25b8cc;
     font-family:'Open Sans', sans-serif;
     font-weight: 700;
+  }
+  .button.detailsbutton {
+    position: absolute;
+    width: 10%;
+    height: 31px;
+    margin-top: 10px;
+    padding: 0px;
   }
   .field {
     width: 60%;
@@ -637,6 +657,10 @@ p {
     border-radius: 3px;
     background-color: #77b2c9;
   }
+  .detailsbuttontext {
+    display: block;
+    margin-top: -5px;
+  }
 }
 @media (max-width: 767px) {
   body {
@@ -651,7 +675,7 @@ p {
     text-shadow: none;
   }
   h6 {
-    color: black;
+    color: white;
     font-size: 14px;
   }
   p {
@@ -693,6 +717,13 @@ p {
   .button.exerciseinputbuttons:focus {
     background-color: #25b8cc;
     font-weight: 700;
+  }
+  .button.detailsbutton {
+    position: fixed;
+    width: 10%;
+    height: 31px;
+    margin-top: 10px;
+    padding: 0px;
   }
   .subtitle {
     text-shadow: none;
@@ -762,6 +793,15 @@ p {
     margin-top: 1%;
     margin-bottom: 1%;
   }
+  .detailsbuttontext {
+    display: block;
+    height: 31px;
+    margin-top: -5px;
+    margin-bottom: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    float: none;
+  }
 }
 @media (max-width: 479px) {
   body {
@@ -781,10 +821,13 @@ p {
     font-weight: 600;
   }
   h6 {
+    width: 100%;
     margin-top: 10px;
     margin-bottom: 5px;
     padding-top: 6px;
-    color: black;
+    padding-left: 0px;
+    float: none;
+    color: white;
     font-size: 14px;
   }
   p {
@@ -844,6 +887,20 @@ p {
   .button.exerciseinputbuttons.editbutton {
     width: 20%;
   }
+  .button.detailsbutton {
+    position: absolute;
+    display: block;
+    overflow-x: visible;
+    overflow-y: visible;
+    width: 10%;
+    height: 31px;
+    margin-top: 10px;
+    padding: 0px;
+    float: left;
+    clear: none;
+    border-radius: 0px;
+    line-height: 32px;
+  }
   .subtitle {
     text-shadow: none;
   }
@@ -899,6 +956,9 @@ p {
   .logoimage {
     margin-top: -10%;
   }
+  .exerciseinfotable {
+    border-radius: 3px;
+  }
   .exerciseinfotable.exerciseinfotabledata {
     border-bottom: 2px none white;
     background-color: transparent;
@@ -909,10 +969,16 @@ p {
     background-attachment: scroll;
   }
   .exercisedivname {
-    width: 50%;
+    width: 40%;
   }
   .exercisesetsdiv {
-    width: 10%;
+    width: 18%;
+  }
+  .exerciserepsdiv {
+    width: 11%;
+  }
+  .exerciserpediv {
+    width: 11%;
   }
   .createdexercises {
     margin-top: 1%;
@@ -942,11 +1008,22 @@ p {
   }
   .recordstab {
     display: inline-block;
-    width: 33%;
+    width: 34%;
+    float: left;
+  }
+  .recordstab.w--current {
+    width: 34%;
+    float: left;
   }
   .notestab {
     display: inline-block;
     width: 33%;
+    float: left;
+  }
+  .edittab {
+    display: inline-block;
+    width: 33%;
+    float: left;
   }
   .edittab.w--current {
     display: inline-block;
@@ -966,6 +1043,12 @@ p {
     display: inline-block;
     width: 50%;
     float: none;
+  }
+  .tabsdiv {
+    float: left;
+  }
+  .detailsbuttontext {
+    margin-top: 0px;
   }
 }
 
