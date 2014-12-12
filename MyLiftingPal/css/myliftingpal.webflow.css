@@ -52,13 +52,14 @@ h5 {
   text-align: center;
 }
 h6 {
+  height: 31px;
   margin: 10px 0px;
-  border: 1px solid white;
-  border-radius: 3px;
+  padding-top: 5px;
+  border-radius: 0px;
   background-image: -webkit-linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
   background-image: linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
-  color: black;
-  font-size: 14px;
+  color: white;
+  font-size: 18px;
   line-height: 18px;
   font-weight: 700;
   text-align: center;
@@ -487,6 +488,25 @@ p {
   width: 100%;
   float: left;
 }
+.showhidetab {
+  width: 100%;
+  float: left;
+}
+.showtab {
+  background-color: rgba(194, 190, 179, 0.59);
+}
+.showtab.w--current {
+  background-color: #77b2c9;
+}
+.hidetab {
+  background-color: rgba(194, 190, 179, 0.59);
+}
+.hidetab.w--current {
+  background-color: #77b2c9;
+}
+.hidetabcontent {
+  height: 0px;
+}
 @media (max-width: 991px) {
   body {
     background-attachment: fixed;
@@ -763,6 +783,7 @@ p {
   h6 {
     margin-top: 10px;
     margin-bottom: 5px;
+    padding-top: 6px;
     color: black;
     font-size: 14px;
   }
@@ -918,6 +939,33 @@ p {
   }
   .createdropdown {
     width: 110%;
+  }
+  .recordstab {
+    display: inline-block;
+    width: 33%;
+  }
+  .notestab {
+    display: inline-block;
+    width: 33%;
+  }
+  .edittab.w--current {
+    display: inline-block;
+    width: 33%;
+  }
+  .showtab {
+    display: inline-block;
+    width: 50%;
+  }
+  .showtab.w--current {
+    display: inline-block;
+    width: 50%;
+    margin-bottom: 0px;
+    padding-bottom: 8px;
+  }
+  .hidetab {
+    display: inline-block;
+    width: 50%;
+    float: none;
   }
 }
 
