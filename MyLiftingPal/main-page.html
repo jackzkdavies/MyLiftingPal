@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <!-- This site was created in Webflow. http://www.webflow.com-->
-<!-- Last Published: Sun Nov 30 2014 01:59:00 GMT+0000 (UTC) -->
+<!-- Last Published: Sun Dec 14 2014 22:12:09 GMT+0000 (UTC) -->
 <html data-wf-site="54697ee94e26f780049e790b" data-wf-page="546989c85294c14035d7ee01">
 <head>
   <meta charset="utf-8">
-  <title>Main Page - Jack's Donerun</title>
+  <title>My Lifting Pal - Main Page</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="generator" content="Webflow">
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
   <link rel="stylesheet" type="text/css" href="css/webflow.css">
   <link rel="stylesheet" type="text/css" href="css/myliftingpal.webflow.css">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
-  <script src="js/main.js"></script>
   <script>
     WebFont.load({
       google: {
@@ -23,7 +22,7 @@
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
   <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
 </head>
-<body class="bodymain" onload="myFunction()">
+<body class="plainbodybackground">
   <div class="w-row">
     <div class="w-col w-col-9 w-col-stack"><img class="logoimage" src="images/mlp_logo.png" alt="546987585294c14035d7eda7_mlp_logo.png">
       <div class="w-nav" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1">
@@ -66,7 +65,7 @@
         </div>
         <div class="w-clearfix exerciseinfotable exerciseinfotabledata">
           <div class="w-clearfix createdexercises">
-            <div class="w-clearfix exercisedivname"><a class="button detailsbutton" onclick="slideToggle(1)"><strong class="detailsbuttontext">+</strong></a>
+            <div class="w-clearfix exercisedivname"><a class="button detailsbutton" href="#"><strong class="detailsbuttontext">+</strong></a>
               <h6>Lunges</h6>
             </div>
             <div class="exercisesetsdiv">
@@ -81,7 +80,7 @@
             <div class="exerciseweightsdiv">
               <h6>999kg</h6>
             </div>
-            <div class="tabsdiv1">
+            <div class="w-clearfix tabsdiv">
               <div class="w-tabs tabs" data-duration-in="300" data-duration-out="100">
                 <div class="w-tab-menu w-clearfix">
                   <a class="w-tab-link w-inline-block recordstab" data-w-tab="RecordsTab">
@@ -108,7 +107,7 @@
                         <input class="w-input" id="RPE" type="email" placeholder="Enter your RPE" name="RPE" data-name="RPE" required="required">
                         <label for="weight">Weight</label>
                         <input class="w-input" id="weight" type="email" placeholder="Enter weight" name="weight" data-name="weight" required="required">
-                        <input class="w-button" type="submit" value="Submit" data-wait="Please wait...">
+                        <input class="w-button updatesubmitbutton" type="submit" value="Submit" data-wait="Please wait...">
                       </form>
                       <div class="w-form-done">
                         <p>Thank you! Your submission has been received!</p>
@@ -124,7 +123,7 @@
             <div class="w-tabs showhidetab" data-duration-in="300" data-duration-out="100"></div>
           </div>
           <div class="w-clearfix createdexercises">
-            <div class="w-clearfix exercisedivname"><a class="button detailsbutton" onclick="slideToggle(2)"><strong class="detailsbuttontext">+</strong></a>
+            <div class="w-clearfix exercisedivname"><a class="button detailsbutton" href="#"><strong class="detailsbuttontext">+</strong></a>
               <h6>Lunges</h6>
             </div>
             <div class="exercisesetsdiv">
@@ -139,7 +138,7 @@
             <div class="exerciseweightsdiv">
               <h6>999kg</h6>
             </div>
-            <div class="tabsdiv2">
+            <div class="w-clearfix tabsdiv">
               <div class="w-tabs tabs" data-duration-in="300" data-duration-out="100">
                 <div class="w-tab-menu w-clearfix">
                   <a class="w-tab-link w-inline-block recordstab" data-w-tab="RecordsTab">
@@ -166,7 +165,7 @@
                         <input class="w-input" id="RPE-3" type="email" placeholder="Enter your RPE" name="RPE-3" data-name="Rpe 3" required="required">
                         <label for="weight-3">Weight 3</label>
                         <input class="w-input" id="weight-3" type="email" placeholder="Enter weight" name="weight-3" data-name="Weight 3" required="required">
-                        <input class="w-button" type="submit" value="Submit" data-wait="Please wait...">
+                        <input class="w-button updatesubmitbutton" type="submit" value="Submit" data-wait="Please wait...">
                       </form>
                       <div class="w-form-done">
                         <p>Thank you! Your submission has been received!</p>
@@ -182,7 +181,7 @@
             <div class="w-tabs showhidetab" data-duration-in="300" data-duration-out="100"></div>
           </div>
           <div class="w-clearfix createdexercises">
-            <div class="w-clearfix exercisedivname"><a class="button detailsbutton" onclick="slideToggle(3)"><strong class="detailsbuttontext">+</strong></a>
+            <div class="w-clearfix exercisedivname"><a class="button detailsbutton" href="#"><strong class="detailsbuttontext">+</strong></a>
               <h6>Lunges</h6>
             </div>
             <div class="exercisesetsdiv">
@@ -197,7 +196,7 @@
             <div class="exerciseweightsdiv">
               <h6>999kg</h6>
             </div>
-            <div class="tabsdiv3">
+            <div class="w-clearfix tabsdiv">
               <div class="w-tabs tabs" data-duration-in="300" data-duration-out="100">
                 <div class="w-tab-menu w-clearfix">
                   <a class="w-tab-link w-inline-block recordstab" data-w-tab="RecordsTab">
@@ -224,7 +223,7 @@
                         <input class="w-input" id="RPE-2" type="email" placeholder="Enter your RPE" name="RPE-2" data-name="Rpe 2" required="required">
                         <label for="weight-2">Weight 2</label>
                         <input class="w-input" id="weight-2" type="email" placeholder="Enter weight" name="weight-2" data-name="Weight 2" required="required">
-                        <input class="w-button" type="submit" value="Submit" data-wait="Please wait...">
+                        <input class="w-button updatesubmitbutton" type="submit" value="Submit" data-wait="Please wait...">
                       </form>
                       <div class="w-form-done">
                         <p>Thank you! Your submission has been received!</p>
@@ -256,7 +255,6 @@
       </div>
     </div>
   </div>
-  <div class="w-container"></div>
   <div class="color-section">
     <div class="w-container">
       <div class="footer-section">

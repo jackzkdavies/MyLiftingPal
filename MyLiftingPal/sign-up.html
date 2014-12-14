@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <!-- This site was created in Webflow. http://www.webflow.com-->
-<!-- Last Published: Sun Nov 30 2014 01:59:00 GMT+0000 (UTC) -->
+<!-- Last Published: Sun Dec 14 2014 22:12:09 GMT+0000 (UTC) -->
 <html data-wf-site="54697ee94e26f780049e790b" data-wf-page="546988e74e26f780049e79bf">
 <head>
   <meta charset="utf-8">
-  <title>Sign Up - Jack's Donerun</title>
+  <title>My Lifting Pal - Sign Up</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="generator" content="Webflow">
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
@@ -19,6 +19,7 @@
     });
   </script>
   <script type="text/javascript" src="js/modernizr.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
   <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
 </head>
@@ -28,13 +29,14 @@
       <div class="w-col w-col-9"><img class="logoimage" src="images/mlp_logo.png" alt="546987585294c14035d7eda7_mlp_logo.png">
         <p class="subtitle">The new way to accomplish your goals and get ahead in life. Don’t look at. Be looked at.&nbsp;&nbsp;</p>
         <div class="w-form sign-up-form">
-          <form class="w-clearfix" name="wf-form-signup-form" data-name="Signup Form">
-            <input class="w-input field feild2" id="email" type="text" placeholder="Enter your email adress" name="email" required="required" data-name="email">
+          <form class="w-clearfix" name="wf-form-signup-form" data-name="Signup Form" id="signup">
+            <input class="w-input field feild2" id="email" type="email" placeholder="Enter your email adress" name="email" required="required" data-name="email">
             <input class="w-input field feild2" id="username" type="text" placeholder="Select username" name="username" required="required" data-name="username">
             <input class="w-input field feild2" id="password-2" type="text" placeholder="Select your Password" name="password" required="required" data-name="password">
             <input class="w-input field" id="passwordconfirm" type="email" placeholder="Re-enter your password" name="passwordconfirm" data-name="passwordconfirm" required="required">
-            <input class="w-button button" type="submit" value="sign up" data-wait="Please wait..."><a class="button backbutton" href="index.html">Back</a>
+            <a class="w-button button" href="javascript: submitform()">sign up</a>
           </form>
+          <a class="button backbutton" href="index.html">Back</a>
           <div class="w-form-done success-message">
             <p>Thanks! You have been added to our list.&nbsp;</p>
             <p class="spread-word">Help spread the word!</p>

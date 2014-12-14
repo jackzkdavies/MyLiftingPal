@@ -3,8 +3,8 @@ body {
   padding-top: 156px;
   background-color: #524237;
   background-image: url('../images/weights.jpg');
+  background-position: 50% 50%;
   background-size: cover;
-  background-repeat: repeat;
   background-attachment: fixed;
   font-family:'Open Sans', sans-serif;
   color: white;
@@ -520,10 +520,13 @@ p {
   display: block;
   margin-top: -5px;
 }
+.plainbodybackground {
+  background-image: none;
+  background-position: 0% 0%;
+  background-size: auto;
+  background-attachment: scroll;
+}
 @media (max-width: 991px) {
-  body {
-    background-attachment: fixed;
-  }
   h2 {
     text-shadow: none;
   }
@@ -654,7 +657,7 @@ p {
   .searchtab.w--current {
     width: 50%;
     margin-bottom: 1%;
-    border-radius: 3px;
+    border-radius: 0px 3px 3px 0px;
     background-color: #77b2c9;
   }
   .detailsbuttontext {
@@ -665,7 +668,6 @@ p {
 @media (max-width: 767px) {
   body {
     padding-top: 47px;
-    background-attachment: fixed;
     text-align: center;
   }
   h2 {
@@ -804,12 +806,6 @@ p {
   }
 }
 @media (max-width: 479px) {
-  body {
-    background-image: url('../images/weights.jpg'), none;
-    background-size: cover, auto;
-    background-repeat: repeat, repeat;
-    background-attachment: fixed, fixed;
-  }
   h2 {
     text-shadow: none;
   }
@@ -1049,6 +1045,10 @@ p {
   }
   .detailsbuttontext {
     margin-top: 0px;
+  }
+  .updatesubmitbutton {
+    border-radius: 3px 3px 0px 0px;
+    background-color: #77b2c9;
   }
 }
 
