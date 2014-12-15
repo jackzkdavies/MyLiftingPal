@@ -29,12 +29,15 @@
       <div class="w-col w-col-9"><img class="logoimage" src="images/mlp_logo.png" alt="546987585294c14035d7eda7_mlp_logo.png">
         <p class="subtitle">The new way to accomplish your goals and get ahead in life. Don’t look at. Be looked at.&nbsp;&nbsp;</p>
         <div class="w-form sign-up-form">
-          <form class="w-clearfix" name="wf-form-signup-form" data-name="Signup Form" id="signup">
-            <input class="w-input field feild2" id="email" type="email" placeholder="Enter your email adress" name="email" required="required" data-name="email">
-            <input class="w-input field feild2" id="username" type="text" placeholder="Select username" name="username" required="required" data-name="username">
-            <input class="w-input field feild2" id="password-2" type="text" placeholder="Select your Password" name="password" required="required" data-name="password">
-            <input class="w-input field" id="passwordconfirm" type="email" placeholder="Re-enter your password" name="passwordconfirm" data-name="passwordconfirm" required="required">
-            <a class="w-button button" href="javascript: submitform()">sign up</a>
+          <form class="w-clearfix" name="wf-form-signup-form" data-name="Signup Form">
+            <p class ="invalidinput" id="invalidemailresponse"></p>
+            <input class="w-input field feild2" id="email" type="email" placeholder="Enter your email adress" name="email" required="required" data-name="email" >
+            <p class ="invalidinput" id="invalidusernameresponse"></p>
+            <input class="w-input field feild2" id="username" type="text" placeholder="Select username" name="username" required="required" data-name="username" onclick="checkEmailaddress(); return false;">
+            <p class ="invalidinput" id="invalidpasswordmatch"></p>
+            <input class="w-input field feild2" id="password" type="password" placeholder="Select your Password" name="password" required="required" data-name="password" onclick="checkEmailaddress(); return false;">
+            <input class="w-input field" id="passwordconfirm" type="password" placeholder="Re-enter your password" name="passwordconfirm" data-name="passwordconfirm" required="required" onclick="checkEmailaddress(); return false;" onkeyup="checkPassword(); return false;">
+            <a class="w-button button" href="javascript: submitSignUpform()">sign up</a>
           </form>
           <a class="button backbutton" href="index.html">Back</a>
           <div class="w-form-done success-message">
