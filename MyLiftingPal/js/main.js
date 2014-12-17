@@ -1,3 +1,6 @@
+//Create MLP object
+var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
+
 //Toggling ful view of exercises with
 function slideToggle(number){
     $(".tabsdiv"+number).slideToggle(400);
@@ -12,12 +15,27 @@ function toggleTest(){
 document.forms["signup"].submit();
 
 function submitSignUpform()
-{
-    var sEmail = document.getElementById("email").value; 
-    var sUsername = document.getElementById("username").value; 
-    var sPassword = document.getElementById("password").value; 
-    var sPConfirm = document.getElementById("passwordconfirm").value; 
-//submit data to server to go here
+{ 
+    var sEmail;
+    var sUsername; 
+    var sPassword;
+    var sConfirmPasswork;
+    
+    try {
+        sEmail = document.getElementById("email").value; 
+        sUsername = document.getElementById("username").value; 
+        sPassword = document.getElementById("password").value;
+        sConfirmPasswork = document.getElementById('passwordconfirm').value;
+        
+        if ((sPassword === sConfirmPasswork) && (validateEmail(sEmail) === true)){ 
+            mlpObject.createuser(sEmail,sUsername,sPassword);
+        }
+        else{ throw "Email or Password falid check";}
+    }
+    
+    catch (e){
+        console.log(e,"email: " + sEmail, "username: " + sUsername, "password: " + sPassword);
+    }
 }
 
 function checkEmailaddress(){
