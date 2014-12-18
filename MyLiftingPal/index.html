@@ -19,6 +19,8 @@
     });
   </script>
   <script type="text/javascript" src="js/modernizr.js"></script>
+  <script type="text/javascript" src="js/mlp.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
   <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
 </head>
@@ -27,11 +29,12 @@
     <div class="w-row">
       <div class="w-col w-col-8 w-clearfix"><img class="logoimage" src="images/mlp_logo.png" alt="546987585294c14035d7eda7_mlp_logo.png">
         <p class="subtitle">The new way to accomplish your goals and get ahead in life. Don’t be looking, be looked at.&nbsp;&nbsp;</p>
-        <div class="w-form sign-up-form">
+        
+        <div class="w-form signin-form" id="signindiv" style="display: block;">
           <form class="w-clearfix" name="wf-form-signup-form" data-name="Signup Form" data-redirect="/main-page">
-            <input class="w-input field feild2" id="email" type="text" placeholder="Enter your email adress" name="email" required="required" data-name="email">
-            <input class="w-input field" id="password" type="email" placeholder="Enter your password" name="password" data-name="password" required="required">
-            <input class="w-button button" type="submit" value="sign in" data-wait="Please wait...">
+            <input class="w-input field feild2" id="email" type="text" placeholder="Enter your username" name="username" required="required" data-name="username">
+            <input class="w-input field" id="password" type="password" placeholder="Enter your password" name="password" data-name="password" required="required">
+            <a class="w-button button" href="javascript: submitLoginForm()">login</a>
           </form>
           <div class="w-form-done success-message">
             <p>Thanks! You have been added to our list.&nbsp;</p>
@@ -48,7 +51,40 @@
           <div class="w-form-fail error-message">
             <p>Oops! Something went wrong while submitting the form. :(</p>
           </div>
-        </div><a class="button signup" href="sign-up.html"><span>sign up</span></a>
+            <br><br>
+        <a class="button signup" href="javascript: toggleForms()"><span>sign up</span></a>
+        </div>
+        
+        <div class="w-form sign-up-form" id="signupdiv" style="display: none;" >
+          <form class="w-clearfix" name="wf-form-signup-form" data-name="Signup Form">
+            <p class ="invalidinput" id="invalidemailresponse"></p>
+            <input class="w-input field feild2" id="email" type="email" placeholder="Enter your email adress" name="email" required="required" data-name="email" >
+            <p class ="invalidinput" id="invalidusernameresponse"></p>
+            <input class="w-input field feild2" id="username" type="text" placeholder="Select username" name="username" required="required" data-name="username" onclick="checkEmailaddress(); return false;">
+            <p class ="invalidinput" id="invalidpasswordmatch"></p>
+            <input class="w-input field feild2" id="password" type="password" placeholder="Select your Password" name="password" required="required" data-name="password" onclick="checkEmailaddress(); return false;">
+            <input class="w-input field" id="passwordconfirm" type="password" placeholder="Re-enter your password" name="passwordconfirm" data-name="passwordconfirm" required="required" onclick="checkEmailaddress(); return false;" onkeyup="checkPassword(); return false;">
+            <a class="w-button button" href="javascript: submitSignUpForm()">sign up</a>
+          </form>
+          <br><br>
+          <a class="button backbutton" href="javascript: toggleForms()">Back</a>
+          <div class="w-form-done success-message">
+            <p>Thanks! You have been added to our list.&nbsp;</p>
+            <p class="spread-word">Help spread the word!</p>
+            <div class="w-clearfix social-widget-wrapper">
+              <div class="w-widget w-widget-twitter social-widget full-opacity">
+                <iframe src="https://platform.twitter.com/widgets/tweet_button.html#url=http%3A%2F%2Fwebflow.com&amp;counturl=webflow.com&amp;text=Check%20out%20this%20site&amp;count=horizontal&amp;size=m&amp;dnt=true" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 110px; height: 20px;"></iframe>
+              </div>
+              <div class="w-widget w-widget-facebook social-widget full-opacity">
+                <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Ffacebook.com%2Fwebflow&amp;layout=button_count&amp;locale=en_US&amp;action=like&amp;show_faces=false&amp;share=false" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 90px; height: 20px;"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="w-form-fail error-message">
+            <p>Oops! Something went wrong while submitting the form. :(</p>
+          </div>
+        </div>
+        
         <div class="share-text">Share with your friends:&nbsp;</div>
         <div class="w-clearfix social-widget-wrapper">
           <div class="w-widget w-widget-twitter social-widget">

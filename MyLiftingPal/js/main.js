@@ -14,7 +14,7 @@ function toggleTest(){
 //////////////////////////////////
 //document.forms["signup"].submit();
 
-function submitSignUpform()
+function submitSignUpForm()
 { 
     var sEmail;
     var sUsername; 
@@ -29,14 +29,52 @@ function submitSignUpform()
         
         if ((sPassword === sConfirmPassword) && (validateEmail(sEmail) === true)){ 
             mlpObject.createuser(sEmail,sUsername,sPassword);
-            mlpObject.createuser('test@test.com','username','password');
+            submitLoginForm();
         }
-        else{ throw "Email or Password falid check";}
+        else{ throw "Email or Password falid check";
+        }
     }
     
     catch (e){
         console.log(e,"email: " + sEmail, "username: " + sUsername, "password: " + sPassword);
     }
+    
+    finally{
+        sEmail = null; 
+        sUsername = null; 
+        sPassword = null;
+        sConfirmPassword = null;
+    }
+}
+
+function submitLoginForm(){
+    var lUsername; 
+    var lPassword;
+    
+    try{
+        lUsername = document.getElementById("username").value; 
+        lPassword = document.getElementById("password").value;
+        mlpObject.login(lUsername,lPassword);
+    }
+    catch(e){
+        console.log(e,"username: " + lUsername, "password: " + lPassword);
+    }
+    finally{
+        lUsername = null; 
+        lPassword = null; 
+    }
+}
+
+function toggleForms(){
+    if (document.getElementById("signupdiv").style.display !== "block"){
+        document.getElementById("signupdiv").style.display="block";
+        document.getElementById("signindiv").style.display="none";
+    }
+    else{
+        document.getElementById("signupdiv").style.display="none";
+        document.getElementById("signindiv").style.display="block";
+    }
+    
 }
 
 function checkEmailaddress(){
@@ -69,7 +107,8 @@ function checkPassword()
         passwordconfirm.style.backgroundColor = goodColor;
         message.style.color = goodColor;
         message.innerHTML = "Passwords Match!";
-    }else{
+    }
+    else{
         //The passwords do not match.
         //Set the color to the bad color and
         //notify the user.
