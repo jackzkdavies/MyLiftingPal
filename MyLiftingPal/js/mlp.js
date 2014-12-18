@@ -3,7 +3,7 @@
 function mlp(key){
    var self = {};
    self.key = key;
-   self.url = 'http://www.myliftingpal.net/api';
+   self.url = 'http://www.myliftingpal.net/api/';
    self.result = [];
    self.session = '';
  

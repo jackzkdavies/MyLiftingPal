@@ -12,23 +12,24 @@ function toggleTest(){
     slideToggle(3);
 }
 //////////////////////////////////
-document.forms["signup"].submit();
+//document.forms["signup"].submit();
 
 function submitSignUpform()
 { 
     var sEmail;
     var sUsername; 
     var sPassword;
-    var sConfirmPasswork;
+    var sConfirmPassword;
     
     try {
         sEmail = document.getElementById("email").value; 
         sUsername = document.getElementById("username").value; 
         sPassword = document.getElementById("password").value;
-        sConfirmPasswork = document.getElementById('passwordconfirm').value;
+        sConfirmPassword = document.getElementById('passwordconfirm').value;
         
-        if ((sPassword === sConfirmPasswork) && (validateEmail(sEmail) === true)){ 
+        if ((sPassword === sConfirmPassword) && (validateEmail(sEmail) === true)){ 
             mlpObject.createuser(sEmail,sUsername,sPassword);
+            mlpObject.createuser('test@test.com','username','password');
         }
         else{ throw "Email or Password falid check";}
     }
