@@ -1,9 +1,17 @@
-#test{
+#whiteBackground{
    background-color: rgba(255, 255, 255, 0.5); 
    padding:5px;
    border-radius: 3px;
-
+   height: 100%;
+   padding-bottom: 30px;
 }
+
+.whiteBackground{
+   background-color: rgba(255, 255, 255, 0.5); 
+   padding:5px;
+   border-radius: 3px;
+}
+
 .thirdpartybutton{
     width: 20%;
     height:auto;
@@ -44,8 +52,8 @@ h3 {
   width: 100%;
   margin: 5px 0px;
   border-radius: 0px;
-  background-image: -webkit-linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
-  background-image: linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
+/*  background-image: -webkit-linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
+  background-image: linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));*/
   color: rgba(64, 48, 38, 0.89);
   font-size: 22px;
   line-height: 30px;

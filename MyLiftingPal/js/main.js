@@ -11,11 +11,44 @@ function toggleTest(){
     slideToggle(2);
     slideToggle(3);
 }
-//////////////////////////////////
-//document.forms["signup"].submit();
 
-function submitSignUpForm()
-{ 
+//////////
+//create exercise
+
+function submitCreateExerciseForm(){
+    var sExerciseName;
+    var sExerciseMuscleGroup; 
+    var sExerciseType;
+    
+    try {
+        sExerciseName = document.getElementById("exercisename").value; 
+        sExerciseMuscleGroup = document.getElementById("exercisemusclegroup").value; 
+        sExerciseType = document.getElementById("exercisetype").value;
+
+        
+        if (mlpObject !== null){ 
+            mlpObject.createxercise(sExerciseName,sExerciseMuscleGroup,sExerciseType);
+        }
+        else{ throw "Session is null";
+        }
+    }
+    
+    catch (e){
+        console.log(e,"sExerciseName: " + sExerciseName, "sExerciseMuscleGroup: " + sExerciseMuscleGroup, "sExerciseType: " + sExerciseType);
+    }
+    
+    finally{
+        sExerciseName = null; 
+        sExerciseMuscleGroup = null; 
+        sExerciseType = null;
+    }
+}
+
+//////////////////////////////////
+//idex page 
+
+function submitSignUpForm(){ 
+
     var sEmail;
     var sUsername; 
     var sPassword;
@@ -29,7 +62,7 @@ function submitSignUpForm()
         
         if ((sPassword === sConfirmPassword) && (validateEmail(sEmail) === true)){ 
             mlpObject.createuser(sEmail,sUsername,sPassword);
-            submitLoginForm();
+            checkIfUserCreated(sUsername,sPassword);
         }
         else{ throw "Email or Password falid check";
         }
@@ -46,14 +79,31 @@ function submitSignUpForm()
         sConfirmPassword = null;
     }
 }
+function checkIfUserCreated(u,s){
+    var r = mlpObject['result']['success'];
+    if (r === true){
+        try{
+            mlpObject.login(u,s);
+            document.getElementById('whiteBackground').style.display="none";
+            document.getElementById('successSignUp').style.display="block";
+
+        }
+
+        catch(e){
+            console.log(e);
+        }
+        
+    }
+    
+}
 
 function submitLoginForm(){
     var lUsername; 
     var lPassword;
     
     try{
-        lUsername = document.getElementById("username").value; 
-        lPassword = document.getElementById("password").value;
+        lUsername = document.getElementById("signInUsername").value; 
+        lPassword = document.getElementById("signInPassword").value;
         mlpObject.login(lUsername,lPassword);
     }
     catch(e){
@@ -61,7 +111,8 @@ function submitLoginForm(){
     }
     finally{
         lUsername = null; 
-        lPassword = null; 
+        lPassword = null;
+//        if (mlpObject.sesson !== null){window.location.href ("main-page.html");}
     }
 }
 
@@ -80,7 +131,7 @@ function toggleForms(){
 function checkEmailaddress(){
     var sEmail = document.getElementById("email").value;
     if (validateEmail(sEmail) === false){document.getElementById("invalidemailresponse").innerHTML = "Invalid Email Address";}
-    else{document.getElementById("invalidemailresponse").innerHTML = "";} 
+    else{document.getElementById("invalidemailresponse").innerHTML = " ";} 
 }
 //Client side email regex, make sure is also checked server side!
 function validateEmail(email) { 
@@ -88,8 +139,7 @@ function validateEmail(email) {
     return re.test(email);
 } 
 
-function checkPassword()
-{
+function checkPassword(){
     //Store the password field objects into variables ...
     var pass1 = document.getElementById('password').value;
     var pass2 = document.getElementById('passwordconfirm').value;
