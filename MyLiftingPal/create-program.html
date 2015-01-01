@@ -47,8 +47,12 @@
                 </div>
               </div>
             </div>
-            <h4>◄ Mon 17th Nov 2014 ►</h4>
-            <h2>Add Program</h2>
+            <h4 id="date">  </h4>
+            <script> var d = new Date(); var date = d.getDate(); var day = d.getDay(); var year = d.getFullYear(); var month = d.getMonth();
+            var days= ["Sun","Mon","Tue","Wed", "Thur","Fri","Sat"]; var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
+            var monthPrefix = ["st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"];
+            document.getElementById("date").innerHTML = "◄ "+ days[day] +" "+ date+monthPrefix[month] +" "+ months[month] +" "+ year+ " ►";
+            </script>
             <div class="w-tabs" data-duration-in="300" data-duration-out="100">
               <div class="w-tab-menu w-clearfix">
                 <a class="w-tab-link w-inline-block createtab" data-w-tab="Create New">
@@ -62,8 +66,8 @@
               </div>
               <div class="w-tab-content">
                 <div class="w-tab-pane w-clearfix" data-w-tab="Create New">
-                  <input class="w-input field feild2" id="programname" type="text" placeholder="Enter program name" name="programname" required="required" data-name="programname">
-                  <input class="w-input field feild2" id="programduration" type="text" placeholder="Enter program duration in weeks" name="programduration" required="required" data-name="programduration">
+                  <input class="w-input field feild2" id="cProgramName" type="text" placeholder="Enter program name" name="programname" required="required" data-name="programname">
+                  <input class="w-input field feild2" id="cProgramDuration" type="text" placeholder="Enter program duration in weeks" name="programduration" required="required" data-name="programduration">
                   <input class="w-input" id="addexercisetoworkout" type="text" placeholder="Select workout to add" name="addexercisetoworkout" required="required" data-name="addexercisetoworkout"><a class="button signup" href="#"><span><strong>Create Program</strong></span></a>
                 </div>
                 <div class="w-tab-pane w--tab-active w-clearfix" data-w-tab="Search">

@@ -39,7 +39,7 @@
                   <div class="w-dropdown" data-delay="0">
                     <div class="w-dropdown-toggle createdropdown">
                       <div class="w-icon-dropdown-toggle"></div>
-                      <div>Create New</div>
+                      <div>Create/Add</div>
                     </div>
                     <nav class="w-dropdown-list"><a class="w-dropdown-link" href="create-exercise.html">exercise</a><a class="w-dropdown-link" href="create-workout.html">workout</a><a class="w-dropdown-link" href="create-program.html">program</a>
                     </nav>
@@ -47,12 +47,17 @@
                 </div>
               </div>
             </div>
-            <h4>◄ Mon 17th Nov 2014 ►</h4>
-            <h2>Add Exercise</h2>
+            <h4 id="date">  </h4>
+            <script> var d = new Date(); var date = d.getDate(); var day = d.getDay(); var year = d.getFullYear(); var month = d.getMonth();
+            var days= ["Sun","Mon","Tue","Wed", "Thur","Fri","Sat"]; var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
+            var monthPrefix = ["st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"];
+            document.getElementById("date").innerHTML = "◄ "+ days[day] +" "+ date+monthPrefix[month] +" "+ months[month] +" "+ year+ " ►";
+            </script>
+           
             <div class="w-tabs" data-duration-in="300" data-duration-out="100">
               <div class="w-tab-menu w-clearfix">
                 <a class="w-tab-link w--current w-inline-block createtab" data-w-tab="Create New">
-                  <div><strong>Create New</strong> <strong>Exercise</strong>
+                  <div><strong>Create New Exercise</strong>
                   </div>
                 </a>
                 <a class="w-tab-link w-inline-block searchtab" data-w-tab="Search">
@@ -62,13 +67,16 @@
               </div>
               <div class="w-tab-content">
                 <div class="w-tab-pane w--tab-active w-clearfix" data-w-tab="Create New">
-                  <input class="w-input field feild2" id="exercisename" type="text" placeholder="Enter exercise name" name="exercisename" required="required" data-name="exercisename">
-                  <input class="w-input field feild2" id="exercisemusclegroup" type="text" placeholder="Enter muscle group" name="exercisemusclegroup" required="required" data-name="exercisemusclegroup">
-                  <input class="w-input field feild2" id="exercisetype" type="text" placeholder="Enter type" name="exercisetype" required="required" data-name="exercisetype"><a class="button signup" href="#"><span><strong>Create Exercise</strong></span></a>
+                  <input class="w-input field feild2" id="cExerciseName" type="text" placeholder="Enter exercise name" name="exercisename" required="required" data-name="exercisename">
+                  <input class="w-input field feild2" id="cExerciseMusclegroup" type="text" placeholder="Enter muscle group" name="exercisemusclegroup" required="required" data-name="exercisemusclegroup">
+                  <input class="w-input field feild2" id="cExerciseType" type="text" placeholder="Enter type" name="exercisetype" required="required" data-name="exercisetype">
+                  <a class="button signup" href="javascript: submitCreateExerciseForm(1)"><span><strong>Create and Add </strong></span></a>
+                  <h4>or</h4>
+                  <a class="button signup" href="javascript: submitCreateExerciseForm(0)"><span><strong>Create Exercise</strong></span></a>
                 </div>
                 <div class="w-tab-pane w-clearfix" data-w-tab="Search">
                   <input class="w-input seachexerciseinput" id="exercisesearch" type="text" placeholder="Enter exercise" name="exercisesearch" required="required" data-name="exercisesearch">
-                  <div class="searchresultsdiv">Search result show here&nbsp;</div><a class="button addexercisetocurrentday" href="javascript: submitCreateExerciseForm()">"><strong>Add to current day</strong></a>
+                  <div class="searchresultsdiv">Search result show here&nbsp;</div><a class="button addexercisetocurrentday" href="javascript: submitCreateExerciseForm()"><strong>Add to current day</strong></a>
                 </div>
               </div>
             </div>

@@ -13,21 +13,25 @@ function toggleTest(){
 }
 
 //////////
-//create exercise
 
-function submitCreateExerciseForm(){
+//create exercise
+function submitCreateExerciseForm(add){
+    var addToDay = add;
     var sExerciseName;
     var sExerciseMuscleGroup; 
     var sExerciseType;
     
     try {
-        sExerciseName = document.getElementById("exercisename").value; 
-        sExerciseMuscleGroup = document.getElementById("exercisemusclegroup").value; 
-        sExerciseType = document.getElementById("exercisetype").value;
+        sExerciseName = document.getElementById("cExerciseName").value; 
+        sExerciseMuscleGroup = document.getElementById("cExerciseMusclegroup").value; 
+        sExerciseType = document.getElementById("cExerciseType").value;
 
         
         if (mlpObject !== null){ 
             mlpObject.createxercise(sExerciseName,sExerciseMuscleGroup,sExerciseType);
+            if(addToDay === 1){
+                console.log("need to add code for adding to current day");
+            }
         }
         else{ throw "Session is null";
         }
@@ -44,9 +48,75 @@ function submitCreateExerciseForm(){
     }
 }
 
+//create Workout
+function submitCreateWorkoutForm(){
+    var sWorkoutName;
+    var addExercises = []; 
+    
+    try {
+        sWorkoutName = document.getElementById("cWorkoutName").value; 
+        sExercises = document.getElementById("cAddExerciseToWorkout").value; 
+
+
+        
+        if (mlpObject !== null){ 
+            mlpObject.creatWorkout(sWorkoutName);
+            if(addExercises !== null){
+                console.log("need to add code for adding to workout");
+                for (exercise in addExercises){
+                    mlpObject.addexercise(exercise['exerciseid'], exercise['workoutid'], exercise['ordering'], 
+                    exercise['reps'], exercise['sets'], exercise['rpe'], exercise['weight'], exercise['percentage']);
+                }
+            }
+        }
+        else{ throw "Session is null";
+        }
+    }
+    
+    catch (e){
+        console.log(e);
+    }
+    
+    finally{
+        sWorkoutName = null; 
+        sExercises = null; 
+    }
+//create programme
+}
+function submitCreateProgrammeForm(){
+    var cProgramName;
+    var cProgramDuration;
+    var addWorkouts = [];
+    
+    try {
+        cProgramName = document.getElementById("cProgramName").value; 
+        cProgramDuration = document.getElementById("cProgramDuration").value; 
+
+        if (mlpObject !== null){ 
+            mlpObject.createProgram(cProgramName,cProgramDuration);
+            if(addWorkouts !== null){
+                console.log("need to add code for adding to workout");
+                for (workouts in addWorkouts){
+                    mlpObject.addworkout (workouts['workoutid'], workouts['programid'], workouts['ordering'], workouts['day']);
+                }
+            }
+        }
+        else{ throw "Session is null";
+        }
+    }
+    
+    catch (e){
+        console.log(e);
+    }
+    
+    finally{
+        sWorkoutName = null; 
+        sExercises = null; 
+    }
+}
+
 //////////////////////////////////
 //idex page 
-
 function submitSignUpForm(){ 
 
     var sEmail;
