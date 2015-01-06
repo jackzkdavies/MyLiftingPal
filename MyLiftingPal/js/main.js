@@ -12,7 +12,7 @@ function toggleTest(){
     slideToggle(3);
 }
 
-//////////
+////////// examplemlpObject.login({username: 'myusername', password:'mypassword'}
 
 //create exercise
 function submitCreateExerciseForm(add){
@@ -28,7 +28,8 @@ function submitCreateExerciseForm(add){
 
         
         if (mlpObject !== null){ 
-            mlpObject.createxercise(sExerciseName,sExerciseMuscleGroup,sExerciseType);
+            //name,musclegroup,type
+            mlpObject.createxercise({name:sExerciseName,musclegroup:sExerciseMuscleGroup,type:sExerciseType});
             if(addToDay === 1){
                 console.log("need to add code for adding to current day");
             }
@@ -60,12 +61,19 @@ function submitCreateWorkoutForm(){
 
         
         if (mlpObject !== null){ 
-            mlpObject.creatWorkout(sWorkoutName);
+            //name
+            mlpObject.creatWorkout({name:sWorkoutName});
             if(addExercises !== null){
                 console.log("need to add code for adding to workout");
                 for (exercise in addExercises){
-                    mlpObject.addexercise(exercise['exerciseid'], exercise['workoutid'], exercise['ordering'], 
-                    exercise['reps'], exercise['sets'], exercise['rpe'], exercise['weight'], exercise['percentage']);
+                    //exerciseid, workoutid,ordering, reps, sets, rpe, weight, percentage
+                    try{
+                    mlpObject.addexercise({exerciseid:exercise['exerciseid'], workoutid:exercise['workoutid'], ordering:exercise['ordering'], 
+                    reps:exercise['reps'], sets:exercise['sets'], rpe:exercise['rpe'],weight:exercise['weight'], percentage:exercise['percentage']});
+                    }
+                    
+                    catch(e){
+                        console.log(e);}
                 }
             }
         }
@@ -92,12 +100,19 @@ function submitCreateProgrammeForm(){
         cProgramName = document.getElementById("cProgramName").value; 
         cProgramDuration = document.getElementById("cProgramDuration").value; 
 
-        if (mlpObject !== null){ 
-            mlpObject.createProgram(cProgramName,cProgramDuration);
+        if (mlpObject !== null){
+            //name, duration
+            mlpObject.createProgram({name:cProgramName,duration:cProgramDuration});
             if(addWorkouts !== null){
                 console.log("need to add code for adding to workout");
                 for (workouts in addWorkouts){
-                    mlpObject.addworkout (workouts['workoutid'], workouts['programid'], workouts['ordering'], workouts['day']);
+                     //workoutid, programid, ordering, day
+                    try{
+                    mlpObject.addworkout ({workoutid:workouts['workoutid'], programid:workouts['programid'], ordering:workouts['ordering'], day:workouts['day']});
+                    }
+                    catch(e){
+                        console.log(e);
+                    }
                 }
             }
         }
@@ -111,7 +126,7 @@ function submitCreateProgrammeForm(){
     
     finally{
         sWorkoutName = null; 
-        sExercises = null; 
+        sExercises = null;
     }
 }
 
@@ -131,8 +146,21 @@ function submitSignUpForm(){
         sConfirmPassword = document.getElementById('passwordconfirm').value;
         
         if ((sPassword === sConfirmPassword) && (validateEmail(sEmail) === true)){ 
-            mlpObject.createuser(sEmail,sUsername,sPassword);
-            checkIfUserCreated(sUsername,sPassword);
+            //email,username,password
+            mlpObject.createuser({email:sEmail,username:sUsername,password:sPassword});
+            if (mlpObject['result']['success'] === true){
+                try{
+                    mlpObject.login({username: u, password:p});
+                    document.getElementById('whiteBackground').style.display="none";
+                    document.getElementById('successSignUp').style.display="block";
+
+                }
+
+                catch(e){
+                    console.log(e);
+                }
+            };
+//            checkIfUserCreated(sUsername,sPassword);
         }
         else{ throw "Email or Password falid check";
         }
@@ -149,23 +177,24 @@ function submitSignUpForm(){
         sConfirmPassword = null;
     }
 }
-function checkIfUserCreated(u,s){
-    var r = mlpObject['result']['success'];
-    if (r === true){
-        try{
-            mlpObject.login(u,s);
-            document.getElementById('whiteBackground').style.display="none";
-            document.getElementById('successSignUp').style.display="block";
-
-        }
-
-        catch(e){
-            console.log(e);
-        }
-        
-    }
-    
-}
+/// OLD CREATE USER CHECK
+//function checkIfUserCreated(u,p){
+//    var r = mlpObject['result']['success'];
+//    if (r === true){
+//        try{
+//            mlpObject.login({username: u, password:p});
+//            document.getElementById('whiteBackground').style.display="none";
+//            document.getElementById('successSignUp').style.display="block";
+//
+//        }
+//
+//        catch(e){
+//            console.log(e);
+//        }
+//        
+//    }
+//    
+//}
 
 function submitLoginForm(){
     var lUsername; 
@@ -174,7 +203,8 @@ function submitLoginForm(){
     try{
         lUsername = document.getElementById("signInUsername").value; 
         lPassword = document.getElementById("signInPassword").value;
-        mlpObject.login(lUsername,lPassword);
+        //username, password
+        mlpObject.login({username:lUsername,password:lPassword});
     }
     catch(e){
         console.log(e,"username: " + lUsername, "password: " + lPassword);
