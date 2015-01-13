@@ -33,7 +33,7 @@ function mlp(key){
             async: false,
             data: allParamters,
             success: callback,
-			error:  function( jqXHR, textStatus, errorThrown ){console.log(errorThrown)}
+			error:  function( jqXHR, textStatus, errorThrown ){console.log(errorThrown);}
       });         
     };
    
@@ -47,7 +47,7 @@ function mlp(key){
    self.logout = function(){
 		
         self.call('authentication','logout', {}, cb); 
-		self.session = ''
+		self.session = '';
 		$.removeCookie("mlpsession");	
 		return self;		
    };  

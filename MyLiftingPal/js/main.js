@@ -204,15 +204,17 @@ function submitLoginForm(){
         lUsername = document.getElementById("signInUsername").value; 
         lPassword = document.getElementById("signInPassword").value;
         //username, password
-        mlpObject.login({username:lUsername,password:lPassword});
+        if (mlpObject.login({username:lUsername,password:lPassword}).result["success"] === true){
+          window.location.href ("main-page.html");
+        };
     }
     catch(e){
-        console.log(e,"username: " + lUsername, "password: " + lPassword);
+        console.log(e);
+        console.log("username: " + lUsername, "password: " + lPassword);
     }
     finally{
         lUsername = null; 
         lPassword = null;
-//        if (mlpObject.sesson !== null){window.location.href ("main-page.html");}
     }
 }
 

@@ -39,3 +39,12 @@ so say you have a weekly schedule
 then you can add a program started from a given date
 
 and it will pre add all the workouts
+
+
+//////
+just navigate to the directory in cmd
+and then go node server.js
+and then the server will start
+and you can go to localhost:1337
+to find it
+keep cmd open for as long as u want the server running
