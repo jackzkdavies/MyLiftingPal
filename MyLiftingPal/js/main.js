@@ -30,7 +30,7 @@ function centerCalander(){
         }
     }
     else{
-        t.style.paddingLeft= ((sw-dpw)/2)-20+'px';
+        t.style.paddingLeft= ((sw-dpw)/2)-10+'px';
         t.style.backgroundColor="#77b2c9";
     }
 }
