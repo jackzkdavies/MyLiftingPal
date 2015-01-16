@@ -1,3 +1,5 @@
+//Date
+var d = new Date(); var date = d.getDate(); var day = d.getDay(); var year = d.getFullYear(); var month = d.getMonth();
 //Create MLP object
 var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
 
@@ -6,13 +8,52 @@ function slideToggle(number){
     $(".tabsdiv"+number).slideToggle(400);
 }
 
+function slideToggleCalender(){
+    $(".calender").slideToggle(400);
+    centerCalander();
+}
+
+function centerCalander(){
+    var t = document.getElementById("sandbox-container");
+    t.style.paddingLeft=0;
+    var sw= screen.availWidth;
+    var tw = $("div.calender table").width();
+    var dpw = $("div.datepicker").width();
+    if (tw !== 0){
+            if(tw===217){
+            t.style.paddingLeft= ((sw-tw)/2)-22+'px';
+            t.style.backgroundColor="#77b2c9";
+        }
+        else{
+            t.style.paddingLeft= ((sw-tw)/2)-25+'px';
+            t.style.backgroundColor="#77b2c9";
+        }
+    }
+    else{
+        t.style.paddingLeft= ((sw-dpw)/2)-20+'px';
+        t.style.backgroundColor="#77b2c9";
+    }
+}
+
 function toggleTest(){
     slideToggle(1);
     slideToggle(2);
     slideToggle(3);
 }
 
+function checkResults(){
+    try{
+        if (mlpObject.selectResults({assigneddate:year+"-"+(month+1)+"-"+date}).result['success']===false){
+            document.getElementById("noResults").innerHTML = "No Results to Show for Current Date";};
+    }
+    catch(e){
+        console.log(e);
+    }
+}
 ////////// examplemlpObject.login({username: 'myusername', password:'mypassword'}
+
+//check login
+
 
 //create exercise
 function submitCreateExerciseForm(add){
@@ -147,12 +188,12 @@ function submitSignUpForm(){
         
         if ((sPassword === sConfirmPassword) && (validateEmail(sEmail) === true)){ 
             //email,username,password
-            mlpObject.createuser({email:sEmail,username:sUsername,password:sPassword});
-            if (mlpObject['result']['success'] === true){
+            if (mlpObject.createUser({email:sEmail,username:sUsername,password:sPassword}).result['success']===true){
                 try{
-                    mlpObject.login({username: u, password:p});
+                    mlpObject.login({username: sUsername, password:sPassword});
                     document.getElementById('whiteBackground').style.display="none";
                     document.getElementById('successSignUp').style.display="block";
+                    setTimeout(function () {window.location.replace("main-page.html");}, 2000);
 
                 }
 
@@ -160,14 +201,24 @@ function submitSignUpForm(){
                     console.log(e);
                 }
             };
+            if(mlpObject.result['success']===false){
+                document.getElementById("invalidemailresponse").innerHTML = mlpObject.result['errormsg'];
+                
+            }
 //            checkIfUserCreated(sUsername,sPassword);
         }
-        else{ throw "Email or Password falid check";
+        else{
+            var message = document.getElementById('invalidpasswordmatch');
+            var badColor = "#ff6666";
+            passwordconfirm.style.backgroundColor = badColor;
+            message.style.color = badColor;
+            message.innerHTML = "Passwords Do Not Match"; 
+            throw "Email or Password falid check";
         }
     }
     
     catch (e){
-        console.log(e,"email: " + sEmail, "username: " + sUsername, "password: " + sPassword);
+        console.log(e);
     }
     
     finally{
@@ -199,14 +250,28 @@ function submitSignUpForm(){
 function submitLoginForm(){
     var lUsername; 
     var lPassword;
+    var errormsg;
+    var message;
+    
+    document.getElementById('usernameNotFound').innerHTML="";
+    document.getElementById('incorrectPassword').innerHTML="";
     
     try{
         lUsername = document.getElementById("signInUsername").value; 
         lPassword = document.getElementById("signInPassword").value;
         //username, password
         if (mlpObject.login({username:lUsername,password:lPassword}).result["success"] === true){
-          window.location.href ("main-page.html");
+            console.log('Logged In');
+            window.location.replace("main-page.html");
         };
+        if(mlpObject.result["success"] === false){            
+            errormsg = 'usernameNotFound';
+            if (mlpObject.result["errormsg"]=== "Password incorrect."){
+                errormsg = 'incorrectPassword';
+            }
+            message = document.getElementById(errormsg);
+            message.innerHTML = mlpObject.result["errormsg"];
+        }
     }
     catch(e){
         console.log(e);
@@ -215,9 +280,20 @@ function submitLoginForm(){
     finally{
         lUsername = null; 
         lPassword = null;
+        errormsg = null;
+        message = null;
     }
 }
-
+function signOut(){
+    try{
+        if (mlpObject.logout().result["success"] === true){
+        window.location.replace("index.html");       }
+    }
+    catch(e){
+        console.log(e);
+    }
+    
+}
 function toggleForms(){
     if (document.getElementById("signupdiv").style.display !== "block"){
         document.getElementById("signupdiv").style.display="block";
