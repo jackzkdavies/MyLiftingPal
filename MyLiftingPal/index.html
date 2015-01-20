@@ -16,42 +16,43 @@
       google: {
         families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic","Lily Script One:regular"]
       }
-    });
+    });    
   </script>
+  
+  
+  <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+  <!--<script type="text/javascript" src="js/jquery-1.11.2.js"></script>-->
   <script type="text/javascript" src="js/modernizr.js"></script>
+  <script type="text/javascript" src="js/jquery.cookie.js"></script>
   <script type="text/javascript" src="js/mlp.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
+  <script type="text/javascript" src="js/webflow.js"></script>
+  
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
   <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
 </head>
 <body>
   <div class="w-container">
     <div class="w-row">
-      <div class="w-col w-col-8 w-clearfix"><img class="logoimage" src="images/mlp_logo.png" alt="546987585294c14035d7eda7_mlp_logo.png">
-        <p class="subtitle">The new way to accomplish your goals and get ahead in life. Don’t be looking, be looked at.&nbsp;&nbsp;</p>
-        
+      <img class="logoimage" src="images/mlp_logo.png" alt="546987585294c14035d7eda7_mlp_logo.png">
+      <div  class="w-col w-col-8 w-clearfix"> 
+        <p class="subtitle">The new way to accomplish your goals and get ahead in life. Don’t look at, be looked at.&nbsp;&nbsp;</p>
+        <div id="whiteBackground">
+        <p class="blackfont">Login or <font color="#2da1cf"> Sign up!</font></p>
+        <img class="thirdpartybutton" src="images/fb.png" alt="fb">
+        <img class="thirdpartybutton" src="images/twitter.png" alt="twitter">
+        <img class="thirdpartybutton" src="images/google.png" alt="google">
+        <p class="blackfont">or</p>
         <div class="w-form signin-form" id="signindiv" style="display: block;">
           <form class="w-clearfix" name="wf-form-signup-form" data-name="Signup Form" data-redirect="/main-page">
-            <input class="w-input field feild2" id="email" type="text" placeholder="Enter your username" name="username" required="required" data-name="username">
-            <input class="w-input field" id="password" type="password" placeholder="Enter your password" name="password" data-name="password" required="required">
+            <p class ="invalidinput" id="usernameNotFound"></p>
+            <input class="w-input field feild2" id="signInUsername" type="text" placeholder="Enter your username" name="username" required="required" data-name="username">
+            <p class ="invalidinput" id="incorrectPassword"></p>
+            <input class="w-input field" id="signInPassword" type="password" placeholder="Enter your password" name="password" data-name="password" required="required">
             <a class="w-button button" href="javascript: submitLoginForm()">login</a>
           </form>
-          <div class="w-form-done success-message">
-            <p>Thanks! You have been added to our list.&nbsp;</p>
-            <p class="spread-word">Help spread the word!</p>
-            <div class="w-clearfix social-widget-wrapper">
-              <div class="w-widget w-widget-twitter social-widget full-opacity">
-                <iframe src="https://platform.twitter.com/widgets/tweet_button.html#url=http%3A%2F%2Fwebflow.com&amp;counturl=webflow.com&amp;text=Check%20out%20this%20site&amp;count=horizontal&amp;size=m&amp;dnt=true" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 110px; height: 20px;"></iframe>
-              </div>
-              <div class="w-widget w-widget-facebook social-widget full-opacity">
-                <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Ffacebook.com%2Fwebflow&amp;layout=button_count&amp;locale=en_US&amp;action=like&amp;show_faces=false&amp;share=false" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 90px; height: 20px;"></iframe>
-              </div>
-            </div>
-          </div>
-          <div class="w-form-fail error-message">
-            <p>Oops! Something went wrong while submitting the form. :(</p>
-          </div>
-            <br><br>
+            <br>
+            <p class="blackfont">New user?</p>
         <a class="button signup" href="javascript: toggleForms()"><span>sign up</span></a>
         </div>
         
@@ -66,34 +67,28 @@
             <input class="w-input field" id="passwordconfirm" type="password" placeholder="Re-enter your password" name="passwordconfirm" data-name="passwordconfirm" required="required" onclick="checkEmailaddress(); return false;" onkeyup="checkPassword(); return false;">
             <a class="w-button button" href="javascript: submitSignUpForm()">sign up</a>
           </form>
-          <br><br>
-          <a class="button backbutton" href="javascript: toggleForms()">Back</a>
-          <div class="w-form-done success-message">
-            <p>Thanks! You have been added to our list.&nbsp;</p>
-            <p class="spread-word">Help spread the word!</p>
-            <div class="w-clearfix social-widget-wrapper">
-              <div class="w-widget w-widget-twitter social-widget full-opacity">
-                <iframe src="https://platform.twitter.com/widgets/tweet_button.html#url=http%3A%2F%2Fwebflow.com&amp;counturl=webflow.com&amp;text=Check%20out%20this%20site&amp;count=horizontal&amp;size=m&amp;dnt=true" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 110px; height: 20px;"></iframe>
-              </div>
-              <div class="w-widget w-widget-facebook social-widget full-opacity">
-                <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Ffacebook.com%2Fwebflow&amp;layout=button_count&amp;locale=en_US&amp;action=like&amp;show_faces=false&amp;share=false" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 90px; height: 20px;"></iframe>
-              </div>
-            </div>
+          
+          
+          <a class="button backbutton" href="javascript: toggleForms()">return</a>
+        </div>
+        
+        </div>
+        
+        <div id="successSignUp" class="whiteBackground" style="display: none;"><h2><font color="#2da1cf">Thank you for joining</font> MyLiftingPal!</h2></div>
+          
+        <div  class="share-text"><h3> <font color="#2da1cf">Share with your friends:&nbsp;</font></h3></div>
+        <div class="w-clearfix social-widget-wrapper whiteBackground">
+          <div class="w-widget w-widget-twitter social-widget">
+            <iframe src="http://platform.twitter.com/widgets/tweet_button.html#url=http%3A%2F%2Fwebflow.com&amp;counturl=webflow.com&amp;text=Check%20out%20this%20site&amp;count=horizontal&amp;size=m&amp;dnt=true" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 110px; height: 20px;"></iframe>
           </div>
-          <div class="w-form-fail error-message">
-            <p>Oops! Something went wrong while submitting the form. :(</p>
+          <div class="w-widget w-widget-facebook social-widget">
+            <iframe src="http://www.facebook.com/plugins/like.php?href=https%3A%2F%2Ffacebook.com%2Fwebflow&amp;layout=button_count&amp;locale=en_US&amp;action=like&amp;show_faces=false&amp;share=false" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 90px; height: 20px;"></iframe>
           </div>
         </div>
         
-        <div class="share-text">Share with your friends:&nbsp;</div>
-        <div class="w-clearfix social-widget-wrapper">
-          <div class="w-widget w-widget-twitter social-widget">
-            <iframe src="https://platform.twitter.com/widgets/tweet_button.html#url=http%3A%2F%2Fwebflow.com&amp;counturl=webflow.com&amp;text=Check%20out%20this%20site&amp;count=horizontal&amp;size=m&amp;dnt=true" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 110px; height: 20px;"></iframe>
-          </div>
-          <div class="w-widget w-widget-facebook social-widget">
-            <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Ffacebook.com%2Fwebflow&amp;layout=button_count&amp;locale=en_US&amp;action=like&amp;show_faces=false&amp;share=false" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 90px; height: 20px;"></iframe>
-          </div>
-        </div>
+        
+        
+        
       </div>
       <div class="w-col w-col-4 image-column"><img class="adhomepage" src="images/fakead.png" alt="5469870d5294c14035d7ed9f_fakead.png">
       </div>
@@ -102,12 +97,19 @@
   <div class="color-section">
     <div class="w-container">
       <div class="footer-section">
-        <div class="copyright">© 2014 MyLiftingPal. All right reserved.&nbsp;</div>
+        <div class="copyright">© 2014 MyLiftingPal. All rights reserved.&nbsp;</div>
       </div>
     </div>
   </div>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script type="text/javascript" src="js/webflow.js"></script>
+
+    <script>       
+        function checkLoginStatus(){
+        if (mlpObject.session !== ""){
+            window.location.replace("main-page.html");
+            }
+        }
+        checkLoginStatus();
+    </script>
   <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
 </body>
 </html>

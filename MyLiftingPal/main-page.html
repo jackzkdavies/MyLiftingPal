@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="generator" content="Webflow">
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="css/datepicker3.css">
   <link rel="stylesheet" type="text/css" href="css/webflow.css">
   <link rel="stylesheet" type="text/css" href="css/myliftingpal.webflow.css">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
@@ -18,33 +19,63 @@
       }
     });
   </script>
+  <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+  <!--<script type="text/javascript" src="js/jquery-1.11.2.js"></script>-->
   <script type="text/javascript" src="js/modernizr.js"></script>
+  <script type="text/javascript" src="js/jquery.cookie.js"></script>
+  <script type="text/javascript" src="js/mlp.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+  <script type="text/javascript" src="js/webflow.js"></script>
+  <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
   <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
 </head>
 <body class="plainbodybackground">
   <div class="w-row">
-    <div class="w-col w-col-9 w-col-stack"><img class="logoimage" src="images/mlp_logo.png" alt="546987585294c14035d7eda7_mlp_logo.png">
+    <div class="w-col w-col-9 w-col-stack"><img id ="logo" class="logoimage" src="images/mlp_logo.png" alt="546987585294c14035d7eda7_mlp_logo.png">
       <div class="w-nav" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1">
         <div class="w-container menucont">
-          <nav class="w-nav-menu" role="navigation"><a class="w-nav-link" href="main-page.html">view</a><a class="w-nav-link" href="#">Settings</a><a class="w-nav-link" href="#">Sign Out</a>
+          <nav class="w-nav-menu" role="navigation"><a class="w-nav-link" href="main-page.html">view</a><a class="w-nav-link" href="#">Settings</a><a class="w-nav-link" href="javascript: signOut()">Sign Out</a>
           </nav>
           <div class="w-nav-button">
             <div class="w-icon-nav-menu"></div>
           </div>
           <div class="dropdowndiv">
             <div class="w-dropdown" data-delay="0">
-              <div class="w-dropdown-toggle">
-                <div class="w-icon-dropdown-toggle"></div>
-                <div>Add New</div>
-              </div>
-              <nav class="w-dropdown-list"><a class="w-dropdown-link" href="create-exercise.html">exercise</a><a class="w-dropdown-link" href="create-workout.html">workout</a><a class="w-dropdown-link" href="create-program.html">program</a>
-              </nav>
+            <div class="w-dropdown-toggle createdropdown">
+                      <div class="w-icon-dropdown-toggle"></div>
+                      <div>Create/Add</div>
+                    </div>
+                    <nav class="w-dropdown-list"><a class="w-dropdown-link" href="create-exercise.html">exercise</a><a class="w-dropdown-link" href="create-workout.html">workout</a><a class="w-dropdown-link" href="create-program.html">program</a>
+                    </nav>
             </div>
           </div>
         </div>
       </div>
-      <h4>◄ Mon 17th Nov 2014 ►</h4>
+        
+        <h4 id="date" onClick="slideToggleCalender()">  </h4>
+        <script> var d = new Date(); var date = d.getDate(); var day = d.getDay(); var year = d.getFullYear(); var month = d.getMonth();
+        var days= ["Sun","Mon","Tue","Wed", "Thur","Fri","Sat"]; var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
+        var monthPrefix = ["st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"];
+        document.getElementById("date").innerHTML = "◄ "+ days[day] +" "+ date+monthPrefix[day] +" "+ months[month] +" "+ year+ " ►";
+        </script>
+        
+      
+            
+        <div class="calender"  id="sandbox-container" style="display: none;" onClick="centerCalander()">
+            <script>
+                $('#sandbox-container').datepicker({
+                format: "dd/mm/yyyy",
+                orientation: "top",
+                keyboardNavigation: false,
+                calendarWeeks: true,
+                todayHighlight: true
+            });
+        </script>
+        </div>
+
+     
+           
       <div class="exersicediv">
         <div class="w-clearfix exerciseinfotable">
           <div class="exercisedivname">
@@ -64,6 +95,11 @@
           </div>
         </div>
         <div class="w-clearfix exerciseinfotable exerciseinfotabledata">
+            
+            <p id="noResults"> 
+                
+            </p>
+            
           <div class="w-clearfix createdexercises">
             <div class="w-clearfix exercisedivname"><a class="button detailsbutton" href="#"><strong class="detailsbuttontext">+</strong></a>
               <h6>Lunges</h6>
@@ -262,8 +298,17 @@
       </div>
     </div>
   </div>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script type="text/javascript" src="js/webflow.js"></script>
+    <script>    
+    function checkLoginStatus(){
+        if (mlpObject.session === ""){
+            window.location.replace("index.html");
+        }
+    }
+
+
+    checkLoginStatus();
+    checkResults();
+   </script>
   <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
 </body>
 </html>
