@@ -70,7 +70,7 @@ function submitCreateExerciseForm(add){
         
         if (mlpObject !== null){ 
             //name,musclegroup,type
-            mlpObject.createxercise({name:sExerciseName,musclegroup:sExerciseMuscleGroup,type:sExerciseType});
+            mlpObject.createExercise({name:sExerciseName,musclegroup:sExerciseMuscleGroup,type:sExerciseType});
             if(addToDay === 1){
                 console.log("need to add code for adding to current day");
             }
@@ -90,6 +90,51 @@ function submitCreateExerciseForm(add){
     }
 }
 
+function submitSearchExcercise(){
+    var results=[];
+    var searchTerms =['name','musclegroup','type','userid'];
+    var searchTerm= document.getElementById("exercisesearch").value.toString();
+    try{
+    for (st in searchTerms){
+        var data = new Array();
+        data[searchTerms[st]] = searchTerm;
+        var searchResult = mlpObject.getExercises(data).result;
+        if (searchResult['success'] === true){
+            for ( test in searchResult['data'] ){
+                results.push(searchResult['data'][test]);
+            };
+        
+            
+        }
+    }
+    document.getElementById("searchresults").innerHTML = "";
+    document.getElementById("searchresults").innerHTML += "<div id='tester'>";
+    for (obj in results){
+   
+        for (st in searchTerms){
+            
+   
+            if (searchTerms[st] === 'userid'){
+                document.getElementById("searchresults").innerHTML += "Create By: ";
+                document.getElementById("searchresults").innerHTML += + mlpObject.getUsers({id:results[obj][searchTerms[st]]}).result['data']['username'] ;
+
+            }
+            else {
+                document.getElementById("searchresults").innerHTML += searchTerms[st].charAt(0).toUpperCase() + searchTerms[st].slice(1) + ": &nbsp;" ;
+                document.getElementById("searchresults").innerHTML += results[obj][searchTerms[st]] +"<br>";
+            }
+   
+        }
+        document.getElementById("searchresults").innerHTML += "<hr>";
+    
+    }
+    document.getElementById("searchresults").innerHTML += "</div>";
+    document.getElementById("tester").style.backgroundColor = "#66cc66";
+    }
+    catch(e){console.log(e);}
+    finally{};
+    
+}
 //create Workout
 function submitCreateWorkoutForm(){
     var sWorkoutName;
