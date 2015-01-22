@@ -87,24 +87,12 @@
                 </div>
                 <div class="w-tab-pane w-clearfix" data-w-tab="Search">
                   <input class="w-input seachexerciseinput" id="exercisesearch" type="text" placeholder="Enter exercise" name="exercisesearch" required="required" data-name="exercisesearch">
-                  <a class="button addexercisetocurrentday" href="javascript: submitSearchExcercise()"><strong>Search</strong></a>
+                  <a class="button addexercisetocurrentday" href="javascript: submitSearchExcercise()"><strong>Submit Search</strong></a>
                   
-                  <div style='background-color: purple'>
-                      
-                    <div id ="searchresults" class="searchresultsdiv" style='float: left; background-color: blue; text-align:left; width:70%'>Search result show here&nbsp;
-                        <br><br><br><br><br><br><br>
-                    </div>
-                    
-                    <div style='background-color: red; min-height: 45%; width:30% ;'>&nbsp;</div>     
-                    
-                    <div style="background-color: hotpink; width: 30%; float: left">
-                    <input type="button" value="Dropdown" data-dropdown="#dropdown" />
-                    </div>
-                    
-                    <div style='background-color: #33ff33; width:30% ; float: left'></div> 
-                  </div>
-                  
-                  <a class="button addexercisetocurrentday" href="javascript: submitCreateExerciseForm()"><strong>Add to current day</strong></a>
+                  <table  style='width: 100%; text-align:left'>
+                      <tbody id ="searchresults"></tbody>
+                  </table>
+                   
                 </div>
               </div>
             </div>
@@ -134,13 +122,10 @@
   <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
     <div id="dropdown" class="dropdown dropdown-tip">
     <ul class="dropdown-menu">
-        <li><a href="#1">Item 1</a></li>
-        <li><a href="#2">Item 2</a></li>
-        <li><a href="#3">Item 3</a></li>
-        <li class="dropdown-divider"></li>
-        <li><a href="#4">Item 4</a></li>
-        <li><a href="#5">Item 5</a></li>
-        <li><a href="#5">Item 6</a></li>
+        <li><a href="#1">Day</a></li>
+        <li><a href="#2">Week</a></li>
+        <li><a href="#3">Month</a></li>
+
     </ul>
     </div>
 </body>

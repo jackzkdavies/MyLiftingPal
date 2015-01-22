@@ -108,28 +108,40 @@ function submitSearchExcercise(){
         }
     }
     document.getElementById("searchresults").innerHTML = "";
-    document.getElementById("searchresults").innerHTML += "<div id='tester'>";
+    var toAppend="";
+    toAppend += "<tr><td> <br> </td></tr>";
+    toAppend += "<tr><td> <h5><u>Search Results:</u> <h5></td></tr>";
     for (obj in results){
-   
+        console.log(results[obj]);
+
+        toAppend += "<tr>";
+        toAppend += "<td>";
         for (st in searchTerms){
             
    
             if (searchTerms[st] === 'userid'){
-                document.getElementById("searchresults").innerHTML += "Create By: ";
-                document.getElementById("searchresults").innerHTML += + mlpObject.getUsers({id:results[obj][searchTerms[st]]}).result['data']['username'] ;
+                toAppend += "<span style='color:#77b2c9'>Create By: &nbsp;</span>";
+                toAppend += mlpObject.getUsers({id:results[obj][searchTerms[st]]}).result['data']['username'];
+                toAppend += "<span style='color:#77b2c9'><hr></span>";
 
             }
             else {
-                document.getElementById("searchresults").innerHTML += searchTerms[st].charAt(0).toUpperCase() + searchTerms[st].slice(1) + ": &nbsp;" ;
-                document.getElementById("searchresults").innerHTML += results[obj][searchTerms[st]] +"<br>";
+                toAppend += "<span style='color:#77b2c9'>"+searchTerms[st].charAt(0).toUpperCase() + searchTerms[st].slice(1) + ": &nbsp; </span>";
+                toAppend += results[obj][searchTerms[st]] +"<br>";
             }
    
         }
-        document.getElementById("searchresults").innerHTML += "<hr>";
+        toAppend += "</td>";
+        toAppend += "<td style='text-align:center'>"+"<input type='button' class ='dropdownButton' value='Add To' data-dropdown='#dropdown' />" + "</td>";
+        toAppend += "</tr>";
+        toAppend += "<tr><td><br></td></tr>";
+        
     
     }
-    document.getElementById("searchresults").innerHTML += "</div>";
-    document.getElementById("tester").style.backgroundColor = "#66cc66";
+    $("#searchresults").append(toAppend);
+    
+  
+    
     }
     catch(e){console.log(e);}
     finally{};
