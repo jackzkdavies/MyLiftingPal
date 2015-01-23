@@ -10,6 +10,7 @@
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
   <link rel="stylesheet" type="text/css" href="css/webflow.css">
   <link rel="stylesheet" type="text/css" href="css/myliftingpal.webflow.css">
+
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
   <script>
     WebFont.load({
@@ -19,7 +20,6 @@
     });
   </script>
   <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
-  <!--<script type="text/javascript" src="js/jquery-1.11.2.js"></script>-->
   <script type="text/javascript" src="js/modernizr.js"></script>
   <script type="text/javascript" src="js/jquery.cookie.js"></script>
   <script type="text/javascript" src="js/mlp.js"></script>
@@ -61,11 +61,11 @@
             </script>
             <div class="w-tabs" data-duration-in="300" data-duration-out="100">
               <div class="w-tab-menu w-clearfix">
-                <a class="w-tab-link w-inline-block createtab" data-w-tab="Create New">
+                <a class="w-tab-link w--current w-inline-block createtab" data-w-tab="Create New">
                   <div><strong>Create New Workout</strong>
                   </div>
                 </a>
-                <a class="w-tab-link w--current w-inline-block searchtab" data-w-tab="Search">
+                <a class="w-tab-link w-inline-block searchtab" data-w-tab="Search">
                   <div><strong>Search</strong>
                   </div>
                 </a>
@@ -73,7 +73,34 @@
               <div class="w-tab-content">
                 <div class="w-tab-pane w-clearfix" data-w-tab="Create New">
                   <input class="w-input field feild2" id="cWorkoutName" type="text" placeholder="Enter workout name" name="workoutname" required="required" data-name="workoutname">
-                  <input class="w-input" id="cAddExerciseToWorkout" type="text" placeholder="Select Exercise to add" name="addexercisetoworkout" required="required" data-name="addexercisetoworkout"><a class="button signup" href="#"><span><strong>Create Workout</strong></span></a>
+                  
+                  <table id="exercisesToAdd" style="display:  none">
+                      <thead>
+                      <tr>
+                          
+                          <td><span style='color:#77b2c9'>Id</span></td>
+                          <td>&nbsp</td>
+                          <td><span style='color:#77b2c9'>Name</span></td>
+                          <td>&nbsp</td>
+                          <td><span style='color:#77b2c9'>Group</span></td>
+                          <td>&nbsp</td>
+                          <td><span style='color:#77b2c9'>Type</span></td>
+                      </tr>
+                      </thead>
+                      <tbody id="selectedExerciseToAdd">
+                      </tbody>
+                  </table>
+                  
+                  <div style="width: 100%;">
+                  <input style="float:left; margin-right: -38px" class="w-input" id="exercisesearch" type="text" placeholder="Select Exercise to add" name="addexercisetoworkout" required="required" data-name="addexercisetoworkout">
+                  <img class="searchImage" onclick="submitSearchExcerciseInWorkout();return false;" src="images/search.svg" alt="Search" onerror="this.src='your.png'">
+                  </div>
+                  
+                  <table data-toggle="table" style='width: 100%; text-align:left'>
+                      <tbody id ="searchresults"></tbody>
+                  </table>
+                  
+                  <a class="button signup" href="#"><span><strong>Create Workout</strong></span></a>
                 </div>
                 <div class="w-tab-pane w--tab-active w-clearfix" data-w-tab="Search">
                   <input class="w-input seachexerciseinput" id="workoutsearch" type="text" placeholder="Enter workout name" name="workoutsearch" required="required" data-name="workoutsearch">
