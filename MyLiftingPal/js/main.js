@@ -194,7 +194,7 @@ function submitCreateWorkoutForm(){
 var globalExerciseObjs; 
 function submitSearchExcerciseInWorkout(){
     var results=[];
-    var searchTerms =['name','musclegroup','type','userid'];
+    var searchTerms =['name','musclegroup','type'];
     var searchTerm= (document.getElementById("exercisesearch").value.toString()).trim();
     document.getElementById("searchresults").innerHTML = "";
     
@@ -218,39 +218,35 @@ function submitSearchExcerciseInWorkout(){
     }
     globalExerciseObjs = results;
     
-    var toAppend="";
-    toAppend += "<tr><td> <br> </td></tr>";
-    toAppend += "<tr><td> <h5><u>Search Results:</u> <h5></td></tr>";
+    
+    var toAppend="";   
+    
     for (obj in results){
 //        console.log(results[obj]['id']);
         
         
-        toAppend += "<tr>";
-        toAppend += "<td>";
+        toAppend += "<tr onClick='selectedExercise("+results[obj]['id']+")'>";
+        
         for (st in searchTerms){
-            
+            toAppend += "<td>";
    
             if (searchTerms[st] === 'userid'){
-                toAppend += "<span style='color:#77b2c9'>Create By: &nbsp;</span>";
-                toAppend += mlpObject.getUsers({id:results[obj][searchTerms[st]]}).result['data']['username'];
-                toAppend += "<span style='color:#77b2c9'><hr></span>";
+//                toAppend += mlpObject.getUsers({id:results[obj][searchTerms[st]]}).result['data']['username'];
 
             }
             else {
-                toAppend += "<span style='color:#77b2c9'>"+searchTerms[st].charAt(0).toUpperCase() + searchTerms[st].slice(1) + ": &nbsp; </span>";
-                toAppend += results[obj][searchTerms[st]] +"<br>";
+                console.log(results[obj][searchTerms[st]]);
+                toAppend += results[obj][searchTerms[st]];
             }
-   
+            toAppend += "</td>";
         }
-        toAppend += "</td>";
-        toAppend += "<td style='text-align:center'>"+"<input id='"+results[obj]['id']+"' onClick='selectedExercise("+results[obj]['id']+")' type='button' class ='Button' value='Add' />" + "</td>";
+        
         toAppend += "</tr>";
-        toAppend += "<tr><td><br></td></tr>";
         
     
     }
     $("#searchresults").append(toAppend);
-    
+    $('#mytable').DataTable();
   
     
     }

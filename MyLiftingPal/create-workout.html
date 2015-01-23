@@ -7,9 +7,11 @@
   <title>My Lifting Pal - Create Workout </title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="generator" content="Webflow">
+  <link rel="stylesheet" type="text/css" href="css/bootStrap.css">
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
   <link rel="stylesheet" type="text/css" href="css/webflow.css">
   <link rel="stylesheet" type="text/css" href="css/myliftingpal.webflow.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
   <script>
@@ -25,15 +27,23 @@
   <script type="text/javascript" src="js/mlp.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
   <script type="text/javascript" src="js/webflow.js"></script>
+  <script type="text/javascript" src="js/bootStrap.js"></script>
+  <script type="text/javascript" src="js/jquery.dataTables.js"></script>
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
   <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
 </head>
 <body class="plainbodybackground">
   <div class="w-container">
     <div class="w-row">
-      <div class="w-col w-col-9"><img class="logoimage" src="images/mlp_logo.png" alt="546987585294c14035d7eda7_mlp_logo.png">
-        <div class="w-form sign-up-form">
-          <form name="wf-form-signup-form" data-name="Signup Form">
+        
+    
+        
+      <div class="w-col w-col-9">
+          <div class='tester'>
+              <img class="logoimage" src="images/mlp_logo.png" alt="546987585294c14035d7eda7_mlp_logo.png">
+              <!--<img class="logoimage" src="images/test.svg" alt="Search" onerror="this.src='your.png'">-->
+        <!--<div class="w-form sign-up-form">-->
+          <!--<form name="wf-form-signup-form" data-name="Signup Form">-->
             <div class="w-nav" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1">
               <div class="w-container menucont">
                 <nav class="w-nav-menu" role="navigation"><a class="w-nav-link" href="main-page.html">Return</a><a class="w-nav-link" href="#">Settings</a><a class="w-nav-link" href="#">Sign Out</a>
@@ -53,6 +63,12 @@
                 </div>
               </div>
             </div>
+              
+          
+          </div>
+              
+              
+              
             <h4 id="date">  </h4>
             <script> var d = new Date(); var date = d.getDate(); var day = d.getDay(); var year = d.getFullYear(); var month = d.getMonth();
             var days= ["Sun","Mon","Tue","Wed", "Thur","Fri","Sat"]; var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
@@ -96,9 +112,20 @@
                   <img class="searchImage" onclick="submitSearchExcerciseInWorkout();return false;" src="images/search.svg" alt="Search" onerror="this.src='your.png'">
                   </div>
                   
-                  <table data-toggle="table" style='width: 100%; text-align:left'>
-                      <tbody id ="searchresults"></tbody>
+                  <table id='mytable' style='width: 100%; text-align:left' class='table table-striped'>
+                      <thead>
+                          <tr>
+                              <td style='border-top-left-radius: 3px; border-right: 3px solid white'>Name</td>
+                              <td style='border-left: 3px solid white;border-right: 3px solid white'>M/Group</td>
+                              <td style='border-top-right-radius: 3px; border-left: 3px solid white'>Type</td>
+                          </tr>
+                      </thead>
+                      <tbody id ="searchresults">
+                          
+                      </tbody>
                   </table>
+
+                  
                   
                   <a class="button signup" href="#"><span><strong>Create Workout</strong></span></a>
                 </div>
@@ -108,23 +135,10 @@
                 </div>
               </div>
             </div>
-          </form>
-          <div class="w-form-done success-message">
-            <p>Thanks! You have been added to our list.&nbsp;</p>
-            <p class="spread-word">Help spread the word!</p>
-            <div class="w-clearfix social-widget-wrapper">
-              <div class="w-widget w-widget-twitter social-widget full-opacity">
-                <iframe src="https://platform.twitter.com/widgets/tweet_button.html#url=http%3A%2F%2Fwebflow.com&amp;counturl=webflow.com&amp;text=Check%20out%20this%20site&amp;count=horizontal&amp;size=m&amp;dnt=true" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 110px; height: 20px;"></iframe>
-              </div>
-              <div class="w-widget w-widget-facebook social-widget full-opacity">
-                <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Ffacebook.com%2Fwebflow&amp;layout=button_count&amp;locale=en_US&amp;action=like&amp;show_faces=false&amp;share=false" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 90px; height: 20px;"></iframe>
-              </div>
-            </div>
-          </div>
-          <div class="w-form-fail error-message">
-            <p>Oops! Something went wrong while submitting the form. :(</p>
-          </div>
-        </div>
+          <!--</form>-->
+
+
+        <!--</div>-->
         <div class="share-text">Share with your friends:&nbsp;</div>
         <div class="w-clearfix social-widget-wrapper">
           <div class="w-widget w-widget-twitter social-widget">

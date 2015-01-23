@@ -1,4 +1,55 @@
+.tester{
+    background-image: url('../images/weights.jpg');
+    margin-left: -10px;
+    /*padding-left: 10px;*/
+    margin-top: -50px;
+    padding-top: 50px;
+    margin-right: -10px;
+    /*padding-right: 10px;*/
+}
+a{
+    color:white;
+}
+a:hover{
+    color:white;
+    text-decoration: none;
+}
 
+td{
+    border-bottom: solid;
+    border-color: #77b2c9;
+    border-bottom-width: 1px
+    
+    
+}
+thead{
+    background-color: #77b2c9;
+    color:white;
+    font-weight: bold;
+    width:100%;
+    text-align: center;
+}
+thead td{
+    background-color: #77b2c9;
+    
+    
+}
+tbody{
+    background-color: #ebe8e4;
+    color:black;
+}
+#mytable_wrapper{
+    background-color: rgba(119, 178, 201, 0.65);
+    color:white;
+    padding: 8px;
+    border-radius: 3px;
+    margin-bottom: 8px
+    
+}
+table{
+    border: none;
+    border-radius: 3px;
+}
 
 #whiteBackground{
    background-color: rgba(255, 255, 255, 0.5); 
@@ -25,13 +76,13 @@
 body {
   height: 100%;
   padding-top: 156px;
-  background-color: #524237;
+  /*background-color: #524237;*/
   background-image: url('../images/weights.jpg');
   background-position: 50% 50%;
   background-size: cover;
   background-attachment: fixed;
   font-family:'Open Sans', sans-serif;
-  color: white;
+  color: black;
   font-size: 14px;
   line-height: 20px;
   list-style-type: disc;
@@ -365,9 +416,11 @@ p {
 .logoimage {
   margin-top: -10%;
   border-radius: 3px 3px 0px 0px;
+  border: 1px solid grey
 }
 .menucont {
   border-radius: 0px 0px 3px 3px;
+  background-color: rgba(194, 190, 179, 0.59);
 }
 .exerciseinfotable {
   width: 100%;
