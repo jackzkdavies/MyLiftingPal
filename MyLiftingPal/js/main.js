@@ -13,6 +13,16 @@ function slideToggleCalender(){
     centerCalander();
 }
 
+function toggleDropDownArrow(t){
+    if (t.classList.contains('w--open')=== true){
+        document.getElementById("dropDownArrow").innerHTML = '<i class="fa fa-caret-down"></i>';
+    }
+    else{
+        document.getElementById("dropDownArrow").innerHTML = '<i class="fa fa-caret-up"></i>';
+    }
+}
+
+
 function centerCalander(){
     var t = document.getElementById("sandbox-container");
     t.style.paddingLeft=0;

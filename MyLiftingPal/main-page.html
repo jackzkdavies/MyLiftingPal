@@ -44,18 +44,30 @@
             <img class="logoimage"  src="images/header.svg" alt="Search" onerror="this.src='images/mlp_logo.png'">
             <div class="w-nav" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1">
               <div class="w-container menucont">
-                <nav class="w-nav-menu" role="navigation"><a class="w-nav-link" href="main-page.html">Return</a><a class="w-nav-link" href="#">Settings</a><a class="w-nav-link" href="#">Sign Out</a>
+                  
+                <nav class="w-nav-menu" role="navigation">
+                    <a class="w-nav-link" href="#">Profile</a>
+                    <a class="w-nav-link" href="#">Settings</a>
+                    <hr>
+                    <a class="w-nav-link" href="#">Logout</a>
                 </nav>
+                  
                 <div class="w-nav-button">
                   <div class="w-icon-nav-menu"></div>
                 </div>
-                <div class="dropdowndiv">
+                  
+                <div  class="dropdowndiv">
                   <div class="w-dropdown" data-delay="0">
-                    <div class="w-dropdown-toggle createdropdown">
-                      <div class="w-icon-dropdown-toggle"></div>
+                    <div class="w-dropdown-toggle createdropdown" onclick="toggleDropDownArrow(this)">
+                      <div id="dropDownArrow"  class="w-icon-dropdown-toggle"><i class="fa fa-caret-down"></i></div>
                       <div><img class="dumbbells" src="images/db.png" alt="">My Training</div>
                     </div>
-                    <nav class="w-dropdown-list"><a class="w-dropdown-link" href="create-exercise.html">exercise</a><a class="w-dropdown-link" href="create-workout.html">workout</a><a class="w-dropdown-link" href="create-program.html">program</a>
+                    <nav class="w-dropdown-list">
+                        <a class="w-dropdown-link" href="create-exercise.html"><span style='color:#77b2c9'><i class="fa fa-book"></i> My Diary</span></a>
+                        <a class="w-dropdown-link" href="create-exercise.html"><i class="fa fa-heart"></i> My Exercises</a>
+                        <a class="w-dropdown-link" href="create-workout.html"><i class="fa fa-child"></i> My Workouts</a>
+                        <a class="w-dropdown-link" href="create-program.html"><i class="fa fa-calendar"></i> My Programs</a>
+                        <a class="w-dropdown-link" href="create-program.html"><i class="fa fa-line-chart"></i> My Stats</a>
                     </nav>
                   </div>
                 </div>
@@ -299,7 +311,8 @@
 
         </div>
       </div>
-        <div class="share-text"><p>Share with your friends:&nbsp;</p></div>
+        <br><br><hr>
+        <div class="share-text">Share with your friends:&nbsp;</div>
       <div class="w-clearfix social-widget-wrapper">
         <div class="w-widget w-widget-twitter social-widget">
           <iframe src="https://platform.twitter.com/widgets/tweet_button.html#url=http%3A%2F%2Fwebflow.com&amp;counturl=webflow.com&amp;text=Check%20out%20this%20site&amp;count=horizontal&amp;size=m&amp;dnt=true" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 110px; height: 20px;"></iframe>
@@ -309,15 +322,13 @@
         </div>
       </div>
     </div>
-    <div class="w-col w-col-3 w-col-stack image-column">
-<!--      <div><img class="advert" src="images/fakead.png" alt="5469870d5294c14035d7ed9f_fakead.png">
-      </div>-->
-    </div>
+
   </div>
   <div class="color-section">
     <div class="w-container">
+
       <div class="footer-section">
-        <div class="copyright">© 2014 MyLiftingPal. All rights reserved.&nbsp;</div>
+          <div class="copyright">© 2014 MyLiftingPal. All rights reserved.&nbsp;</div>
       </div>
     </div>
   </div>
@@ -325,7 +336,7 @@
     function checkLoginStatus(){
         if (mlpObject.session === ""){
 			console.log("fuck");
-            //window.location.replace("index.html");
+            window.location.replace("index.html");
         }
     }
 
