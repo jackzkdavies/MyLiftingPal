@@ -1,9 +1,29 @@
+.btn-circle-main {
+width: 60px;
+height: 60px;
+text-align: center;
+padding: 6px 0;
+font-size: 12px;
+line-height: 1.9;
+border-radius: 30px;
+}
+
+.myDiary{
+    border-bottom: 1px solid #eee;
+}
+.dumbbells{
+    width: 16px;
+    margin-left: -12px;
+    padding-right: 5px;
+}
 .tester{
     background-image: url('../images/weights.jpg');
+    background-size: 450% 550%;
+    background-position:-590px -150px;
     margin-left: -10px;
     /*padding-left: 10px;*/
     margin-top: -50px;
-    padding-top: 50px;
+    padding-top:20px;
     margin-right: -10px;
     /*padding-right: 10px;*/
 }
@@ -36,7 +56,7 @@ thead td{
 }
 tbody{
     background-color: #ebe8e4;
-    color:black;
+    color:#333;
 }
 #mytable_wrapper{
     background-color: rgba(119, 178, 201, 0.65);
@@ -82,7 +102,7 @@ body {
   background-size: cover;
   background-attachment: fixed;
   font-family:'Open Sans', sans-serif;
-  color: black;
+  color: #333;
   font-size: 14px;
   line-height: 20px;
   list-style-type: disc;
@@ -415,18 +435,20 @@ p {
 }
 .logoimage {
   margin-top: -10%;
-  border-radius: 3px 3px 0px 0px;
-  border: 1px solid grey
+  border-radius: 0px 0px 0px 0px;
+  
+  /*border: 1px solid grey*/
 }
 .menucont {
-  border-radius: 0px 0px 3px 3px;
-  background-color: rgba(194, 190, 179, 0.59);
+  margin-top: -20px;
+  border-radius: 0px 0px 0px 0px;
+  background-color: rgba(255,255,255,0.7);
 }
 .exerciseinfotable {
   width: 100%;
   border-radius: 3px 3px 0px 0px;
-  background-image: -webkit-linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
-  background-image: linear-gradient(rgba(194, 190, 179, 0.59), rgba(194, 190, 179, 0.59));
+  background-color: #77b2c9;
+  border-bottom: 1px solid #eee;
 }
 .exerciseinfotable.exerciseinfotabledata {
   background-image: none;
@@ -438,6 +460,11 @@ p {
 .exercisedivname {
   width: 50%;
   float: left;
+  background-color: white;
+}
+.exercisedivname h5{
+    color:black;
+    font-weight: bold;
 }
 .exercisesetsdiv {
   width: 10%;
@@ -1036,9 +1063,7 @@ z-index: 10; width:38px; height:38px ; float:right;display:inline-block
   .logoimage {
     margin-top: -10%;
   }
-  .exerciseinfotable {
-    border-radius: 3px;
-  }
+
   .exerciseinfotable.exerciseinfotabledata {
     border-bottom: 2px none white;
     background-color: transparent;

@@ -44,7 +44,7 @@ function toggleTest(){
 function checkResults(){
     try{
         if (mlpObject.selectResults({assigneddate:year+"-"+(month+1)+"-"+date}).result['success']===false){
-            document.getElementById("noResults").innerHTML = "No Results to Show for Current Date";};
+            document.getElementById("noResults").innerHTML = "Rest day is it?";};
     }
     catch(e){
         console.log(e);

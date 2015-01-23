@@ -10,7 +10,10 @@
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
   <link rel="stylesheet" type="text/css" href="css/datepicker3.css">
   <link rel="stylesheet" type="text/css" href="css/webflow.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/myliftingpal.webflow.css">
+  
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
   <script>
     WebFont.load({
@@ -27,37 +30,47 @@
   <script type="text/javascript" src="js/main.js"></script>
   <script type="text/javascript" src="js/webflow.js"></script>
   <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
   <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
 </head>
 <body class="plainbodybackground">
   <div class="w-row">
-    <div class="w-col w-col-9 w-col-stack"><img id ="logo" class="logoimage" src="images/mlp_logo.png" alt="546987585294c14035d7eda7_mlp_logo.png">
-      <div class="w-nav" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1">
-        <div class="w-container menucont">
-          <nav class="w-nav-menu" role="navigation"><a class="w-nav-link" href="main-page.html">view</a><a class="w-nav-link" href="#">Settings</a><a class="w-nav-link" href="javascript: signOut()">Sign Out</a>
-          </nav>
-          <div class="w-nav-button">
-            <div class="w-icon-nav-menu"></div>
-          </div>
-          <div class="dropdowndiv">
-            <div class="w-dropdown" data-delay="0">
-            <div class="w-dropdown-toggle createdropdown">
+    <div class="w-col w-col-9 w-col-stack">
+        
+                  <div class='tester'>
+              
+              
+            <img class="logoimage"  src="images/header.svg" alt="Search" onerror="this.src='images/mlp_logo.png'">
+            <div class="w-nav" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1">
+              <div class="w-container menucont">
+                <nav class="w-nav-menu" role="navigation"><a class="w-nav-link" href="main-page.html">Return</a><a class="w-nav-link" href="#">Settings</a><a class="w-nav-link" href="#">Sign Out</a>
+                </nav>
+                <div class="w-nav-button">
+                  <div class="w-icon-nav-menu"></div>
+                </div>
+                <div class="dropdowndiv">
+                  <div class="w-dropdown" data-delay="0">
+                    <div class="w-dropdown-toggle createdropdown">
                       <div class="w-icon-dropdown-toggle"></div>
-                      <div>Create/Add</div>
+                      <div><img class="dumbbells" src="images/db.png" alt="">My Training</div>
                     </div>
                     <nav class="w-dropdown-list"><a class="w-dropdown-link" href="create-exercise.html">exercise</a><a class="w-dropdown-link" href="create-workout.html">workout</a><a class="w-dropdown-link" href="create-program.html">program</a>
                     </nav>
+                  </div>
+                </div>
+              </div>
             </div>
+              
+          
           </div>
-        </div>
-      </div>
+        <h4 class="myDiary">My Diary</h4>
         
-        <h4 id="date" onClick="slideToggleCalender()">  </h4>
+        <p id="date" onClick="slideToggleCalender()">  </p>
         <script> var d = new Date(); var date = d.getDate(); var day = d.getDay(); var year = d.getFullYear(); var month = d.getMonth();
-        var days= ["Sun","Mon","Tue","Wed", "Thur","Fri","Sat"]; var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
+        var days= ["Sunday","Monday","Tuesday","Wednesday", "Thursdat","Friday","Saturday"]; var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
         var monthPrefix = ["st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"];
-        document.getElementById("date").innerHTML = "◄ "+ days[day] +" "+ date+monthPrefix[day] +" "+ months[month] +" "+ year+ " ►";
+        document.getElementById("date").innerHTML = "<span style='color:#77b2c9'>◄ </span> "+ days[day] +", "+ months[month] +" "+ date+monthPrefix[day] +", "+ year+ "<span style='color:#77b2c9'> ►</span>";
         </script>
         
       
@@ -95,12 +108,18 @@
           </div>
         </div>
         <div class="w-clearfix exerciseinfotable exerciseinfotabledata">
-            
             <p id="noResults"> 
                 
             </p>
+            <br>
+            <a href="javascript:void(0);" class="btn btn-default btn-circle-main">
+                <i class="fa fa-plus fa-2x" style="line-height: 1.9 !important;"></i>
+            </a>
             
-          <div class="w-clearfix createdexercises">
+            
+            
+            
+<!--          <div class="w-clearfix createdexercises">
             <div class="w-clearfix exercisedivname"><a class="button detailsbutton" href="#"><strong class="detailsbuttontext">+</strong></a>
               <h6>Lunges</h6>
             </div>
@@ -273,7 +292,11 @@
               </div>
             </div>
             <div class="w-tabs showhidetab" data-duration-in="300" data-duration-out="100"></div>
-          </div><a class="button addnewbutton" href="#">+</a>
+          </div>-->
+
+
+
+
         </div>
       </div>
       <div class="share-text">Share with your friends:&nbsp;</div>
@@ -287,8 +310,8 @@
       </div>
     </div>
     <div class="w-col w-col-3 w-col-stack image-column">
-      <div><img class="advert" src="images/fakead.png" alt="5469870d5294c14035d7ed9f_fakead.png">
-      </div>
+<!--      <div><img class="advert" src="images/fakead.png" alt="5469870d5294c14035d7ed9f_fakead.png">
+      </div>-->
     </div>
   </div>
   <div class="color-section">
