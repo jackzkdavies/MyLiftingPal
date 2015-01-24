@@ -43,9 +43,11 @@ table.dataTable {
   table.dataTable thead .sorting_desc_disabled {
     background: url("../images/sort_desc_disabled.png") no-repeat center right; }
   table.dataTable tbody tr {
-    background-color: #ebe8e4; }
+    /*background-color: #ebe8e4;*/ 
+  }
     table.dataTable tbody tr.selected {
-      background-color: #b0bed9; }
+      background-color: #b0bed9; 
+    }
   table.dataTable tbody th,
   table.dataTable tbody td {
     padding: 8px 10px; }
@@ -153,7 +155,8 @@ table.dataTable {
   table.dataTable.order-column.hover tbody tr.even:hover.selected > .sorting_3 {
     background-color: #a4b2cb; }
   table.dataTable.no-footer {
-    border-bottom: 1px solid #111111; }
+    /*border-bottom: 1px solid #111111;*/ 
+  }
   table.dataTable.nowrap th, table.dataTable.nowrap td {
     white-space: nowrap; }
   table.dataTable.compact thead th,
@@ -263,23 +266,15 @@ table.dataTable td {
       cursor: pointer;
       *cursor: hand;
       color: #333333 !important;
-      border: 1px solid transparent; }
+      /*border: 1px solid blue;*/ 
+      font-weight: bold;
+    
+    }
       .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-        color: #333333 !important;
-        border: 1px solid #cacaca;
-        background-color: white;
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, gainsboro));
-        /* Chrome,Safari4+ */
-        background: -webkit-linear-gradient(top, white 0%, gainsboro 100%);
-        /* Chrome10+,Safari5.1+ */
-        background: -moz-linear-gradient(top, white 0%, gainsboro 100%);
-        /* FF3.6+ */
-        background: -ms-linear-gradient(top, white 0%, gainsboro 100%);
-        /* IE10+ */
-        background: -o-linear-gradient(top, white 0%, gainsboro 100%);
-        /* Opera 11.10+ */
-        background: linear-gradient(to bottom, white 0%, gainsboro 100%);
-        /* W3C */ }
+        color: #77B2C9 !important;
+        border: 1px solid rgba(5, 2, 2, 0);
+        background-color: rgba(115, 89, 72, 0.44);
+        border-radius: 8px;}
       .dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
         cursor: default;
         color: #666 !important;

@@ -8,6 +8,17 @@ function slideToggle(number){
     $(".tabsdiv"+number).slideToggle(400);
 }
 
+function checkLoginStatus(){
+    if ($.cookie("mlpsession") === undefined){
+        window.location.replace("index.html");
+    }
+}
+
+function logout(){
+    mlpObject.logout();
+    window.location.replace("index.html");
+}
+
 function slideToggleCalender(){
     $(".calender").slideToggle(400);
     centerCalander();
@@ -49,6 +60,7 @@ function toggleTest(){
     slideToggle(1);
     slideToggle(2);
     slideToggle(3);
+    
 }
 
 function checkResults(){
@@ -209,15 +221,18 @@ function submitSearchExcerciseInWorkout(){
     document.getElementById("searchresults").innerHTML = "";
     
     if (searchTerm ===""){
-        $("#searchresults").append("Please enter a Keyword");
+        $("#searchresults").append("Please enter a keyword");
         return;
     }
     globalExerciseObjs="";
-    try{
+    console.log(searchTerm);
+    try{  
     for (st in searchTerms){
         var data = new Array();
         data[searchTerms[st]] = searchTerm;
+        console.log(data);
         var searchResult = mlpObject.getExercises(data).result;
+        console.log(searchResult);
         if (searchResult['success'] === true){
             for ( test in searchResult['data'] ){
                 results.push(searchResult['data'][test]);
@@ -232,7 +247,7 @@ function submitSearchExcerciseInWorkout(){
     var toAppend="";   
     
     for (obj in results){
-//        console.log(results[obj]['id']);
+        console.log(results[obj]['id']);
         
         
         toAppend += "<tr onClick='selectedExercise("+results[obj]['id']+")'>";

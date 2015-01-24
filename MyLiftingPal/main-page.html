@@ -7,13 +7,15 @@
   <title>My Lifting Pal - Main Page</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="generator" content="Webflow">
+  
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
   <link rel="stylesheet" type="text/css" href="css/datepicker3.css">
   <link rel="stylesheet" type="text/css" href="css/webflow.css">
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="css/myliftingpal.webflow.css">
-  
+  <link rel="stylesheet" type="text/css" href="css/myliftingpal.webflow.css"> 
   <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+  
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
   <script>
     WebFont.load({
@@ -22,8 +24,8 @@
       }
     });
   </script>
+  
   <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
-  <!--<script type="text/javascript" src="js/jquery-1.11.2.js"></script>-->
   <script type="text/javascript" src="js/modernizr.js"></script>
   <script type="text/javascript" src="js/jquery.cookie.js"></script>
   <script type="text/javascript" src="js/mlp.js"></script>
@@ -31,6 +33,8 @@
   <script type="text/javascript" src="js/webflow.js"></script>
   <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/jquery.dataTables.js"></script>
+  
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
   <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
 </head>
@@ -49,7 +53,7 @@
                     <a class="w-nav-link" href="#">Profile</a>
                     <a class="w-nav-link" href="#">Settings</a>
                     <hr>
-                    <a class="w-nav-link" href="#">Logout</a>
+                    <a class="w-nav-link" href="javascript:logout()">Logout</a>
                 </nav>
                   
                 <div class="w-nav-button">
@@ -63,11 +67,11 @@
                       <div><img class="dumbbells" src="images/db.png" alt="">My Training</div>
                     </div>
                     <nav class="w-dropdown-list">
-                        <a class="w-dropdown-link" href="create-exercise.html"><span style='color:#77b2c9'><i class="fa fa-book"></i> My Diary</span></a>
+                        <a class="w-dropdown-link" href="main-page.html"><i class="fa fa-book"></i> My Diary</a>
                         <a class="w-dropdown-link" href="create-exercise.html"><i class="fa fa-heart"></i> My Exercises</a>
                         <a class="w-dropdown-link" href="create-workout.html"><i class="fa fa-child"></i> My Workouts</a>
                         <a class="w-dropdown-link" href="create-program.html"><i class="fa fa-calendar"></i> My Programs</a>
-                        <a class="w-dropdown-link" href="create-program.html"><i class="fa fa-line-chart"></i> My Stats</a>
+                        <a class="w-dropdown-link" href="stats.html"><i class="fa fa-line-chart"></i> My Stats</a>
                     </nav>
                   </div>
                 </div>
@@ -76,6 +80,8 @@
               
           
           </div>
+        
+        
         <h4 class="myDiary">My Diary</h4>
         
         <p id="date" onClick="slideToggleCalender()">  </p>
@@ -333,16 +339,12 @@
     </div>
   </div>
     <script>    
-    function checkLoginStatus(){
-        if (mlpObject.session === ""){
-			console.log("fuck");
-            window.location.replace("index.html");
-        }
-    }
-
-
-    checkLoginStatus();
-    checkResults();
+        window.onload = function load(){
+            checkLoginStatus();
+            checkResults();
+            
+        };
+    
    </script>
   <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
 </body>

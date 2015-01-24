@@ -36,9 +36,9 @@ a:hover{
 }
 
 td{
-    border-bottom: solid;
-    border-color: #77b2c9;
-    border-bottom-width: 1px
+/*    border-bottom: solid;
+    border-color: #77b2c9;*/
+    /*border-bottom-width: 1px*/
     
     
 }
@@ -48,21 +48,30 @@ thead{
     font-weight: bold;
     width:100%;
     text-align: center;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 }
 thead td{
-    background-color: #77b2c9;
+    /*background-color: #77b2c9;*/
     
     
 }
 tbody{
-    background-color: #ebe8e4;
+    /*background-color: #ebe8e4;*/
     color:#333;
+}
+.odd{
+    background-color: #ebe8e4;
+    /*border-bottom:*/
+}
+.even{
+    background-color: white;
 }
 #mytable_wrapper{
     background-color: rgba(119, 178, 201, 0.65);
     color:white;
     padding: 8px;
-    border-radius: 3px;
+    border-radius: 8px;
     margin-bottom: 8px
     
 }
