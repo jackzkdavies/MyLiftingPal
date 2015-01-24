@@ -271,9 +271,9 @@ table.dataTable td {
     
     }
       .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-        color: #77B2C9 !important;
+        color: #FFFFFF !important;
         border: 1px solid rgba(5, 2, 2, 0);
-        background-color: rgba(115, 89, 72, 0.44);
+        background-color: rgba(119, 178, 201, 1);
         border-radius: 8px;}
       .dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
         cursor: default;

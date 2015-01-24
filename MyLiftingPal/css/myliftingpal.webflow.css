@@ -62,17 +62,24 @@ tbody{
 }
 .odd{
     background-color: #ebe8e4;
-    /*border-bottom:*/
+    border-bottom:1px ;
+    border-bottom-color: grey;
+    border:solid;
 }
 .even{
     background-color: white;
+                border-bottom:1px ;
+    border-bottom-color: grey;
+    border:solid;
 }
 #mytable_wrapper{
-    background-color: rgba(119, 178, 201, 0.65);
+    /*background-color: rgba(119, 178, 201, 0.65);*/
     color:white;
     padding: 8px;
     border-radius: 8px;
-    margin-bottom: 8px
+    margin-bottom: 8px;
+        
+
     
 }
 table{
@@ -531,7 +538,7 @@ p {
   padding-right: 0px;
   padding-left: 0px;
   float: left;
-  border-radius: 3px 0px 0px 3px;
+  border-radius: 3px 0px 3px 0px;
   background-color: rgba(194, 190, 179, 0.59);
   text-align: center;
 }
@@ -539,14 +546,15 @@ p {
   margin-bottom: 1%;
   float: left;
   background-color: #77b2c9;
+  width: 70%;
 }
 .searchtab {
-  width: 50%;
+  width: 30%;
   margin-top: 1%;
   padding-right: 0px;
   padding-left: 0px;
   float: left;
-  border-radius: 0px 3px 3px 0px;
+  border-radius: 0px 3px 0px 3px;
   background-color: rgba(194, 190, 179, 0.59);
   text-align: center;
 }
@@ -554,6 +562,7 @@ p {
   margin-bottom: 1%;
   float: left;
   background-color: #77b2c9;
+  width: 30%;
 }
 .seachexerciseinput {
   width: 100%;
@@ -562,6 +571,10 @@ p {
 }
 .searchImage {
 z-index: 10; width:38px; height:38px ; float:right;display:inline-block
+}
+
+.searchImage2{
+ width:18px; height:18px ;  
 }
 .searchImage:after{
  content:""; position:absolute; top:0; left:0; bottom:0; right:0;
@@ -758,7 +771,7 @@ z-index: 10; width:38px; height:38px ; float:right;display:inline-block
     background-color: #77b2c9;
   }
   .createtab {
-    width: 50%;
+    width: 70%;
     border-radius: 3px 0px 0px 3px;
     background-color: rgba(194, 190, 179, 0.59);
   }
@@ -768,11 +781,12 @@ z-index: 10; width:38px; height:38px ; float:right;display:inline-block
     color: white;
   }
   .searchtab {
+    width: 30%;
     border-radius: 0px 3px 3px 0px;
     background-color: rgba(194, 190, 179, 0.59);
   }
   .searchtab.w--current {
-    width: 50%;
+    width: 30%;
     margin-bottom: 1%;
     border-radius: 0px 3px 3px 0px;
     background-color: #77b2c9;
@@ -1104,18 +1118,6 @@ z-index: 10; width:38px; height:38px ; float:right;display:inline-block
     margin-right: 1%;
     margin-left: 1%;
     background-color: #77b2c9;
-  }
-  .createtab {
-    width: 100%;
-    border-radius: 3px;
-  }
-  .searchtab {
-    width: 100%;
-    margin-bottom: 1%;
-  }
-  .searchtab.w--current {
-    width: 100%;
-    border-radius: 3px;
   }
   .createdropdown {
     width: 110%;

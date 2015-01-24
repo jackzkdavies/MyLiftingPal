@@ -219,20 +219,16 @@ function submitSearchExcerciseInWorkout(){
     var searchTerms =['name','musclegroup','type'];
     var searchTerm= (document.getElementById("exercisesearch").value.toString()).trim();
     document.getElementById("searchresults").innerHTML = "";
-    
     if (searchTerm ===""){
         $("#searchresults").append("Please enter a keyword");
         return;
     }
     globalExerciseObjs="";
-    console.log(searchTerm);
     try{  
     for (st in searchTerms){
         var data = new Array();
         data[searchTerms[st]] = searchTerm;
-        console.log(data);
         var searchResult = mlpObject.getExercises(data).result;
-        console.log(searchResult);
         if (searchResult['success'] === true){
             for ( test in searchResult['data'] ){
                 results.push(searchResult['data'][test]);
@@ -241,14 +237,17 @@ function submitSearchExcerciseInWorkout(){
             
         }
     }
-    globalExerciseObjs = results;
+    for (r in results){
+        if (globalExerciseObjs.indexOf(r) < -1){
+            globalExerciseObjs += r;
+        }
+    }
+    
     
     
     var toAppend="";   
     
-    for (obj in results){
-        console.log(results[obj]['id']);
-        
+    for (obj in results){       
         
         toAppend += "<tr onClick='selectedExercise("+results[obj]['id']+")'>";
         
@@ -260,7 +259,6 @@ function submitSearchExcerciseInWorkout(){
 
             }
             else {
-                console.log(results[obj][searchTerms[st]]);
                 toAppend += results[obj][searchTerms[st]];
             }
             toAppend += "</td>";
@@ -270,8 +268,15 @@ function submitSearchExcerciseInWorkout(){
         
     
     }
+    
+    try{
+    $("#mytable").dataTable().fnDestroy();
+    $("#searchresults").empty();
+    }
+    catch(e){coneole.log(e);}
+    
     $("#searchresults").append(toAppend);
-    $('#mytable').DataTable();
+    $('#mytable').DataTable({bFilter: false});
   
     
     }
@@ -281,23 +286,23 @@ function submitSearchExcerciseInWorkout(){
 }
 var globalExerciseIds =[];
 function selectedExercise(r){
-    var searchTerms =['id','name','musclegroup','type'];
+    var searchTerms =['name','musclegroup','type'];
     
     var Append="";
     Append +="<tr>";
     for (obj in globalExerciseObjs){
         if( globalExerciseObjs[obj]['id'] == r){
             globalExerciseIds.push(globalExerciseObjs[obj]['id']);
-            for (st in searchTerms ){
-            Append += "<td>";
-            Append+= globalExerciseObjs[obj][searchTerms[st]];
-            Append += "</td>";
-            Append += "<td>&nbsp</td>";
+                for (st in searchTerms ){
+                console.log(globalExerciseObjs[obj][searchTerms[st]]);
+                Append += "<td>";
+                Append+= globalExerciseObjs[obj][searchTerms[st]];
+                Append += "</td>";
         }
     }
 
     }
-    Append +="<td> <span style='color:#77b2c9'> remove </span> </td>";
+    Append +="<td> <span style='color:#77b2c9'> <i class='fa fa-pencil-square-o'></i> </span> </td>";
     Append +="</tr>";
     $("#selectedExerciseToAdd").append(Append);
     document.getElementById("exercisesToAdd").style.display='block';
