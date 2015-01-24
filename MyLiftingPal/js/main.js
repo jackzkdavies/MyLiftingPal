@@ -215,41 +215,42 @@ function submitCreateWorkoutForm(){
 }
 var globalExerciseObjs; 
 function submitSearchExcerciseInWorkout(){
-    var results=[];
     var searchTerms =['name','musclegroup','type'];
     var searchTerm= (document.getElementById("exercisesearch").value.toString()).trim();
     document.getElementById("searchresults").innerHTML = "";
+    document.getElementById("searchResultsHeading").innerHTML="";
     if (searchTerm ===""){
         $("#searchresults").append("Please enter a keyword");
         return;
     }
-    globalExerciseObjs="";
+    globalExerciseObjs={};
     try{  
     for (st in searchTerms){
         var data = new Array();
         data[searchTerms[st]] = searchTerm;
         var searchResult = mlpObject.getExercises(data).result;
         if (searchResult['success'] === true){
-            for ( test in searchResult['data'] ){
-                results.push(searchResult['data'][test]);
+            for ( objects in searchResult['data'] ){              
+                globalExerciseObjs[searchResult['data'][objects]['id']]=searchResult['data'][objects];
             };
         
             
         }
     }
-    for (r in results){
-        if (globalExerciseObjs.indexOf(r) < -1){
-            globalExerciseObjs += r;
-        }
-    }
+
     
     
     
     var toAppend="";   
     
-    for (obj in results){       
+        for (key in globalExerciseObjs){    
+              if (globalExerciseObjs.hasOwnProperty(key)) {
+                
+                globalExerciseObjs[key]['id']
+                
+                
         
-        toAppend += "<tr onClick='selectedExercise("+results[obj]['id']+")'>";
+        toAppend += "<tr onClick='selectedExercise("+globalExerciseObjs[key]['id']+")'>";
         
         for (st in searchTerms){
             toAppend += "<td>";
@@ -259,15 +260,14 @@ function submitSearchExcerciseInWorkout(){
 
             }
             else {
-                toAppend += results[obj][searchTerms[st]];
+                toAppend += globalExerciseObjs[key][searchTerms[st]];
             }
             toAppend += "</td>";
         }
         
         toAppend += "</tr>";
-        
-    
-    }
+
+    }}
     
     try{
     $("#mytable").dataTable().fnDestroy();
@@ -277,7 +277,8 @@ function submitSearchExcerciseInWorkout(){
     
     $("#searchresults").append(toAppend);
     $('#mytable').DataTable({bFilter: false});
-  
+    document.getElementById('mytable').style.display='block';
+    document.getElementById('searchResultsHeading').innerHTML='Search results for: '+searchTerm;
     
     }
     catch(e){console.log(e);}
@@ -290,23 +291,46 @@ function selectedExercise(r){
     
     var Append="";
     Append +="<tr>";
+//    for (obj in globalExerciseObjs){
+//        if( globalExerciseObjs[obj]['id'] == r){
+//            globalExerciseIds.push(globalExerciseObjs[obj]['id']);
+//                for (st in searchTerms ){
+//                Append += "<td>";
+//                Append+= globalExerciseObjs[obj][searchTerms[st]];
+//                Append += "</td>";
+//            }
+//        }
+//    }
+
     for (obj in globalExerciseObjs){
         if( globalExerciseObjs[obj]['id'] == r){
-            globalExerciseIds.push(globalExerciseObjs[obj]['id']);
-                for (st in searchTerms ){
-                console.log(globalExerciseObjs[obj][searchTerms[st]]);
-                Append += "<td>";
-                Append+= globalExerciseObjs[obj][searchTerms[st]];
-                Append += "</td>";
+            globalExerciseIds.push(globalExerciseObjs[obj]);}
+    }
+    
+    for (obj in globalExerciseIds){
+            for (st in searchTerms ){
+            Append += "<td>";
+            Append+= globalExerciseIds[obj][searchTerms[st]];
+            Append += "</td>";
         }
     }
-
-    }
+    
+    
+    
     Append +="<td> <span style='color:#77b2c9'> <i class='fa fa-pencil-square-o'></i> </span> </td>";
     Append +="</tr>";
+    
+    try{
+        $("#exercisesToAdd").dataTable().fnDestroy();
+        $("#selectedExerciseToAdd").empty();
+    }
+    catch(e){coneole.log(e);}
+    
+    
     $("#selectedExerciseToAdd").append(Append);
     document.getElementById("exercisesToAdd").style.display='block';
-    $('#exercisesToAdd').DataTable();
+    $('#exercisesToAdd').DataTable({bFilter: false});
+
 }
 //create programme
 function submitCreateProgrammeForm(){

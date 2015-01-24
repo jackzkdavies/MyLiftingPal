@@ -194,8 +194,8 @@
                   <table id="exercisesToAdd" style="display:  none">
                       <thead>
                       <tr>
-                          <td>Name</td>
-                          <td>Group</td>
+                          <td>Exercise</td>
+                          <td>M/Group</td>
                           <td>Type</td>
                           <td></td>
                       </tr>
@@ -204,16 +204,18 @@
                           
                       </tbody>
                   </table>
+                  <hr>
                   
                   <div style="width: 100%;">
                   <input style="float:left; margin-right: -38px" class="w-input" id="exercisesearch" type="text" placeholder="Select Exercise to add" name="addexercisetoworkout" required="required" data-name="addexercisetoworkout">
                   <img class="searchImage" onclick="submitSearchExcerciseInWorkout();return false;" src="images/search.svg" alt="Search" onerror="this.src='your.png'">
                   </div>
-                  <h3>Search results for: </h3>
-                  <table id='mytable' style='width: 100%; text-align:left; text-shadow: 0px 0px rgba(255, 255, 255, 0);' class=''>
+                  <p id="searchResultsHeading"></p>
+                  
+                  <table id='mytable' style='display: none; width: 100%; text-align:left; text-shadow: 0px 0px rgba(255, 255, 255, 0);'>
                       <thead>
                           <tr>
-                              <td style=''>Name</td>
+                              <td style=''>Exercise</td>
                               <td style=''>M/Group</td>
                               <td style=''>Type</td>
                           </tr>
