@@ -246,7 +246,7 @@ function submitSearchExcerciseInWorkout(){
         for (key in globalExerciseObjs){    
               if (globalExerciseObjs.hasOwnProperty(key)) {
                 
-                globalExerciseObjs[key]['id']
+//                globalExerciseObjs[key]['id']
                 
                 
         
@@ -273,7 +273,7 @@ function submitSearchExcerciseInWorkout(){
     $("#mytable").dataTable().fnDestroy();
     $("#searchresults").empty();
     }
-    catch(e){coneole.log(e);}
+    catch(e){console.log(e);}
     
     $("#searchresults").append(toAppend);
     $('#mytable').DataTable({bFilter: false});
@@ -285,7 +285,7 @@ function submitSearchExcerciseInWorkout(){
     finally{};
     
 }
-var globalExerciseIds =[];
+var globalExerciseIds ={};
 function selectedExercise(r){
     var searchTerms =['name','musclegroup','type'];
     
@@ -304,21 +304,42 @@ function selectedExercise(r){
 
     for (obj in globalExerciseObjs){
         if( globalExerciseObjs[obj]['id'] == r){
-            globalExerciseIds.push(globalExerciseObjs[obj]);}
-    }
-    
-    for (obj in globalExerciseIds){
-            for (st in searchTerms ){
-            Append += "<td>";
-            Append+= globalExerciseIds[obj][searchTerms[st]];
-            Append += "</td>";
+//            globalExerciseIds.push(globalExerciseObjs[obj]);
+            globalExerciseIds[globalExerciseObjs[obj]['id']]=globalExerciseObjs[obj];
         }
     }
     
+//    for (obj in globalExerciseIds){
+//            for (st in searchTerms ){
+//            Append += "<td>";
+//            Append+= globalExerciseIds[obj][searchTerms[st]];
+//            Append += "</td>";
+//        }
+//    }
     
-    
-    Append +="<td> <span style='color:#77b2c9'> <i class='fa fa-pencil-square-o'></i> </span> </td>";
+    for (key in globalExerciseIds){ 
+        for (st in searchTerms){
+                Append += "<td>";
+
+                if (searchTerms[st] === 'userid'){
+    //                toAppend += mlpObject.getUsers({id:results[obj][searchTerms[st]]}).result['data']['username'];
+
+                }
+                else {
+                    Append += globalExerciseIds[key][searchTerms[st]];
+                }
+                Append += "</td>";
+            }
+            Append +="<td> <span style='color:#77b2c9'> <i class='fa fa-pencil-square-o'></i> </span> </td>";
     Append +="</tr>";
+            
+    }
+    
+    console.log(globalExerciseObjs);
+    console.log(globalExerciseIds);
+    
+    
+    
     
     try{
         $("#exercisesToAdd").dataTable().fnDestroy();
