@@ -7,9 +7,16 @@
   <title>My Lifting Pal - Create Workout </title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="generator" content="Webflow">
+  
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="css/datepicker3.css">
   <link rel="stylesheet" type="text/css" href="css/webflow.css">
-  <link rel="stylesheet" type="text/css" href="css/myliftingpal.webflow.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/myliftingpal.webflow.css"> 
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+  
+  
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
   <script>
     WebFont.load({
@@ -18,86 +25,225 @@
       }
     });
   </script>
+  
   <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
-  <!--<script type="text/javascript" src="js/jquery-1.11.2.js"></script>-->
   <script type="text/javascript" src="js/modernizr.js"></script>
   <script type="text/javascript" src="js/jquery.cookie.js"></script>
   <script type="text/javascript" src="js/mlp.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
   <script type="text/javascript" src="js/webflow.js"></script>
+  <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/jquery.dataTables.js"></script>
+  
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
   <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
 </head>
 <body class="plainbodybackground">
   <div class="w-container">
     <div class="w-row">
-      <div class="w-col w-col-9"><img class="logoimage" src="images/mlp_logo.png" alt="546987585294c14035d7eda7_mlp_logo.png">
-        <div class="w-form sign-up-form">
-          <form name="wf-form-signup-form" data-name="Signup Form">
+        
+    
+        
+      <div class="w-col w-col-9">
+                  <div class='tester'>
+              
+              
+            <img class="logoimage"  src="images/header.svg" alt="Search" onerror="this.src='images/mlp_logo.png'">
             <div class="w-nav" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1">
               <div class="w-container menucont">
-                <nav class="w-nav-menu" role="navigation"><a class="w-nav-link" href="main-page.html">Return</a><a class="w-nav-link" href="#">Settings</a><a class="w-nav-link" href="#">Sign Out</a>
+                  
+                <nav class="w-nav-menu" role="navigation">
+                    <a class="w-nav-link" href="#">Profile</a>
+                    <a class="w-nav-link" href="#">Settings</a>
+                    <hr>
+                    <a class="w-nav-link" href="#">Logout</a>
                 </nav>
+                  
                 <div class="w-nav-button">
                   <div class="w-icon-nav-menu"></div>
                 </div>
-                <div class="dropdowndiv">
+                  
+                <div  class="dropdowndiv">
                   <div class="w-dropdown" data-delay="0">
-                    <div class="w-dropdown-toggle createdropdown">
-                      <div class="w-icon-dropdown-toggle"></div>
-                      <div>Create/Add</div>
+                    <div class="w-dropdown-toggle createdropdown" onclick="toggleDropDownArrow(this)">
+                      <div id="dropDownArrow"  class="w-icon-dropdown-toggle"><i class="fa fa-caret-down"></i></div>
+                      <div><img class="dumbbells" src="images/db.png" alt="">My Training</div>
                     </div>
-                    <nav class="w-dropdown-list"><a class="w-dropdown-link" href="create-exercise.html">exercise</a><a class="w-dropdown-link" href="create-workout.html">workout</a><a class="w-dropdown-link" href="create-program.html">program</a>
+                    <nav class="w-dropdown-list">
+                        <a class="w-dropdown-link" href="main-page.html"><i class="fa fa-book"></i> My Diary</a>
+                        <a class="w-dropdown-link" href="create-exercise.html"><i class="fa fa-heart"></i> My Exercises</a>
+                        <a class="w-dropdown-link" href="create-workout.html"><i class="fa fa-child"></i> My Workouts</a>
+                        <a class="w-dropdown-link" href="create-program.html"><i class="fa fa-calendar"></i> My Programs</a>
+                        <a class="w-dropdown-link" href="stats.html"><i class="fa fa-line-chart"></i> My Stats</a>
                     </nav>
                   </div>
                 </div>
               </div>
             </div>
-            <h4 id="date">  </h4>
+              
+          
+          </div>
+              
+              
+           <h4 class="myDiary">My Workouts</h4>
+        
+        <p id="date" onClick="slideToggleCalender()">  </p>
+        
             <script> var d = new Date(); var date = d.getDate(); var day = d.getDay(); var year = d.getFullYear(); var month = d.getMonth();
             var days= ["Sun","Mon","Tue","Wed", "Thur","Fri","Sat"]; var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
             var monthPrefix = ["st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"];
             document.getElementById("date").innerHTML = "◄ "+ days[day] +" "+ date+monthPrefix[day] +" "+ months[month] +" "+ year+ " ►";
             </script>
+            
+            <br>
+            
+            <div onclick='slideToggle("MyWorkOutsBackAndBis")'>
+                <h3 style='text-align:left;width:70%;padding: 8px; float:left'>Back and Bi's <i class="fa fa-caret-down"></i></h3>
+                <a href="javascript:void(0);" style="width:60px; margin-bottom: 4px;" class="btn btn-default btn-circle-main">
+                    <i class="fa fa-plus fa-2x" style="line-height: 1.9 !important;"></i>
+                </a>
+                
+                <div style='width: 100%; position: relative' class='tabsdivMyWorkOutsBackAndBis'>
+                    <table class='table table-striped'>
+                        <thead>
+                            <tr>
+                            <td colspan="2">Hammer Curls</td>
+                            <td colspan="2">Biceps</td>
+                            <td colspan="2">Pull</td>
+                            </tr>
+                        </thead>
+                        
+                        <tbody id ="myWorkouts">
+                            <tr>
+                            <td style='border-top-left-radius: 3px; border-right: 3px solid white'>reps</td>
+                            <td style='border-left: 3px solid white;border-right: 3px solid white'>sets</td>
+                            <td colspan="2" style='border-top-right-radius: 3px; border-left: 3px solid white'>weight</td>
+                            <td style='border-top-right-radius: 3px; border-left: 3px solid white'>rpe</td>
+                            <td style='border-top-right-radius: 3px; border-left: 3px solid white'>%</td>
+                            </tr>
+                            
+                             <tr>
+                            <td style='border-top-left-radius: 3px; border-right: 3px solid white'>12</td>
+                            <td style='border-left: 3px solid white;border-right: 3px solid white'>5</td>
+                            <td colspan="2" style='border-top-right-radius: 3px; border-left: 3px solid white'>22.5</td>
+                            <td style='border-top-right-radius: 3px; border-left: 3px solid white'>0.8</td>
+                            <td style='border-top-right-radius: 3px; border-left: 3px solid white'>60</td>
+                            </tr>    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <hr>
+            
+            <div onclick='slideToggle("MyWorkOutsChestAndTris")'>
+                <h3 style='text-align:left;width:70%;padding: 8px; float:left'>Chest and Tri's <i class="fa fa-caret-down"></i></h3>
+                <a href="javascript:void(0);" style="width:60px; margin-bottom: 4px;" class="btn btn-default btn-circle-main">
+                    <i class="fa fa-plus fa-2x" style="line-height: 1.9 !important;"></i>
+                </a>
+                
+                <div style='width: 100%; position: relative' class='tabsdivMyWorkOutsChestAndTris'>
+                    <table class='table table-striped'>
+                        <thead>
+                            <tr>
+                            <td colspan="2">Bench Press</td>
+                            <td colspan="2">Pectorals</td>
+                            <td colspan="2">Push</td>
+                            </tr>
+                        </thead>
+                        
+                        <tbody id ="myWorkouts">
+                            <tr>
+                            <td style='border-top-left-radius: 3px; border-right: 3px solid white'>reps</td>
+                            <td style='border-left: 3px solid white;border-right: 3px solid white'>sets</td>
+                            <td colspan="2" style='border-top-right-radius: 3px; border-left: 3px solid white'>weight</td>
+                            <td style='border-top-right-radius: 3px; border-left: 3px solid white'>rpe</td>
+                            <td style='border-top-right-radius: 3px; border-left: 3px solid white'>%</td>
+                            </tr>
+                            
+                             <tr>
+                            <td style='border-top-left-radius: 3px; border-right: 3px solid white'>12</td>
+                            <td style='border-left: 3px solid white;border-right: 3px solid white'>5</td>
+                            <td colspan="2" style='border-top-right-radius: 3px; border-left: 3px solid white'>80</td>
+                            <td style='border-top-right-radius: 3px; border-left: 3px solid white'>0.8</td>
+                            <td style='border-top-right-radius: 3px; border-left: 3px solid white'>60</td>
+                            </tr>    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <br>
+            <hr>
             <div class="w-tabs" data-duration-in="300" data-duration-out="100">
               <div class="w-tab-menu w-clearfix">
-                <a class="w-tab-link w-inline-block createtab" data-w-tab="Create New">
+                <a class="w-tab-link w--current w-inline-block createtab" data-w-tab="Create New">
                   <div><strong>Create New Workout</strong>
                   </div>
                 </a>
-                <a class="w-tab-link w--current w-inline-block searchtab" data-w-tab="Search">
-                  <div><strong>Search</strong>
+                <a class="w-tab-link w-inline-block searchtab" data-w-tab="Search">
+                  <div><strong><img class="searchImage2" src="images/search.svg" alt="">Search</strong>
                   </div>
                 </a>
               </div>
               <div class="w-tab-content">
                 <div class="w-tab-pane w-clearfix" data-w-tab="Create New">
                   <input class="w-input field feild2" id="cWorkoutName" type="text" placeholder="Enter workout name" name="workoutname" required="required" data-name="workoutname">
-                  <input class="w-input" id="cAddExerciseToWorkout" type="text" placeholder="Select Exercise to add" name="addexercisetoworkout" required="required" data-name="addexercisetoworkout"><a class="button signup" href="#"><span><strong>Create Workout</strong></span></a>
+                  
+                  <table id="exercisesToAdd" style="display:  none">
+                      <thead>
+                      <tr>
+                          <td>Exercise</td>
+                          <td>M/Group</td>
+                          <td>Type</td>
+                          <td></td>
+                      </tr>
+                      </thead>
+                      <tbody id="selectedExerciseToAdd">
+                          
+                      </tbody>
+                  </table>
+                  <hr>
+                  
+                  <div style="width: 100%;">
+                  <input style="float:left; margin-right: -38px" class="w-input" id="exercisesearch" type="text" placeholder="Select Exercise to add" name="addexercisetoworkout" required="required" data-name="addexercisetoworkout">
+                  <img class="searchImage" onclick="submitSearchExcerciseInWorkout();return false;" src="images/search.svg" alt="Search" onerror="this.src='your.png'">
+                  </div>
+                  <p id="searchResultsHeading"></p>
+                  
+                  <table id='mytable' style='display: none; width: 100%; text-align:left; text-shadow: 0px 0px rgba(255, 255, 255, 0);'>
+                      <thead>
+                          <tr>
+                              <td style=''>Exercise</td>
+                              <td style=''>M/Group</td>
+                              <td style=''>Type</td>
+                          </tr>
+                      </thead>
+                      <tbody id ="searchresults">
+                          
+                      </tbody>
+                  </table>
+                  
+                  <hr>
+                  
+        
+                  <a class="button signup" href="#"><span><strong>Create Workout</strong></span></a>
                 </div>
+                  
+                  
+                  
+                  
                 <div class="w-tab-pane w--tab-active w-clearfix" data-w-tab="Search">
                   <input class="w-input seachexerciseinput" id="workoutsearch" type="text" placeholder="Enter workout name" name="workoutsearch" required="required" data-name="workoutsearch">
                   <div class="searchresultsdiv">Search result show here&nbsp;</div><a class="button addexercisetocurrentday" href="#"><strong>Add to current day</strong></a>
                 </div>
               </div>
             </div>
-          </form>
-          <div class="w-form-done success-message">
-            <p>Thanks! You have been added to our list.&nbsp;</p>
-            <p class="spread-word">Help spread the word!</p>
-            <div class="w-clearfix social-widget-wrapper">
-              <div class="w-widget w-widget-twitter social-widget full-opacity">
-                <iframe src="https://platform.twitter.com/widgets/tweet_button.html#url=http%3A%2F%2Fwebflow.com&amp;counturl=webflow.com&amp;text=Check%20out%20this%20site&amp;count=horizontal&amp;size=m&amp;dnt=true" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 110px; height: 20px;"></iframe>
-              </div>
-              <div class="w-widget w-widget-facebook social-widget full-opacity">
-                <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Ffacebook.com%2Fwebflow&amp;layout=button_count&amp;locale=en_US&amp;action=like&amp;show_faces=false&amp;share=false" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 90px; height: 20px;"></iframe>
-              </div>
-            </div>
-          </div>
-          <div class="w-form-fail error-message">
-            <p>Oops! Something went wrong while submitting the form. :(</p>
-          </div>
-        </div>
+          <!--</form>-->
+
+
+        <!--</div>-->
         <div class="share-text">Share with your friends:&nbsp;</div>
         <div class="w-clearfix social-widget-wrapper">
           <div class="w-widget w-widget-twitter social-widget">
@@ -108,8 +254,8 @@
           </div>
         </div>
       </div>
-      <div class="w-col w-col-3 image-column"><img class="advert" src="images/fakead.png" alt="5469870d5294c14035d7ed9f_fakead.png">
-      </div>
+<!--      <div class="w-col w-col-3 image-column"><img class="advert" src="images/fakead.png" alt="5469870d5294c14035d7ed9f_fakead.png">
+      </div>-->
     </div>
   </div>
   <div class="color-section">
@@ -119,6 +265,15 @@
       </div>
     </div>
   </div>
+    <script>
+        window.onload = function load(){
+            checkLoginStatus();
+            slideToggle('MyWorkOutsBackAndBis');
+            slideToggle('MyWorkOutsChestAndTris');
+            
+        };
+    </script>
+    
   <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
 </body>
 </html>

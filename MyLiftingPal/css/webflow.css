@@ -27,8 +27,9 @@
 }
 .w-icon-arrow-down:before,
 .w-icon-dropdown-toggle:before {
-  content: "\e603";
+  /*content: "\e603";*/
 }
+
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -1441,7 +1442,7 @@ textarea.w-select {
 }
 .w-nav {
   position: relative;
-  background: #BBB;
+  /*background: #BBB;*/
   z-index: 1000;
 }
 .w-nav:before,

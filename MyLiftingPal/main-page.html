@@ -7,10 +7,15 @@
   <title>My Lifting Pal - Main Page</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="generator" content="Webflow">
+  
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
   <link rel="stylesheet" type="text/css" href="css/datepicker3.css">
   <link rel="stylesheet" type="text/css" href="css/webflow.css">
-  <link rel="stylesheet" type="text/css" href="css/myliftingpal.webflow.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/myliftingpal.webflow.css"> 
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+  
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
   <script>
     WebFont.load({
@@ -19,45 +24,71 @@
       }
     });
   </script>
+  
   <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
-  <!--<script type="text/javascript" src="js/jquery-1.11.2.js"></script>-->
   <script type="text/javascript" src="js/modernizr.js"></script>
   <script type="text/javascript" src="js/jquery.cookie.js"></script>
   <script type="text/javascript" src="js/mlp.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
   <script type="text/javascript" src="js/webflow.js"></script>
   <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/jquery.dataTables.js"></script>
+  
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
   <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
 </head>
 <body class="plainbodybackground">
   <div class="w-row">
-    <div class="w-col w-col-9 w-col-stack"><img id ="logo" class="logoimage" src="images/mlp_logo.png" alt="546987585294c14035d7eda7_mlp_logo.png">
-      <div class="w-nav" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1">
-        <div class="w-container menucont">
-          <nav class="w-nav-menu" role="navigation"><a class="w-nav-link" href="main-page.html">view</a><a class="w-nav-link" href="#">Settings</a><a class="w-nav-link" href="javascript: signOut()">Sign Out</a>
-          </nav>
-          <div class="w-nav-button">
-            <div class="w-icon-nav-menu"></div>
-          </div>
-          <div class="dropdowndiv">
-            <div class="w-dropdown" data-delay="0">
-            <div class="w-dropdown-toggle createdropdown">
-                      <div class="w-icon-dropdown-toggle"></div>
-                      <div>Create/Add</div>
-                    </div>
-                    <nav class="w-dropdown-list"><a class="w-dropdown-link" href="create-exercise.html">exercise</a><a class="w-dropdown-link" href="create-workout.html">workout</a><a class="w-dropdown-link" href="create-program.html">program</a>
-                    </nav>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="w-col w-col-9 w-col-stack">
         
-        <h4 id="date" onClick="slideToggleCalender()">  </h4>
+                  <div class='tester'>
+              
+              
+            <img class="logoimage"  src="images/header.svg" alt="Search" onerror="this.src='images/mlp_logo.png'">
+            <div class="w-nav" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1">
+              <div class="w-container menucont">
+                  
+                <nav class="w-nav-menu" role="navigation">
+                    <a class="w-nav-link" href="#">Profile</a>
+                    <a class="w-nav-link" href="#">Settings</a>
+                    <hr>
+                    <a class="w-nav-link" href="javascript:logout()">Logout</a>
+                </nav>
+                  
+                <div class="w-nav-button">
+                  <div class="w-icon-nav-menu"></div>
+                </div>
+                  
+                <div  class="dropdowndiv">
+                  <div class="w-dropdown" data-delay="0">
+                    <div class="w-dropdown-toggle createdropdown" onclick="toggleDropDownArrow(this)">
+                      <div id="dropDownArrow"  class="w-icon-dropdown-toggle"><i class="fa fa-caret-down"></i></div>
+                      <div><img class="dumbbells" src="images/db.png" alt="">My Training</div>
+                    </div>
+                    <nav class="w-dropdown-list">
+                        <a class="w-dropdown-link" href="main-page.html"><i class="fa fa-book"></i> My Diary</a>
+                        <a class="w-dropdown-link" href="create-exercise.html"><i class="fa fa-heart"></i> My Exercises</a>
+                        <a class="w-dropdown-link" href="create-workout.html"><i class="fa fa-child"></i> My Workouts</a>
+                        <a class="w-dropdown-link" href="create-program.html"><i class="fa fa-calendar"></i> My Programs</a>
+                        <a class="w-dropdown-link" href="stats.html"><i class="fa fa-line-chart"></i> My Stats</a>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+              
+          
+          </div>
+        
+        
+        <h4 class="myDiary">My Diary</h4>
+        
+        <p id="date" onClick="slideToggleCalender()">  </p>
         <script> var d = new Date(); var date = d.getDate(); var day = d.getDay(); var year = d.getFullYear(); var month = d.getMonth();
-        var days= ["Sun","Mon","Tue","Wed", "Thur","Fri","Sat"]; var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
+        var days= ["Sunday","Monday","Tuesday","Wednesday", "Thursdat","Friday","Saturday"]; var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
         var monthPrefix = ["st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"];
-        document.getElementById("date").innerHTML = "◄ "+ days[day] +" "+ date+monthPrefix[day] +" "+ months[month] +" "+ year+ " ►";
+        document.getElementById("date").innerHTML = "<span style='color:#77b2c9'>◄ </span> "+ days[day] +", "+ months[month] +" "+ date+monthPrefix[day] +", "+ year+ "<span style='color:#77b2c9'> ►</span>";
         </script>
         
       
@@ -95,12 +126,18 @@
           </div>
         </div>
         <div class="w-clearfix exerciseinfotable exerciseinfotabledata">
-            
             <p id="noResults"> 
                 
             </p>
+            <br>
+            <a href="javascript:void(0);" class="btn btn-default btn-circle-main">
+                <i class="fa fa-plus fa-2x" style="line-height: 1.9 !important;"></i>
+            </a>
             
-          <div class="w-clearfix createdexercises">
+            
+            
+            
+<!--          <div class="w-clearfix createdexercises">
             <div class="w-clearfix exercisedivname"><a class="button detailsbutton" href="#"><strong class="detailsbuttontext">+</strong></a>
               <h6>Lunges</h6>
             </div>
@@ -273,10 +310,15 @@
               </div>
             </div>
             <div class="w-tabs showhidetab" data-duration-in="300" data-duration-out="100"></div>
-          </div><a class="button addnewbutton" href="#">+</a>
+          </div>-->
+
+
+
+
         </div>
       </div>
-      <div class="share-text">Share with your friends:&nbsp;</div>
+        <br><br><hr>
+        <div class="share-text">Share with your friends:&nbsp;</div>
       <div class="w-clearfix social-widget-wrapper">
         <div class="w-widget w-widget-twitter social-widget">
           <iframe src="https://platform.twitter.com/widgets/tweet_button.html#url=http%3A%2F%2Fwebflow.com&amp;counturl=webflow.com&amp;text=Check%20out%20this%20site&amp;count=horizontal&amp;size=m&amp;dnt=true" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 110px; height: 20px;"></iframe>
@@ -286,28 +328,23 @@
         </div>
       </div>
     </div>
-    <div class="w-col w-col-3 w-col-stack image-column">
-      <div><img class="advert" src="images/fakead.png" alt="5469870d5294c14035d7ed9f_fakead.png">
-      </div>
-    </div>
+
   </div>
   <div class="color-section">
     <div class="w-container">
+
       <div class="footer-section">
-        <div class="copyright">© 2014 MyLiftingPal. All right reserved.&nbsp;</div>
+          <div class="copyright">© 2014 MyLiftingPal. All rights reserved.&nbsp;</div>
       </div>
     </div>
   </div>
     <script>    
-    function checkLoginStatus(){
-        if (mlpObject.session === ""){
-            window.location.replace("index.html");
-        }
-    }
-
-
-    checkLoginStatus();
-    checkResults();
+        window.onload = function load(){
+            checkLoginStatus();
+            checkResults();
+            
+        };
+    
    </script>
   <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
 </body>

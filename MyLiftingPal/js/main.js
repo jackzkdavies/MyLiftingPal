@@ -8,10 +8,31 @@ function slideToggle(number){
     $(".tabsdiv"+number).slideToggle(400);
 }
 
+function checkLoginStatus(){
+    if ($.cookie("mlpsession") === undefined){
+        window.location.replace("index.html");
+    }
+}
+
+function logout(){
+    mlpObject.logout();
+    window.location.replace("index.html");
+}
+
 function slideToggleCalender(){
     $(".calender").slideToggle(400);
     centerCalander();
 }
+
+function toggleDropDownArrow(t){
+    if (t.classList.contains('w--open')=== true){
+        document.getElementById("dropDownArrow").innerHTML = '<i class="fa fa-caret-down"></i>';
+    }
+    else{
+        document.getElementById("dropDownArrow").innerHTML = '<i class="fa fa-caret-up"></i>';
+    }
+}
+
 
 function centerCalander(){
     var t = document.getElementById("sandbox-container");
@@ -39,12 +60,13 @@ function toggleTest(){
     slideToggle(1);
     slideToggle(2);
     slideToggle(3);
+    
 }
 
 function checkResults(){
     try{
         if (mlpObject.selectResults({assigneddate:year+"-"+(month+1)+"-"+date}).result['success']===false){
-            document.getElementById("noResults").innerHTML = "No Results to Show for Current Date";};
+            document.getElementById("noResults").innerHTML = "Rest day is it?";};
     }
     catch(e){
         console.log(e);
@@ -61,6 +83,7 @@ function submitCreateExerciseForm(add){
     var sExerciseName;
     var sExerciseMuscleGroup; 
     var sExerciseType;
+    document.getElementById("createSuccess").innerHTML = "";
     
     try {
         sExerciseName = document.getElementById("cExerciseName").value; 
@@ -70,10 +93,11 @@ function submitCreateExerciseForm(add){
         
         if (mlpObject !== null){ 
             //name,musclegroup,type
-            mlpObject.createxercise({name:sExerciseName,musclegroup:sExerciseMuscleGroup,type:sExerciseType});
+            mlpObject.createExercise({name:sExerciseName,musclegroup:sExerciseMuscleGroup,type:sExerciseType});
             if(addToDay === 1){
                 console.log("need to add code for adding to current day");
             }
+            document.getElementById("createSuccess").innerHTML = sExerciseName + " Added Successfully";
         }
         else{ throw "Session is null";
         }
@@ -90,6 +114,63 @@ function submitCreateExerciseForm(add){
     }
 }
 
+function submitSearchExcercise(){
+    var results=[];
+    var searchTerms =['name','musclegroup','type','userid'];
+    var searchTerm= document.getElementById("exercisesearch").value.toString();
+    try{
+    for (st in searchTerms){
+        var data = new Array();
+        data[searchTerms[st]] = searchTerm;
+        var searchResult = mlpObject.getExercises(data).result;
+        if (searchResult['success'] === true){
+            for ( test in searchResult['data'] ){
+                results.push(searchResult['data'][test]);
+            };
+        
+            
+        }
+    }
+    document.getElementById("searchresults").innerHTML = "";
+    var toAppend="";
+    toAppend += "<tr><td> <br> </td></tr>";
+    toAppend += "<tr><td> <h5><u>Search Results:</u> <h5></td></tr>";
+    for (obj in results){
+        console.log(results[obj]);
+
+        toAppend += "<tr>";
+        toAppend += "<td>";
+        for (st in searchTerms){
+            
+   
+            if (searchTerms[st] === 'userid'){
+                toAppend += "<span style='color:#77b2c9'>Create By: &nbsp;</span>";
+                toAppend += mlpObject.getUsers({id:results[obj][searchTerms[st]]}).result['data']['username'];
+                toAppend += "<span style='color:#77b2c9'><hr></span>";
+
+            }
+            else {
+                toAppend += "<span style='color:#77b2c9'>"+searchTerms[st].charAt(0).toUpperCase() + searchTerms[st].slice(1) + ": &nbsp; </span>";
+                toAppend += results[obj][searchTerms[st]] +"<br>";
+            }
+   
+        }
+        toAppend += "</td>";
+        toAppend += "<td style='text-align:center'>"+"<input type='button' class ='dropdownButton' value='Add To' data-dropdown='#dropdown' />" + "</td>";
+        toAppend += "</tr>";
+        toAppend += "<tr><td><br></td></tr>";
+        
+    
+    }
+    $("#searchresults").append(toAppend);
+    
+  
+    
+    }
+    catch(e){console.log(e);}
+    finally{};
+    
+}
 //create Workout
 function submitCreateWorkoutForm(){
     var sWorkoutName;
@@ -130,8 +211,128 @@ function submitCreateWorkoutForm(){
         sWorkoutName = null; 
         sExercises = null; 
     }
-//create programme
+
 }
+var globalExerciseObjs; 
+function submitSearchExcerciseInWorkout(){
+    var searchTerms =['name','musclegroup','type'];
+    var searchTerm= (document.getElementById("exercisesearch").value.toString()).trim();
+    document.getElementById("searchresults").innerHTML = "";
+    document.getElementById("searchResultsHeading").innerHTML="";
+    if (searchTerm ===""){
+        $("#searchresults").append("Please enter a keyword");
+        return;
+    }
+    globalExerciseObjs={};
+    try{  
+    for (st in searchTerms){
+        var data = new Array();
+        data[searchTerms[st]] = searchTerm;
+        var searchResult = mlpObject.getExercises(data).result;
+        if (searchResult['success'] === true){
+            for ( objects in searchResult['data'] ){              
+                globalExerciseObjs[searchResult['data'][objects]['id']]=searchResult['data'][objects];
+            };
+        
+            
+        }
+    }
+
+    
+    
+    
+    var toAppend="";   
+    
+        for (key in globalExerciseObjs){    
+              if (globalExerciseObjs.hasOwnProperty(key)) {
+                
+                globalExerciseObjs[key]['id']
+                
+                
+        
+        toAppend += "<tr onClick='selectedExercise("+globalExerciseObjs[key]['id']+")'>";
+        
+        for (st in searchTerms){
+            toAppend += "<td>";
+   
+            if (searchTerms[st] === 'userid'){
+//                toAppend += mlpObject.getUsers({id:results[obj][searchTerms[st]]}).result['data']['username'];
+
+            }
+            else {
+                toAppend += globalExerciseObjs[key][searchTerms[st]];
+            }
+            toAppend += "</td>";
+        }
+        
+        toAppend += "</tr>";
+
+    }}
+    
+    try{
+    $("#mytable").dataTable().fnDestroy();
+    $("#searchresults").empty();
+    }
+    catch(e){coneole.log(e);}
+    
+    $("#searchresults").append(toAppend);
+    $('#mytable').DataTable({bFilter: false});
+    document.getElementById('mytable').style.display='block';
+    document.getElementById('searchResultsHeading').innerHTML='Search results for: '+searchTerm;
+    
+    }
+    catch(e){console.log(e);}
+    finally{};
+    
+}
+var globalExerciseIds =[];
+function selectedExercise(r){
+    var searchTerms =['name','musclegroup','type'];
+    
+    var Append="";
+    Append +="<tr>";
+//    for (obj in globalExerciseObjs){
+//        if( globalExerciseObjs[obj]['id'] == r){
+//            globalExerciseIds.push(globalExerciseObjs[obj]['id']);
+//                for (st in searchTerms ){
+//                Append += "<td>";
+//                Append+= globalExerciseObjs[obj][searchTerms[st]];
+//                Append += "</td>";
+//            }
+//        }
+//    }
+
+    for (obj in globalExerciseObjs){
+        if( globalExerciseObjs[obj]['id'] == r){
+            globalExerciseIds.push(globalExerciseObjs[obj]);}
+    }
+    
+    for (obj in globalExerciseIds){
+            for (st in searchTerms ){
+            Append += "<td>";
+            Append+= globalExerciseIds[obj][searchTerms[st]];
+            Append += "</td>";
+        }
+    }
+    
+    
+    
+    Append +="<td> <span style='color:#77b2c9'> <i class='fa fa-pencil-square-o'></i> </span> </td>";
+    Append +="</tr>";
+    
+    try{
+        $("#exercisesToAdd").dataTable().fnDestroy();
+        $("#selectedExerciseToAdd").empty();
+    }
+    catch(e){coneole.log(e);}
+    
+    
+    $("#selectedExerciseToAdd").append(Append);
+    document.getElementById("exercisesToAdd").style.display='block';
+    $('#exercisesToAdd').DataTable({bFilter: false});
+
+}
+//create programme
 function submitCreateProgrammeForm(){
     var cProgramName;
     var cProgramDuration;
