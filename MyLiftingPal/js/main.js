@@ -306,7 +306,7 @@ function selectedExercise(r){
         if( globalExerciseObjs[obj]['id'] == r){
             globalExerciseIds.push(globalExerciseObjs[obj]);}
     }
-    
+    console.log(globalExerciseIds);
     for (obj in globalExerciseIds){
             for (st in searchTerms ){
             Append += "<td>";
@@ -324,7 +324,7 @@ function selectedExercise(r){
         $("#exercisesToAdd").dataTable().fnDestroy();
         $("#selectedExerciseToAdd").empty();
     }
-    catch(e){coneole.log(e);}
+    catch(e){console.log(e);}
     
     
     $("#selectedExerciseToAdd").append(Append);
