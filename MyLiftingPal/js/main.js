@@ -174,30 +174,54 @@ function submitSearchExcercise(){
 //create Workout
 function submitCreateWorkoutForm(){
     var sWorkoutName;
-    var addExercises = []; 
+    var temp;
+//    var addExercises = []; 
     
     try {
         sWorkoutName = document.getElementById("cWorkoutName").value; 
-        sExercises = document.getElementById("cAddExerciseToWorkout").value; 
-
+        if(sWorkoutName.trim() ===""){
+            document.getElementById("errorCreatingWorkout").innerHTML="Please Enter Name for Workout";
+            return;
+        }
+        console.log(sWorkoutName);
 
         
         if (mlpObject !== null){ 
+            console.log("In Create new workoutLoop.");
             //name
-            mlpObject.creatWorkout({name:sWorkoutName});
-            if(addExercises !== null){
-                console.log("need to add code for adding to workout");
-                for (exercise in addExercises){
-                    //exerciseid, workoutid,ordering, reps, sets, rpe, weight, percentage
-                    try{
-                    mlpObject.addexercise({exerciseid:exercise['exerciseid'], workoutid:exercise['workoutid'], ordering:exercise['ordering'], 
-                    reps:exercise['reps'], sets:exercise['sets'], rpe:exercise['rpe'],weight:exercise['weight'], percentage:exercise['percentage']});
+            var newWorkout = mlpObject.createWorkout({name:sWorkoutName});
+                console.log("newWorkout obj:");
+                console.log(newWorkout);
+                console.log(newWorkout['result']['data']['id']);
+                var nwi = newWorkout['result']['data']['id'];
+                if(globalExerciseIds !== {}){
+                    console.log("in add exercises to new Workoutout:");
+                    for (key in globalExerciseIds){    
+                        if (globalExerciseIds.hasOwnProperty(key)) {
+                            //exerciseid, workoutid,ordering, reps, sets, rpe, weight, percentage
+//                            try{
+//                            mlpObject.addexercise({exerciseid:globalExerciseIds[key]['id'], workoutid:newWorkout['id'], ordering:key, 
+//                            reps:globalExerciseIds[key]['reps'], sets:globalExerciseIds[key]['sets'], rpe:globalExerciseIds[key]['rpe'],weight:globalExerciseIds[key]['weight'], percentage:globalExerciseIds[key]['percentage']});
+//                            }
+                            console.log("globalExerciseIds[key]['id']:");
+                            console.log(globalExerciseIds[key]['id']);
+                            console.log("newWorkout['id']:");
+                            console.log(newWorkout['id']);
+                            console.log("key:");
+                            console.log(key);
+                            try{
+                            temp = mlpObject.addExercise({exerciseid:globalExerciseIds[key]['id'], workoutid:nwi, ordering:key.toString(), 
+                            reps:'0', sets:'0', rpe:'0',weight:'0', percentage:'0'});
+                            console.log(temp);
+                             }
+
+                            catch(e){
+                                console.log(e);}
+
+                                }
                     }
-                    
-                    catch(e){
-                        console.log(e);}
                 }
-            }
+            
         }
         else{ throw "Session is null";
         }
@@ -246,7 +270,7 @@ function submitSearchExcerciseInWorkout(){
         for (key in globalExerciseObjs){    
               if (globalExerciseObjs.hasOwnProperty(key)) {
                 
-                globalExerciseObjs[key]['id']
+//                globalExerciseObjs[key]['id']
                 
                 
         
@@ -273,7 +297,7 @@ function submitSearchExcerciseInWorkout(){
     $("#mytable").dataTable().fnDestroy();
     $("#searchresults").empty();
     }
-    catch(e){coneole.log(e);}
+    catch(e){console.log(e);}
     
     $("#searchresults").append(toAppend);
     $('#mytable').DataTable({bFilter: false});
@@ -285,7 +309,7 @@ function submitSearchExcerciseInWorkout(){
     finally{};
     
 }
-var globalExerciseIds =[];
+var globalExerciseIds ={};
 function selectedExercise(r){
     var searchTerms =['name','musclegroup','type'];
     
@@ -304,27 +328,44 @@ function selectedExercise(r){
 
     for (obj in globalExerciseObjs){
         if( globalExerciseObjs[obj]['id'] == r){
-            globalExerciseIds.push(globalExerciseObjs[obj]);}
-    }
-    console.log(globalExerciseIds);
-    for (obj in globalExerciseIds){
-            for (st in searchTerms ){
-            Append += "<td>";
-            Append+= globalExerciseIds[obj][searchTerms[st]];
-            Append += "</td>";
+//            globalExerciseIds.push(globalExerciseObjs[obj]);
+            globalExerciseIds[globalExerciseObjs[obj]['id']]=globalExerciseObjs[obj];
         }
     }
     
+//    for (obj in globalExerciseIds){
+//            for (st in searchTerms ){
+//            Append += "<td>";
+//            Append+= globalExerciseIds[obj][searchTerms[st]];
+//            Append += "</td>";
+//        }
+//    }
     
-    
-    Append +="<td> <span style='color:#77b2c9'> <i class='fa fa-pencil-square-o'></i> </span> </td>";
+    for (key in globalExerciseIds){ 
+        for (st in searchTerms){
+                Append += "<td>";
+
+                if (searchTerms[st] === 'userid'){
+    //                toAppend += mlpObject.getUsers({id:results[obj][searchTerms[st]]}).result['data']['username'];
+
+                }
+                else {
+                    Append += globalExerciseIds[key][searchTerms[st]];
+                }
+                Append += "</td>";
+            }
+            Append +="<td> <span style='color:#77b2c9'> <i class='fa fa-pencil-square-o'></i> </span> </td>";
     Append +="</tr>";
+            
+    }
+       
+    
     
     try{
         $("#exercisesToAdd").dataTable().fnDestroy();
         $("#selectedExerciseToAdd").empty();
     }
-    catch(e){console.log(e);}
+    catch(e){coneole.log(e);}
     
     
     $("#selectedExerciseToAdd").append(Append);

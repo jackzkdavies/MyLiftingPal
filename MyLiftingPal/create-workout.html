@@ -189,6 +189,7 @@
               </div>
               <div class="w-tab-content">
                 <div class="w-tab-pane w-clearfix" data-w-tab="Create New">
+                    <p id="errorCreatingWorkout"></p>
                   <input class="w-input field feild2" id="cWorkoutName" type="text" placeholder="Enter workout name" name="workoutname" required="required" data-name="workoutname">
                   
                   <table id="exercisesToAdd" style="display:  none">
@@ -228,7 +229,7 @@
                   <hr>
                   
         
-                  <a class="button signup" href="#"><span><strong>Create Workout</strong></span></a>
+                  <a class="button signup" href="javascript:submitCreateWorkoutForm()"><span><strong>Create Workout</strong></span></a>
                 </div>
                   
                   
