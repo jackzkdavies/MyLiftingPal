@@ -1,3 +1,10 @@
+.badText{
+   color:#ff6666;
+}
+.goodText{
+   color:#66cc66 
+}
+
 .btn-circle-main {
 width: 60px;
 height: 60px;

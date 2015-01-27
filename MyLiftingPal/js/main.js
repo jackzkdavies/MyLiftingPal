@@ -2,7 +2,7 @@
 var d = new Date(); var date = d.getDate(); var day = d.getDay(); var year = d.getFullYear(); var month = d.getMonth();
 //Create MLP object
 var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
-
+var globalExerciseObjs; 
 //Toggling ful view of exercises with
 function slideToggle(number){
     $(".tabsdiv"+number).slideToggle(400);
@@ -75,7 +75,49 @@ function checkResults(){
 ////////// examplemlpObject.login({username: 'myusername', password:'mypassword'}
 
 //check login
+function updateModal(inputId){
+    var getExercise = mlpObject.getExercises({id:inputId});
+    
+    $("#myModalLabel").empty();
+    $("#myModalLabel").append("Add " + getExercise.result['data'][0]['name'] + " To:");
+    
+    var options = {
+    "backdrop" : "static",
+    "show":"true"};
+    $('#basicModal').modal(options);
+    
 
+}
+//Displaay exercises
+function displayMyExercises(){
+    $("#myExercises").empty();
+    var userId=mlpObject.getUser().result['data']['id'];
+    var meo=mlpObject.getExercises({userid:userId}).result['data'];
+    for (objects in meo){
+    var toAppend = [];
+    toAppend +='<div >';
+    toAppend +='<h3 onclick="addMyExercisesDetails(' + "'" +'myExercises'+meo[objects]['id']+"'"+ ')" style="text-align:left;width:70%;padding: 8px; float:left">'+meo[objects]['name'];
+    toAppend +='<i class="fa fa-caret-down"></i>';
+    toAppend +='</h3>';
+    
+//    <a href="#" class="btn btn-lg btn-success"
+//   data-toggle="modal"
+//   data-target="#basicModal">Click to open Modal</a>\
+//   toAppend +='<a onclick="updateModal('+meo[objects]['id']+') href="#" style="width:60px; margin-bottom: 4px;" class="btn btn-lg btn-success btn btn-default btn-circle-main" data-toggle="modal" data-target="#basicModal">';
+    
+    toAppend +='<a href="javascript:updateModal(' +meo[objects]['id']+ ')" style="width:60px; margin-bottom: 4px;" class="btn btn-default btn-circle-main">';
+ 
+    toAppend +='<i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i>';
+    toAppend +='</a>';
+
+    toAppend +='<div id="myExercises'+meo[objects]['id']+'" style="width: 100%; position: relative" class="tabsdivMyWorkOutsBackAndBis"></div>';
+
+
+    toAppend+="</div><hr>";
+    
+    $("#myExercises").append(toAppend);
+    }
+}
 
 //create exercise
 function submitCreateExerciseForm(add){
@@ -89,7 +131,11 @@ function submitCreateExerciseForm(add){
         sExerciseName = document.getElementById("cExerciseName").value; 
         sExerciseMuscleGroup = document.getElementById("cExerciseMusclegroup").value; 
         sExerciseType = document.getElementById("cExerciseType").value;
-
+        if (sExerciseName.trim() === '' || sExerciseMuscleGroup.trim() === '' || sExerciseType.trim() === ''){
+            console.log(sExerciseName.trim(), sExerciseMuscleGroup.trim(),sExerciseType.trim());
+            document.getElementById("createSuccess").innerHTML = "<span style='color:#ff6666'>Required feild empty</span>";
+            return;
+        }
         
         if (mlpObject !== null){ 
             //name,musclegroup,type
@@ -97,10 +143,18 @@ function submitCreateExerciseForm(add){
             if(addToDay === 1){
                 console.log("need to add code for adding to current day");
             }
-            document.getElementById("createSuccess").innerHTML = sExerciseName + " Added Successfully";
+            document.getElementById("createSuccess").innerHTML = '"'+sExerciseName +'"'+ " <span style='color:#66cc66'>Added Successfully!</span>";
         }
         else{ throw "Session is null";
         }
+        
+        displayMyExercises();
+        
+        $('#cExerciseName').val('').removeAttr('checked').removeAttr('selected');
+        $('#cExerciseMusclegroup').val('').removeAttr('checked').removeAttr('selected');
+        $('#cExerciseType').val('').removeAttr('checked').removeAttr('selected');
+        
+        
     }
     
     catch (e){
@@ -115,70 +169,79 @@ function submitCreateExerciseForm(add){
 }
 
 function submitSearchExcercise(){
-    var results=[];
-    var searchTerms =['name','musclegroup','type','userid'];
-    var searchTerm= document.getElementById("exercisesearch").value.toString();
-    try{
+    var searchTerms =['name','musclegroup','type'];
+    var searchTerm= (document.getElementById("exercisesearch").value.toString()).trim();
+    document.getElementById("searchresults").innerHTML = "";
+    document.getElementById("searchResultsHeading").innerHTML="";
+    if (searchTerm ===""){
+        $("#searchresults").append("Please enter a keyword");
+        return;
+    }
+    globalExerciseObjs={};
+    try{  
     for (st in searchTerms){
         var data = new Array();
         data[searchTerms[st]] = searchTerm;
         var searchResult = mlpObject.getExercises(data).result;
         if (searchResult['success'] === true){
-            for ( test in searchResult['data'] ){
-                results.push(searchResult['data'][test]);
+            for ( objects in searchResult['data'] ){              
+                globalExerciseObjs[searchResult['data'][objects]['id']]=searchResult['data'][objects];
             };
         
             
         }
     }
-    document.getElementById("searchresults").innerHTML = "";
-    var toAppend="";
-    toAppend += "<tr><td> <br> </td></tr>";
-    toAppend += "<tr><td> <h5><u>Search Results:</u> <h5></td></tr>";
-    for (obj in results){
-        console.log(results[obj]);
-
-        toAppend += "<tr>";
-        toAppend += "<td>";
+    
+    var toAppend="";   
+    
+        for (key in globalExerciseObjs){    
+              if (globalExerciseObjs.hasOwnProperty(key)) {      
+        
+        toAppend += "<tr onClick='selectedExercise("+globalExerciseObjs[key]['id']+")'>";
+        
         for (st in searchTerms){
-            
+            toAppend += "<td>";
    
             if (searchTerms[st] === 'userid'){
-                toAppend += "<span style='color:#77b2c9'>Create By: &nbsp;</span>";
-                toAppend += mlpObject.getUsers({id:results[obj][searchTerms[st]]}).result['data']['username'];
-                toAppend += "<span style='color:#77b2c9'><hr></span>";
+//                toAppend += mlpObject.getUsers({id:results[obj][searchTerms[st]]}).result['data']['username'];
 
             }
             else {
-                toAppend += "<span style='color:#77b2c9'>"+searchTerms[st].charAt(0).toUpperCase() + searchTerms[st].slice(1) + ": &nbsp; </span>";
-                toAppend += results[obj][searchTerms[st]] +"<br>";
+                toAppend += globalExerciseObjs[key][searchTerms[st]];
             }
-   
+            toAppend += "</td>";
         }
-        toAppend += "</td>";
-        toAppend += "<td style='text-align:center'>"+"<input type='button' class ='dropdownButton' value='Add To' data-dropdown='#dropdown' />" + "</td>";
-        toAppend += "</tr>";
-        toAppend += "<tr><td><br></td></tr>";
         
+        toAppend += "</tr>";
+
+    }}
     
+    try{
+    $("#mytable").dataTable().fnDestroy();
+    $("#searchresults").empty();
     }
-    $("#searchresults").append(toAppend);
+    catch(e){console.log(e);}
     
-  
+    $("#searchresults").append(toAppend);
+    $('#mytable').DataTable({bFilter: false});
+    document.getElementById('mytable').style.display='block';
+    document.getElementById('searchResultsHeading').innerHTML='Search results for: '+searchTerm;
     
     }
     catch(e){console.log(e);}
     finally{};
-    
 }
 
 
 
 function addMyworkoutDetails(input){
     console.log(input);
-    toAppend=[];
-    
-    toAppend +='<table class="table table-striped">'+
+    var toAppend ="";
+    var divId='#'+input;
+    console.log(toAppend);
+    if ((document.getElementById(input).innerHTML).trim() === ""){
+        console.log(toAppend);
+        toAppend +='<table class="table table-striped">'+
         '<thead>'+
             '<tr>'+
                 '<td colspan="2">Hammer Curls</td>'+
@@ -203,12 +266,16 @@ function addMyworkoutDetails(input){
                 "<td style='border-top-right-radius: 3px; border-left: 3px solid white'>0.8</td>"+
                 "<td style='border-top-right-radius: 3px; border-left: 3px solid white'>60</td>"+
             "</tr>    "+
-        "</tbody>;"+
+        "</tbody>"+
 
        "</table>";
+       console.log(toAppend);
     
-    var test='"'+'#'+input+'"';
-    $(test).append(toAppend);
+    
+    $(divId).append(toAppend);
+    }
+     else{$(divId).slideToggle(400);
+    }
 }
 //Display my workouts
 function displayMyWorkouts(){
@@ -223,11 +290,10 @@ function displayMyWorkouts(){
     toAppend +='</h3>';
     
     toAppend +='<a href="javascript:void(0);" style="width:60px; margin-bottom: 4px;" class="btn btn-default btn-circle-main">';
-    toAppend +='<i class="fa fa-plus fa-2x" style="line-height: 1.9 !important;"></i>';
+    toAppend +='<i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i>';
     toAppend +='</a>';
 
-    toAppend +='<div id="myWorkouts'+objects+'" style="width: 100%; position: relative" class="tabsdivMyWorkOutsBackAndBis">';
-    toAppend +='</div>';
+    toAppend +='<div id="myWorkouts'+mwo[objects]['id']+'" style="width: 100%; position: relative" class="tabsdivMyWorkOutsBackAndBis"></div>';
 
 
     toAppend+="</div><hr>";
@@ -326,18 +392,11 @@ function submitSearchExcerciseInWorkout(){
             
         }
     }
-
-    
-    
     
     var toAppend="";   
     
         for (key in globalExerciseObjs){    
-              if (globalExerciseObjs.hasOwnProperty(key)) {
-                
-//                globalExerciseObjs[key]['id']
-                
-                
+              if (globalExerciseObjs.hasOwnProperty(key)) {      
         
         toAppend += "<tr onClick='selectedExercise("+globalExerciseObjs[key]['id']+")'>";
         

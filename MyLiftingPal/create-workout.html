@@ -11,7 +11,7 @@
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
   <link rel="stylesheet" type="text/css" href="css/datepicker3.css">
   <link rel="stylesheet" type="text/css" href="css/webflow.css">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="css/myliftingpal.webflow.css"> 
   <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
@@ -98,52 +98,9 @@
             
             <br>
             
-            <div id="myWorkouts">
-                
-                
-            </div>
-
-        
+            <div id="myWorkouts"></div>
             
-            <div onclick='slideToggle("MyWorkOutsChestAndTris")'>
-                <h3 style='text-align:left;width:70%;padding: 8px; float:left'>Chest and Tri's <i class="fa fa-caret-down"></i></h3>
-                <a href="javascript:void(0);" style="width:60px; margin-bottom: 4px;" class="btn btn-default btn-circle-main">
-                    <i class="fa fa-plus fa-2x" style="line-height: 1.9 !important;"></i>
-                </a>
-                
-                <div style='width: 100%; position: relative' class='tabsdivMyWorkOutsChestAndTris'>
-                    <table class='table table-striped'>
-                        <thead>
-                            <tr>
-                            <td colspan="2">Bench Press</td>
-                            <td colspan="2">Pectorals</td>
-                            <td colspan="2">Push</td>
-                            </tr>
-                        </thead>
-                        
-                        <tbody id ="myWorkouts">
-                            <tr>
-                            <td style='border-top-left-radius: 3px; border-right: 3px solid white'>reps</td>
-                            <td style='border-left: 3px solid white;border-right: 3px solid white'>sets</td>
-                            <td colspan="2" style='border-top-right-radius: 3px; border-left: 3px solid white'>weight</td>
-                            <td style='border-top-right-radius: 3px; border-left: 3px solid white'>rpe</td>
-                            <td style='border-top-right-radius: 3px; border-left: 3px solid white'>%</td>
-                            </tr>
-                            
-                             <tr>
-                            <td style='border-top-left-radius: 3px; border-right: 3px solid white'>12</td>
-                            <td style='border-left: 3px solid white;border-right: 3px solid white'>5</td>
-                            <td colspan="2" style='border-top-right-radius: 3px; border-left: 3px solid white'>80</td>
-                            <td style='border-top-right-radius: 3px; border-left: 3px solid white'>0.8</td>
-                            <td style='border-top-right-radius: 3px; border-left: 3px solid white'>60</td>
-                            </tr>    
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <br>
-            <hr>
+            
             <div class="w-tabs" data-duration-in="300" data-duration-out="100">
               <div class="w-tab-menu w-clearfix">
                 <a class="w-tab-link w--current w-inline-block createtab" data-w-tab="Create New">
@@ -157,48 +114,51 @@
               </div>
               <div class="w-tab-content">
                 <div class="w-tab-pane w-clearfix" data-w-tab="Create New">
-                    <p id="errorCreatingWorkout"></p>
-                  <input class="w-input field feild2" id="cWorkoutName" type="text" placeholder="Enter workout name" name="workoutname" required="required" data-name="workoutname">
-                  
-                  <table id="exercisesToAdd" style="display:  none">
-                      <thead>
+                <p id="errorCreatingWorkout"></p>
+              <input class="w-input field feild2" id="cWorkoutName" type="text" placeholder="Enter workout name" name="workoutname" required="required" data-name="workoutname">
+
+              <table id="exercisesToAdd" style="display:  none">
+                  <thead>
+                  <tr>
+                      <td>Exercise</td>
+                      <td>M/Group</td>
+                      <td>Type</td>
+                      <td></td>
+                  </tr>
+                  </thead>
+                  <tbody id="selectedExerciseToAdd">
+
+                  </tbody>
+              </table>
+              <hr>
+
+              <div style="width: 100%;">
+              <input style="float:left; margin-right: -38px" class="w-input" id="exercisesearch" type="text" placeholder="Select Exercise to add" name="addexercisetoworkout" required="required" data-name="addexercisetoworkout">
+              <img class="searchImage" onclick="submitSearchExcerciseInWorkout();return false;" src="images/search.svg" alt="Search" onerror="this.src='your.png'">
+              </div>
+              
+              
+              
+              <p id="searchResultsHeading"></p>
+
+              <table id='mytable' style='display: none; width: 100%; text-align:left; text-shadow: 0px 0px rgba(255, 255, 255, 0);'>
+                  <thead>
                       <tr>
-                          <td>Exercise</td>
-                          <td>M/Group</td>
-                          <td>Type</td>
-                          <td></td>
+                          <td style=''>Exercise</td>
+                          <td style=''>M/Group</td>
+                          <td style=''>Type</td>
                       </tr>
-                      </thead>
-                      <tbody id="selectedExerciseToAdd">
-                          
-                      </tbody>
-                  </table>
-                  <hr>
-                  
-                  <div style="width: 100%;">
-                  <input style="float:left; margin-right: -38px" class="w-input" id="exercisesearch" type="text" placeholder="Select Exercise to add" name="addexercisetoworkout" required="required" data-name="addexercisetoworkout">
-                  <img class="searchImage" onclick="submitSearchExcerciseInWorkout();return false;" src="images/search.svg" alt="Search" onerror="this.src='your.png'">
-                  </div>
-                  <p id="searchResultsHeading"></p>
-                  
-                  <table id='mytable' style='display: none; width: 100%; text-align:left; text-shadow: 0px 0px rgba(255, 255, 255, 0);'>
-                      <thead>
-                          <tr>
-                              <td style=''>Exercise</td>
-                              <td style=''>M/Group</td>
-                              <td style=''>Type</td>
-                          </tr>
-                      </thead>
-                      <tbody id ="searchresults">
-                          
-                      </tbody>
-                  </table>
-                  
-                  <hr>
-                  
-        
-                  <a class="button signup" href="javascript:submitCreateWorkoutForm()"><span><strong>Create Workout</strong></span></a>
-                </div>
+                  </thead>
+                  <tbody id ="searchresults">
+
+                  </tbody>
+              </table>
+
+              <hr>
+
+
+            <a class="button signup" href="javascript:submitCreateWorkoutForm()"><span><strong>Create Workout</strong></span></a>
+            </div>
                   
                   
                   
@@ -209,10 +169,7 @@
                 </div>
               </div>
             </div>
-          <!--</form>-->
-
-
-        <!--</div>-->
+            
         <div class="share-text">Share with your friends:&nbsp;</div>
         <div class="w-clearfix social-widget-wrapper">
           <div class="w-widget w-widget-twitter social-widget">
