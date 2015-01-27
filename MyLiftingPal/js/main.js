@@ -172,54 +172,68 @@ function submitSearchExcercise(){
     
 }
 
+
+
+function addMyworkoutDetails(input){
+    console.log(input);
+    toAppend=[];
+    
+    toAppend +='<table class="table table-striped">'+
+        '<thead>'+
+            '<tr>'+
+                '<td colspan="2">Hammer Curls</td>'+
+                '<td colspan="2">Biceps</td>'+
+                '<td colspan="2">Pull</td>'+
+            '</tr>'+
+        '</thead>'+
+
+        "<tbody id ='myWorkouts'>"+
+            "<tr>"+
+                "<td style='border-top-left-radius: 3px; border-right: 3px solid white'>reps</td>"+
+                "<td style='border-left: 3px solid white;border-right: 3px solid white'>sets</td>"+
+                "<td colspan='2' style='border-top-right-radius: 3px; border-left: 3px solid white'>weight</td>"+
+                "<td style='border-top-right-radius: 3px; border-left: 3px solid white'>rpe</td>"+
+                "<td style='border-top-right-radius: 3px; border-left: 3px solid white'>%</td>"+
+            "</tr>"+
+
+            "<tr>"+
+                "<td style='border-top-left-radius: 3px; border-right: 3px solid white'>12</td>"+
+                "<td style='border-left: 3px solid white;border-right: 3px solid white'>5</td>"+
+                "<td colspan='2' style='border-top-right-radius: 3px; border-left: 3px solid white'>22.5</td>"+
+                "<td style='border-top-right-radius: 3px; border-left: 3px solid white'>0.8</td>"+
+                "<td style='border-top-right-radius: 3px; border-left: 3px solid white'>60</td>"+
+            "</tr>    "+
+        "</tbody>;"+
+
+       "</table>";
+    
+    var test='"'+'#'+input+'"';
+    $(test).append(toAppend);
+}
 //Display my workouts
 function displayMyWorkouts(){
     var userId=mlpObject.getUser().result['data']['id'];
-    var mwo=mlpObject.getWorkouts({userid:userId});
+    var mwo=mlpObject.getWorkouts({userid:userId}).result['data'];
     console.log(mwo);
+    for (objects in mwo){
     var toAppend = [];
-    toAppend +='<div id="1" onclick="slideToggle(' + "'" + 'MyWorkOutsBackAndBis' +"'"+ ')">';
-    toAppend +='<h3 style="text-align:left;width:70%;padding: 8px; float:left">test';
+    toAppend +='<div onclick="addMyworkoutDetails(' + "'" +'myWorkouts'+mwo[objects]['id']+"'"+ ')">';
+    toAppend +='<h3 style="text-align:left;width:70%;padding: 8px; float:left">'+mwo[objects]['name'];
     toAppend +='<i class="fa fa-caret-down"></i>';
     toAppend +='</h3>';
     
     toAppend +='<a href="javascript:void(0);" style="width:60px; margin-bottom: 4px;" class="btn btn-default btn-circle-main">';
     toAppend +='<i class="fa fa-plus fa-2x" style="line-height: 1.9 !important;"></i>';
     toAppend +='</a>';
-    
-    toAppend +='<div style="width: 100%; position: relative" class="tabsdivMyWorkOutsBackAndBis">';
-    toAppend +='<table class="table table-striped">';
-    toAppend +='<thead>';
-    toAppend +='<tr>';
-    toAppend +='<td colspan="2">Hammer Curls</td>';
-    toAppend +='<td colspan="2">Biceps</td>';
-    toAppend +='<td colspan="2">Pull</td>';
-    toAppend +='</tr>';
-    toAppend +='</thead>';
-    
-    toAppend += "<tbody id ='myWorkouts'>"+
-                    "<tr>"+
-                        "<td style='border-top-left-radius: 3px; border-right: 3px solid white'>reps</td>"+
-                        "<td style='border-left: 3px solid white;border-right: 3px solid white'>sets</td>"+
-                        "<td colspan='2' style='border-top-right-radius: 3px; border-left: 3px solid white'>weight</td>"+
-                        "<td style='border-top-right-radius: 3px; border-left: 3px solid white'>rpe</td>"+
-                        "<td style='border-top-right-radius: 3px; border-left: 3px solid white'>%</td>"+
-                    "</tr>"+
-                            
-                    "<tr>"+
-                        "<td style='border-top-left-radius: 3px; border-right: 3px solid white'>12</td>"+
-                        "<td style='border-left: 3px solid white;border-right: 3px solid white'>5</td>"+
-                        "<td colspan='2' style='border-top-right-radius: 3px; border-left: 3px solid white'>22.5</td>"+
-                        "<td style='border-top-right-radius: 3px; border-left: 3px solid white'>0.8</td>"+
-                        "<td style='border-top-right-radius: 3px; border-left: 3px solid white'>60</td>"+
-                    "</tr>    "+
-                "</tbody>;"+
-    
-            "</table>"+
-        "</div>"+
-    "</div><hr>";
+
+    toAppend +='<div id="myWorkouts'+objects+'" style="width: 100%; position: relative" class="tabsdivMyWorkOutsBackAndBis">';
+    toAppend +='</div>';
+
+
+    toAppend+="</div><hr>";
     
     $("#myWorkouts").append(toAppend);
+    }
 }
 
 //create Workout
