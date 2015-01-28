@@ -320,37 +320,54 @@ function addMyworkoutDetails(input){
 
     var toAppend ="";
     var divId='#'+input;
+    var idNum =input.replace('myWorkouts','');
+    var workouts = mlpObject.selectExercises({workoutid:idNum}).result;
 
+//    console.log(workouts);
     if ((document.getElementById(input).innerHTML).trim() === ""){
+        
+        if (workouts['success'] === false){
+            toAppend +='<p>No exercises to display</p>';
+        }
+        else{
+        for (workout in workouts['data']){
+//            console.log(workouts['data'][workout]);
+            var wnames = mlpObject.getExercises({id:workouts['data'][workout]['exerciseid']}).result;
 
-        toAppend +='<table class="table table-striped">'+
-        '<thead>'+
-            '<tr>'+
-                '<td colspan="2">Hammer Curls</td>'+
-                '<td colspan="2">Biceps</td>'+
-                '<td colspan="2">Pull</td>'+
-            '</tr>'+
-        '</thead>'+
+            toAppend +='<table class="table table-striped">'+
+            '<thead>'+
+                '<tr>'+
+                    '<td colspan="2">'+wnames['data'][0]['name']+'</td>'+
+                    '<td colspan="2">'+wnames['data'][0]['musclegroup']+'</td>'+
+                    '<td colspan="2">'+wnames['data'][0]['type']+'</td>'+
+                '</tr>'+
+            '</thead>'+
 
-        "<tbody id ='myWorkouts'>"+
-            "<tr>"+
-                "<td style='border-top-left-radius: 3px; border-right: 3px solid white'>reps</td>"+
-                "<td style='border-left: 3px solid white;border-right: 3px solid white'>sets</td>"+
-                "<td colspan='2' style='border-top-right-radius: 3px; border-left: 3px solid white'>weight</td>"+
-                "<td style='border-top-right-radius: 3px; border-left: 3px solid white'>rpe</td>"+
-                "<td style='border-top-right-radius: 3px; border-left: 3px solid white'>%</td>"+
-            "</tr>"+
+            "<tbody id ='myWorkouts'>"+
+                "<tr>"+
+                    
+                    "<td style='border-left: 3px solid white;border-right: 3px solid white'>sets</td>"+
+                    "<td style='border-top-left-radius: 3px; border-right: 3px solid white'>reps</td>"+
+                    "<td colspan='2' style='border-top-right-radius: 3px; border-left: 3px solid white'>weight</td>"+
+                    "<td style='border-top-right-radius: 3px; border-left: 3px solid white'>rpe</td>"+
+                    "<td style='border-top-right-radius: 3px; border-left: 3px solid white'>%1RM</td>"+
+                "</tr>"+
 
-            "<tr>"+
-                "<td style='border-top-left-radius: 3px; border-right: 3px solid white'>12</td>"+
-                "<td style='border-left: 3px solid white;border-right: 3px solid white'>5</td>"+
-                "<td colspan='2' style='border-top-right-radius: 3px; border-left: 3px solid white'>22.5</td>"+
-                "<td style='border-top-right-radius: 3px; border-left: 3px solid white'>0.8</td>"+
-                "<td style='border-top-right-radius: 3px; border-left: 3px solid white'>60</td>"+
-            "</tr>    "+
-        "</tbody>"+
+                "<tr>"+
+                    
+                    "<td style='border-left: 3px solid white;border-right: 3px solid white'>"+workouts['data'][workout]['sets']+"</td>"+
+                    "<td style='border-top-left-radius: 3px; border-right: 3px solid white'>"+workouts['data'][workout]['reps']+"</td>"+
+                    "<td colspan='2' style='border-top-right-radius: 3px; border-left: 3px solid white'>"+workouts['data'][workout]['weight']+"</td>"+
+                    "<td style='border-top-right-radius: 3px; border-left: 3px solid white'>"+workouts['data'][workout]['rpe']+"</td>"+
+                    "<td style='border-top-right-radius: 3px; border-left: 3px solid white'>"+workouts['data'][workout]['percentage']+"</td>"+
+                "</tr>    "+
+            "</tbody>"+
 
-       "</table>";
+           "</table>";
+            }
+        }
+     toAppend +=  ' <a href="javascript:updateModalWorkoutEdit('+input+');" class="btn btn-default btn-circle myexercises-edit">'+
+        '<i class="fa fa-pencil-square-o"></i></a>';
     
     
     $(divId).append(toAppend);
@@ -362,7 +379,6 @@ function addMyworkoutDetails(input){
 function displayMyWorkouts(){
     var userId=mlpObject.getUser().result['data']['id'];
     var mwo=mlpObject.getWorkouts({userid:userId}).result['data'];
-    console.log(mwo);
     for (objects in mwo){
     var toAppend = [];
     toAppend +='<div onclick="addMyworkoutDetails(' + "'" +'myWorkouts'+mwo[objects]['id']+"'"+ ')">';
