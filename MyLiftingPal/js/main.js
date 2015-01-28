@@ -24,8 +24,8 @@ function slideToggleCalender(){
     centerCalander();
 }
 
-function toggleDropDownArrow(t){
-    if (t.classList.contains('w--open')=== true){
+function toggleDropDownArrow(i){
+    if (i.classList.contains('w--open')=== true){
         document.getElementById("dropDownArrow").innerHTML = '<i class="fa fa-caret-down"></i>';
     }
     else{
@@ -75,16 +75,68 @@ function checkResults(){
 ////////// examplemlpObject.login({username: 'myusername', password:'mypassword'}
 
 //check login
-function updateModal(inputId){
+function updateModalExerciseAdd(inputId){
     var getExercise = mlpObject.getExercises({id:inputId});
     
-    $("#myModalLabel").empty();
-    $("#myModalLabel").append("Add " + getExercise.result['data'][0]['name'] + " To:");
+    $("#myModalLabelExerciseAdd").empty();
+    $("#myModalLabelExerciseAdd").append("Add " + getExercise.result['data'][0]['name'] + " To:");
     
     var options = {
     "backdrop" : "static",
     "show":"true"};
-    $('#basicModal').modal(options);
+    $('#basicModalUpdate').modal(options);
+    
+    
+
+}
+function deleteExercise(eid){
+    mlpObject.deleteExercise({id:eid});
+    $('#basicModalEdit').modal('hide');
+    displayMyExercises();
+
+}
+
+function updateExercise(eid){
+    var newExName = document.getElementById("updateExerciseName").value;
+    
+    var e = document.getElementById("updateExerciseMuscle");
+    var newExGroup = e.options[e.selectedIndex].text;
+    
+    var e2 = document.getElementById("updateExerciseType");
+    var newExType = e2.options[e2.selectedIndex].text;
+    
+
+    mlpObject.updateExercise({id:eid,name:newExName,musclegroup:newExGroup,type:newExType});
+    
+    $('#basicModalEdit').modal('hide');
+    displayMyExercises();
+}
+function updateModalExerciseEdit(inputId){
+    var getExercise = mlpObject.getExercises({id:inputId}).result['data'][0];
+    
+    console.log(getExercise);
+    
+    document.getElementById("updateExerciseName").value = getExercise['name'];
+    
+    var element = document.getElementById('updateExerciseMuscle');
+    element.value = 0;
+    var element2 = document.getElementById('updateExerciseType');
+    element2.value = 0;
+    
+    
+    $("#deleteExerciseButton").empty();
+    var delBut = '<button onclick="deleteExercise('+inputId+')" type="button" class="btn btn-primary">Delete</button>';
+    $("#deleteExerciseButton").append(delBut);
+    
+    $("#editCalANDSav").empty();
+    var buttons='<button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
+            '<button onclick="updateExercise('+inputId+')" type="button" class="btn btn-primary">Save</button>';
+    $("#editCalANDSav").append(buttons);
+    
+    var options = {
+    "backdrop" : "static",
+    "show":"true"};
+    $('#basicModalEdit').modal(options);
     
 
 }
@@ -96,16 +148,11 @@ function displayMyExercises(){
     for (objects in meo){
     var toAppend = [];
     toAppend +='<div >';
-    toAppend +='<h3 onclick="addMyExercisesDetails(' + "'" +'myExercises'+meo[objects]['id']+"'"+ ')" style="text-align:left;width:70%;padding: 8px; float:left">'+meo[objects]['name'];
-    toAppend +='<i class="fa fa-caret-down"></i>';
+    toAppend +='<h3 onclick="displayMyExercisesDetails(' + "'" +'myExercises'+meo[objects]['id']+"'"+ ')" style="text-align:left;width:70%;padding: 8px; float:left">'+meo[objects]['name'];
+    toAppend +='<span id="myExercisesDetailsArrow'+meo[objects]['id']+'"><i class="fa fa-caret-down"></i></span>';
     toAppend +='</h3>';
-    
-//    <a href="#" class="btn btn-lg btn-success"
-//   data-toggle="modal"
-//   data-target="#basicModal">Click to open Modal</a>\
-//   toAppend +='<a onclick="updateModal('+meo[objects]['id']+') href="#" style="width:60px; margin-bottom: 4px;" class="btn btn-lg btn-success btn btn-default btn-circle-main" data-toggle="modal" data-target="#basicModal">';
-    
-    toAppend +='<a href="javascript:updateModal(' +meo[objects]['id']+ ')" style="width:60px; margin-bottom: 4px;" class="btn btn-default btn-circle-main">';
+  
+    toAppend +='<a href="javascript:updateModalExerciseAdd(' +meo[objects]['id']+ ')" style="width:60px; margin-bottom: 4px;" class="btn btn-default btn-circle-main">';
  
     toAppend +='<i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i>';
     toAppend +='</a>';
@@ -119,6 +166,34 @@ function displayMyExercises(){
     }
 }
 
+function displayMyExercisesDetails(input){
+    var toAppend ="";
+    var divId='#'+input;
+    var idNum =input.replace('myExercises','');
+    var exercise = mlpObject.getExercises({id:idNum}).result['data'][0];;
+    if ((document.getElementById(input).innerHTML).trim() === ""){
+
+        toAppend +='<p style="text-align:left; color:#77b2c9;">&nbsp;&nbsp;&nbsp;'+exercise['type']+'</p>'+
+                '<p style="text-align:left; color:#77b2c9;">&nbsp;&nbsp;&nbsp;'+exercise['musclegroup']+'</p>'+
+                
+               ' <a href="javascript:updateModalExerciseEdit('+idNum+');" class="btn btn-default btn-circle myexercises-edit">'+
+                '<i class="fa fa-pencil-square-o"></i></a>';
+        
+    
+    
+    $(divId).append(toAppend);
+    }
+     else{$(divId).slideToggle(400);
+    }
+    
+    if (document.getElementById('myExercisesDetailsArrow'+idNum).innerHTML=== '<i class="fa fa-caret-up"></i>'){
+        document.getElementById('myExercisesDetailsArrow'+idNum).innerHTML = '<i class="fa fa-caret-down"></i>';
+    }
+    else{
+        document.getElementById('myExercisesDetailsArrow'+idNum).innerHTML = '<i class="fa fa-caret-up"></i>';
+    }
+    
+}
 //create exercise
 function submitCreateExerciseForm(add){
     var addToDay = add;
@@ -235,12 +310,12 @@ function submitSearchExcercise(){
 
 
 function addMyworkoutDetails(input){
-    console.log(input);
+
     var toAppend ="";
     var divId='#'+input;
-    console.log(toAppend);
+
     if ((document.getElementById(input).innerHTML).trim() === ""){
-        console.log(toAppend);
+
         toAppend +='<table class="table table-striped">'+
         '<thead>'+
             '<tr>'+
@@ -269,7 +344,6 @@ function addMyworkoutDetails(input){
         "</tbody>"+
 
        "</table>";
-       console.log(toAppend);
     
     
     $(divId).append(toAppend);
