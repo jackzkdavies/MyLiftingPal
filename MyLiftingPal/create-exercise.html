@@ -57,7 +57,7 @@
                     <a class="w-nav-link" href="#">Profile</a>
                     <a class="w-nav-link" href="#">Settings</a>
                     <hr>
-                    <a class="w-nav-link" href="#">Logout</a>
+                    <a class="w-nav-link" href="javascript:logout()">Logout</a>
                 </nav>
                   
                 <div class="w-nav-button">
@@ -87,12 +87,11 @@
            <h4 class="myDiary">My Exercises</h4>
         
         <p id="date" onClick="slideToggleCalender()">  </p>
-        
-            <script> var d = new Date(); var date = d.getDate(); var day = d.getDay(); var year = d.getFullYear(); var month = d.getMonth();
-            var days= ["Sun","Mon","Tue","Wed", "Thur","Fri","Sat"]; var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
-            var monthPrefix = ["st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"];
-            document.getElementById("date").innerHTML = "◄ "+ days[day] +" "+ date+monthPrefix[day] +" "+ months[month] +" "+ year+ " ►";
-            </script>
+        <script> var d = new Date(); var date = d.getDate(); var day = d.getDay(); var year = d.getFullYear(); var month = d.getMonth();
+        var days= ["Sunday","Monday","Tuesday","Wednesday", "Thursdat","Friday","Saturday"]; var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
+        var monthPrefix = ["st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"];
+        document.getElementById("date").innerHTML = "<span style='color:#77b2c9'>◄ </span> "+ days[day] +", "+ months[month] +" "+ date+monthPrefix[day] +", "+ year+ "<span style='color:#77b2c9'> ►</span>";
+        </script>
             
             <br>
             
@@ -193,8 +192,43 @@
               <div class="w-tab-content">
                 <div class="w-tab-pane w--tab-active w-clearfix" data-w-tab="Create New">
                   <input class="w-input field feild2" id="cExerciseName" type="text" placeholder="Enter exercise name" name="exercisename" required="required" data-name="exercisename">
-                  <input class="w-input field feild2" id="cExerciseMusclegroup" type="text" placeholder="Enter muscle group" name="exercisemusclegroup" required="required" data-name="exercisemusclegroup">
-                  <input class="w-input field feild2" id="cExerciseType" type="text" placeholder="Enter type" name="exercisetype" required="required" data-name="exercisetype">
+                  <!--<input class="w-input field feild2" id="cExerciseMusclegroup" type="text" placeholder="Enter muscle group" name="exercisemusclegroup" required="required" data-name="exercisemusclegroup">-->
+                  <p>Muscle group</p>   
+                  <select id="cExerciseMusclegroup" class="form-control myexercises-editModal-muscle">
+                                <option value="0">None</option>
+                                <option>Rectus Abdominis</option>
+                                <option>Biceps</option>
+                                <option>Deltoids</option>
+                                <option>Erector Spinae</option>
+                                <option>Gastrocnemius</option>
+                                <option>Soleus</option>
+                                <option>Gluteus</option>
+                                <option>Hamstrings</option>
+                                <option>Latissimus Dorsi</option>
+                                <option>Rhomboids</option>
+                                <option>Obliques</option>
+                                <option>Pectoralis</option>
+                                <option>Quadriceps</option>
+                                <option>Trapezius</option>
+                                <option>Triceps</option>
+                                </select>
+                  
+                  <!--<input class="w-input field feild2" id="cExerciseType" type="text" placeholder="Enter type" name="exercisetype" required="required" data-name="exercisetype">-->
+                  <p>Type</p>                 
+                  <select id="cExerciseType" class="form-control myexercises-editModal-type">
+                                <option value="0">None</option>
+                                <option>Isolation</option>
+                                <option>Compound</option>                    
+                                <option>Squat</option>
+                                <option>Press</option>
+                                <option>Deadlift</option>
+                                <option>Push</option>
+                                <option>Pull</option>
+                                <option>Legs</option>
+                                <option>Upper</option>
+                                <option>Lower</option>                    
+                                </select>
+                  
                   <p id="createSuccess"></p>
                   <a class="button signup" href="javascript: submitCreateExerciseForm(0)"><span><strong>Create Exercise</strong></span></a>
                   <p>&nbsp;</p>

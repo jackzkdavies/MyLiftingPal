@@ -114,7 +114,6 @@ function updateExercise(eid){
 function updateModalExerciseEdit(inputId){
     var getExercise = mlpObject.getExercises({id:inputId}).result['data'][0];
     
-    console.log(getExercise);
     
     document.getElementById("updateExerciseName").value = getExercise['name'];
     
@@ -173,8 +172,9 @@ function displayMyExercisesDetails(input){
     var exercise = mlpObject.getExercises({id:idNum}).result['data'][0];;
     if ((document.getElementById(input).innerHTML).trim() === ""){
 
-        toAppend +='<p style="text-align:left; color:#77b2c9;">&nbsp;&nbsp;&nbsp;'+exercise['type']+'</p>'+
-                '<p style="text-align:left; color:#77b2c9;">&nbsp;&nbsp;&nbsp;'+exercise['musclegroup']+'</p>'+
+        toAppend +='<p style="text-align:left; color:#77b2c9;">&nbsp;&nbsp;&nbsp;'+exercise['musclegroup']+'</p>'+
+                '<p style="text-align:left; color:#77b2c9;">&nbsp;&nbsp;&nbsp;'+exercise['type']+'</p>'+
+                
                 
                ' <a href="javascript:updateModalExerciseEdit('+idNum+');" class="btn btn-default btn-circle myexercises-edit">'+
                 '<i class="fa fa-pencil-square-o"></i></a>';
@@ -204,8 +204,15 @@ function submitCreateExerciseForm(add){
     
     try {
         sExerciseName = document.getElementById("cExerciseName").value; 
-        sExerciseMuscleGroup = document.getElementById("cExerciseMusclegroup").value; 
-        sExerciseType = document.getElementById("cExerciseType").value;
+        
+        var e2 = document.getElementById("cExerciseMusclegroup");
+        var sExerciseMuscleGroup = e2.options[e2.selectedIndex].text;
+        
+        var e3 = document.getElementById("cExerciseType");
+        var sExerciseType = e3.options[e3.selectedIndex].text;
+        
+//        sExerciseMuscleGroup = document.getElementById("cExerciseMusclegroup").value; 
+//        sExerciseType = document.getElementById("cExerciseType").value;
         if (sExerciseName.trim() === '' || sExerciseMuscleGroup.trim() === '' || sExerciseType.trim() === ''){
             console.log(sExerciseName.trim(), sExerciseMuscleGroup.trim(),sExerciseType.trim());
             document.getElementById("createSuccess").innerHTML = "<span style='color:#ff6666'>Required feild empty</span>";
