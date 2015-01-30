@@ -151,7 +151,7 @@ function displayMyExercises(){
     toAppend +='<span id="myExercisesDetailsArrow'+meo[objects]['id']+'"><i class="fa fa-caret-down"></i></span>';
     toAppend +='</h3>';
   
-    toAppend +='<a href="javascript:updateModalExerciseAdd(' +meo[objects]['id']+ ')" style="width:60px; margin-bottom: 4px;" class="btn btn-default btn-circle-main">';
+    toAppend +='<a href="javascript:updateModalExerciseAdd(' +meo[objects]['id']+ ')" style="width:60px; margin-bottom: 4px; " class="btn btn-default btn-circle-main">';
  
     toAppend +='<i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i>';
     toAppend +='</a>';
@@ -176,7 +176,7 @@ function displayMyExercisesDetails(input){
                 '<p style="text-align:left; color:#77b2c9;">&nbsp;&nbsp;&nbsp;'+exercise['type']+'</p>'+
                 
                 
-               ' <a href="javascript:updateModalExerciseEdit('+idNum+');" class="btn btn-default btn-circle myexercises-edit">'+
+               ' <a href="javascript:updateModalExerciseEdit('+idNum+');" style="border:1px solid transparent" class="btn btn-default btn-circle myexercises-edit">'+
                 '<i class="fa fa-pencil-square-o"></i></a>';
         
     
@@ -278,8 +278,8 @@ function submitSearchExcercise(){
     
         for (key in globalExerciseObjs){    
               if (globalExerciseObjs.hasOwnProperty(key)) {      
-        
-        toAppend += "<tr onClick='selectedExercise("+globalExerciseObjs[key]['id']+")'>";
+
+        toAppend += "<tr onClick='updateModalExerciseAdd("+globalExerciseObjs[key]['id']+")'>";
         
         for (st in searchTerms){
             toAppend += "<td>";
@@ -306,8 +306,8 @@ function submitSearchExcercise(){
     
     $("#searchresults").append(toAppend);
     $('#mytable').DataTable({bFilter: false});
-    document.getElementById('mytable').style.display='block';
-    document.getElementById('searchResultsHeading').innerHTML='Search results for: '+searchTerm;
+    document.getElementById('mytable').style.display='table';
+    document.getElementById('searchResultsHeading').innerHTML='<div style="line-height:50px">Search results for: '+searchTerm+'</div>';
     
     }
     catch(e){console.log(e);}
@@ -366,7 +366,7 @@ function addMyworkoutDetails(input){
            "</table>";
             }
         }
-     toAppend +=  ' <a href="javascript:updateModalWorkoutEdit('+input+');" class="btn btn-default btn-circle myexercises-edit">'+
+     toAppend +=  ' <a href="javascript:updateModalWorkoutEdit('+input+');" style="border:1px solid transparent" class="btn btn-default btn-circle myexercises-edit">'+
         '<i class="fa fa-pencil-square-o"></i></a>';
     
     
@@ -522,7 +522,7 @@ function submitSearchExcerciseInWorkout(){
     
     $("#searchresults").append(toAppend);
     $('#mytable').DataTable({bFilter: false});
-    document.getElementById('mytable').style.display='block';
+    document.getElementById('mytable').style.display='table';
     document.getElementById('searchResultsHeading').innerHTML='Search results for: '+searchTerm;
     
     }
@@ -590,7 +590,7 @@ function selectedExercise(r){
     
     
     $("#selectedExerciseToAdd").append(Append);
-    document.getElementById("exercisesToAdd").style.display='block';
+    document.getElementById("exercisesToAdd").style.display='table';
     $('#exercisesToAdd').DataTable({bFilter: false});
 
 }

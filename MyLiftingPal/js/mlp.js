@@ -1,16 +1,21 @@
-/*! myliftingpal v1.0.1 | (c) 2014 Taylor Hamling | taylorhamling.com */
+/*! myliftingpal v3.0.0 | (c) 2015 Taylor Hamling | myliftingpal.net */
 
 function mlp(key){
    var self = {};
    self.key = key;
    self.url = 'http://www.myliftingpal.net/api/index.php';
+   self.debug = false;
    self.result = [];
    self.session = '';
+   self.async = false;
 		if (self.session === '' && $.cookie("mlpsession") !== undefined){
 			self.session = $.cookie("mlpsession");
 		} 
     
    function loginCb(data){
+       if (self.debug === true){
+           console.log(data);
+       }       
        self.result = $.parseJSON(data);
        if (self.result["success"] === true){
 	   self.session = self.result["data"]["sessionid"];
@@ -20,6 +25,9 @@ function mlp(key){
    }    
     
    function cb(data){
+       if (self.debug === true){
+           console.log(data);
+       }
        self.result = $.parseJSON(data);
        return self;
    }
@@ -30,10 +38,10 @@ function mlp(key){
         $.ajax({
             type: 'post',
             url: self.url,
-            async: false,
+            async: self.async,
             data: allParamters,
             success: callback,
-			error:  function( jqXHR, textStatus, errorThrown ){console.log(errorThrown);}
+			error:  function( jqXHR, textStatus, errorThrown ){console.log(jqXHR, textStatus, errorThrown);}
       });         
     };
    
@@ -43,6 +51,16 @@ function mlp(key){
         self.call('authentication','login', data, loginCb); 
 		return self;		
    };
+   self.loginFb = function(data){
+        //(fb)id, name, email
+        self.call('authentication','loginfb', data, loginCb); 
+		return self;		
+   };
+   self.loginGp = function(data){
+        //(gp)id, name
+        self.call('authentication','logingp', data, loginCb); 
+		return self;		
+   };   
 
    self.logout = function(){
 		
@@ -155,6 +173,19 @@ function mlp(key){
        self.call('edit','updateuser', data, cb);
 	   return self;
    };
+   
+   self.updateProfile = function(data){
+	   //id, userid, weight, gender, age, dp, about, why, goals
+       self.call('edit','updateprofile', data, cb);
+	   return self;
+   };
+   
+   self.updateSettings = function(data){
+	   //id,userid,emailpreferences,units
+       self.call('edit','updatesettings', data, cb);
+	   return self;
+   };   
+   
    
    self.updateExercise = function(data){
        //id, name,musclegroup,type
