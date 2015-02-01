@@ -88,11 +88,26 @@
               
            <h4 class="myDiary">My Workouts</h4>
         
+                <h4 class="myDiary">My Diary</h4>
+        
         <p id="date" onClick="slideToggleCalender()">  </p>
         <script> var d = new Date(); var date = d.getDate(); var day = d.getDay(); var year = d.getFullYear(); var month = d.getMonth();
         var days= ["Sunday","Monday","Tuesday","Wednesday", "Thursdat","Friday","Saturday"]; var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
         var monthPrefix = ["st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"];
         document.getElementById("date").innerHTML = "<span style='color:#77b2c9'>◄ </span> "+ days[day] +", "+ months[month] +" "+ date+monthPrefix[day] +", "+ year+ "<span style='color:#77b2c9'> ►</span>";
+        </script>
+        
+      
+            
+        <div class="calender"  id="sandbox-container" style="display: none;" onClick="centerCalander()">
+            <script>
+                $('#sandbox-container').datepicker({
+                format: "dd/mm/yyyy",
+                orientation: "top",
+                keyboardNavigation: false,
+                calendarWeeks: true,
+                todayHighlight: true
+            });
         </script>
             
             <br>
