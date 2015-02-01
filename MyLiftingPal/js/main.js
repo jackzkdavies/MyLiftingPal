@@ -8,6 +8,7 @@ function slideToggle(number){
     $(".tabsdiv"+number).slideToggle(400);
 }
 
+
 function checkLoginStatus(){
     if ($.cookie("mlpsession") === undefined){
         window.location.replace("index.html");
@@ -33,9 +34,21 @@ function toggleDropDownArrow(i){
     }
 }
 
+function setVarDate(){
+        var days= ["Sunday","Monday","Tuesday","Wednesday", "Thursdat","Friday","Saturday"]; 
+        var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
+        var monthPrefix = ["st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"];
 
+        var day = $("#date-Picker").datepicker('getDate').getDay();
+        var date = $("#date-Picker").datepicker('getDate').getDate();                 
+        var month = $("#date-Picker").datepicker('getDate').getMonth();             
+        var year = $("#date-Picker").datepicker('getDate').getFullYear();
+        var fullDate = days[day] + ", " + date +monthPrefix[date-1]+ " " + months[month]+", "+year;
+
+        document.getElementById("date").innerHTML = "<span style='color:#77b2c9'><i class='fa fa-caret-left'></i> </span> " + fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-right'></i></span>";
+}
 function centerCalander(){
-    var t = document.getElementById("sandbox-container");
+    var t = document.getElementById("date-Picker");
     t.style.paddingLeft=0;
     var sw= screen.availWidth;
     var tw = $("div.calender table").width();

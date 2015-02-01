@@ -84,24 +84,33 @@
         
         <h4 class="myDiary">My Diary</h4>
         
-        <p id="date" onClick="slideToggleCalender()">  </p>
-        <script> var d = new Date(); var date = d.getDate(); var day = d.getDay(); var year = d.getFullYear(); var month = d.getMonth();
-        var days= ["Sunday","Monday","Tuesday","Wednesday", "Thursdat","Friday","Saturday"]; var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
-        var monthPrefix = ["st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"];
-        document.getElementById("date").innerHTML = "<span style='color:#77b2c9'>◄ </span> "+ days[day] +", "+ months[month] +" "+ date+monthPrefix[day] +", "+ year+ "<span style='color:#77b2c9'> ►</span>";
-        </script>
-        
+        <p id="date" onClick="slideToggleCalender()">  </p>      
       
             
-        <div class="calender"  id="sandbox-container" style="display: none;" onClick="centerCalander()">
-            <script>
-                $('#sandbox-container').datepicker({
-                format: "dd/mm/yyyy",
-                orientation: "top",
-                keyboardNavigation: false,
-                calendarWeeks: true,
-                todayHighlight: true
-            });
+        <div class="calender"  id="date-Picker" style="display: none;" onClick="setVarDate()">
+        <script>
+            $('#date-Picker').datepicker({
+            format: "dd/mm/yyyy",
+            orientation: "top",
+            keyboardNavigation: false,
+            calendarWeeks: true,
+            todayHighlight: true,
+            gotoCurrent: true
+            }).datepicker("setDate", new Date());
+            
+            
+            
+            var days= ["Sunday","Monday","Tuesday","Wednesday", "Thursdat","Friday","Saturday"]; 
+            var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
+            var monthPrefix = ["st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"];
+            
+            var day = $("#date-Picker").datepicker('getDate').getDay();
+            var date = $("#date-Picker").datepicker('getDate').getDate();                 
+            var month = $("#date-Picker").datepicker('getDate').getMonth();             
+            var year = $("#date-Picker").datepicker('getDate').getFullYear();
+            var fullDate = days[day] + ", " + date +monthPrefix[date-1]+ " " + months[month]+", "+year;
+            
+            document.getElementById("date").innerHTML = "<span style='color:#77b2c9'> <i class='fa fa-caret-left'></i> </span> " + fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-right'></i></span>";
         </script>
         </div>
 
@@ -344,6 +353,26 @@
             checkResults();
             
         };
+        
+        function doOnOrientationChange()
+        {
+            centerCalander();
+            switch(window.orientation) 
+            {  
+              case -90:
+              case 90:
+                console.log('landscape');
+                break; 
+              default:
+                console.log('portrait');
+                break; 
+            }
+        }
+
+        window.addEventListener('orientationchange', doOnOrientationChange);
+
+        // Initial execution if needed
+        doOnOrientationChange();
     
    </script>
   <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
