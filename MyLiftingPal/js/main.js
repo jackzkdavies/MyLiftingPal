@@ -523,10 +523,11 @@ function displayMyWorkouts(){
         
 //        console.log(mwo[objects]);
     var toAppend = "";
+    toAppend +='<div>';
     toAppend +='<div onclick="addMyworkoutDetails(' + "'" +'myWorkouts'+mwo[objects]['id']+"'"+ ')">';
     toAppend +='<h3 style="text-align:left;width:70%;padding: 8px; float:left">'+mwo[objects]['name'];
     toAppend +='<i class="fa fa-caret-down"></i>';
-    toAppend +='</h3>';
+    toAppend +='</h3></div>';
     
     toAppend +='<a href="javascript:updateModalWorkoutAdd('+mwo[objects]['id']+');" style="width:60px; margin-bottom: 4px; z-index:10;" class="btn btn-default btn-circle-main">';
     toAppend +='<i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i>';
