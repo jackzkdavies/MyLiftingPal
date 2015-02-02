@@ -116,6 +116,11 @@
         </script>
             
             <br>
+            <div onclick="toggleMyExercises()">
+            <p id="numberExercises">Show My Exercises</p>
+            <div id="showExToggleArrow"><i style="font-size:40px" class="fa fa-plus-circle"></i></div>
+            <hr>
+            </div>
             
             <div id="myExercises">
                 
@@ -199,7 +204,7 @@
               </div>
             </div>
             
-           
+           <i style="font-size: 40px;" class="fa fa-folder-open"></i>
             <div class="w-tabs" data-duration-in="300" data-duration-out="100">
               <div class="w-tab-menu w-clearfix">
                 <a class="w-tab-link w--current w-inline-block createtab" data-w-tab="Create New">
@@ -315,8 +320,8 @@
       <script>
         window.onload = function load(){
             checkLoginStatus();
-            displayMyExercises();
-            
+//            displayMyExercises();
+//            toggleMyExercises();
         };
     </script>
   

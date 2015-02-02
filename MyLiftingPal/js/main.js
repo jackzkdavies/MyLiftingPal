@@ -108,6 +108,28 @@ function deleteExercise(eid){
     displayMyExercises();
 
 }
+var FirstToggle=0;
+function toggleMyExercises(){
+    
+    if (FirstToggle === 0){
+        displayMyExercises();
+        FirstToggle =1;
+    }
+    else{
+        var isVisible = $( "#myExercises" ).is( ":visible" ); 
+
+
+        $("#myExercises").slideToggle(400);
+
+        if (isVisible !== true){
+            document.getElementById("showExToggleArrow").innerHTML = '<i style="font-size:40px" class="fa fa-minus"></i>';
+        }
+        else{
+            document.getElementById("showExToggleArrow").innerHTML = '<i style="font-size:40px" class="fa fa-plus-circle"></i>';
+        }
+    }
+ 
+}
 
 function updateExercise(eid){
     var newExName = document.getElementById("updateExerciseName").value;
@@ -157,6 +179,20 @@ function displayMyExercises(){
     $("#myExercises").empty();
     var userId=mlpObject.getUser().result['data']['id'];
     var meo=mlpObject.getExercises({userid:userId}).result['data'];
+    var numberEx= meo.length;
+    
+    var append = "";
+    append +='<div style="color:#77b2c9; float:left; margin-right:10px;padding-top:5px;padding-left:7px;padding-right:7px">'+
+                    '<p style="font-weight:bold"; >Sort by:</p></div>'+
+                    '<select id="myExOrder" style="width:40%; " class="form-control myexercises-editModal-muscle">'+
+                    '<option value="0">Name</option>'+
+                    '<option>M.Group</option>'+
+                    ' <option>Type</option>'+
+                    ' <option>ID</option>'+
+                    '</select><br><br>';
+                    
+    
+    $("#myExercises").append(append);
     for (objects in meo){
     var toAppend = [];
     toAppend +='<div >';
@@ -234,9 +270,11 @@ function submitCreateExerciseForm(add){
         
         if (mlpObject !== null){ 
             //name,musclegroup,type
-            mlpObject.createExercise({name:sExerciseName,musclegroup:sExerciseMuscleGroup,type:sExerciseType});
+            var newEx = mlpObject.createExercise({name:sExerciseName,musclegroup:sExerciseMuscleGroup,type:sExerciseType}).result;
             if(addToDay === 1){
-                console.log("need to add code for adding to current day");
+                console.log(newEx);
+                updateModalExerciseAdd(newEx['data'][0]['id']);
+
             }
             document.getElementById("createSuccess").innerHTML = '"'+sExerciseName +'"'+ " <span style='color:#66cc66'>Added Successfully!</span>";
         }
@@ -392,6 +430,7 @@ function addMyworkoutDetails(input){
 function displayMyWorkouts(){
     var userId=mlpObject.getUser().result['data']['id'];
     var mwo=mlpObject.getWorkouts({userid:userId}).result['data'];
+ 
     for (objects in mwo){
     var toAppend = [];
     toAppend +='<div onclick="addMyworkoutDetails(' + "'" +'myWorkouts'+mwo[objects]['id']+"'"+ ')">';
@@ -431,9 +470,6 @@ function submitCreateWorkoutForm(){
             console.log("In Create new workoutLoop.");
             //name
             var newWorkout = mlpObject.createWorkout({name:sWorkoutName});
-                console.log("newWorkout obj:");
-                console.log(newWorkout);
-                console.log(newWorkout['result']['data']['id']);
                 var nwi = newWorkout['result']['data']['id'];
                 if(globalExerciseIds !== {}){
                     console.log("in add exercises to new Workoutout:");
