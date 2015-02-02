@@ -114,6 +114,7 @@ function toggleMyExercises(){
     if (FirstToggle === 0){
         displayMyExercises();
         FirstToggle =1;
+        document.getElementById("showExToggleArrow").innerHTML = '<i style="font-size:40px" class="fa fa-minus"></i>'
     }
     else{
         var isVisible = $( "#myExercises" ).is( ":visible" ); 
@@ -179,6 +180,11 @@ function displayMyExercises(){
     $("#myExercises").empty();
     var userId=mlpObject.getUser().result['data']['id'];
     var meo=mlpObject.getExercises({userid:userId}).result['data'];
+    
+    if (typeof meo == 'undefined'){
+        $("#myExercises").append("You have no exercises to display!<hr>");
+        return;
+    }
     var numberEx= meo.length;
     
     var append = "";
@@ -365,7 +371,28 @@ function submitSearchExcercise(){
     finally{};
 }
 
+function toggleMyWorkouts(){
+    
+    if (FirstToggle === 0){
+        displayMyWorkouts();
+        FirstToggle =1;
+        document.getElementById("showWkToggleArrow").innerHTML = '<i style="font-size:40px" class="fa fa-minus"></i>'
+    }
+    else{
+        var isVisible = $( "#myWorkouts" ).is( ":visible" ); 
 
+
+        $("#myWorkouts").slideToggle(400);
+
+        if (isVisible !== true){
+            document.getElementById("showWkToggleArrow").innerHTML = '<i style="font-size:40px" class="fa fa-minus"></i>';
+        }
+        else{
+            document.getElementById("showWkToggleArrow").innerHTML = '<i style="font-size:40px" class="fa fa-plus-circle"></i>';
+        }
+    }
+ 
+}
 
 function addMyworkoutDetails(input){
 

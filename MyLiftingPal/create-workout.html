@@ -118,10 +118,15 @@
         </script>
             
             <br>
+            <div onclick="toggleMyWorkouts()">
+            <p id="numberExercises">Show My Workouts</p>
+            <div id="showWkToggleArrow"><i style="font-size:40px" class="fa fa-plus-circle"></i></div>
+            <hr>
+            </div>
             
             <div id="myWorkouts"></div>
             
-            
+            <i style="font-size: 40px;" class="fa fa-folder-open"></i>
             <div class="w-tabs" data-duration-in="300" data-duration-out="100">
               <div class="w-tab-menu w-clearfix">
                 <a class="w-tab-link w--current w-inline-block createtab" data-w-tab="Create New">
@@ -215,9 +220,7 @@
     <script>
         window.onload = function load(){
             checkLoginStatus();
-            slideToggle('MyWorkOutsBackAndBis');
-            slideToggle('MyWorkOutsChestAndTris');
-            displayMyWorkouts();
+//            displayMyWorkouts();
             
         };
     </script>
