@@ -1,4 +1,11 @@
 //Date
+//$('.search-form-programs').keypress(function(e) {
+//        if(e.which === 13) {
+//            $('.search-programs .search-btn-programs').click();
+//        }
+//    });
+
+
 var d = new Date(); var date = d.getDate(); var day = d.getDay(); var year = d.getFullYear(); var month = d.getMonth();
 //Create MLP object
 var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
