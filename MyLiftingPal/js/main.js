@@ -27,10 +27,10 @@ function slideToggleCalender(){
 
 function toggleDropDownArrow(i){
     if (i.classList.contains('w--open')=== true){
-        document.getElementById("dropDownArrow").innerHTML = '<i class="fa fa-caret-down"></i>';
+        document.getElementById("dropDownArrow").innerHTML = '<img class="dumbbells" src="images/db.png" alt="">My Training&nbsp;&nbsp<i class="fa fa-caret-down"></i>';
     }
     else{
-        document.getElementById("dropDownArrow").innerHTML = '<i class="fa fa-caret-up"></i>';
+        document.getElementById("dropDownArrow").innerHTML = '<img class="dumbbells" src="images/db.png" alt="">My Training&nbsp;&nbsp;<i class="fa fa-caret-up"></i>';
     }
 }
 
@@ -177,15 +177,23 @@ function updateModalExerciseEdit(inputId){
 }
 //Displaay exercises
 function displayMyExercises(){
+    var searchTerm="";
+    try{
+    searchTerm = document.getElementById('myExerciseSearch').value.trim();
+    }
+    catch(e){}
+    console.log(searchTerm);
     $("#myExercises").empty();
     var userId=mlpObject.getUser().result['data']['id'];
-    var meo=mlpObject.getExercises({userid:userId}).result['data'];
-    
-    if (typeof meo == 'undefined'){
-        $("#myExercises").append("You have no exercises to display!<hr>");
-        return;
+    var meo;
+    if (searchTerm !== ""){
+        var meo=mlpObject.getExercises({userid:userId, name:searchTerm}).result['data'];   
     }
-    var numberEx= meo.length;
+    else{
+        var meo=mlpObject.getExercises({userid:userId}).result['data'];
+    }
+    
+
     
     var append = "";
     append +='<div style="color:#77b2c9; float:left; margin-right:10px;padding-top:5px;padding-left:7px;padding-right:7px">'+
@@ -195,29 +203,83 @@ function displayMyExercises(){
                     '<option>M.Group</option>'+
                     ' <option>Type</option>'+
                     ' <option>ID</option>'+
-                    '</select><br><br>';
+                    '</select><br>'+
+                    '<div><input style="float:left; margin-right: -38px" class="w-input" id="myExerciseSearch" type="text" placeholder="Search My Exercises" name="addexercisetoworkout" required="required" data-name="addexercisetoworkout">'+
+                    '<img class="searchImage" onclick="displayMyExercises();return false;" src="images/search.svg" alt="Search" onerror="this.src="your.png"></div>';
                     
+    if (searchTerm !==""){append +="<div>Showing search results for: '<span style='color:#77b2c9; font-weight:bold'>" + searchTerm +"</span>'.</div>";}
     
+    append +='<div><p>&nbsp;</p><br></div>';
     $("#myExercises").append(append);
-    for (objects in meo){
+    
+    
+    if ((searchTerm !=="")&& (typeof meo == 'undefined')){$("#myExercises").append("No results for search!<hr>");}
+    
+    if (typeof meo == 'undefined'){
+        $("#myExercises").append("You have no exercises to display!<hr>");
+        
+    }
+    else{
+    
+        for (objects in meo){
+            var toAppend = [];
+            toAppend +='<div >';
+            toAppend +='<h3 onclick="displayMyExercisesDetails(' + "'" +'myExercises'+meo[objects]['id']+"'"+ ')" style="text-align:left;width:70%;padding: 8px; float:left">'+meo[objects]['name'];
+            toAppend +='<span id="myExercisesDetailsArrow'+meo[objects]['id']+'"><i class="fa fa-caret-down"></i></span>';
+            toAppend +='</h3>';
+
+            toAppend +='<a href="javascript:updateModalExerciseAdd(' +meo[objects]['id']+ ')" style="width:60px; margin-bottom: 4px; " class="btn btn-default btn-circle-main">';
+
+            toAppend +='<i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i>';
+            toAppend +='</a>';
+
+            toAppend +='<div id="myExercises'+meo[objects]['id']+'" style="width: 100%; position: relative" class="tabsdivMyWorkOutsBackAndBis"></div>';
+
+
+            toAppend+="</div><hr>";
+
+            $("#myExercises").append(toAppend);
+        }
+    }
+    toAppend='';
+    toAppend+='<div style="background-color: rgb(218, 215, 209);color:white; font-weight:bold"><p style="font-weight:bold ">My Recently Used:</p></div><hr>';
+    $("#myExercises").append(toAppend);
+    
+    if (searchTerm !== ""){
+        try{var mreo = mlpObject.selectResults({limit:20,userid:userId,type:'exercises', name:searchTerm}).result['data'];}
+        catch(e){console.log(e);}
+    }
+    else{
+        try{var mreo = mlpObject.selectResults({limit:20,userid:userId,type:'exercises'}).result['data'];}
+        catch(e){console.log(e);}
+    }
+    
+    
+    
+    for (objects in mreo){
     var toAppend = [];
     toAppend +='<div >';
-    toAppend +='<h3 onclick="displayMyExercisesDetails(' + "'" +'myExercises'+meo[objects]['id']+"'"+ ')" style="text-align:left;width:70%;padding: 8px; float:left">'+meo[objects]['name'];
-    toAppend +='<span id="myExercisesDetailsArrow'+meo[objects]['id']+'"><i class="fa fa-caret-down"></i></span>';
+    toAppend +='<h3 onclick="displayMyExercisesDetails(' + "'" +'myExercises'+mreo[objects]['id']+"'"+ ')" style="text-align:left;width:70%;padding: 8px; float:left">'+mreo[objects]['name'];
+    toAppend +='<span id="myExercisesDetailsArrow'+mreo[objects]['id']+'"><i class="fa fa-caret-down"></i></span>';
     toAppend +='</h3>';
   
-    toAppend +='<a href="javascript:updateModalExerciseAdd(' +meo[objects]['id']+ ')" style="width:60px; margin-bottom: 4px; " class="btn btn-default btn-circle-main">';
+    toAppend +='<a href="javascript:updateModalExerciseAdd(' +mreo[objects]['id']+ ')" style="width:60px; margin-bottom: 4px; " class="btn btn-default btn-circle-main">';
  
     toAppend +='<i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i>';
     toAppend +='</a>';
 
-    toAppend +='<div id="myExercises'+meo[objects]['id']+'" style="width: 100%; position: relative" class="tabsdivMyWorkOutsBackAndBis"></div>';
+    toAppend +='<div id="myExercises'+mreo[objects]['id']+'" style="width: 100%; position: relative" class="tabsdivMyWorkOutsBackAndBis"></div>';
 
 
     toAppend+="</div><hr>";
     
     $("#myExercises").append(toAppend);
     }
+    
+//    document.getElementById('myExerciseSearch').value = searchTerm;
+//    selectResults({limit:limit, userid:userid, type:type})
+//    limit is the number of recent exercises you want userid is obv the users id type can be exercise workout or program
+    
 }
 
 function displayMyExercisesDetails(input){
@@ -232,8 +294,8 @@ function displayMyExercisesDetails(input){
                 
                 
                ' <a href="javascript:updateModalExerciseEdit('+idNum+');" style="border:1px solid transparent" class="btn btn-default btn-circle myexercises-edit">'+
-                '<i class="fa fa-pencil-square-o"></i></a>';
-        
+                '<i style="font-size:40px ;padding-left:5px" class="fa fa-pencil-square-o"></i></a>';
+     
     
     
     $(divId).append(toAppend);
@@ -277,17 +339,23 @@ function submitCreateExerciseForm(add){
         if (mlpObject !== null){ 
             //name,musclegroup,type
             var newEx = mlpObject.createExercise({name:sExerciseName,musclegroup:sExerciseMuscleGroup,type:sExerciseType}).result;
-            if(addToDay === 1){
-                console.log(newEx);
-                updateModalExerciseAdd(newEx['data'][0]['id']);
-
+            if (newEx['success']=== false){
+                document.getElementById("createSuccess").innerHTML = "<span style='color:#ff6666'>"+newEx['errormsg']+"</span>";
+                
             }
-            document.getElementById("createSuccess").innerHTML = '"'+sExerciseName +'"'+ " <span style='color:#66cc66'>Added Successfully!</span>";
-        }
+            else{
+                if(addToDay === 1){
+                    console.log(newEx);
+                    updateModalExerciseAdd(newEx['data'][0]['id']);
+                    }
+                document.getElementById("createSuccess").innerHTML = '"'+sExerciseName +'"'+ " <span style='color:#66cc66'>Added Successfully!</span>";
+                displayMyExercises();
+            }
+            }
         else{ throw "Session is null";
         }
         
-        displayMyExercises();
+        
         
         $('#cExerciseName').val('').removeAttr('checked').removeAttr('selected');
         $('#cExerciseMusclegroup').val('').removeAttr('checked').removeAttr('selected');
