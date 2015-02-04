@@ -67,8 +67,8 @@
                 <div  class="dropdowndiv">
                   <div class="w-dropdown" data-delay="0">
                     <div class="w-dropdown-toggle createdropdown" onclick="toggleDropDownArrow(this)">
-                      <div id="dropDownArrow"  class="w-icon-dropdown-toggle"><i class="fa fa-caret-down"></i></div>
-                      <div><img class="dumbbells" src="images/db.png" alt="">My Training</div>
+                      <div class="w-icon-dropdown-toggle"></div>
+                      <div id="dropDownArrow"><img class="dumbbells" src="images/db.png" alt="">My Training&nbsp;&nbsp;<i class="fa fa-caret-down"></i></div>
                     </div>
                     <nav class="w-dropdown-list">
                         <a class="w-dropdown-link" href="main-page.html"><i class="fa fa-book"></i> My Diary</a>
@@ -116,23 +116,29 @@
         </script>
             
             <br>
+            <div onclick="toggleMyExercises()">
+            <p id="numberExercises">Show My Exercises</p>
+            <div id="showExToggleArrow"><i style="font-size:40px" class="fa fa-plus-circle"></i></div>
+            <hr>
+            </div>
             
             <div id="myExercises">
                 
             </div>
             
-            <div class="modal fade" id="basicModalUpdate" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+            <div class="modal fade" id="basicModalAddEx" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
                         <h4 class="modal-title" id="myModalLabelExerciseAdd">Add to</h4>
                         </div>
-                        <div class="modal-body">
-                            <h3><i class="fa fa-book"></i>Current Day</h3>
+                        <div class="modal-body" id="AddEdModalControls">
+<!--                            <h3><i class="fa fa-book"></i>Current Day</h3>
                             <p style="color:#77b2c9">or</p>
                             <h3><i class="fa fa-calendar"></i>Select Day</h3>
-                            <h3><i class="fa fa-child"></i>Select Workout</h3>
+                            <br>
+                            <h3><i class="fa fa-child"></i>Select Workout</h3>-->
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -198,18 +204,19 @@
                 </div>
               </div>
             </div>
-            
            
+           <i style="font-size: 40px;" class="fa fa-heart"></i>
             <div class="w-tabs" data-duration-in="300" data-duration-out="100">
               <div class="w-tab-menu w-clearfix">
-                <a class="w-tab-link w--current w-inline-block createtab" data-w-tab="Create New">
-                  <div><strong>Create New Exercise</strong>
-                  </div>
-                </a>
-                <a class="w-tab-link w-inline-block searchtab" data-w-tab="Search">
+                             <a class="w--current w-tab-link w-inline-block searchtab" data-w-tab="Search">
                   <div><img class="searchImage2" src="images/search.svg" alt=""><strong>Search</strong>
                   </div>
                 </a>
+                  <a class="w-tab-link w-inline-block createtab" data-w-tab="Create New">
+                  <div><strong>Create New Exercise</strong>
+                  </div>
+                </a>
+   
               </div>
               <div class="w-tab-content">
                 <div class="w-tab-pane w--tab-active w-clearfix" data-w-tab="Create New">
@@ -259,7 +266,7 @@
                  
                 </div>
                 <div class="w-tab-pane w-clearfix" data-w-tab="Search">
-                  <input class="w-input seachexerciseinput" id="exercisesearch" type="text" placeholder="Enter exercise" name="exercisesearch" required="required" data-name="exercisesearch">
+                  <input class="w-input seachexerciseinput" id="exercisesearch" type="text" placeholder="Search Existing Exercises" name="exercisesearch" required="required" data-name="exercisesearch">
                   <a class="button addexercisetocurrentday" href="javascript: submitSearchExcercise()"><strong>Submit Search</strong></a>
                   
                 <p id="searchResultsHeading"></p>
@@ -315,8 +322,8 @@
       <script>
         window.onload = function load(){
             checkLoginStatus();
-            displayMyExercises();
-            
+//            displayMyExercises();
+//            toggleMyExercises();
         };
     </script>
   

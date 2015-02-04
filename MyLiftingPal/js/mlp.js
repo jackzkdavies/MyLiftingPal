@@ -115,7 +115,7 @@ function mlp(key){
    };
    
    self.addResults = function(data){
-       //exerciseid, workoutid, programid, reps, sets, rpe, weight, percentage
+       //exerciseid, workoutid, programid, reps, sets, rpe, weight, percentage,assigneddate
        self.call('create','addresults', data, cb);
 	   return self;
    };
