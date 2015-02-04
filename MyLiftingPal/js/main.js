@@ -83,28 +83,104 @@ function toggleTest(){
     
 }
 
+//My Diary Page
 function checkResults(){
     try{
-        if (mlpObject.selectResults({assigneddate:year+"-"+(month+1)+"-"+date}).result['success']===false){
-            document.getElementById("noResults").innerHTML = "Rest day is it?";};
+        var myDiaryResults = mlpObject.selectResults({assigneddate:year+"-"+(month+1)+"-"+date}).result;
+        if (myDiaryResults['success'] === false){
+            document.getElementById("noResults").innerHTML = "Rest day is it?";
+        }
+        else{
+            
+//            console.log(myDiaryResults);
+            $("#myDairyResults").empty();
+            $("#myDairyResults").append('<div><br></div>')
+            
+            for (myRes in myDiaryResults['data']){
+                var toAppend ="";
+                
+                console.log(document.getElementById("myResExNameDiv"));
+                
+                var myResId="myResExNameDiv"+myDiaryResults['data'][myRes]['name'];
+                
+                if (document.getElementById(myResId) == null ){
+                    if (myRes != 0 ){toAppend +="<hr style='border-top:3px solid #77b2c9; margin-top: -20px; */' />";} 
+                    toAppend += '<div id="'+myResId+'" style="width:40%; float:left"><h3 style="text-align:left">'+
+                        myDiaryResults['data'][myRes]['name']+
+                        '</h3></div><divstyle="width:60%; float:left"><h3 style="text-align:right;font-size:50px">'+
+                        '<i class="fa fa-plus-circle"></i>&nbsp;'+
+                        '<i class="fa fa-pencil"></i>&nbsp;'+
+                        '<i class="fa fa-cog"></i></h3>'+
+                        '</div>';
+            }
+            
+            toAppend +='<div><br>'+
+                    '<div class="exerciseRepsDiv">'+
+                    myDiaryResults['data'][myRes]['reps']+
+                    ' </div>'+
+                    '<div class="exerciseSetDiv">'+
+                    myDiaryResults['data'][myRes]['sets']+
+                    ' </div>'+
+                    ' <div class="exerciseWeightDiv">'+
+                    myDiaryResults['data'][myRes]['weight']+
+                    '  </div>'+
+                    ' <div class="exerciseRPeDiv">'+
+                    myDiaryResults['data'][myRes]['rpe']+
+                    ' </div>'+
+
+                    ' <div class="exercise1RMdiv">'+
+                    myDiaryResults['data'][myRes]['percentage'];
+                    toAppend+="</div><br><hr>"
+            
+
+
+            $("#myDairyResults").append(toAppend);
+            
+            }
+        }
+            
+        
     }
     catch(e){
         console.log(e);
     }
 }
-////////// examplemlpObject.login({username: 'myusername', password:'mypassword'}
 
-//check login
+
+
+function addExToResults(exID){
+    console.log(exID);
+    
+    var tdate = year+"-"+(month+1)+"-"+date;
+    try{
+        //exerciseid, workoutid, programid, reps, sets, rpe, weight, percentage,assigneddate
+        console.log(mlpObject.addResults({workoutid:exID,assigneddate:tdate, reps:0,sets:0, rpe:0, weight:0, percentage:0}));
+    }
+    
+    catch(e){
+        
+    }
+}
 function updateModalExerciseAdd(inputId){
     var getExercise = mlpObject.getExercises({id:inputId});
     
     $("#myModalLabelExerciseAdd").empty();
     $("#myModalLabelExerciseAdd").append("Add " + getExercise.result['data'][0]['name'] + " To:");
     
+    $("#AddEdModalControls").empty();
+    var toAppend = "";
+    toAppend+= '<h3 onclick="addExToResults('+inputId+')"><i class="fa fa-book"></i>Current Day</h3>'+
+                            '<p style="color:#77b2c9">or</p>'+
+                            '<h3><i class="fa fa-calendar"></i>Select Day</h3>'+
+                            '<br>'+
+                            '<h3><i class="fa fa-child"></i>Select Workout</h3>';
+                    
+    $("#myModalLabelExerciseAdd").append(toAppend);
+    
     var options = {
     "backdrop" : "static",
     "show":"true"};
-    $('#basicModalUpdate').modal(options);
+    $('#basicModalAddEx').modal(options);
     
     
 
@@ -235,7 +311,7 @@ function displayMyExercises(){
             toAppend +='<span id="myExercisesDetailsArrow'+meo[objects]['id']+'"><i class="fa fa-caret-down"></i></span>';
             toAppend +='</h3>';
 
-            toAppend +='<a href="javascript:updateModalExerciseAdd(' +meo[objects]['id']+ ')" style="width:60px; margin-bottom: 4px; " class="btn btn-default btn-circle-main">';
+            toAppend +='<a href="javascript:updateModalExerciseAdd(' +meo[objects]['id']+ ')" style="width:60px; margin-bottom: 4px; background-color: #77b2c9;color:white" class="btn btn-default btn-circle-main">';
 
             toAppend +='<i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i>';
             toAppend +='</a>';
@@ -262,25 +338,32 @@ function displayMyExercises(){
     }
     
     
-    
-    for (objects in mreo){
-    var toAppend = [];
-    toAppend +='<div >';
-    toAppend +='<h3 onclick="displayMyExercisesDetails(' + "'" +'myExercises'+mreo[objects]['id']+"'"+ ')" style="text-align:left;width:70%;padding: 8px; float:left">'+mreo[objects]['name'];
-    toAppend +='<span id="myExercisesDetailsArrow'+mreo[objects]['id']+'"><i class="fa fa-caret-down"></i></span>';
-    toAppend +='</h3>';
-  
-    toAppend +='<a href="javascript:updateModalExerciseAdd(' +mreo[objects]['id']+ ')" style="width:60px; margin-bottom: 4px; " class="btn btn-default btn-circle-main">';
- 
-    toAppend +='<i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i>';
-    toAppend +='</a>';
+    try{
+        for (objects in mreo){
+        var toAppend = [];
+        toAppend +='<div >';
+        toAppend +='<h3 onclick="displayMyExercisesDetails(' + "'" +'myExercises'+mreo[objects]['id']+"'"+ ')" style="text-align:left;width:70%;padding: 8px; float:left">'+mreo[objects]['name'];
+        toAppend +='<span id="myExercisesDetailsArrow'+mreo[objects]['id']+'"><i class="fa fa-caret-down"></i></span>';
+        toAppend +='</h3>';
 
-    toAppend +='<div id="myExercises'+mreo[objects]['id']+'" style="width: 100%; position: relative" class="tabsdivMyWorkOutsBackAndBis"></div>';
+        toAppend +='<a href="javascript:updateModalExerciseAdd(' +mreo[objects]['id']+ ')" style="width:60px; margin-bottom: 4px; background-color: #77b2c9;color:white " class="btn btn-default btn-circle-main">';
 
+        toAppend +='<i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i>';
+        toAppend +='</a>';
 
-    toAppend+="</div><hr>";
-    
-    $("#myExercises").append(toAppend);
+        toAppend +='<div id="myExercises'+mreo[objects]['id']+'" style="width: 100%; position: relative" class="tabsdivMyWorkOutsBackAndBis"></div>';
+
+        if ((objects) == mreo.length-1){
+        toAppend+="</div><div><br><hr style='border-top:3px solid #77b2c9;' /><br></div>";
+        }
+        else{toAppend+="</div><hr>";
+        }
+
+        $("#myExercises").append(toAppend);
+        }
+    }
+    catch(e){
+        console.log(e);
     }
     
 //    document.getElementById('myExerciseSearch').value = searchTerm;
