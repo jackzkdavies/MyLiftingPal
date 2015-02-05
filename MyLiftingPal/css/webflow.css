@@ -54,6 +54,7 @@ html.w-mod-touch * {
 }
 a:focus {
   outline: 0;
+  text-decoration: none;
 }
 .w-block {
   display: block;

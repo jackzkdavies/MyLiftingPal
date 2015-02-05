@@ -6,7 +6,7 @@
 //    });
 
 
-var d = new Date(); var date = d.getDate(); var day = d.getDay(); var year = d.getFullYear(); var month = d.getMonth();
+
 //Create MLP object
 var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
 var globalExerciseObjs; 
@@ -40,19 +40,20 @@ function toggleDropDownArrow(i){
         document.getElementById("dropDownArrow").innerHTML = '<img class="dumbbells" src="images/db.png" alt="">My Training&nbsp;&nbsp;<i class="fa fa-caret-up"></i>';
     }
 }
-
+var d = new Date(); var date = d.getDate(); var day = d.getDay(); var year = d.getFullYear(); var month = d.getMonth();
 function setVarDate(){
         var days= ["Sunday","Monday","Tuesday","Wednesday", "Thursdat","Friday","Saturday"]; 
         var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
         var monthPrefix = ["st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"];
 
-        var day = $("#date-Picker").datepicker('getDate').getDay();
-        var date = $("#date-Picker").datepicker('getDate').getDate();                 
-        var month = $("#date-Picker").datepicker('getDate').getMonth();             
-        var year = $("#date-Picker").datepicker('getDate').getFullYear();
-        var fullDate = days[day] + ", " + date +monthPrefix[date-1]+ " " + months[month]+", "+year;
+        day = $("#date-Picker").datepicker('getDate').getDay();
+        date = $("#date-Picker").datepicker('getDate').getDate();                 
+        month = $("#date-Picker").datepicker('getDate').getMonth();             
+        year = $("#date-Picker").datepicker('getDate').getFullYear();
+        fullDate = days[day] + ", " + date +monthPrefix[date-1]+ " " + months[month]+", "+year;
 
         document.getElementById("date").innerHTML = "<span style='color:#77b2c9'><i class='fa fa-caret-left'></i> </span> " + fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-right'></i></span>";
+checkResults();
 }
 function centerCalander(){
     var t = document.getElementById("date-Picker");
@@ -82,18 +83,142 @@ function toggleTest(){
     slideToggle(3);
     
 }
+var submitDairySearchClass= 'e';
+function submitDairySearch(){
+    if (submitDairySearchClass === 'e'){
+        dairyPageExSearch();
+    }
+    
+}
+function dairyPageExSearch(){
+    var searchTerms =['name','musclegroup','type'];
+    var searchTerm= (document.getElementById("mainSearchTerm").value.toString()).trim();
+    document.getElementById("searchresults").innerHTML = "";
+    document.getElementById("searchResultsHeading").innerHTML="";
+    if (searchTerm ===""){
+        $("#searchresults").append("Please enter a keyword");
+        return;
+    }
+    globalExerciseObjs={};
+    try{  
+    for (st in searchTerms){
+        var data = new Array();
+        data[searchTerms[st]] = searchTerm;
+        var searchResult = mlpObject.getExercises(data).result;
+        if (searchResult['success'] === true){
+            for ( objects in searchResult['data'] ){              
+                globalExerciseObjs[searchResult['data'][objects]['id']]=searchResult['data'][objects];
+            };
+        
+            
+        }
+    }
+    
+    var toAppend="";   
+    
+        for (key in globalExerciseObjs){    
+              if (globalExerciseObjs.hasOwnProperty(key)) {      
 
+        toAppend += "<tr onClick='console.log('code to ad ex to diary')'>";
+        console.log(globalExerciseObjs[key]);
+        for (st in searchTerms){
+            toAppend += "<td>";
+   
+            if (searchTerms[st] === 'userid'){
+//                toAppend += mlpObject.getUsers({id:results[obj][searchTerms[st]]}).result['data']['username'];
+
+            }
+            else {
+                toAppend += globalExerciseObjs[key][searchTerms[st]];
+            }
+            toAppend += "</td>";
+        }
+        
+        toAppend += "</tr>";
+
+    }}
+    
+    try{
+    $("#mytable").dataTable().fnDestroy();
+    $("#searchresults").empty();
+    }
+    catch(e){console.log(e);}
+    
+    $("#searchresults").append(toAppend);
+    $('#mytable').DataTable({bFilter: false});
+    document.getElementById('mytable').style.display='table';
+    document.getElementById('searchResultsHeading').innerHTML='<div style="line-height:50px">Search results for: '+searchTerm+'</div>';
+    
+    }
+    catch(e){console.log(e);}
+    finally{};
+}
 //My Diary Page
+var firstMainPageAddClicked=false;
+function mainPageAdd(){
+      if(firstMainPageAddClicked === false){
+        document.getElementById('mainExSearch').style.color='#77b2c9';
+        document.getElementById('mainWorkSearch').style.color='#333';
+        document.getElementById('mainProSearch').style.color='#333';  
+        document.getElementById("mainSearchTerm").placeholder="Select Exercise to add";
+        firstMainPageAddClicked = true;  
+      }
+    
+     var t = $("#addToMyDiaryDropdown").is(':visible');
+
+     $("#addToMyDiaryDropdown").slideToggle(400);
+     if ( t === true){
+         
+        document.getElementById('mainPageAddButton').style.color='white';
+        document.getElementById('mainPageAddButton').style.background='#77b2c9';
+     }
+     else{
+ 
+        document.getElementById('mainPageAddButton').style.color='#77b2c9';
+        document.getElementById('mainPageAddButton').style.background='white';}
+
+    
+}
+
+function mainSearchEx(inp){
+
+    if (inp === 'e'){   
+        document.getElementById('mainExSearch').style.color='#77b2c9';
+        document.getElementById('mainWorkSearch').style.color='#333';
+        document.getElementById('mainProSearch').style.color='#333';  
+        document.getElementById("mainSearchTerm").placeholder="Select Exercise to add";
+        submitDairySearchClass= 'e';
+    }
+    else if (inp === 'w'){   
+
+        document.getElementById('mainExSearch').style.color='#333';
+        document.getElementById('mainWorkSearch').style.color='#77b2c9';
+        document.getElementById('mainProSearch').style.color='#333';
+        document.getElementById("mainSearchTerm").placeholder="Select Workout to add";
+        submitDairySearchClass= 'w';
+    }
+    else if (inp === 'p'){   
+        document.getElementById('mainExSearch').style.color='#333';
+        document.getElementById('mainWorkSearch').style.color='#333'; 
+        document.getElementById('mainProSearch').style.color='#77b2c9';
+        document.getElementById("mainSearchTerm").placeholder="Select Programme to add";
+        submitDairySearchClass= 'p';
+    }
+    
+}
+
 function checkResults(){
+    $("#myDairyResults").empty();
+    document.getElementById("noResults").innerHTML = "Rest day is it?";
     try{
         var myDiaryResults = mlpObject.selectResults({assigneddate:year+"-"+(month+1)+"-"+date}).result;
         if (myDiaryResults['success'] === false){
-            document.getElementById("noResults").innerHTML = "Rest day is it?";
+//            document.getElementById("noResults").innerHTML = "Rest day is it?";
         }
         else{
             
 //            console.log(myDiaryResults);
-            $("#myDairyResults").empty();
+            
             $("#myDairyResults").append('<div><br></div>')
             
             for (myRes in myDiaryResults['data']){
@@ -185,12 +310,16 @@ function updateModalExerciseAdd(inputId){
     
 
 }
+
+
 function deleteExercise(eid){
     mlpObject.deleteExercise({id:eid});
     $('#basicModalEdit').modal('hide');
     displayMyExercises();
 
 }
+
+
 var FirstToggle=0;
 function toggleMyExercises(){
     
