@@ -90,6 +90,8 @@ function submitDairySearch(){
     }
     
 }
+
+
 function dairyPageExSearch(){
     var searchTerms =['name','musclegroup','type'];
     var searchTerm= (document.getElementById("mainSearchTerm").value.toString()).trim();
@@ -117,9 +119,12 @@ function dairyPageExSearch(){
     var toAppend="";   
     
         for (key in globalExerciseObjs){    
-              if (globalExerciseObjs.hasOwnProperty(key)) {      
-
-        toAppend += "<tr onClick='console.log('code to ad ex to diary')'>";
+              if (globalExerciseObjs.hasOwnProperty(key)) {    
+                  
+        var dat =(year+'-'+(month+1)+'-'+date);
+        console.log(dat);
+        toAppend += "<tr onClick='addExToResults("+key+","+dat+","+0+","+0+","+0+","+0+","+0+")'>";
+       
         console.log(globalExerciseObjs[key]);
         for (st in searchTerms){
             toAppend += "<td>";
@@ -273,13 +278,14 @@ function checkResults(){
 
 
 
-function addExToResults(exID){
-    console.log(exID);
+function addExToResults(exID,dat,rep,set,rp,weig,per){
     
-    var tdate = year+"-"+(month+1)+"-"+date;
+    console.log(exID);
+//    var tdate = (year+"-"+(month+1)+"-"+date);
     try{
         //exerciseid, workoutid, programid, reps, sets, rpe, weight, percentage,assigneddate
-        console.log(mlpObject.addResults({workoutid:exID,assigneddate:tdate, reps:0,sets:0, rpe:0, weight:0, percentage:0}));
+        console.log(mlpObject.addResults({workoutid:exID,assigneddate:dat, reps:rep,sets:set, rpe:rp, weight:weig, percentage:per}));
+//        checkResults()
     }
     
     catch(e){
@@ -294,7 +300,7 @@ function updateModalExerciseAdd(inputId){
     
     $("#AddEdModalControls").empty();
     var toAppend = "";
-    toAppend+= '<h3 onclick="addExToResults('+inputId+')"><i class="fa fa-book"></i>Current Day</h3>'+
+    toAppend+= '<h3 onclick="addExToResults('+inputId,(year+"-"+(month+1)+"-"+date),0,0,0,0,0+')"><i class="fa fa-book"></i>Current Day</h3>'+
                             '<p style="color:#77b2c9">or</p>'+
                             '<h3><i class="fa fa-calendar"></i>Select Day</h3>'+
                             '<br>'+
