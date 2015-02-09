@@ -15,6 +15,11 @@ function slideToggle(number){
     $(".tabsdiv"+number).slideToggle(400);
 }
 
+function toggle(divID){
+    var div="#"+divID;
+    console.log(div);
+    $(div).slideToggle(400);
+}
 
 function checkLoginStatus(){
     if ($.cookie("mlpsession") === undefined){
@@ -123,7 +128,9 @@ function dairyPageExSearch(){
                   
         var dat =(year+'-'+(month+1)+'-'+date);
         console.log(dat);
-        toAppend += "<tr onClick='addExToResults("+key+","+dat+","+0+","+0+","+0+","+0+","+0+")'>";
+        var useDate=[year,(month+1),date];
+        var resultData=[key,useDate,1,1,1,1,1];
+        toAppend += "<tr onClick='addExToResults(["+resultData+"])'>";
        
         console.log(globalExerciseObjs[key]);
         for (st in searchTerms){
@@ -214,11 +221,11 @@ function mainSearchEx(inp){
 
 function checkResults(){
     $("#myDairyResults").empty();
-    document.getElementById("noResults").innerHTML = "Rest day is it?";
+    document.getElementById("noResults").innerHTML = "";
     try{
         var myDiaryResults = mlpObject.selectResults({assigneddate:year+"-"+(month+1)+"-"+date}).result;
         if (myDiaryResults['success'] === false){
-//            document.getElementById("noResults").innerHTML = "Rest day is it?";
+            document.getElementById("noResults").innerHTML = "Rest day is it?";
         }
         else{
             
@@ -229,44 +236,96 @@ function checkResults(){
             for (myRes in myDiaryResults['data']){
                 var toAppend ="";
                 
-                console.log(document.getElementById("myResExNameDiv"));
                 
-                var myResId="myResExNameDiv"+myDiaryResults['data'][myRes]['name'];
                 
+                var myResId="myResExNameDiv"+myDiaryResults['data'][myRes]['exerciseid'];
+                console.log(myDiaryResults['data'][myRes]);
                 if (document.getElementById(myResId) == null ){
-                    if (myRes != 0 ){toAppend +="<hr style='border-top:3px solid #77b2c9; margin-top: -20px; */' />";} 
-                    toAppend += '<div id="'+myResId+'" style="width:40%; float:left"><h3 style="text-align:left">'+
-                        myDiaryResults['data'][myRes]['name']+
-                        '</h3></div><divstyle="width:60%; float:left"><h3 style="text-align:right;font-size:50px">'+
-                        '<i class="fa fa-plus-circle"></i>&nbsp;'+
-                        '<i class="fa fa-pencil"></i>&nbsp;'+
-                        '<i class="fa fa-cog"></i></h3>'+
-                        '</div>';
+                    if (myRes != 0 ){toAppend +="<div style=''><hr style='width:100%;float:left;  border-top:3px solid #77b2c9; margin-top: 20px; */' /></div>";} 
+                    toAppend += '<div style="width:100%; float:left">'+
+                        '<div id="'+myResId+'" onclick="toggle('+"'"+myResId+"Second"+"'"+')" style="width:100%; float:left"><h3 style="text-align:left">'+
+                            myDiaryResults['data'][myRes]['name']+
+                            '</h3></div>';
+//                            '<div style="width:60%; float:left"><h3 style="text-align:right;font-size:50px">'+
+//                                '<i class="fa fa-plus-circle"></i>&nbsp;'+
+//                                '<i class="fa fa-pencil"></i>&nbsp;'+
+//                                '<i class="fa fa-cog"></i></h3>'+
+//                            '</div>'+
+//                        '';
+                        
+            
+                    toAppend +='<div id="'+myResId+"Second"+'" ><div style="width:100%; float:left"><br>'+
+                            '<div onclick="toggle('+"'"+myResId+myDiaryResults['data'][myRes]['id']+"'"+')"><div class="exerciseRepsDiv" >'+
+                            myDiaryResults['data'][myRes]['reps']+
+                            ' </div>'+
+                            '<div class="exerciseSetDiv">'+
+                            myDiaryResults['data'][myRes]['sets']+
+                            ' </div>'+
+                            ' <div class="exerciseWeightDiv">'+
+                            myDiaryResults['data'][myRes]['weight']+
+                            'kg  </div>'+
+                            ' <div class="exerciseRPeDiv">'+
+                            myDiaryResults['data'][myRes]['rpe']+
+                            ' </div>'+
+
+                            ' <div class="exercise1RMdiv">'+
+                            myDiaryResults['data'][myRes]['percentage'];
+                            toAppend+='%</div></div>'+
+                            '<div id="'+myResId+myDiaryResults['data'][myRes]['id']+'">'+
+                            '<div style=" margin-bottom: -35px;"><a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a></div>'+
+                            '</div><br><hr></div></div><div id="'+myResId+"Third"+'"></div> ';
+                            
+                            
+                            $("#myDairyResults").append(toAppend);
+                }
+                else{
+
+                    toAppend +='<div style="width:100%; float:left"><br>'+
+                            '<div onclick="toggle('+"'"+myResId+myDiaryResults['data'][myRes]['id']+"'"+')"><div class="exerciseRepsDiv" onclick="toggle('+"'"+myResId+myDiaryResults['data'][myRes]['id']+"'"+')">'+
+                            myDiaryResults['data'][myRes]['reps']+
+                            ' </div>'+
+                            '<div class="exerciseSetDiv">'+
+                            myDiaryResults['data'][myRes]['sets']+
+                            ' </div>'+
+                            ' <div class="exerciseWeightDiv">'+
+                            myDiaryResults['data'][myRes]['weight']+
+                            'kg  </div>'+
+                            ' <div class="exerciseRPeDiv">'+
+                            myDiaryResults['data'][myRes]['rpe']+
+                            ' </div>'+
+
+                            ' <div class="exercise1RMdiv">'+
+                            myDiaryResults['data'][myRes]['percentage'];
+                            toAppend+='%</div></div>'+
+                            '<div id="'+myResId+myDiaryResults['data'][myRes]['id']+'">'+
+                            '<div style=" margin-bottom: -35px;"><a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a></div>'+
+                            '</div><br><hr></div>';
+                            
+                            var resId="#"+myResId+"Second";
+
+                            $(resId).append(toAppend);
+                            
+                    
+                }                               
+//                var resId="#"+myResId+"Third";
+                var resId=myResId+"Third"
+                toAppend = '';
+                toAppend += '<div style="width:100%;">'+
+                '<a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 7px; width:60px; margin-bottom: 4px; background-color: white; color:#77b2c9" class="btn btn-default btn-circle-main"  title="Add exercise to your diary"><i class="fa fa-plus"></i></a>'+
+                '<a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 5px; width:60px; margin-bottom: 4px; background-color: #ff6666; color:white" class="btn btn-default btn-circle-main" title="Delete exercise from your diary"><i class="fa fa-times"></i></a>'+
+                '<a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 5px; width:60px; margin-bottom: 4px; background-color: #66cc66; color:white" class="btn btn-default btn-circle-main"  title="View your log for this exercise"><i class="fa fa-book"></i></a>'+
+//                '<a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a>'+
+                '</div>';
+                document.getElementById(resId).innerHTML =toAppend;
+//                $(resId).append(toAppend);
+
+
+
+            
+     
             }
-            
-            toAppend +='<div><br>'+
-                    '<div class="exerciseRepsDiv">'+
-                    myDiaryResults['data'][myRes]['reps']+
-                    ' </div>'+
-                    '<div class="exerciseSetDiv">'+
-                    myDiaryResults['data'][myRes]['sets']+
-                    ' </div>'+
-                    ' <div class="exerciseWeightDiv">'+
-                    myDiaryResults['data'][myRes]['weight']+
-                    '  </div>'+
-                    ' <div class="exerciseRPeDiv">'+
-                    myDiaryResults['data'][myRes]['rpe']+
-                    ' </div>'+
 
-                    ' <div class="exercise1RMdiv">'+
-                    myDiaryResults['data'][myRes]['percentage'];
-                    toAppend+="</div><br><hr>"
-            
-
-
-            $("#myDairyResults").append(toAppend);
-            
-            }
+                
         }
             
         
@@ -278,13 +337,21 @@ function checkResults(){
 
 
 
-function addExToResults(exID,dat,rep,set,rp,weig,per){
+function addExToResults(data){
     
-    console.log(exID);
-//    var tdate = (year+"-"+(month+1)+"-"+date);
+
+    var exID = data[0];
+    var tdate = (data[1]+"-"+data[2]+"-"+data[3]);
+    var rep= data[4];
+    var set= data[5];
+    var rp= data[6];
+    var weig= data[7];
+    var per= data[8];
+    console.log(exID,tdate,rep,set,rp,weig,per);
+    console.log(tdate);
     try{
         //exerciseid, workoutid, programid, reps, sets, rpe, weight, percentage,assigneddate
-        console.log(mlpObject.addResults({workoutid:exID,assigneddate:dat, reps:rep,sets:set, rpe:rp, weight:weig, percentage:per}));
+        console.log(mlpObject.addResults({exerciseid:exID,assigneddate:tdate, reps:rep,sets:set, rpe:rp, weight:weig, percentage:per}).result);
 //        checkResults()
     }
     
@@ -294,19 +361,23 @@ function addExToResults(exID,dat,rep,set,rp,weig,per){
 }
 function updateModalExerciseAdd(inputId){
     var getExercise = mlpObject.getExercises({id:inputId});
-    
+    console.log(getExercise['result']);
     $("#myModalLabelExerciseAdd").empty();
-    $("#myModalLabelExerciseAdd").append("Add " + getExercise.result['data'][0]['name'] + " To:");
+    $("#myModalLabelExerciseAdd").append("Add " + getExercise['result']['data'][0]['name'] + " To:");
     
     $("#AddEdModalControls").empty();
     var toAppend = "";
-    toAppend+= '<h3 onclick="addExToResults('+inputId,(year+"-"+(month+1)+"-"+date),0,0,0,0,0+')"><i class="fa fa-book"></i>Current Day</h3>'+
+    
+    var useDate=[year,(month+1),date];
+    var data=[inputId,useDate,1,1,1,1,1];
+
+    toAppend+= '<h3 onclick="addExToResults(['+data+'])"><i class="fa fa-book"></i>Current Day</h3>'+
                             '<p style="color:#77b2c9">or</p>'+
                             '<h3><i class="fa fa-calendar"></i>Select Day</h3>'+
                             '<br>'+
                             '<h3><i class="fa fa-child"></i>Select Workout</h3>';
                     
-    $("#myModalLabelExerciseAdd").append(toAppend);
+    $("#AddEdModalControls").append(toAppend);
     
     var options = {
     "backdrop" : "static",
@@ -477,16 +548,16 @@ function displayMyExercises(){
         for (objects in mreo){
         var toAppend = [];
         toAppend +='<div >';
-        toAppend +='<h3 onclick="displayMyExercisesDetails(' + "'" +'myExercises'+mreo[objects]['id']+"'"+ ')" style="text-align:left;width:70%;padding: 8px; float:left">'+mreo[objects]['name'];
+        toAppend +='<h3 onclick="displayMyExercisesDetails(' + "'" +'myExercises'+mreo[objects]['exerciseid']+"'"+ ')" style="text-align:left;width:70%;padding: 8px; float:left">'+mreo[objects]['name'];
         toAppend +='<span id="myExercisesDetailsArrow'+mreo[objects]['id']+'"><i class="fa fa-caret-down"></i></span>';
         toAppend +='</h3>';
 
-        toAppend +='<a href="javascript:updateModalExerciseAdd(' +mreo[objects]['id']+ ')" style="width:60px; margin-bottom: 4px; background-color: #77b2c9;color:white " class="btn btn-default btn-circle-main">';
+        toAppend +='<a href="javascript:updateModalExerciseAdd(' +mreo[objects]['exerciseid']+ ')" style="width:60px; margin-bottom: 4px; background-color: #77b2c9;color:white " class="btn btn-default btn-circle-main">';
 
         toAppend +='<i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i>';
         toAppend +='</a>';
 
-        toAppend +='<div id="myExercises'+mreo[objects]['id']+'" style="width: 100%; position: relative" class="tabsdivMyWorkOutsBackAndBis"></div>';
+        toAppend +='<div id="myExercises'+mreo[objects]['exerciseid']+'" style="width: 100%; position: relative" class="tabsdivMyWorkOutsBackAndBis"></div>';
 
         if ((objects) == mreo.length-1){
         toAppend+="</div><div><br><hr style='border-top:3px solid #77b2c9;' /><br></div>";
