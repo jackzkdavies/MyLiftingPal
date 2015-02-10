@@ -10,6 +10,7 @@
 //Create MLP object
 var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
 var globalExerciseObjs; 
+var displayUnits = mlpObject.getUser().result['data']['units'];
 //Toggling ful view of exercises with
 function slideToggle(number){
     $(".tabsdiv"+number).slideToggle(400);
@@ -267,7 +268,7 @@ function checkResults(){
                             ' </div>'+
                             ' <div class="exerciseWeightDiv">'+
                             myDiaryResults['data'][myRes]['weight']+
-                            'kg  </div>'+
+                            displayUnits+'  </div>'+
                             ' <div class="exerciseRPeDiv">'+
                             myDiaryResults['data'][myRes]['rpe']+
                             ' </div>'+
@@ -293,7 +294,7 @@ function checkResults(){
                             ' </div>'+
                             ' <div class="exerciseWeightDiv">'+
                             myDiaryResults['data'][myRes]['weight']+
-                            'kg  </div>'+
+                            displayUnits+'  </div>'+
                             ' <div class="exerciseRPeDiv">'+
                             myDiaryResults['data'][myRes]['rpe']+
                             ' </div>'+
@@ -339,7 +340,52 @@ function checkResults(){
     }
 }
 function diaryModalHistory(inputID){
-    console.log(mlpObject.selectResults({exerciseid:inputID}));
+    var records = mlpObject.selectResults({exerciseid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result['data'];
+//    console.log (mlpObject.selectResults({exerciseid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result);
+
+
+    for (record in records){
+        $("#basicModalHistoryBody").empty();
+        var toAppend="";
+            
+        try{
+            if (typeof records[record]['records']['amrap']['weight'] !='undefined'){
+            toAppend += '<p>Best Reps with '+records[record]['records']['amrap']['weight']+displayUnits+': '+records[record]['records']['amrap']['reps']+
+                    ' @RPE '+records[record]['records']['amrap']['rpe']+'</p><br>';
+            }
+        
+        }
+            catch(e){}
+        
+        try{
+            if (typeof records[record]['records']['overall']['onerm'] !='undefined'){
+            toAppend +='<p>1RM (estimated): '+records[record]['records']['overall']['onerm']+displayUnits+'</p><br>';
+            }
+        }
+        catch(e){}
+
+        try{
+            if (typeof records[record]['records']['backoffs']['reps'] !='undefined'){
+                console.log(records[record]['records']['backoffs']['reps']);
+            toAppend +='<p>Best volume for '+ records[record]['records']['backoffs']['reps'] +' rep sets: ' + records[record]['records']['backoffs']['weight'] +displayUnits+'</p><br>';
+            }
+        }
+        catch(e){}
+        
+        try{
+            if(typeof records[record]['history']['sets' != 'undefined'){
+            toAppend +='<p>Last time you did' + records[record]['history']['sets']+ 'x' +  records[record]['history']['reps'] + ' using ' + records[record]['history']['weight'] +displayUnits +'</p><br>';
+            }
+        }
+            catch(e){}
+                
+    console.log(records[record]['records']);
+    $("#basicModalHistoryBody").append(toAppend);
+    }
+    var options = {
+    "backdrop" : "static",
+    "show":"true"};
+    $('#basicModalHistory').modal(options);
 }
 
 function diaryModalDelete(inputID){
