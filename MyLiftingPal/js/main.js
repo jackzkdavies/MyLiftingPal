@@ -38,11 +38,11 @@ var userData = mlpObject.getUser().result;
 			//logged in  
                         
 		}
-                else if (userData['errormsg'].indexOf('Already logged in as') >-1){
+        else if (userData['errormsg'].indexOf('You are already logged in as') > -1){
                     window.location.replace("main-page.html");
                 }
-                else{
-                   window.location.replace("index.html");
+        else{
+                   //window.location.replace("index.html");
                 }
 }
 
