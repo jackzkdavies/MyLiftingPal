@@ -27,9 +27,18 @@ function toggle(divID){
 }
 
 function checkLoginStatus(){
-    if ($.cookie("mlpsession") === undefined){
-        window.location.replace("index.html");
-    }
+//    if ($.cookie("mlpsession") === undefined){
+//        window.location.replace("index.html");
+//    }
+
+var userData = mlpObject.getUser().result;
+		if (userData["success"] === true){
+		
+			//logged in  
+		}
+                else{
+                   window.location.replace("index.html");
+                }
 }
 
 function logout(){
