@@ -317,7 +317,7 @@ function checkResults(){
                 toAppend += '<div id="DiaryControls'+myResId+'Second" style="width:100%;" >'+
                 '<a href="javascript:diaryModalAddSet('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 7px; width:60px; margin-bottom: 4px; background-color: white; color:#77b2c9" class="btn btn-default btn-circle-main"  title="Add Result to your Exercise"><i class="fa fa-plus"></i></a>'+
                 '<a href="javascript:diaryModalDelete('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 5px; width:60px; margin-bottom: 4px; background-color: #ff6666; color:white" class="btn btn-default btn-circle-main" title="Delete exercise from your diary"><i class="fa fa-times"></i></a>'+
-                '<a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 5px; width:60px; margin-bottom: 4px; background-color: #66cc66; color:white" class="btn btn-default btn-circle-main"  title="View your log for this exercise"><i class="fa fa-book"></i></a>'+
+                '<a href="javascript:diaryModalHistory('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 5px; width:60px; margin-bottom: 4px; background-color: #66cc66; color:white" class="btn btn-default btn-circle-main"  title="View your log for this exercise"><i class="fa fa-book"></i></a>'+
 //                '<a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a>'+
                 '</div>';
                 document.getElementById(resId).innerHTML =toAppend;
@@ -338,6 +338,10 @@ function checkResults(){
         console.log(e);
     }
 }
+function diaryModalHistory(inputID){
+    console.log(mlpObject.selectResults({exerciseid:inputID}));
+}
+
 function diaryModalDelete(inputID){
     
     $("#basicModalDeleteButtons").empty();
@@ -357,9 +361,10 @@ function diaryModalDelete(inputID){
 }
 
 function deleteModalDiaryResult(inputID){
-    console.log(mlpObject.removeResults({id:inputID}));
+    console.log(inputID);
+    console.log(mlpObject.removeResults({exerciseid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}));
     $('#basicModalDelete').modal('hide');
-//    checkResults();
+    checkResults();
     
 }
 function addModalDiaryResult(inputID){
