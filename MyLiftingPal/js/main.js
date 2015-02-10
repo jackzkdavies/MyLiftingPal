@@ -1364,6 +1364,9 @@ function submitLoginForm(){
             if (mlpObject.result["errormsg"]=== "Password incorrect."){
                 errormsg = 'incorrectPassword';
             }
+			else if (mlpObject.result["errormsg"].indexOf('You are already logged in as') > -1){
+				window.location.replace("main-page.html");
+			}
             message = document.getElementById(errormsg);
             message.innerHTML = mlpObject.result["errormsg"];
         }
