@@ -382,7 +382,7 @@ function diaryModalHistory(inputID){
         catch(e){}
         
         try{
-            if(typeof records[record]['history']['sets' != 'undefined'){
+            if(typeof records[record]['history']['sets'] != 'undefined'){
             toAppend +='<p>Last time you did' + records[record]['history']['sets']+ 'x' +  records[record]['history']['reps'] + ' using ' + records[record]['history']['weight'] +displayUnits +'</p><br>';
             }
         }
