@@ -32,10 +32,15 @@ function checkLoginStatus(){
 //    }
 
 var userData = mlpObject.getUser().result;
+
 		if (userData["success"] === true){
 		
 			//logged in  
+                        
 		}
+                else if (userData['errormsg'].indexOf('Already logged in as') >-1){
+                    window.location.replace("main-page.html");
+                }
                 else{
                    window.location.replace("index.html");
                 }
