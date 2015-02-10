@@ -107,6 +107,7 @@
 	background-color: #08C;
 	color: #FFF;
 	cursor: pointer;
+        text-decoration: none;
 }
 
 .dropdown .dropdown-menu .dropdown-divider {

@@ -140,6 +140,73 @@
           </div>
         </div>
           
+          
+            <div class="modal fade" id="basicModalHistory" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                        <h4 class="modal-title" id="myModalLabelExerciseAdd"><i class="fa fa-trophy"></i>Records</h4>
+                        </div>
+                        <div class="modal-body" id="basicModalHistoryBody">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="modal fade" id="basicModalAddSet" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                        <h4 class="modal-title" id="myModalLabelAddSet">New Set</h4>
+                        </div>
+                        <div class="modal-body" id="basicModalNewSetBody">
+                            <p  class="blackfont">Reps</p>
+                            <input id="updateModalAddRep" class="w-input field feild2" type="number" placeholder="1" name="Reps" required="required" data-name="exercisename">
+                            <p  class="blackfont">Set</p>
+                            <input id="updateModalAddSet" class="w-input field feild2" type="number" placeholder="1" name="Set" required="required" data-name="exercisename">
+                            <p  class="blackfont">Weight</p>
+                            <input id="updateModalAddWeight" class="w-input field feild2" type="number" placeholder="1" name="Weight" required="required" data-name="exercisename">
+                            <p  class="blackfont">RPE</p>
+                            <input id="updateModalAddRPE" class="w-input field feild2" type="number" placeholder="1" name="RPE" required="required" data-name="exercisename">
+                            <p  class="blackfont">%1RM</p>
+                            <input id="updateModalAddRM" class="w-input field feild2" type="number" placeholder="1" name="%1RM" required="required" data-name="exercisename">
+                            
+
+                        </div>
+                        <div id="basicModalAddSetButtons" class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="modal fade" id="basicModalDelete" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                        <h4 class="modal-title" id="myModalLabelDelte">Delete Exercise</h4>
+                        </div>
+                        <div class="modal-body" id="basicModalDeleteBody">
+                            Are you sure you want to delete all sets for this exercise?
+                        </div>
+                        <div id="basicModalDeleteButtons" class="modal-footer">
+<!--                            <button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button onclick="deleteModalDiaryResult('+inputID+')" type="button" class="btn btn-primary">Confirm</button>-->
+                    </div>
+                </div>
+              </div>
+            </div>
+          
+          
+          
+          
           <div id="myDairyResults">
               
           </div>
@@ -149,189 +216,52 @@
                 
             </p>
             <br>
-            <a href="javascript:void(0);" style="width:60px; margin-bottom: 4px; background-color: #77b2c9;color:white" class="btn btn-default btn-circle-main">
+            <br>
+            <a href="javascript:mainPageAdd();" id="mainPageAddButton" style="width:60px; margin-bottom: 4px; background-color: #77b2c9;color:white" class="btn btn-default btn-circle-main">
                 <i class="fa fa-plus fa-2x" style="line-height: 1.9 !important;"></i>
             </a>
             
-            
-            
-            
-<!--          <div class="w-clearfix createdexercises">
-            <div class="w-clearfix exercisedivname"><a class="button detailsbutton" href="#"><strong class="detailsbuttontext">+</strong></a>
-              <h6>Lunges</h6>
-            </div>
-            <div class="exercisesetsdiv">
-              <h6>99/99</h6>
-            </div>
-            <div class="exerciserepsdiv">
-              <h6>99</h6>
-            </div>
-            <div class="exerciserpediv">
-              <h6>10</h6>
-            </div>
-            <div class="exerciseweightsdiv">
-              <h6>999kg</h6>
-            </div>
-            <div class="w-clearfix tabsdiv">
-              <div class="w-tabs tabs" data-duration-in="300" data-duration-out="100">
-                <div class="w-tab-menu w-clearfix">
-                  <a class="w-tab-link w-inline-block recordstab" data-w-tab="RecordsTab">
-                    <div>Records</div>
-                  </a>
-                  <a class="w-tab-link w-inline-block notestab" data-w-tab="NotesTab">
-                    <div>Notes</div>
-                  </a>
-                  <a class="w-tab-link w--current w-inline-block edittab" data-w-tab="EditTab">
-                    <div>update</div>
-                  </a>
+            <div id="addToMyDiaryDropdown" style="display: none">
+                <div style="width:33%; float:left">
+                     <a id="mainExSearch" style="text-align: center; text-decoration: none;" class="w-dropdown-link" href="javascript:mainSearchEx('e');"><i style="font-size: 40px" class="fa fa-heart"></i><br>Exercise</a>
+                    
+                     
                 </div>
-                <div class="w-tab-content">
-                  <div class="w-tab-pane recordstabwindow" data-w-tab="RecordsTab">History of last exercise</div>
-                  <div class="w-tab-pane notestabcontanter" data-w-tab="NotesTab">My notes</div>
-                  <div class="w-tab-pane w--tab-active edittabcontent" data-w-tab="EditTab">
-                    <div class="w-form">
-                      <form id="email-form" name="email-form" data-name="Email Form">
-                        <label for="currentset">Current Set</label>
-                        <input class="w-input" id="currentset" type="text" placeholder="Enter your set" name="currentset" data-name="currentset">
-                        <label for="Reps">Reps</label>
-                        <input class="w-input" id="Reps" type="email" placeholder="Enter your reps" name="Reps" data-name="Reps" required="required">
-                        <label for="RPE">Rated Perceived Exertion</label>
-                        <input class="w-input" id="RPE" type="email" placeholder="Enter your RPE" name="RPE" data-name="RPE" required="required">
-                        <label for="weight">Weight</label>
-                        <input class="w-input" id="weight" type="email" placeholder="Enter weight" name="weight" data-name="weight" required="required">
-                        <input class="w-button updatesubmitbutton" type="submit" value="Submit" data-wait="Please wait...">
-                      </form>
-                      <div class="w-form-done">
-                        <p>Thank you! Your submission has been received!</p>
-                      </div>
-                      <div class="w-form-fail">
-                        <p>Oops! Something went wrong while submitting the form :(</p>
-                      </div>
-                    </div>
-                  </div>
+                
+                <div style="width:33%; float:left">
+                    <a id="mainWorkSearch" style="text-align: center; text-decoration: none;" class="w-dropdown-link" href="javascript:mainSearchEx('w');"><i style="font-size: 40px" class="fa fa-child"></i><br>Workout</a>
+                    
+                    
                 </div>
-              </div>
-            </div>
-            <div class="w-tabs showhidetab" data-duration-in="300" data-duration-out="100"></div>
-          </div>
-          <div class="w-clearfix createdexercises">
-            <div class="w-clearfix exercisedivname"><a class="button detailsbutton" href="#"><strong class="detailsbuttontext">+</strong></a>
-              <h6>Lunges</h6>
-            </div>
-            <div class="exercisesetsdiv">
-              <h6>99/99</h6>
-            </div>
-            <div class="exerciserepsdiv">
-              <h6>99</h6>
-            </div>
-            <div class="exerciserpediv">
-              <h6>10</h6>
-            </div>
-            <div class="exerciseweightsdiv">
-              <h6>999kg</h6>
-            </div>
-            <div class="w-clearfix tabsdiv">
-              <div class="w-tabs tabs" data-duration-in="300" data-duration-out="100">
-                <div class="w-tab-menu w-clearfix">
-                  <a class="w-tab-link w-inline-block recordstab" data-w-tab="RecordsTab">
-                    <div>Records</div>
-                  </a>
-                  <a class="w-tab-link w-inline-block notestab" data-w-tab="NotesTab">
-                    <div>Notes</div>
-                  </a>
-                  <a class="w-tab-link w--current w-inline-block edittab" data-w-tab="EditTab">
-                    <div>update</div>
-                  </a>
+                
+                <div style="width:33%; float:left">
+                    <a id="mainProSearch" style="text-align: center; text-decoration: none;" class="w-dropdown-link" href="javascript:mainSearchEx('p');"><i style="font-size: 40px" class="fa fa-calendar"></i><br>Program</a>
+                    
+                    
                 </div>
-                <div class="w-tab-content">
-                  <div class="w-tab-pane recordstabwindow" data-w-tab="RecordsTab">History of last exercise</div>
-                  <div class="w-tab-pane notestabcontanter" data-w-tab="NotesTab">My notes</div>
-                  <div class="w-tab-pane w--tab-active edittabcontent" data-w-tab="EditTab">
-                    <div class="w-form">
-                      <form id="email-form" name="email-form" data-name="Email Form">
-                        <label for="currentset-3">Current Set</label>
-                        <input class="w-input" id="currentset-3" type="text" placeholder="Enter your set" name="currentset-3" data-name="Currentset 3">
-                        <label for="Reps-3">Reps 3</label>
-                        <input class="w-input" id="Reps-3" type="email" placeholder="Enter your reps" name="Reps-3" data-name="Reps 3" required="required">
-                        <label for="RPE-3">Rated Perceived Exertion</label>
-                        <input class="w-input" id="RPE-3" type="email" placeholder="Enter your RPE" name="RPE-3" data-name="Rpe 3" required="required">
-                        <label for="weight-3">Weight 3</label>
-                        <input class="w-input" id="weight-3" type="email" placeholder="Enter weight" name="weight-3" data-name="Weight 3" required="required">
-                        <input class="w-button updatesubmitbutton" type="submit" value="Submit" data-wait="Please wait...">
-                      </form>
-                      <div class="w-form-done">
-                        <p>Thank you! Your submission has been received!</p>
-                      </div>
-                      <div class="w-form-fail">
-                        <p>Oops! Something went wrong while submitting the form :(</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="w-tabs showhidetab" data-duration-in="300" data-duration-out="100"></div>
-          </div>
-          <div class="w-clearfix createdexercises">
-            <div class="w-clearfix exercisedivname"><a class="button detailsbutton" href="#"><strong class="detailsbuttontext">+</strong></a>
-              <h6>Lunges</h6>
-            </div>
-            <div class="exercisesetsdiv">
-              <h6>99/99</h6>
-            </div>
-            <div class="exerciserepsdiv">
-              <h6>99</h6>
-            </div>
-            <div class="exerciserpediv">
-              <h6>10</h6>
-            </div>
-            <div class="exerciseweightsdiv">
-              <h6>999kg</h6>
-            </div>
-            <div class="w-clearfix tabsdiv">
-              <div class="w-tabs tabs" data-duration-in="300" data-duration-out="100">
-                <div class="w-tab-menu w-clearfix">
-                  <a class="w-tab-link w-inline-block recordstab" data-w-tab="RecordsTab">
-                    <div>Records</div>
-                  </a>
-                  <a class="w-tab-link w-inline-block notestab" data-w-tab="NotesTab">
-                    <div>Notes</div>
-                  </a>
-                  <a class="w-tab-link w--current w-inline-block edittab" data-w-tab="EditTab">
-                    <div>update</div>
-                  </a>
-                </div>
-                <div class="w-tab-content">
-                  <div class="w-tab-pane recordstabwindow" data-w-tab="RecordsTab">History of last exercise</div>
-                  <div class="w-tab-pane notestabcontanter" data-w-tab="NotesTab">My notes</div>
-                  <div class="w-tab-pane w--tab-active edittabcontent" data-w-tab="EditTab">
-                    <div class="w-form">
-                      <form id="email-form" name="email-form" data-name="Email Form">
-                        <label for="currentset-2">Current Set</label>
-                        <input class="w-input" id="currentset-2" type="text" placeholder="Enter your set" name="currentset-2" data-name="Currentset 2">
-                        <label for="Reps-2">Reps 2</label>
-                        <input class="w-input" id="Reps-2" type="email" placeholder="Enter your reps" name="Reps-2" data-name="Reps 2" required="required">
-                        <label for="RPE-2">Rated Perceived Exertion</label>
-                        <input class="w-input" id="RPE-2" type="email" placeholder="Enter your RPE" name="RPE-2" data-name="Rpe 2" required="required">
-                        <label for="weight-2">Weight 2</label>
-                        <input class="w-input" id="weight-2" type="email" placeholder="Enter weight" name="weight-2" data-name="Weight 2" required="required">
-                        <input class="w-button updatesubmitbutton" type="submit" value="Submit" data-wait="Please wait...">
-                      </form>
-                      <div class="w-form-done">
-                        <p>Thank you! Your submission has been received!</p>
-                      </div>
-                      <div class="w-form-fail">
-                        <p>Oops! Something went wrong while submitting the form :(</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="w-tabs showhidetab" data-duration-in="300" data-duration-out="100"></div>
-          </div>-->
 
+                <div id="mainSearch" style="width: 100%;">
+                    <input id="mainSearchTerm" style="float:left; margin-right: -38px" class="w-input"  type="text" placeholder="Select Exercise to add" name="addexercisetoworkout" required="required" data-name="addexercisetoworkout">
+                    <img class="searchImage" onclick="submitDairySearch();return false;" src="images/search.svg" alt="Search" onerror="this.src='your.png'">
+                </div>
+                <div id="addDairySearchResults">
+                    <p id="searchResultsHeading"></p>
+                    <table id='mytable' style='display: none; text-align:left; text-shadow: 0px 0px rgba(255, 255, 255, 0);'>
+                      <thead>
+                          <tr>
+                              <td style='color:black; font-weight: bold;background-color: white'>Exercise</td>
+                              <td style='color:white; font-weight: 650;background-color: #77b2c9;' >M.Group</td>
+                              <td style='color:white; font-weight: 650;background-color: #77b2c9; border-radius:0px 3px 0px 0px'>Type</td>
+                          </tr>
+                      </thead>
+                      <tbody id ="searchresults">
+                          
+                      </tbody>
+                  </table>
+                </div>
+                
 
+            </div>
 
 
         </div>

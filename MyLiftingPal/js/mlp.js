@@ -163,7 +163,7 @@ function mlp(key){
    };
    
    self.removeResults = function(data){
-       //id
+       //id exerciseid assigneddate
        self.call('edit','removeresults', data, cb);
 	   return self;
    };
