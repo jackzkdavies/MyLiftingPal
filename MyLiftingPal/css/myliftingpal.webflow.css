@@ -35,7 +35,7 @@ border-radius: 30px;
     background-repeat: no-repeat;
     background-position:-590px -150px;
     margin-left: -10px;
-    background-size: cover;
+    /*background-size: cover;*/
     background-attachment: fixed;
     /*padding-left: 10px;*/
     margin-top: -50px;
