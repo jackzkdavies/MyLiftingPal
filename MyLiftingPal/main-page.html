@@ -140,6 +140,73 @@
           </div>
         </div>
           
+          
+            <div class="modal fade" id="basicModalHistory" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                        <h4 class="modal-title" id="myModalLabelExerciseAdd"><i class="fa fa-trophy"></i>Records</h4>
+                        </div>
+                        <div class="modal-body" id="basicModalHistoryBody">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="modal fade" id="basicModalAddSet" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                        <h4 class="modal-title" id="myModalLabelAddSet">New Set</h4>
+                        </div>
+                        <div class="modal-body" id="basicModalNewSetBody">
+                            <p  class="blackfont">Reps</p>
+                            <input id="updateModalAddRep" class="w-input field feild2" type="number" placeholder="1" name="Reps" required="required" data-name="exercisename">
+                            <p  class="blackfont">Set</p>
+                            <input id="updateModalAddSet" class="w-input field feild2" type="number" placeholder="1" name="Set" required="required" data-name="exercisename">
+                            <p  class="blackfont">Weight</p>
+                            <input id="updateModalAddWeight" class="w-input field feild2" type="number" placeholder="1" name="Weight" required="required" data-name="exercisename">
+                            <p  class="blackfont">RPE</p>
+                            <input id="updateModalAddRPE" class="w-input field feild2" type="number" placeholder="1" name="RPE" required="required" data-name="exercisename">
+                            <p  class="blackfont">%1RM</p>
+                            <input id="updateModalAddRM" class="w-input field feild2" type="number" placeholder="1" name="%1RM" required="required" data-name="exercisename">
+                            
+
+                        </div>
+                        <div id="basicModalAddSetButtons" class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="modal fade" id="basicModalDelete" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                        <h4 class="modal-title" id="myModalLabelDelte">Delete Exercise</h4>
+                        </div>
+                        <div class="modal-body" id="basicModalDeleteBody">
+                            Are you sure you want to delete all sets for this exercise?
+                        </div>
+                        <div id="basicModalDeleteButtons" class="modal-footer">
+<!--                            <button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button onclick="deleteModalDiaryResult('+inputID+')" type="button" class="btn btn-primary">Confirm</button>-->
+                    </div>
+                </div>
+              </div>
+            </div>
+          
+          
+          
+          
           <div id="myDairyResults">
               
           </div>
@@ -148,6 +215,7 @@
             <p id="noResults"> 
                 
             </p>
+            <br>
             <br>
             <a href="javascript:mainPageAdd();" id="mainPageAddButton" style="width:60px; margin-bottom: 4px; background-color: #77b2c9;color:white" class="btn btn-default btn-circle-main">
                 <i class="fa fa-plus fa-2x" style="line-height: 1.9 !important;"></i>

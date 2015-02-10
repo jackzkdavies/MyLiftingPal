@@ -17,8 +17,12 @@ function slideToggle(number){
 
 function toggle(divID){
     var div="#"+divID;
-    console.log(div);
     $(div).slideToggle(400);
+    
+    var test="#DiaryControls"+divID;
+    if (divID.indexOf("Second") != -1) {
+        $(test).slideToggle(400);
+}
 }
 
 function checkLoginStatus(){
@@ -127,12 +131,12 @@ function dairyPageExSearch(){
               if (globalExerciseObjs.hasOwnProperty(key)) {    
                   
         var dat =(year+'-'+(month+1)+'-'+date);
-        console.log(dat);
+
         var useDate=[year,(month+1),date];
         var resultData=[key,useDate,1,1,1,1,1];
         toAppend += "<tr onClick='addExToResults(["+resultData+"])'>";
        
-        console.log(globalExerciseObjs[key]);
+
         for (st in searchTerms){
             toAppend += "<td>";
    
@@ -239,7 +243,7 @@ function checkResults(){
                 
                 
                 var myResId="myResExNameDiv"+myDiaryResults['data'][myRes]['exerciseid'];
-                console.log(myDiaryResults['data'][myRes]);
+
                 if (document.getElementById(myResId) == null ){
                     if (myRes != 0 ){toAppend +="<div style=''><hr style='width:100%;float:left;  border-top:3px solid #77b2c9; margin-top: 20px; */' /></div>";} 
                     toAppend += '<div style="width:100%; float:left">'+
@@ -271,8 +275,8 @@ function checkResults(){
                             ' <div class="exercise1RMdiv">'+
                             myDiaryResults['data'][myRes]['percentage'];
                             toAppend+='%</div></div>'+
-                            '<div id="'+myResId+myDiaryResults['data'][myRes]['id']+'">'+
-                            '<div style=" margin-bottom: -35px;"><a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a></div>'+
+                            '<div id="'+myResId+myDiaryResults['data'][myRes]['id']+'" style="display:none; ">'+
+                            '<div style=" margin-bottom: -35px; "><a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a></div>'+
                             '</div><br><hr></div></div><div id="'+myResId+"Third"+'"></div> ';
                             
                             
@@ -297,7 +301,7 @@ function checkResults(){
                             ' <div class="exercise1RMdiv">'+
                             myDiaryResults['data'][myRes]['percentage'];
                             toAppend+='%</div></div>'+
-                            '<div id="'+myResId+myDiaryResults['data'][myRes]['id']+'">'+
+                            '<div id="'+myResId+myDiaryResults['data'][myRes]['id']+'" style="display:none;">'+
                             '<div style=" margin-bottom: -35px;"><a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a></div>'+
                             '</div><br><hr></div>';
                             
@@ -310,9 +314,9 @@ function checkResults(){
 //                var resId="#"+myResId+"Third";
                 var resId=myResId+"Third"
                 toAppend = '';
-                toAppend += '<div style="width:100%;">'+
-                '<a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 7px; width:60px; margin-bottom: 4px; background-color: white; color:#77b2c9" class="btn btn-default btn-circle-main"  title="Add exercise to your diary"><i class="fa fa-plus"></i></a>'+
-                '<a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 5px; width:60px; margin-bottom: 4px; background-color: #ff6666; color:white" class="btn btn-default btn-circle-main" title="Delete exercise from your diary"><i class="fa fa-times"></i></a>'+
+                toAppend += '<div id="DiaryControls'+myResId+'Second" style="width:100%;" >'+
+                '<a href="javascript:diaryModalAddSet('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 7px; width:60px; margin-bottom: 4px; background-color: white; color:#77b2c9" class="btn btn-default btn-circle-main"  title="Add Result to your Exercise"><i class="fa fa-plus"></i></a>'+
+                '<a href="javascript:diaryModalDelete('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 5px; width:60px; margin-bottom: 4px; background-color: #ff6666; color:white" class="btn btn-default btn-circle-main" title="Delete exercise from your diary"><i class="fa fa-times"></i></a>'+
                 '<a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 5px; width:60px; margin-bottom: 4px; background-color: #66cc66; color:white" class="btn btn-default btn-circle-main"  title="View your log for this exercise"><i class="fa fa-book"></i></a>'+
 //                '<a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a>'+
                 '</div>';
@@ -334,7 +338,66 @@ function checkResults(){
         console.log(e);
     }
 }
+function diaryModalDelete(inputID){
+    
+    $("#basicModalDeleteButtons").empty();
+//    var delBut = '<button onclick="deleteExercise('+inputId+')" type="button" class="btn btn-primary">Delete</button>';
+//    $("#basicModalAddSetButtons").append(delBut);
+    
 
+    var buttons='<button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
+            '<button onclick="deleteModalDiaryResult('+inputID+')" type="button" class="btn btn-primary">Remove</button>';
+    $("#basicModalDeleteButtons").append(buttons);
+    
+    var options = {
+    "backdrop" : "static",
+    "show":"true"};
+    $('#basicModalDelete').modal(options);
+    
+}
+
+function deleteModalDiaryResult(inputID){
+    console.log(mlpObject.removeResults({id:inputID}));
+    $('#basicModalDelete').modal('hide');
+//    checkResults();
+    
+}
+function addModalDiaryResult(inputID){
+    try{
+        var rep=document.getElementById("updateModalAddRep").value;
+        var set=document.getElementById("updateModalAddSet").value;
+        var wei=document.getElementById("updateModalAddWeight").value;
+        var rp=document.getElementById("updateModalAddRPE").value;
+        var rm=document.getElementById("updateModalAddRM").value;
+        
+        
+        //exerciseid, workoutid, programid, reps, sets, rpe, weight, percentage,assigneddate
+        mlpObject.addResults({exerciseid:inputID, reps:rep, sets:set, weight:wei, rpe:rp, percentage:rm, assigneddate:year+"-"+(month+1)+"-"+date});
+        $('#basicModalAddSet').modal('hide');
+        checkResults();
+    }
+    catch(e){}
+    
+}
+function diaryModalAddSet(inputID){
+    console.log(inputID);
+
+    
+    
+    $("#basicModalAddSetButtons").empty();
+//    var delBut = '<button onclick="deleteExercise('+inputId+')" type="button" class="btn btn-primary">Delete</button>';
+//    $("#basicModalAddSetButtons").append(delBut);
+    
+
+    var buttons='<button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
+            '<button onclick="addModalDiaryResult('+inputID+')" type="button" class="btn btn-primary">Add</button>';
+    $("#basicModalAddSetButtons").append(buttons);
+    
+    var options = {
+    "backdrop" : "static",
+    "show":"true"};
+    $('#basicModalAddSet').modal(options);
+}
 
 
 function addExToResults(data){
@@ -347,12 +410,11 @@ function addExToResults(data){
     var rp= data[6];
     var weig= data[7];
     var per= data[8];
-    console.log(exID,tdate,rep,set,rp,weig,per);
-    console.log(tdate);
+
     try{
         //exerciseid, workoutid, programid, reps, sets, rpe, weight, percentage,assigneddate
-        console.log(mlpObject.addResults({exerciseid:exID,assigneddate:tdate, reps:rep,sets:set, rpe:rp, weight:weig, percentage:per}).result);
-//        checkResults()
+        mlpObject.addResults({exerciseid:exID,assigneddate:tdate, reps:rep,sets:set, rpe:rp, weight:weig, percentage:per}).result;
+        checkResults();
     }
     
     catch(e){
