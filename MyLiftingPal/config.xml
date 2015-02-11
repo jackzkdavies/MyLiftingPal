@@ -1,0 +1,14 @@
+<widget id="com.myliftingpal" version="2.1.0">
+        <name>MyLiftingPal</name>
+        <description>
+            An app used to track your lifting in the gym.
+        </description>
+        <author email="support@myliftingpal.net" href="http://www.myliftingpal.net">
+            MyLiftingPal
+        </author>
+        <content src="index.html" />
+        <access origin="*" />
+        <preference name="Orientation" value="landscape" />
+		<preference name="permissions" value="none" />
+        <icon src="images/mlpicon.png" />
+    </widget>
