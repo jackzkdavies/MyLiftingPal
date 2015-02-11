@@ -291,7 +291,7 @@ function checkResults(){
                             myDiaryResults['data'][myRes]['percentage'];
                             toAppend+='%</div></div>'+
                             '<div id="'+myResId+myDiaryResults['data'][myRes]['id']+'" style="display:none; ">'+
-                            '<div style=" margin-bottom: -35px; "><a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a></div>'+
+                            '<div style=" margin-bottom: -35px; "><a href="javascript:diaryEditExercise('+myDiaryResults['data'][myRes]['id']+');" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a></div>'+
                             '</div><br><hr></div></div><div id="'+myResId+"Third"+'"></div> ';
                             
                             
@@ -317,7 +317,8 @@ function checkResults(){
                             myDiaryResults['data'][myRes]['percentage'];
                             toAppend+='%</div></div>'+
                             '<div id="'+myResId+myDiaryResults['data'][myRes]['id']+'" style="display:none;">'+
-                            '<div style=" margin-bottom: -35px;"><a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a></div>'+
+                            '<div id="diaryEditExDiv" style="display:none"></div>'
+                            '<div style=" margin-bottom: -35px;"><a href="javascript:diaryEditExercise('+myDiaryResults['data'][myRes]['id']+');" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a></div>'+
                             '</div><br><hr></div>';
                             
                             var resId="#"+myResId+"Second";
@@ -353,6 +354,14 @@ function checkResults(){
         console.log(e);
     }
 }
+function diaryEditExercise(inputID){
+    $('#diaryEditExDiv').empty();
+    var toAppend ='';
+    toAppend +=""
+    mlpObject.changeResults({id:inputID})
+}
+
+
 function diaryModalHistory(inputID){
     var records = mlpObject.selectResults({exerciseid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result['data'];
 //    console.log (mlpObject.selectResults({exerciseid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result);
