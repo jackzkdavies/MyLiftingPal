@@ -26,6 +26,8 @@ function toggle(divID){
 }
 }
 
+
+
 function checkLoginStatus(){
 //    if ($.cookie("mlpsession") === undefined){
 //        window.location.replace("index.html");
@@ -894,6 +896,68 @@ function toggleMyWorkouts(){
  
 }
 
+
+function addWorkoutToDiary(inputID){
+    try{
+        mlpObject.addResults({workoutid:inputID, assigneddate:year+"-"+(month+1)+"-"+date});
+    }
+    catch(e){
+        
+    }
+    
+}
+
+function workoutExerciseEdit(inputID){
+    try{
+        var rep=document.getElementById("updateModalAddRep").value;
+        var set=document.getElementById("updateModalAddSet").value;
+        var wei=document.getElementById("updateModalAddWeight").value;
+        var rp=document.getElementById("updateModalAddRPE").value;
+        var rm=document.getElementById("updateModalAddRM").value;
+
+        console.log(mlpObject.changeExercise({exerciseid:inputID,reps:rep,sets:set, rpe:rp, weight:wei, percentage:rm}));
+        
+    }
+    catch(e){
+        
+    }
+    
+}
+function modalWorkoutExerciseEdit(inputID){
+    console.log(inputID);
+    var workouts = mlpObject.getExercises({id:inputID}).result;
+    console.log(workouts);
+     
+     
+//    document.getElementById("updateModalAddRep").value = workouts['data'][0]['name'];
+//    document.getElementById("updateModalAddSet").value = workouts['data'][0]['name'];
+//    document.getElementById("updateModalAddWeight").value = workouts['data'][0]['name'];
+//    document.getElementById("updateModalAddRPE").value = workouts['data'][0]['name'];
+//    document.getElementById("updateModalAddRM").value = workouts['data'][0]['name'];
+     
+    document.getElementById("updateModalAddRep").value = 0;
+    document.getElementById("updateModalAddSet").value = 0;
+    document.getElementById("updateModalAddWeight").value = 0;
+    document.getElementById("updateModalAddRPE").value = 0;
+    document.getElementById("updateModalAddRM").value = 0; 
+     
+    $("#myModalLabelWorkoutExerciseEdit").empty();
+    $("#myModalLabelWorkoutExerciseEdit").append(workouts['data'][0]['name']);
+    
+    
+    $("#modalWorkoutExerciseEditControls").empty();
+    var buttons='<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
+            '<button onclick="workoutExerciseEdit('+inputID+')" type="button" class="btn btn-primary">Save</button>';
+    $("#modalWorkoutExerciseEditControls").append(buttons);
+    
+    
+    var options = {
+    "backdrop" : "static",
+    "show":"true"};
+    $('#modalWorkoutExerciseEdit').modal(options);
+    
+}
+
 function addMyworkoutDetails(input){
 
     var toAppend ="";
@@ -917,12 +981,16 @@ function addMyworkoutDetails(input){
 
                 }
             else{
-                toAppend +='<br><table class="table table-striped">'+
+                console.log(workouts['data'][workout]);
+                console.log(workouts['data'][workout]['exerciseid']);
+//                console.log(wnames['data'][0]);
+                toAppend +='<br><table onclick="modalWorkoutExerciseEdit('+workouts['data'][workout]['exerciseid']+')" class="table table-striped">'+
                 '<thead>'+
                     '<tr>'+
-                        '<td colspan="2">'+wnames['data'][0]['name']+'</td>'+
-                        '<td colspan="2">'+wnames['data'][0]['musclegroup']+'</td>'+
-                        '<td colspan="2">'+wnames['data'][0]['type']+'</td>'+
+                        '<td colspan="5">'+wnames['data'][0]['name']+'</td>'+
+//                        '<td colspan="2">'+wnames['data'][0]['musclegroup']+'</td>'+
+//                        '<td colspan="2">'+wnames['data'][0]['type']+'</td>'+
+                        '<td style="text-align:right" colspan="1"><i class="fa fa-cog"></i></td>'+
                     '</tr>'+
                 '</thead>'+
 
@@ -1000,16 +1068,16 @@ function deleteWorkout(wId){
     displayMyWorkouts();
 }
 function updateModalWorkoutAdd(wId){
-//    console.log(wId);
-    var workout = mlpObject.getWorkouts({id:wId});
+    console.log(wId);
+//    var workout = mlpObject.getWorkouts({id:wId});
     
-    $("#myModalLabelWorkoutAdd").empty();
-    $("#myModalLabelWorkoutAdd").append("Add " + workout.result['data'][0]['name'] + " To:");
+//    $("#myModalLabelWorkoutAdd").empty();
+//    $("#myModalLabelWorkoutAdd").append("Add " + workout.result['data'][0]['name'] + " To:");
     
     var options = {
     "backdrop" : "static",
     "show":"true"};
-    $('#basicModalAdd').modal(options);
+    $('#basicModalAddWorkout').modal(options);
 }
 //Display my workouts
 
