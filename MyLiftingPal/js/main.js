@@ -907,7 +907,8 @@ function addWorkoutToDiary(inputID){
     
 }
 
-function workoutExerciseEdit(inputID){
+function workoutExerciseEdit(inputID,wID){
+    console.log(wID);
     try{
         var rep=document.getElementById("updateModalAddRep").value;
         var set=document.getElementById("updateModalAddSet").value;
@@ -915,7 +916,7 @@ function workoutExerciseEdit(inputID){
         var rp=document.getElementById("updateModalAddRPE").value;
         var rm=document.getElementById("updateModalAddRM").value;
 
-        console.log(mlpObject.changeExercise({exerciseid:inputID,reps:rep,sets:set, rpe:rp, weight:wei, percentage:rm}));
+        console.log(mlpObject.changeExercise({id:wID,exerciseid:inputID,reps:rep,sets:set, rpe:rp, weight:wei, percentage:rm}));
         
     }
     catch(e){
@@ -923,10 +924,10 @@ function workoutExerciseEdit(inputID){
     }
     
 }
-function modalWorkoutExerciseEdit(inputID){
-    console.log(inputID);
+function modalWorkoutExerciseEdit(inputID,wID){
+    console.log(wID);
     var workouts = mlpObject.getExercises({id:inputID}).result;
-    console.log(workouts);
+
      
      
 //    document.getElementById("updateModalAddRep").value = workouts['data'][0]['name'];
@@ -947,7 +948,7 @@ function modalWorkoutExerciseEdit(inputID){
     
     $("#modalWorkoutExerciseEditControls").empty();
     var buttons='<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
-            '<button onclick="workoutExerciseEdit('+inputID+')" type="button" class="btn btn-primary">Save</button>';
+            '<button onclick="workoutExerciseEdit('+inputID+','+wID+')" type="button" class="btn btn-primary">Save</button>';
     $("#modalWorkoutExerciseEditControls").append(buttons);
     
     
@@ -981,10 +982,10 @@ function addMyworkoutDetails(input){
 
                 }
             else{
-                console.log(workouts['data'][workout]);
-                console.log(workouts['data'][workout]['exerciseid']);
+//                console.log(workouts['data'][workout]);
+//                console.log(workouts['data'][workout]['exerciseid']);
 //                console.log(wnames['data'][0]);
-                toAppend +='<br><table onclick="modalWorkoutExerciseEdit('+workouts['data'][workout]['exerciseid']+')" class="table table-striped">'+
+                toAppend +='<br><table onclick="modalWorkoutExerciseEdit('+workouts['data'][workout]['exerciseid']+','+workouts['data'][workout]['id']+')" class="table table-striped">'+
                 '<thead>'+
                     '<tr>'+
                         '<td colspan="5">'+wnames['data'][0]['name']+'</td>'+
