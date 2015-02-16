@@ -127,7 +127,7 @@
             <div id="myWorkouts"></div>
             
             
-            <div class="modal fade" id="basicModalAdd" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+            <div class="modal fade" id="basicModalAddWorkout" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -170,7 +170,38 @@
                     </div>
                     </div>
                 </div>
+            </div>
+            
+            <div class="modal fade" id="modalWorkoutExerciseEdit" style="overflow-y:auto" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                        <h4 class="modal-title" id="myModalLabelWorkoutExerciseEdit">Update</h4>
+                        </div>
+                        <div class="modal-body" id="basicModalNewSetBody">
+                            <p  class="blackfont">Reps</p>
+                            <input id="updateModalAddRep" class="w-input field feild2" type="number" placeholder="1" name="Reps" required="required" data-name="exercisename">
+                            <p  class="blackfont">Set</p>
+                            <input id="updateModalAddSet" class="w-input field feild2" type="number" placeholder="1" name="Set" required="required" data-name="exercisename">
+                            <p  class="blackfont">Weight</p>
+                            <input id="updateModalAddWeight" class="w-input field feild2" type="number" placeholder="1" name="Weight" required="required" data-name="exercisename">
+                            <p  class="blackfont">RPE</p>
+                            <input id="updateModalAddRPE" class="w-input field feild2" type="number" placeholder="1" name="RPE" required="required" data-name="exercisename">
+                            <p  class="blackfont">%1RM</p>
+                            <input id="updateModalAddRM" class="w-input field feild2" type="number" placeholder="1" name="%1RM" required="required" data-name="exercisename">
+                            
+
+                        </div>
+                        <div id="modalWorkoutExerciseEditControls" class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
               </div>
+            </div>
+            
+            
+            
             </div>
             
             
@@ -179,14 +210,16 @@
             <i style="font-size: 40px;" class="fa fa-child"></i>
             <div class="w-tabs" data-duration-in="300" data-duration-out="100">
               <div class="w-tab-menu w-clearfix">
-                <a class="w-tab-link w--current w-inline-block createtab" data-w-tab="Create New">
+                    <a class="w-tab-link w--current w-inline-block searchtab" data-w-tab="Search">
+                    <div><strong><img class="searchImage2" src="images/search.svg" alt="">Search</strong>
+                    </div>
+                     </a>
+                  
+                  <a class="w-tab-link w-inline-block createtab" data-w-tab="Create New">
                   <div><strong>Create New Workout</strong>
                   </div>
                 </a>
-                <a class="w-tab-link w-inline-block searchtab" data-w-tab="Search">
-                  <div><strong><img class="searchImage2" src="images/search.svg" alt="">Search</strong>
-                  </div>
-                </a>
+
               </div>
               <div class="w-tab-content">
                 <div class="w-tab-pane w-clearfix" data-w-tab="Create New">

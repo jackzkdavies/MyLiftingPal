@@ -26,6 +26,8 @@ function toggle(divID){
 }
 }
 
+
+
 function checkLoginStatus(){
 //    if ($.cookie("mlpsession") === undefined){
 //        window.location.replace("index.html");
@@ -291,7 +293,7 @@ function checkResults(){
                             myDiaryResults['data'][myRes]['percentage'];
                             toAppend+='%</div></div>'+
                             '<div id="'+myResId+myDiaryResults['data'][myRes]['id']+'" style="display:none; ">'+
-                            '<div style=" margin-bottom: -35px; "><a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a></div>'+
+                            '<div style=" margin-bottom: -35px; "><a href="javascript:diaryEditExercise('+myDiaryResults['data'][myRes]['id']+');" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a></div>'+
                             '</div><br><hr></div></div><div id="'+myResId+"Third"+'"></div> ';
                             
                             
@@ -317,7 +319,8 @@ function checkResults(){
                             myDiaryResults['data'][myRes]['percentage'];
                             toAppend+='%</div></div>'+
                             '<div id="'+myResId+myDiaryResults['data'][myRes]['id']+'" style="display:none;">'+
-                            '<div style=" margin-bottom: -35px;"><a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a></div>'+
+                            '<div id="diaryEditExDiv" style="display:none"></div>'
+                            '<div style=" margin-bottom: -35px;"><a href="javascript:diaryEditExercise('+myDiaryResults['data'][myRes]['id']+');" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a></div>'+
                             '</div><br><hr></div>';
                             
                             var resId="#"+myResId+"Second";
@@ -353,6 +356,14 @@ function checkResults(){
         console.log(e);
     }
 }
+function diaryEditExercise(inputID){
+    $('#diaryEditExDiv').empty();
+    var toAppend ='';
+    toAppend +=""
+    mlpObject.changeResults({id:inputID})
+}
+
+
 function diaryModalHistory(inputID){
     var records = mlpObject.selectResults({exerciseid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result['data'];
 //    console.log (mlpObject.selectResults({exerciseid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result);
@@ -885,6 +896,69 @@ function toggleMyWorkouts(){
  
 }
 
+
+function addWorkoutToDiary(inputID){
+    try{
+        mlpObject.addResults({workoutid:inputID, assigneddate:year+"-"+(month+1)+"-"+date});
+    }
+    catch(e){
+        
+    }
+    
+}
+
+function workoutExerciseEdit(inputID,wID){
+    console.log(wID);
+    try{
+        var rep=document.getElementById("updateModalAddRep").value;
+        var set=document.getElementById("updateModalAddSet").value;
+        var wei=document.getElementById("updateModalAddWeight").value;
+        var rp=document.getElementById("updateModalAddRPE").value;
+        var rm=document.getElementById("updateModalAddRM").value;
+
+        console.log(mlpObject.changeExercise({id:wID,exerciseid:inputID,reps:rep,sets:set, rpe:rp, weight:wei, percentage:rm}));
+        
+    }
+    catch(e){
+        
+    }
+    
+}
+function modalWorkoutExerciseEdit(inputID,wID){
+    console.log(wID);
+    var workouts = mlpObject.getExercises({id:inputID}).result;
+
+     
+     
+//    document.getElementById("updateModalAddRep").value = workouts['data'][0]['name'];
+//    document.getElementById("updateModalAddSet").value = workouts['data'][0]['name'];
+//    document.getElementById("updateModalAddWeight").value = workouts['data'][0]['name'];
+//    document.getElementById("updateModalAddRPE").value = workouts['data'][0]['name'];
+//    document.getElementById("updateModalAddRM").value = workouts['data'][0]['name'];
+     
+    document.getElementById("updateModalAddRep").value = 0;
+    document.getElementById("updateModalAddSet").value = 0;
+    document.getElementById("updateModalAddWeight").value = 0;
+    document.getElementById("updateModalAddRPE").value = 0;
+    document.getElementById("updateModalAddRM").value = 0; 
+     
+    $("#myModalLabelWorkoutExerciseEdit").empty();
+    $("#myModalLabelWorkoutExerciseEdit").append(workouts['data'][0]['name']);
+    
+    
+    $("#modalWorkoutExerciseEditControls").empty();
+    var buttons='<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
+            '<button onclick="workoutExerciseEdit('+inputID+','+wID+')" type="button" class="btn btn-primary">Save</button>';
+    $("#modalWorkoutExerciseEditControls").append(buttons);
+    
+    
+    var options = {
+    "backdrop" : "static",
+    "show":"true"};
+    $('#modalWorkoutExerciseEdit').modal(options);
+    
+}
+
 function addMyworkoutDetails(input){
 
     var toAppend ="";
@@ -908,12 +982,16 @@ function addMyworkoutDetails(input){
 
                 }
             else{
-                toAppend +='<br><table class="table table-striped">'+
+//                console.log(workouts['data'][workout]);
+//                console.log(workouts['data'][workout]['exerciseid']);
+//                console.log(wnames['data'][0]);
+                toAppend +='<br><table onclick="modalWorkoutExerciseEdit('+workouts['data'][workout]['exerciseid']+','+workouts['data'][workout]['id']+')" class="table table-striped">'+
                 '<thead>'+
                     '<tr>'+
-                        '<td colspan="2">'+wnames['data'][0]['name']+'</td>'+
-                        '<td colspan="2">'+wnames['data'][0]['musclegroup']+'</td>'+
-                        '<td colspan="2">'+wnames['data'][0]['type']+'</td>'+
+                        '<td colspan="5">'+wnames['data'][0]['name']+'</td>'+
+//                        '<td colspan="2">'+wnames['data'][0]['musclegroup']+'</td>'+
+//                        '<td colspan="2">'+wnames['data'][0]['type']+'</td>'+
+                        '<td style="text-align:right" colspan="1"><i class="fa fa-cog"></i></td>'+
                     '</tr>'+
                 '</thead>'+
 
@@ -991,16 +1069,16 @@ function deleteWorkout(wId){
     displayMyWorkouts();
 }
 function updateModalWorkoutAdd(wId){
-//    console.log(wId);
-    var workout = mlpObject.getWorkouts({id:wId});
+    console.log(wId);
+//    var workout = mlpObject.getWorkouts({id:wId});
     
-    $("#myModalLabelWorkoutAdd").empty();
-    $("#myModalLabelWorkoutAdd").append("Add " + workout.result['data'][0]['name'] + " To:");
+//    $("#myModalLabelWorkoutAdd").empty();
+//    $("#myModalLabelWorkoutAdd").append("Add " + workout.result['data'][0]['name'] + " To:");
     
     var options = {
     "backdrop" : "static",
     "show":"true"};
-    $('#basicModalAdd').modal(options);
+    $('#basicModalAddWorkout').modal(options);
 }
 //Display my workouts
 
