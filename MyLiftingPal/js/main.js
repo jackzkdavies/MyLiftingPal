@@ -39,7 +39,7 @@ function checkLoginStatus(){
 //    if ($.cookie("mlpsession") === undefined){
 //        window.location.replace("index.html");
 //    }
-
+alert(window.location.pathname);
 var userData = mlpObject.getUser().result;
         var locationTest = [(window.location.pathname).toLocaleString(), "/index.html"];
         if (userData["success"] === true){
