@@ -39,12 +39,12 @@ function checkLoginStatus(){
 //    if ($.cookie("mlpsession") === undefined){
 //        window.location.replace("index.html");
 //    }
-alert(window.location.pathname);
+
 var userData = mlpObject.getUser().result;
         var locationTest = [(window.location.pathname).toLocaleString(), "/index.html"];
         if (userData["success"] === true){
 
-                if(locationTest[0] === locationTest[1] || locationTest[0] ==='/'){
+                if(locationTest[0].indexOf('index') > -1){
                     window.location.replace("main-page.html"); 
                 }
                         
@@ -53,10 +53,10 @@ var userData = mlpObject.getUser().result;
                     window.location.replace("main-page.html");
                 }
         else{
-            if(locationTest[0] !=='/'){
-                if(locationTest[0] !== locationTest[1] )
+
+                if(locationTest[0].indexOf('index') < -1 )
                     window.location.replace("index.html");
-                }
+                
             }
 }
 
