@@ -9,8 +9,15 @@
 
 //Create MLP object
 var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
+
 var globalExerciseObjs; 
+
+try{
 var displayUnits = mlpObject.getUser().result['data']['units'];
+}
+
+catch(e){}
+
 //Toggling ful view of exercises with
 function slideToggle(number){
     $(".tabsdiv"+number).slideToggle(400);
@@ -34,18 +41,23 @@ function checkLoginStatus(){
 //    }
 
 var userData = mlpObject.getUser().result;
+        var locationTest = [(window.location.pathname).toLocaleString(), "/index.html"];
+        if (userData["success"] === true){
 
-		if (userData["success"] === true){
-		
-			//logged in  
+                if(locationTest[0] === locationTest[1] || locationTest[0] ==='/'){
+                    window.location.replace("main-page.html"); 
+                }
                         
-		}
+            }
         else if (userData['errormsg'].indexOf('You are already logged in as') > -1){
                     window.location.replace("main-page.html");
                 }
         else{
-                   //window.location.replace("index.html");
+            if(locationTest[0] !=='/'){
+                if(locationTest[0] !== locationTest[1] )
+                    window.location.replace("index.html");
                 }
+            }
 }
 
 function logout(){
