@@ -911,7 +911,7 @@ function toggleMyWorkouts(){
 
 function addWorkoutToDiary(inputID){
     try{
-        mlpObject.addResults({workoutid:inputID, assigneddate:year+"-"+(month+1)+"-"+date});
+        console.log(mlpObject.addResults({workoutid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result);
     }
     catch(e){
         
@@ -1082,11 +1082,19 @@ function deleteWorkout(wId){
 }
 function updateModalWorkoutAdd(wId){
     console.log(wId);
-//    var workout = mlpObject.getWorkouts({id:wId});
+    var workout = mlpObject.getWorkouts({id:wId});
+
+//
+//    addWorkoutToDiary
+    $("#myModalLabelWorkoutAdd").empty();
+    $("#myModalLabelWorkoutAdd").append("Add " + workout.result['data'][0]['name'] + " To:");
     
-//    $("#myModalLabelWorkoutAdd").empty();
-//    $("#myModalLabelWorkoutAdd").append("Add " + workout.result['data'][0]['name'] + " To:");
-    
+    $("#modalWorkoutAddTo").empty();
+    var toAppend ='';
+     toAppend += '<h3 onclick='+'"addWorkoutToDiary('+wId+')"><i class="fa fa-book"></i>Current Day</h3>'+
+                            '<p style="color:#77b2c9">or</p>'+
+                            '<h3><i class="fa fa-calendar"></i>Select Day</h3>';
+    $("#myModalLabelWorkoutAdd").append(toAppend);
     var options = {
     "backdrop" : "static",
     "show":"true"};
