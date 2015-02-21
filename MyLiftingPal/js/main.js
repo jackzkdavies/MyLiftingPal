@@ -22,12 +22,52 @@ catch(e){}
 function slideToggle(number){
     $(".tabsdiv"+number).slideToggle(400);
 }
+var toggleList={};
+
+function toggleListActivate(){
+
+    try{
+    for (var key in toggleList) {
+      if (toggleList.hasOwnProperty(key)) {
+        if(toggleList[key]===true){
+            var div="#"+key;
+            console.log(div);
+            $(div).slideToggle(400);
+            
+            var test="#DiaryControls"+key;
+            console.log(test); 
+            if (divID.indexOf("Second") != -1) {
+            $(test).slideToggle(400);
+            }
+        }
+        
+      }
+    }
+    }
+    catch(e){console.log(e);}
+}
 
 function toggle(divID){
+    if (!(divID in toggleList)){
+        toggleList[divID] =true;
+    }
+    
+    else{
+        var temp  = toggleList[divID];
+        if(temp===true ){
+
+            toggleList[divID] = false;
+        }
+        else{
+            toggleList[divID] = true;
+        }
+    }
+    
     var div="#"+divID;
     $(div).slideToggle(400);
-    
+
     var test="#DiaryControls"+divID;
+    console.log(test);
     if (divID.indexOf("Second") != -1) {
         $(test).slideToggle(400);
 }
@@ -95,24 +135,25 @@ checkResults();
 }
 function centerCalander(){
     var t = document.getElementById("date-Picker");
-    t.style.paddingLeft=0;
-    var sw= screen.availWidth;
-    var tw = $("div.calender table").width();
-    var dpw = $("div.datepicker").width();
-    if (tw !== 0){
-            if(tw===217){
-            t.style.paddingLeft= ((sw-tw)/2)-22+'px';
-            t.style.backgroundColor="#77b2c9";
-        }
-        else{
-            t.style.paddingLeft= ((sw-tw)/2)-25+'px';
-            t.style.backgroundColor="#77b2c9";
-        }
-    }
-    else{
-        t.style.paddingLeft= ((sw-dpw)/2)-10+'px';
-        t.style.backgroundColor="#77b2c9";
-    }
+    t.style.backgroundColor="#77b2c9";
+//    t.style.paddingLeft=0;
+//    var sw= screen.availWidth;
+//    var tw = $("div.calender table").width();
+//    var dpw = $("div.datepicker").width();
+//    if (tw !== 0){
+//            if(tw===217){
+//            t.style.paddingLeft= ((sw-tw)/2)-22+'px';
+//            t.style.backgroundColor="#77b2c9";
+//        }
+//        else{
+//            t.style.paddingLeft= ((sw-tw)/2)-25+'px';
+//            t.style.backgroundColor="#77b2c9";
+//        }
+//    }
+//    else{
+//        t.style.paddingLeft= ((sw-dpw)/2)-10+'px';
+//        t.style.backgroundColor="#77b2c9";
+//    }
 }
 
 function toggleTest(){
@@ -272,13 +313,16 @@ function checkResults(){
                 
                 
                 var myResId="myResExNameDiv"+myDiaryResults['data'][myRes]['exerciseid'];
-
+                
+                 
+                
                 if (document.getElementById(myResId) == null ){
                     if (myRes != 0 ){toAppend +="<div style=''><hr style='width:100%;float:left;  border-top:3px solid #77b2c9; margin-top: 20px; */' /></div>";} 
                     toAppend += '<div style="width:100%; float:left">'+
                         '<div id="'+myResId+'" onclick="toggle('+"'"+myResId+"Second"+"'"+')" style="width:100%; float:left"><h3 style="text-align:left">'+
                             myDiaryResults['data'][myRes]['name']+
                             '</h3></div>';
+                            toAppend += bestVolume(myDiaryResults['data'][myRes]['exerciseid']);
 //                            '<div style="width:60%; float:left"><h3 style="text-align:right;font-size:50px">'+
 //                                '<i class="fa fa-plus-circle"></i>&nbsp;'+
 //                                '<i class="fa fa-pencil"></i>&nbsp;'+
@@ -331,7 +375,7 @@ function checkResults(){
                             myDiaryResults['data'][myRes]['percentage'];
                             toAppend+='%</div></div>'+
                             '<div id="'+myResId+myDiaryResults['data'][myRes]['id']+'" style="display:none;">'+
-                            '<div id="diaryEditExDiv" style="display:none"></div>'
+                            
                             '<div style=" margin-bottom: -35px;"><a href="javascript:diaryEditExercise('+myDiaryResults['data'][myRes]['id']+');" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a></div>'+
                             '</div><br><hr></div>';
                             
@@ -361,18 +405,62 @@ function checkResults(){
 
                 
         }
+        
             
         
     }
     catch(e){
         console.log(e);
     }
+    toggleListActivate();
+}
+
+function updateDiaryResults(inputID){
+    try{
+        var rep=document.getElementById("updateModalChangeRep").value;
+        var set=document.getElementById("updateModalChangeSet").value;
+        var wei=document.getElementById("updateModalChangeWeight").value;
+        var rp=document.getElementById("updateModalChangeRPE").value;
+        var rm=document.getElementById("updateModalChangeRM").value;
+        
+        
+        //exerciseid, workoutid, programid, reps, sets, rpe, weight, percentage,assigneddate
+        console.log(mlpObject.changeResults({id:inputID, reps:rep, sets:set, weight:wei, rpe:rp, percentage:rm}).result);
+        $('#modalEditDiaryResult').modal('hide');
+        checkResults();
+    }
+    catch(e){}
+    
+}
+function diaryRemoveResults(inputID){
+    try{
+        mlpObject.removeResults({id:inputID});
+        $('#modalEditDiaryResult').modal('hide');
+        checkResults();
+    }
+    catch(e){}
 }
 function diaryEditExercise(inputID){
-    $('#diaryEditExDiv').empty();
-    var toAppend ='';
-    toAppend +=""
-    mlpObject.changeResults({id:inputID})
+    var result = mlpObject.selectResults({id:inputID}).result['data'][0];
+    
+    console.log(result);
+    document.getElementById("updateModalChangeRep").value = result['reps'];
+    document.getElementById("updateModalChangeSet").value = result['sets'];
+    document.getElementById("updateModalChangeWeight").value = result['weight'];
+    document.getElementById("updateModalChangeRPE").value = result['rpe'];
+    document.getElementById("updateModalChangeRM").value = result['percentage'];
+    $("#basicModalUpdateButtons").empty();
+
+    var buttons='<button onclick="diaryRemoveResults('+inputID+')" type="button" style="background-color:#ff6666;border-color:#ff6666" class="btn btn-primary">Remove</button>'+
+            '<button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
+            '<button onclick="updateDiaryResults('+inputID+')" type="button" class="btn btn-primary">Update</button>';
+    $("#basicModalUpdateButtons").append(buttons);
+    
+    var options = {
+    "backdrop" : "static",
+    "show":"true"};
+    $('#modalEditDiaryResult').modal(options);
+    
 }
 
 
@@ -467,10 +555,30 @@ function addModalDiaryResult(inputID){
     catch(e){}
     
 }
+
+function bestVolume(exId){
+    var maxVolume=0;
+    var volume;
+    var toReturn;
+    try{
+    var results = mlpObject.selectResults({exerciseid:exId}).result['data'];
+    for(res in results){
+        volume = results[res]['weight'] * results[res]['reps'];
+        if(volume > maxVolume){
+            maxVolume = volume;
+            toReturn='<div>'+
+                    'Best Volume: '+volume+displayUnits+' @ '+results[res]['weight']+displayUnits+' for '+results[res]['reps']+' reps.'+
+                    '</div>';
+            }
+    }
+    console.log(toReturn);
+    return toReturn;
+    }
+    catch(e){console.log(e);}
+}
 function diaryModalAddSet(inputID){
     console.log(inputID);
-
-    
+        
     
     $("#basicModalAddSetButtons").empty();
 //    var delBut = '<button onclick="deleteExercise('+inputId+')" type="button" class="btn btn-primary">Delete</button>';

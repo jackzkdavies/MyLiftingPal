@@ -100,7 +100,7 @@
             
             
             
-            var days= ["Sunday","Monday","Tuesday","Wednesday", "Thursdat","Friday","Saturday"]; 
+            var days= ["Sunday","Monday","Tuesday","Wednesday", "Thursday","Friday","Saturday"]; 
             var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
             var monthPrefix = ["st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"];
             
@@ -197,6 +197,34 @@
                             Are you sure you want to delete all sets for this exercise?
                         </div>
                         <div id="basicModalDeleteButtons" class="modal-footer">
+<!--                            <button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button onclick="deleteModalDiaryResult('+inputID+')" type="button" class="btn btn-primary">Confirm</button>-->
+                    </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="modal fade" id="modalEditDiaryResult" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                        <h4 class="modal-title" id="myModalLabelUpdateResult">Update Results</h4>
+                        </div>
+                        <div class="modal-body" id="ModalUpdateResult">
+                            <p  class="blackfont">Reps</p>
+                            <input id="updateModalChangeRep" class="w-input field feild2" type="number" placeholder="1" name="Reps" required="required" data-name="exercisename">
+                            <p  class="blackfont">Set</p>
+                            <input id="updateModalChangeSet" class="w-input field feild2" type="number" placeholder="1" name="Set" required="required" data-name="exercisename">
+                            <p  class="blackfont">Weight</p>
+                            <input id="updateModalChangeWeight" class="w-input field feild2" type="number" placeholder="1" name="Weight" required="required" data-name="exercisename">
+                            <p  class="blackfont">RPE</p>
+                            <input id="updateModalChangeRPE" class="w-input field feild2" type="number" min="1" max="10" placeholder="1" name="RPE" required="required" data-name="exercisename">
+                            <p  class="blackfont">%1RM</p>
+                            <input id="updateModalChangeRM" class="w-input field feild2" type="number" min="1" max="100" placeholder="1" name="%1RM" required="required" data-name="exercisename">
+                            <br><hr>
+                        </div>
+                        <div id="basicModalUpdateButtons" class="modal-footer">
 <!--                            <button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>
                             <button onclick="deleteModalDiaryResult('+inputID+')" type="button" class="btn btn-primary">Confirm</button>-->
                     </div>
