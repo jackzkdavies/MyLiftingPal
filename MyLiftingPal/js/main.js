@@ -20,7 +20,7 @@ catch(e){}
 
 //Toggling ful view of exercises with
 function slideToggle(number){
-    $(".tabsdiv"+number).slideToggle(400);
+    $(".tabsdiv"+number).slideToggle(800);
 }
 var toggleList={};
 
@@ -32,13 +32,13 @@ function toggleListActivate(){
         if(toggleList[key]===true){
             var div="#"+key;
             console.log(div);
-            $(div).slideToggle(400);
+            $(div).slideToggle(0);
             
-            var test="#DiaryControls"+key;
-            console.log(test); 
-            if (divID.indexOf("Second") != -1) {
-            $(test).slideToggle(400);
-            }
+//            var test="#DiaryControls"+key;
+//            console.log(test); 
+//            if (divID.indexOf("Second") != -1) {
+//            $(test).slideToggle(400);
+//            }
         }
         
       }
@@ -64,13 +64,13 @@ function toggle(divID){
     }
     
     var div="#"+divID;
-    $(div).slideToggle(400);
+    $(div).slideToggle(800);
 
-    var test="#DiaryControls"+divID;
-    console.log(test);
-    if (divID.indexOf("Second") != -1) {
-        $(test).slideToggle(400);
-}
+//    var test="#DiaryControls"+divID;
+//    console.log(test);
+//    if (divID.indexOf("Second") != -1) {
+//        $(test).slideToggle(400);
+//}
 }
 
 
@@ -106,7 +106,7 @@ function logout(){
 }
 
 function slideToggleCalender(){
-    $(".calender").slideToggle(400);
+    $(".calender").slideToggle(800);
     centerCalander();
 }
 
@@ -321,8 +321,8 @@ function checkResults(){
                     toAppend += '<div style="width:100%; float:left">'+
                         '<div id="'+myResId+'" onclick="toggle('+"'"+myResId+"Second"+"'"+')" style="width:100%; float:left"><h3 style="text-align:left">'+
                             myDiaryResults['data'][myRes]['name']+
-                            '</h3></div>';
-                            toAppend += bestVolume(myDiaryResults['data'][myRes]['exerciseid']);
+                            '</h3>';
+                            toAppend += bestVolume(myDiaryResults['data'][myRes]['exerciseid'])+'</div>';
 //                            '<div style="width:60%; float:left"><h3 style="text-align:right;font-size:50px">'+
 //                                '<i class="fa fa-plus-circle"></i>&nbsp;'+
 //                                '<i class="fa fa-pencil"></i>&nbsp;'+
@@ -331,7 +331,7 @@ function checkResults(){
 //                        '';
                         
             
-                    toAppend +='<div id="'+myResId+"Second"+'" ><div style="width:100%; float:left"><br>'+
+                    toAppend +='<div id="'+myResId+"Second"+'" style="width:100%"><div style="width:100%; float:left"><br>'+
                             '<div onclick="toggle('+"'"+myResId+myDiaryResults['data'][myRes]['id']+"'"+')"><div class="exerciseRepsDiv" >'+
                             myDiaryResults['data'][myRes]['reps']+
                             ' </div>'+
@@ -389,7 +389,7 @@ function checkResults(){
                 var resId=myResId+"Third"
                 toAppend = '';
                 toAppend += '<div id="DiaryControls'+myResId+'Second" style="width:100%;" >'+
-                '<a href="javascript:diaryModalAddSet('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 7px; width:60px; margin-bottom: 4px; background-color: white; color:#77b2c9" class="btn btn-default btn-circle-main"  title="Add Result to your Exercise"><i class="fa fa-plus"></i></a>'+
+                '<a href="javascript:diaryModalAddSet('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 5px;padding-left: 1px; width:60px; margin-bottom: 4px; background-color: white; color:#77b2c9" class="btn btn-default btn-circle-main"  title="Add Result to your Exercise"><i class="fa fa-plus"></i></a>'+
                 '<a href="javascript:diaryModalDelete('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 5px; width:60px; margin-bottom: 4px; background-color: #ff6666; color:white" class="btn btn-default btn-circle-main" title="Delete exercise from your diary"><i class="fa fa-times"></i></a>'+
                 '<a href="javascript:diaryModalHistory('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 5px; width:60px; margin-bottom: 4px; background-color: #66cc66; color:white" class="btn btn-default btn-circle-main"  title="View your log for this exercise"><i class="fa fa-book"></i></a>'+
 //                '<a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a>'+
@@ -557,17 +557,21 @@ function addModalDiaryResult(inputID){
 }
 
 function bestVolume(exId){
-    var maxVolume=0;
+    var maxVolume=(-99999);
     var volume;
     var toReturn;
     try{
     var results = mlpObject.selectResults({exerciseid:exId}).result['data'];
     for(res in results){
-        volume = results[res]['weight'] * results[res]['reps'];
-        if(volume > maxVolume){
+        volume = (results[res]['weight']) * (results[res]['reps']);
+        console.log(maxVolume);
+        if(volume < 0){
+            volume = volume*(-1);
+        }
+        if((volume) > maxVolume){
             maxVolume = volume;
             toReturn='<div>'+
-                    'Best Volume: '+volume+displayUnits+' @ '+results[res]['weight']+displayUnits+' for '+results[res]['reps']+' reps.'+
+                    'Best Volume: '+(volume)+displayUnits+' @ '+results[res]['weight']+displayUnits+' for '+results[res]['reps']+' reps.'+
                     '</div>';
             }
     }
