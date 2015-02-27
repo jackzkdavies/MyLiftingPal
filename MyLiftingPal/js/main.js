@@ -470,43 +470,48 @@ function diaryModalHistory(inputID){
 
 
     for (record in records){
-        $("#basicModalHistoryBody").empty();
+        $("#modalHistoryRecords").empty();
         var toAppend="";
             
         try{
             if (typeof records[record]['records']['amrap']['weight'] !='undefined'){
-            toAppend += '<p>Best Reps with '+records[record]['records']['amrap']['weight']+displayUnits+': '+records[record]['records']['amrap']['reps']+
+            toAppend = '<p>Best Reps with '+records[record]['records']['amrap']['weight']+displayUnits+': '+records[record]['records']['amrap']['reps']+
                     ' @RPE '+records[record]['records']['amrap']['rpe']+'</p><br>';
+            $("#modalHistoryRecords").append(toAppend);
             }
         
         }
-            catch(e){}
+            catch(e){ console.log(e);}
         
         try{
-            if (typeof records[record]['records']['overall']['onerm'] !='undefined'){
-            toAppend +='<p>1RM (estimated): '+records[record]['records']['overall']['onerm']+displayUnits+'</p><br>';
+            if (typeof records[record]['records']['overall']['max'] !='undefined'){
+            toAppend ='<p>1RM (estimated): '+records[record]['records']['overall']['max']+displayUnits+'</p><br>';
+            $("#modalHistoryRecords").append(toAppend);
+    
             }
         }
-        catch(e){}
+        catch(e){ console.log(e); }
 
         try{
-            if (typeof records[record]['records']['backoffs']['reps'] !='undefined'){
-                console.log(records[record]['records']['backoffs']['reps']);
-            toAppend +='<p>Best volume for '+ records[record]['records']['backoffs']['reps'] +' rep sets: ' + records[record]['records']['backoffs']['weight'] +displayUnits+'</p><br>';
+            if (typeof records[record]['records']['backoffs']['best'] !='undefined'){
+                console.log(records[record]['records']['backoffs']['best']);
+            toAppend ='<p>Best volume for current weight '+ records[record]['records']['backoffs']['best'] +displayUnits+'</p><br>';
+                $("#modalHistoryRecords").append(toAppend);
+    
             }
         }
-        catch(e){}
+        catch(e){ console.log(e);}
         
         try{
-            if(typeof records[record]['history']['sets'] != 'undefined'){
-            toAppend +='<p>Last time you did' + records[record]['history']['sets']+ 'x' +  records[record]['history']['reps'] + ' using ' + records[record]['history']['weight'] +displayUnits +'</p><br>';
-            }
+//            if(typeof records[record]['history']['sets'] != 'undefined'){
+//            toAppend +='<p>Last time you did' + records[record]['history']['sets']+ 'x' +  records[record]['history']['reps'] + ' using ' + records[record]['history']['weight'] +displayUnits +'</p><br>';
+//            }
         }
-            catch(e){}
+            catch(e){ console.log(e);}
+        }
                 
     console.log(records[record]['records']);
-    $("#basicModalHistoryBody").append(toAppend);
-    }
+
     var options = {
     "backdrop" : "static",
     "show":"true"};
