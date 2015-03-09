@@ -575,6 +575,7 @@ function bestVolume(exId){
         }
         if((volume) > maxVolume){
             maxVolume = volume;
+            console.log(results[res]);
             toReturn='<div>'+
                     'Best Volume: '+(volume)+displayUnits+' @ '+results[res]['weight']+displayUnits+' for '+results[res]['reps']+' reps.'+
                     '</div>';
