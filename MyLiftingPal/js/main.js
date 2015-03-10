@@ -20,7 +20,7 @@ catch(e){}
 
 //Toggling ful view of exercises with
 function slideToggle(number){
-    $(".tabsdiv"+number).slideToggle(800);
+    $(".tabsdiv"+number).slideToggle(0);
 }
 var toggleList={};
 
@@ -64,7 +64,7 @@ function toggle(divID){
     }
     
     var div="#"+divID;
-    $(div).slideToggle(800);
+    $(div).slideToggle(0);
 
 //    var test="#DiaryControls"+divID;
 //    console.log(test);
@@ -239,6 +239,19 @@ function dairyPageExSearch(){
     catch(e){console.log(e);}
     finally{};
 }
+
+function diaryPageWorkoutSeach(){
+    var searchTerms =['name','userid'];
+    var searchTerm= (document.getElementById("mainSearchTerm").value.toString()).trim();
+    document.getElementById("searchresults").innerHTML = "";
+    document.getElementById("searchResultsHeading").innerHTML="";
+    if (searchTerm ===""){
+        $("#searchresults").append("Please enter a keyword");
+        return;
+    }
+}
+
+
 //My Diary Page
 var firstMainPageAddClicked=false;
 function mainPageAdd(){
@@ -305,7 +318,7 @@ function checkResults(){
             
 //            console.log(myDiaryResults);
             
-            $("#myDairyResults").append('<div><br></div>')
+            $("#myDairyResults").append('<div><br></div>');
             
             for (myRes in myDiaryResults['data']){
                 var toAppend ="";
@@ -1539,6 +1552,8 @@ function submitSignUpForm(){
         sConfirmPassword = null;
     }
 }
+
+//
 /// OLD CREATE USER CHECK
 //function checkIfUserCreated(u,p){
 //    var r = mlpObject['result']['success'];
@@ -1598,6 +1613,8 @@ function submitLoginForm(){
         message = null;
     }
 }
+
+
 function signOut(){
     try{
         if (mlpObject.logout().result["success"] === true){
