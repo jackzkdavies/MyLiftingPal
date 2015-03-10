@@ -5,8 +5,7 @@
 
 //Create MLP object
 try{
-    window.localStorage.setItem("mlpObject", JSON.stringify(mlp('f5c31db3b7e2675a43a61a87923955c9')));
-    var mlpObject = JSON.parse(window.localStorage.getItem("mlpObject"));
+    var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
 }
 
 catch(e){
@@ -20,6 +19,13 @@ try{
 }
 
 catch(e){}
+
+try{
+    window.localStorage.setItem("toggleSpeed", '0');
+}
+
+catch(e){}
+
 
 //Code Section for Loging in
 function submitLoginForm(){

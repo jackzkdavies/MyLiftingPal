@@ -29,7 +29,7 @@
   <script type="text/javascript" src="js/modernizr.js"></script>
   <script type="text/javascript" src="js/jquery.cookie.js"></script>
   <script type="text/javascript" src="js/mlp.js"></script>
-  <script type="text/javascript" src="js/main.js"></script>
+  <script type="text/javascript" src="js/MLP-DiaryPage.js"></script>
   <script type="text/javascript" src="js/webflow.js"></script>
   <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
@@ -240,6 +240,24 @@
               </div>
             </div>
           
+                      <div class="modal fade" id="modalDisplayWorkoutExercies" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                        <h4 class="modal-title" id="modalLabelDWE">WorkOut Contains</h4>
+                        </div>
+                        <div class="modal-body" id="modalDWEdetails">
+         
+                        </div>
+                        <div id="basicModalUpdateButtons" class="modal-footer">
+<!--                            <button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button onclick="deleteModalDiaryResult('+inputID+')" type="button" class="btn btn-primary">Confirm</button>-->
+                    </div>
+                </div>
+              </div>
+            </div>
+          
           
           
           
@@ -282,6 +300,8 @@
                 </div>
                 <div id="addDairySearchResults">
                     <p id="searchResultsHeading"></p>
+                 
+                    
                     <table id='mytable' style='display: none; text-align:left; text-shadow: 0px 0px rgba(255, 255, 255, 0);'>
                       <thead>
                           <tr>
@@ -291,6 +311,19 @@
                           </tr>
                       </thead>
                       <tbody id ="searchresults">
+                          
+                      </tbody>
+                  </table>
+                    
+                    <table id='mytableWorkouts' style='display: none; text-align:left; text-shadow: 0px 0px rgba(255, 255, 255, 0);'>
+                      <thead>
+                          <tr>
+                              <td style='color:black; font-weight: bold;background-color: white'>Name</td>
+                              <td style='color:white; font-weight: 650;background-color: #77b2c9;' >Author</td>
+                              <!--<td style='color:white; font-weight: 650;background-color: #77b2c9; border-radius:0px 3px 0px 0px'>Type</td>-->
+                          </tr>
+                      </thead>
+                      <tbody id ="searchresultsWorkouts">
                           
                       </tbody>
                   </table>

@@ -1,11 +1,12 @@
 //Create MLP object
-var mlpObject = JSON.parse(window.localStorage.getItem("mlpObject"));
+var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
 
 //Global Variables 
 var globalExerciseObjs; 
 var globalWorkoutObjs;
 var globalProgramObjs; 
 var firstMainPageAddClicked=false;
+var toggleSpeed = window.localStorage.getItem("toggleSpeed");
 var submitDairySearchClass= 'e';
 var displayUnits = window.localStorage.getItem("displayUnits");
 var toggleList={};
@@ -86,7 +87,7 @@ function toggleListActivate(){
         if(toggleList[key]===true){
             var div="#"+key;
             console.log(div);
-            $(div).slideToggle(0);
+            $(div).slideToggle(toggleSpeed);
             
 //            var test="#DiaryControls"+key;
 //            console.log(test); 
@@ -118,11 +119,11 @@ function toggle(divID){
     }
     
     var div="#"+divID;
-    $(div).slideToggle(0);
+    $(div).slideToggle(toggleSpeed);
 }
 
 function slideToggleCalender(){
-    $(".calender").slideToggle(800);
+    $(".calender").slideToggle(toggleSpeed);
     centerCalander();
 }
 
@@ -135,57 +136,6 @@ function toggleDropDownArrow(i){
     }
 }
 
-function mainPageAdd(){
-      if(firstMainPageAddClicked === false){
-        document.getElementById('mainExSearch').style.color='#77b2c9';
-        document.getElementById('mainWorkSearch').style.color='#333';
-        document.getElementById('mainProSearch').style.color='#333';  
-        document.getElementById("mainSearchTerm").placeholder="Select Exercise to add";
-        firstMainPageAddClicked = true;  
-      }
-    
-     var t = $("#addToMyDiaryDropdown").is(':visible');
-
-     $("#addToMyDiaryDropdown").slideToggle(400);
-     if ( t === true){
-         
-        document.getElementById('mainPageAddButton').style.color='white';
-        document.getElementById('mainPageAddButton').style.background='#77b2c9';
-     }
-     else{
- 
-        document.getElementById('mainPageAddButton').style.color='#77b2c9';
-        document.getElementById('mainPageAddButton').style.background='white';}
-
-    
-}
-
-function mainSearchEx(inp){
-
-    if (inp === 'e'){   
-        document.getElementById('mainExSearch').style.color='#77b2c9';
-        document.getElementById('mainWorkSearch').style.color='#333';
-        document.getElementById('mainProSearch').style.color='#333';  
-        document.getElementById("mainSearchTerm").placeholder="Select Exercise to add";
-        submitDairySearchClass= 'e';
-    }
-    else if (inp === 'w'){   
-
-        document.getElementById('mainExSearch').style.color='#333';
-        document.getElementById('mainWorkSearch').style.color='#77b2c9';
-        document.getElementById('mainProSearch').style.color='#333';
-        document.getElementById("mainSearchTerm").placeholder="Select Workout to add";
-        submitDairySearchClass= 'w';
-    }
-    else if (inp === 'p'){   
-        document.getElementById('mainExSearch').style.color='#333';
-        document.getElementById('mainWorkSearch').style.color='#333'; 
-        document.getElementById('mainProSearch').style.color='#77b2c9';
-        document.getElementById("mainSearchTerm").placeholder="Select Programme to add";
-        submitDairySearchClass= 'p';
-    }
-    
-}
 
 function checkResults(){
     $("#myDairyResults").empty();
@@ -532,10 +482,85 @@ function addWorkoutToDiary(inputID){
     } 
 }
 
-//Code Section for Diary Searchs
+
+//Code for modals
+function modalDisplayWorkoutExercies(inputID){
+    console.log(inputID);
+    $("#modalDWEdetails").empty();
+//    var delBut = '<button onclick="deleteExercise('+inputId+')" type="button" class="btn btn-primary">Delete</button>';
+//    $("#basicModalAddSetButtons").append(delBut);
+    
+
+    var toAppend='test';
+    $("#modalDWEdetails").append(toAppend);
+    
+    var options = {
+    "backdrop" : "static",
+    "show":"true"};
+    $('#modalDisplayWorkoutExercies').modal(options);
+}
+
+//Code for search section on diary page
+function mainPageAdd(){
+      if(firstMainPageAddClicked === false){
+        document.getElementById('mainExSearch').style.color='#77b2c9';
+        document.getElementById('mainWorkSearch').style.color='#333';
+        document.getElementById('mainProSearch').style.color='#333';  
+        document.getElementById("mainSearchTerm").placeholder="Select Exercise to add";
+        firstMainPageAddClicked = true;  
+      }
+    
+     var t = $("#addToMyDiaryDropdown").is(':visible');
+
+     $("#addToMyDiaryDropdown").slideToggle(toggleSpeed);
+     if ( t === true){
+         
+        document.getElementById('mainPageAddButton').style.color='white';
+        document.getElementById('mainPageAddButton').style.background='#77b2c9';
+     }
+     else{
+ 
+        document.getElementById('mainPageAddButton').style.color='#77b2c9';
+        document.getElementById('mainPageAddButton').style.background='white';}
+
+    
+}
+
+function mainSearchEx(inp){
+
+    if (inp === 'e'){   
+        document.getElementById('mainExSearch').style.color='#77b2c9';
+        document.getElementById('mainWorkSearch').style.color='#333';
+        document.getElementById('mainProSearch').style.color='#333';  
+        document.getElementById("mainSearchTerm").placeholder="Select Exercise to add";
+        submitDairySearchClass= 'e';
+    }
+    else if (inp === 'w'){   
+
+        document.getElementById('mainExSearch').style.color='#333';
+        document.getElementById('mainWorkSearch').style.color='#77b2c9';
+        document.getElementById('mainProSearch').style.color='#333';
+        document.getElementById("mainSearchTerm").placeholder="Select Workout to add";
+        submitDairySearchClass= 'w';
+    }
+    else if (inp === 'p'){   
+        document.getElementById('mainExSearch').style.color='#333';
+        document.getElementById('mainWorkSearch').style.color='#333'; 
+        document.getElementById('mainProSearch').style.color='#77b2c9';
+        document.getElementById("mainSearchTerm").placeholder="Select Programme to add";
+        submitDairySearchClass= 'p';
+    }
+    
+}
+
+
 function submitDairySearch(){
     if (submitDairySearchClass === 'e'){
         dairyPageExSearch();
+    }
+    
+    if (submitDairySearchClass === 'w'){
+        diaryPageWorkoutSeach();
     }
     
 }
@@ -602,7 +627,7 @@ function dairyPageExSearch(){
     $("#searchresults").append(toAppend);
     $('#mytable').DataTable({bFilter: false});
     document.getElementById('mytable').style.display='table';
-    document.getElementById('searchResultsHeading').innerHTML='<div style="line-height:50px">Search results for: '+searchTerm+'</div>';
+    document.getElementById('searchResultsHeading').innerHTML='<div style="line-height:50px">Search results for Exercise: '+searchTerm+'</div>';
     
     }
     catch(e){console.log(e);}
@@ -610,5 +635,69 @@ function dairyPageExSearch(){
 }
 
 function diaryPageWorkoutSeach(){
+    var searchTerms =['name','userid'];
+    var searchTerm= (document.getElementById("mainSearchTerm").value.toString()).trim();
+    document.getElementById("searchresults").innerHTML = "";
+    document.getElementById("searchResultsHeading").innerHTML="";
+    if (searchTerm ===""){
+        $("#searchresultsWorkouts").append("Please enter a keyword");
+        return;
+    }
+    globalWorkoutObjs={};
+    try{  
+    for (st in searchTerms){
+        var data = new Array();
+        data[searchTerms[st]] = searchTerm;
+        var searchResult = mlpObject.getWorkouts(data).result;
+        if (searchResult['success'] === true){
+            for ( objects in searchResult['data'] ){              
+                globalWorkoutObjs[searchResult['data'][objects]['id']]=searchResult['data'][objects];
+            };
+        
+            
+        }
+    }
     
+    var toAppend="";   
+    
+        for (key in globalWorkoutObjs){    
+              if (globalWorkoutObjs.hasOwnProperty(key)) {    
+                  
+        var useDate=[year,(month+1),date];
+        toAppend += "<tr onClick='modalDisplayWorkoutExercies(["+key+"])'>";
+       
+
+        for (st in searchTerms){
+            toAppend += "<td>";
+   
+            if (searchTerms[st] === 'userid'){
+                console.log(searchTerms[st]);
+                console.log(mlpObject.getUsers({id:globalWorkoutObjs[key][searchTerms[st]]}).result['data'][1]);
+                toAppend += mlpObject.getUsers({id:globalWorkoutObjs[key][searchTerms[st]]}).result['data'][1];
+
+            }
+            else {
+                toAppend += globalWorkoutObjs[key][searchTerms[st]];
+            }
+            toAppend += "</td>";
+        }
+        
+        toAppend += "</tr>";
+
+    }}
+    
+    try{
+    $("#mytableWorkouts").dataTable().fnDestroy();
+    $("#searchresultsWorkouts").empty();
+    }
+    catch(e){console.log(e);}
+    
+    $("#searchresultsWorkouts").append(toAppend);
+    $('#mytableWorkouts').DataTable({bFilter: false});
+    document.getElementById('mytableWorkouts').style.display='table';
+    document.getElementById('searchResultsHeading').innerHTML='<div style="line-height:50px">Search results for workout: '+searchTerm+'</div>';
+    
+    }
+    catch(e){console.log(e);}
+    finally{};
 }
