@@ -1,7 +1,6 @@
 //Create MLP object
 var mlpObject = JSON.parse(window.localStorage.getItem("mlpObject"));
 
-
 //Global Variables 
 var globalExerciseObjs; 
 var globalWorkoutObjs;
