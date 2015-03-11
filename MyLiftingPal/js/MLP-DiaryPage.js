@@ -304,7 +304,7 @@ function diaryEditExercise(inputID){
 
 function diaryModalHistory(inputID){
     var records = mlpObject.selectResults({exerciseid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result['data'];
-
+    var test = mlpObject.getExercises({exerciseid:inputID});
 //    console.log(mlpObject.selectResults({exerciseid:inputID}).result['data']);
 
     for (record in records){

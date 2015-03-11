@@ -277,7 +277,7 @@ function mlp(key){
    };
    
    self.selectResults = function(data){
-       //id,exerciseid,workoutid,programid,userid,reps,sets,rpe,weight,percent,assigneddate
+       //id,userid,assigneddate
        self.call('view','selectresults', data, cb);
 	   return self;
    };
