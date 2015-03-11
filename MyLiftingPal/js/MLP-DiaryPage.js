@@ -9,6 +9,7 @@ var firstMainPageAddClicked=false;
 var toggleSpeed = window.localStorage.getItem("toggleSpeed");
 var submitDairySearchClass= 'e';
 var displayUnits = window.localStorage.getItem("displayUnits");
+if (displayUnits === null){displayUnits = 'kg';}
 var toggleList={};
 
 //Code section for checking login state
@@ -86,14 +87,7 @@ function toggleListActivate(){
       if (toggleList.hasOwnProperty(key)) {
         if(toggleList[key]===true){
             var div="#"+key;
-            console.log(div);
             $(div).slideToggle(toggleSpeed);
-            
-//            var test="#DiaryControls"+key;
-//            console.log(test); 
-//            if (divID.indexOf("Second") != -1) {
-//            $(test).slideToggle(400);
-//            }
         }
         
       }
@@ -147,7 +141,6 @@ function checkResults(){
         }
         else{
             
-//            console.log(myDiaryResults);
             
             $("#myDairyResults").append('<div><br></div>');
             
@@ -269,7 +262,7 @@ function updateDiaryResults(inputID){
         
         
         //exerciseid, workoutid, programid, reps, sets, rpe, weight, percentage,assigneddate
-        console.log(mlpObject.changeResults({id:inputID, reps:rep, sets:set, weight:wei, rpe:rp, percentage:rm}).result);
+        mlpObject.changeResults({id:inputID, reps:rep, sets:set, weight:wei, rpe:rp, percentage:rm}).result;
         $('#modalEditDiaryResult').modal('hide');
         checkResults();
     }
@@ -289,7 +282,7 @@ function diaryRemoveResults(inputID){
 function diaryEditExercise(inputID){
     var result = mlpObject.selectResults({id:inputID}).result['data'][0];
     
-    console.log(result);
+
     document.getElementById("updateModalChangeRep").value = result['reps'];
     document.getElementById("updateModalChangeSet").value = result['sets'];
     document.getElementById("updateModalChangeWeight").value = result['weight'];
@@ -311,8 +304,8 @@ function diaryEditExercise(inputID){
 
 function diaryModalHistory(inputID){
     var records = mlpObject.selectResults({exerciseid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result['data'];
-//    console.log (mlpObject.selectResults({exerciseid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result);
 
+//    console.log(mlpObject.selectResults({exerciseid:inputID}).result['data']);
 
     for (record in records){
         $("#modalHistoryRecords").empty();
@@ -339,7 +332,6 @@ function diaryModalHistory(inputID){
 
         try{
             if (typeof records[record]['records']['backoffs']['best'] !='undefined'){
-                console.log(records[record]['records']['backoffs']['best']);
             toAppend ='<p>Best volume for current weight '+ records[record]['records']['backoffs']['best'] +displayUnits+'</p><br>';
                 $("#modalHistoryRecords").append(toAppend);
     
@@ -355,7 +347,6 @@ function diaryModalHistory(inputID){
             catch(e){ console.log(e);}
         }
                 
-    console.log(records[record]['records']);
 
     var options = {
     "backdrop" : "static",
@@ -382,8 +373,7 @@ function diaryModalDelete(inputID){
 }
 
 function deleteModalDiaryResult(inputID){
-    console.log(inputID);
-    console.log(mlpObject.removeResults({exerciseid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}));
+    mlpObject.removeResults({exerciseid:inputID, assigneddate:year+"-"+(month+1)+"-"+date});
     $('#basicModalDelete').modal('hide');
     checkResults();
     
@@ -415,32 +405,34 @@ function bestVolume(exId){
     var results = mlpObject.selectResults({exerciseid:exId}).result['data'];
     for(res in results){
         volume = (results[res]['weight']) * (results[res]['reps']);
-        console.log(maxVolume);
         if(volume < 0){
             volume = volume*(-1);
         }
         if((volume) > maxVolume){
             maxVolume = volume;
-            console.log(results[res]);
             toReturn='<div>'+
                     'Best Volume: '+(volume)+displayUnits+' @ '+results[res]['weight']+displayUnits+' for '+results[res]['reps']+' reps.'+
                     '</div>';
             }
     }
-    console.log(toReturn);
     return toReturn;
     }
     catch(e){console.log(e);}
 }
 
 function diaryModalAddSet(inputID){
-    console.log(inputID);
-        
-    
     $("#basicModalAddSetButtons").empty();
-//    var delBut = '<button onclick="deleteExercise('+inputId+')" type="button" class="btn btn-primary">Delete</button>';
-//    $("#basicModalAddSetButtons").append(delBut);
-    
+
+
+    var exercise = mlpObject.selectResults({exerciseid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result['data'];
+    var result = exercise[exercise.length-1];
+    var test = result['sets'];
+    console.log(test+1);
+    document.getElementById("updateModalAddRep").value = result['reps'];
+    document.getElementById("updateModalAddSet").value = parseInt(result['sets'])+1;
+    document.getElementById("updateModalAddWeight").value = result['weight'];
+    document.getElementById("updateModalAddRPE").value = result['rpe'];
+    document.getElementById("updateModalAddRM").value = result['percentage'];
 
     var buttons='<button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
             '<button onclick="addModalDiaryResult('+inputID+')" type="button" class="btn btn-primary">Add</button>';
@@ -475,7 +467,9 @@ function addExToResults(data){
 
 function addWorkoutToDiary(inputID){
     try{
-        console.log(mlpObject.addResults({workoutid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result);
+        mlpObject.addResults({workoutid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result;
+        $('#modalDisplayWorkoutExercies').modal('hide');
+        checkResults();
     }
     catch(e){
         
@@ -485,13 +479,47 @@ function addWorkoutToDiary(inputID){
 
 //Code for modals
 function modalDisplayWorkoutExercies(inputID){
-    console.log(inputID);
-    $("#modalDWEdetails").empty();
-//    var delBut = '<button onclick="deleteExercise('+inputId+')" type="button" class="btn btn-primary">Delete</button>';
-//    $("#basicModalAddSetButtons").append(delBut);
+
+    var searchResult = mlpObject.getWorkouts({id:inputID}).result['data'][0];
+    var name = searchResult['name']
+    var exercises = searchResult['exercises'];
+ 
+    
+    $("#modalLabelDWE").empty();
+    $("#modalLabelDWE").append(name);
+    
+    var toAppend='<table><tr style="color: #77b2c9; font-weight:bold;" ><td>Exercise</td><td>Weight</td><td>Reps</td><td>Sets</td><td>RPE</td></tr>';
+    
+    for(i in exercises){
+        toAppend+='<tr>';
+        toAppend+='<td width="50%">';
+        toAppend+=exercises[i]['name'];
+        toAppend+='</td>';
+        toAppend+='<td width="20%">';
+        toAppend+=exercises[i]['weight'];
+        toAppend+='</td>';
+        toAppend+='<td width="10%">';
+        toAppend+=exercises[i]['reps'];
+        toAppend+='</td>';
+        toAppend+='<td width="10%">';
+        toAppend+=exercises[i]['sets'];
+        toAppend+='</td>';
+        toAppend+='<td width="10%">';
+        toAppend+=exercises[i]['rpe'];
+        toAppend+='</td>';
+        toAppend+='</tr>'
+
+    }
+    toAppend+='</table>'
+    
+    var buttons='<button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
+            '<button onclick="addWorkoutToDiary('+inputID+')" type="button" class="btn btn-primary">Add</button>';
+    
+    $("#basicModalDWAdd").empty();
+    $("#basicModalDWAdd").append(buttons);
     
 
-    var toAppend='test';
+    $("#modalDWEdetails").empty();
     $("#modalDWEdetails").append(toAppend);
     
     var options = {
@@ -664,15 +692,14 @@ function diaryPageWorkoutSeach(){
               if (globalWorkoutObjs.hasOwnProperty(key)) {    
                   
         var useDate=[year,(month+1),date];
-        toAppend += "<tr onClick='modalDisplayWorkoutExercies(["+key+"])'>";
+        toAppend += "<tr onClick='modalDisplayWorkoutExercies("+key+")'>";
        
 
         for (st in searchTerms){
             toAppend += "<td>";
    
             if (searchTerms[st] === 'userid'){
-                console.log(searchTerms[st]);
-                console.log(mlpObject.getUsers({id:globalWorkoutObjs[key][searchTerms[st]]}).result['data'][1]);
+              
                 toAppend += mlpObject.getUsers({id:globalWorkoutObjs[key][searchTerms[st]]}).result['data'][1];
 
             }
