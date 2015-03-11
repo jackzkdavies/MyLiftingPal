@@ -76,7 +76,6 @@ function signOut(){
     
 }
 
-
 function slideToggleCalender(){
     $(".calender").slideToggle(800);
     centerCalander();
@@ -103,7 +102,6 @@ function setVarDate(){
         fullDate = days[day] + ", " + date +monthPrefix[date-1]+ " " + months[month]+", "+year;
 
         document.getElementById("date").innerHTML = "<span style='color:#77b2c9'><i class='fa fa-caret-left'></i> </span> " + fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-right'></i></span>";
-checkResults();
 }
 
 function centerCalander(){
@@ -145,7 +143,6 @@ function addExToResults(data){
     try{
         //exerciseid, workoutid, programid, reps, sets, rpe, weight, percentage,assigneddate
         mlpObject.addResults({exerciseid:exID,assigneddate:tdate, reps:rep,sets:set, rpe:rp, weight:weig, percentage:per}).result;
-        checkResults();
     }
     
     catch(e){

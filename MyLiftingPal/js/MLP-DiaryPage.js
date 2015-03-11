@@ -11,6 +11,7 @@ var submitDairySearchClass= 'e';
 var displayUnits = window.localStorage.getItem("displayUnits");
 if (displayUnits === null){displayUnits = 'kg';}
 var toggleList={};
+var recordsList={};
 
 //Code section for checking login state
 function checkLoginStatus(){
@@ -132,6 +133,8 @@ function toggleDropDownArrow(i){
 
 
 function checkResults(){
+    var test = [];
+    recordsList={};
     $("#myDairyResults").empty();
     document.getElementById("noResults").innerHTML = "";
     try{
@@ -146,15 +149,24 @@ function checkResults(){
             
             for (myRes in myDiaryResults['data']){
                 var toAppend ="";
+                test=[];
                 
                 
                 
                 var myResId="myResExNameDiv"+myDiaryResults['data'][myRes]['exerciseid'];
                 
-                 
+                
+                
+                
+  
                 
                 if (document.getElementById(myResId) == null ){
-                    if (myRes != 0 ){toAppend +="<div style=''><hr style='width:100%;float:left;  border-top:3px solid #77b2c9; margin-top: 20px; */' /></div>";} 
+                    
+                    
+                    if (myRes != 0 ){
+                        
+                        test.push([myDiaryResults['data'][myRes]['records']]);
+                        toAppend +="<div style=''><hr style='width:100%;float:left;  border-top:3px solid #77b2c9; margin-top: 20px; */' /></div>";} 
                     toAppend += '<div style="width:100%; float:left">'+
                         '<div id="'+myResId+'" onclick="toggle('+"'"+myResId+"Second"+"'"+')" style="width:100%; float:left"><h3 style="text-align:left">'+
                             myDiaryResults['data'][myRes]['name']+
@@ -193,7 +205,8 @@ function checkResults(){
                             $("#myDairyResults").append(toAppend);
                 }
                 else{
-
+                    
+                    test.push([myDiaryResults['data'][myRes]['records']]);
                     toAppend +='<div style="width:100%; float:left"><br>'+
                             '<div onclick="toggle('+"'"+myResId+myDiaryResults['data'][myRes]['id']+"'"+')"><div class="exerciseRepsDiv" onclick="toggle('+"'"+myResId+myDiaryResults['data'][myRes]['id']+"'"+')">'+
                             myDiaryResults['data'][myRes]['reps']+
@@ -235,7 +248,7 @@ function checkResults(){
 //                $(resId).append(toAppend);
 
 
-
+                recordsList[myDiaryResults['data'][myRes]['name']]=test;
             
      
             }
@@ -424,15 +437,15 @@ function diaryModalAddSet(inputID){
     $("#basicModalAddSetButtons").empty();
 
 
-    var exercise = mlpObject.selectResults({exerciseid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result['data'];
-    var result = exercise[exercise.length-1];
-    var test = result['sets'];
-    console.log(test+1);
-    document.getElementById("updateModalAddRep").value = result['reps'];
-    document.getElementById("updateModalAddSet").value = parseInt(result['sets'])+1;
-    document.getElementById("updateModalAddWeight").value = result['weight'];
-    document.getElementById("updateModalAddRPE").value = result['rpe'];
-    document.getElementById("updateModalAddRM").value = result['percentage'];
+//    var exercise = mlpObject.selectResults({id:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result['data'];
+//    var result = exercise[exercise.length-1];
+//    var test = result['sets'];
+//    console.log(result);
+//    document.getElementById("updateModalAddRep").value = result['reps'];
+//    document.getElementById("updateModalAddSet").value = parseInt(result['sets'])+1;
+//    document.getElementById("updateModalAddWeight").value = result['weight'];
+//    document.getElementById("updateModalAddRPE").value = result['rpe'];
+//    document.getElementById("updateModalAddRM").value = result['percentage'];
 
     var buttons='<button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
             '<button onclick="addModalDiaryResult('+inputID+')" type="button" class="btn btn-primary">Add</button>';
