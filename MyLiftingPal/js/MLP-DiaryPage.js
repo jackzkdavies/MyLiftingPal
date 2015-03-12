@@ -2,11 +2,17 @@
 var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
 
 //Global Variables 
+var day ;
+var date ;                 
+var month ;            
+var year ;
+var fullDate;
 var globalExerciseObjs; 
 var globalWorkoutObjs;
 var globalProgramObjs; 
 var firstMainPageAddClicked=false;
 var toggleSpeed = window.localStorage.getItem("toggleSpeed");
+toggleSpeed=0;
 var submitDairySearchClass= 'e';
 var displayUnits = window.localStorage.getItem("displayUnits");
 if (displayUnits === null){displayUnits = 'kg';}
@@ -42,10 +48,11 @@ function logout(){
 }
 
 //Code section for date and calander 
-function setVarDate(){
-    var days= ["Sunday","Monday","Tuesday","Wednesday", "Thursdat","Friday","Saturday"]; 
+    var days= ["Sunday","Monday","Tuesday","Wednesday", "Thursday","Friday","Saturday"]; 
     var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
     var monthPrefix = ["st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"];
+
+function setVarDate(){
 
     day = $("#date-Picker").datepicker('getDate').getDay();
     date = $("#date-Picker").datepicker('getDate').getDate();                 
@@ -53,9 +60,46 @@ function setVarDate(){
     year = $("#date-Picker").datepicker('getDate').getFullYear();
     fullDate = days[day] + ", " + date +monthPrefix[date-1]+ " " + months[month]+", "+year;
 
-    document.getElementById("date").innerHTML = "<span style='color:#77b2c9'><i class='fa fa-caret-left'></i> </span> " + fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-right'></i></span>";
+//    document.getElementById("date").innerHTML = "<span style='color:#77b2c9'><i class='fa fa-caret-left'></i> </span> " + fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-right' onclick='dateScroll(1)'></i></span>";
+    if ($(".calender").is(':hidden')){
+        document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-down'></i></span>";
+
+    }
+    else{
+        document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-up'></i></span>";
+
+    }
+    
     checkResults();
 }
+
+//function dateScroll(i){
+//    if(i >= 1){
+//        if(day < 6){day += 1;}else{day = 0;}
+//        date+= 1;
+//        var realDate = new Date(date, month - 1, year); 
+//        date+= 1;
+//        var fullDate = days[day] + ", " + date +monthPrefix[date-1]+ " " + months[month]+", "+year;
+//        
+//        $('#datePicker').datepicker('setDate', realDate);
+//        document.getElementById("date").innerHTML = "<span style='color:#77b2c9'><i class='fa fa-caret-left'></i> </span> " + fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-right'></i></span>";
+//        checkResults();
+//    }
+//    else{
+//        var realDate = new Date(day - 1, month - 1, year);
+//        date+= -1;
+//        var fullDate = days[day-1] + ", " + date +monthPrefix[date-1]+ " " + months[month]+", "+year;
+//        
+//        $('#datePicker').datepicker('setDate', realDate);
+//        document.getElementById("date").innerHTML = "<span style='color:#77b2c9'><i class='fa fa-caret-left'></i> </span> " + fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-right'></i></span>";
+//        checkResults();
+//    }
+//
+//
+////$('#datePicker').datepicker({ dateFormat: 'yy-mm-dd' }); // format to show
+//  
+//}
+
 
 function centerCalander(){
     var t = document.getElementById("date-Picker");
@@ -118,7 +162,15 @@ function toggle(divID){
 }
 
 function slideToggleCalender(){
-    $(".calender").slideToggle(toggleSpeed);
+    
+    if ($(".calender").is(':hidden')){
+        document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-up'></i></span>";
+        $(".calender").slideToggle(toggleSpeed);
+    }
+    else{
+        document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-down'></i></span>";
+        $(".calender").slideToggle(toggleSpeed);
+    }
     centerCalander();
 }
 
@@ -181,7 +233,7 @@ function checkResults(){
                         
             
                     toAppend +='<div id="'+myResId+"Second"+'" style="width:100%"><div style="width:100%; float:left"><br>'+
-                            '<div onclick="toggle('+"'"+myResId+myDiaryResults['data'][myRes]['id']+"'"+')"><div class="exerciseRepsDiv" >'+
+                            '<div onclick="diaryEditExercise('+"'"+myDiaryResults['data'][myRes]['id']+"'"+')"><div class="exerciseRepsDiv" >'+
                             myDiaryResults['data'][myRes]['reps']+
                             ' </div>'+
                             '<div class="exerciseSetDiv">'+
@@ -208,7 +260,7 @@ function checkResults(){
                     
                     test.push([myDiaryResults['data'][myRes]['records']]);
                     toAppend +='<div style="width:100%; float:left"><br>'+
-                            '<div onclick="toggle('+"'"+myResId+myDiaryResults['data'][myRes]['id']+"'"+')"><div class="exerciseRepsDiv" onclick="toggle('+"'"+myResId+myDiaryResults['data'][myRes]['id']+"'"+')">'+
+                            '<div onclick="diaryEditExercise('+"'"+myDiaryResults['data'][myRes]['id']+"'"+')"><div class="exerciseRepsDiv" onclick="toggle('+"'"+myResId+myDiaryResults['data'][myRes]['id']+"'"+')">'+
                             myDiaryResults['data'][myRes]['reps']+
                             ' </div>'+
                             '<div class="exerciseSetDiv">'+
@@ -248,7 +300,7 @@ function checkResults(){
 //                $(resId).append(toAppend);
 
 
-                recordsList[myDiaryResults['data'][myRes]['name']]=test;
+                recordsList[myDiaryResults['data'][myRes]['exerciseid']]=test;
             
      
             }
@@ -316,27 +368,33 @@ function diaryEditExercise(inputID){
 }
 
 function diaryModalHistory(inputID){
-    var records = mlpObject.selectResults({exerciseid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result['data'];
-    var test = mlpObject.getExercises({exerciseid:inputID});
-//    console.log(mlpObject.selectResults({exerciseid:inputID}).result['data']);
-
+    var records = recordsList[inputID][0];
+    
     for (record in records){
         $("#modalHistoryRecords").empty();
         var toAppend="";
             
         try{
-            if (typeof records[record]['records']['amrap']['weight'] !='undefined'){
-            toAppend = '<p>Best Reps with '+records[record]['records']['amrap']['weight']+displayUnits+': '+records[record]['records']['amrap']['reps']+
-                    ' @RPE '+records[record]['records']['amrap']['rpe']+'</p><br>';
+            if (typeof records[record]['amrap']['weight'] !='undefined'){
+            toAppend = '<p>Best Reps with '+records[record]['amrap']['weight']+displayUnits+': '+records[record]['amrap']['reps']+
+                    ' @RPE '+records[record]['amrap']['rpe']+'</p><br>';
             $("#modalHistoryRecords").append(toAppend);
             }
         
         }
             catch(e){ console.log(e);}
         
+//        try{
+//            if (typeof records[record]['overall']['max'] !='undefined'){
+//            toAppend ='<p>'+records[record]['overall']['rep']+'RM (estimated): '+records[record]['overall']['max']+displayUnits+'</p><br>';
+//            $("#modalHistoryRecords").append(toAppend);
+//    
+//            }
+//        }
+
         try{
-            if (typeof records[record]['records']['overall']['max'] !='undefined'){
-            toAppend ='<p>1RM (estimated): '+records[record]['records']['overall']['max']+displayUnits+'</p><br>';
+            if (typeof records[record]['overall']['max'] !='undefined'){
+            toAppend ='<p>Best '+records[record]['overall']['rep']+' RM recorded: '+records[record]['overall']['max']+displayUnits+'</p><br>';
             $("#modalHistoryRecords").append(toAppend);
     
             }
@@ -344,8 +402,8 @@ function diaryModalHistory(inputID){
         catch(e){ console.log(e); }
 
         try{
-            if (typeof records[record]['records']['backoffs']['best'] !='undefined'){
-            toAppend ='<p>Best volume for current weight '+ records[record]['records']['backoffs']['best'] +displayUnits+'</p><br>';
+            if (typeof records[record]['backoffs']['best'] !='undefined'){
+            toAppend ='<p>Best volume for '+records[record]['overall']['rep']+' rep sets: '+ records[record]['backoffs']['best'] +displayUnits+'</p><br>';
                 $("#modalHistoryRecords").append(toAppend);
     
             }
@@ -436,15 +494,13 @@ function bestVolume(exId){
 function diaryModalAddSet(inputID){
     $("#basicModalAddSetButtons").empty();
 
+    var records = recordsList[inputID][0];
 
-//    var exercise = mlpObject.selectResults({id:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result['data'];
-//    var result = exercise[exercise.length-1];
-//    var test = result['sets'];
-//    console.log(result);
-//    document.getElementById("updateModalAddRep").value = result['reps'];
-//    document.getElementById("updateModalAddSet").value = parseInt(result['sets'])+1;
-//    document.getElementById("updateModalAddWeight").value = result['weight'];
-//    document.getElementById("updateModalAddRPE").value = result['rpe'];
+
+    document.getElementById("updateModalAddRep").value = records[0]['amrap']['reps'];
+    document.getElementById("updateModalAddSet").value = $("#myResExNameDiv2Second> div").length+1;
+    document.getElementById("updateModalAddWeight").value = records[0]['amrap']['weight'];
+    document.getElementById("updateModalAddRPE").value = records[0]['amrap']['rpe'];
 //    document.getElementById("updateModalAddRM").value = result['percentage'];
 
     var buttons='<button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
@@ -661,7 +717,10 @@ function dairyPageExSearch(){
     
     try{
     $("#mytable").dataTable().fnDestroy();
+    $("#mytableWorkouts").dataTable().fnDestroy();
     $("#searchresults").empty();
+    $("#searchresultsWorkouts").empty();
+    document.getElementById('mytableWorkouts').style.display='none';
     }
     catch(e){console.log(e);}
     
@@ -727,8 +786,11 @@ function diaryPageWorkoutSeach(){
     }}
     
     try{
+    $("#mytable").dataTable().fnDestroy();
     $("#mytableWorkouts").dataTable().fnDestroy();
+    $("#searchresults").empty();
     $("#searchresultsWorkouts").empty();
+    document.getElementById('mytable').style.display='none';
     }
     catch(e){console.log(e);}
     

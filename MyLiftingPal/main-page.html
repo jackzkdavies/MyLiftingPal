@@ -110,12 +110,13 @@
             var year = $("#date-Picker").datepicker('getDate').getFullYear();
             var fullDate = days[day] + ", " + date +monthPrefix[date-1]+ " " + months[month]+", "+year;
             
-            document.getElementById("date").innerHTML = "<span style='color:#77b2c9'> <i class='fa fa-caret-left'></i> </span> " + fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-right'></i></span>";
+//            document.getElementById("date").innerHTML = "<span style='color:#77b2c9'> <i class='fa fa-caret-left'></i> </span> " + fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-right'></i></span>";
+              document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-down'></i></span>";
         </script>
         </div>
 
         <br>
-       <i style="font-size:40px" class="fa fa-book"></i>    
+        <i style="font-size:40px" class="fa fa-book" onclick="slideToggleCalender()"></i>    
       <div class="exersicediv">
         <div class="w-clearfix exerciseinfotable">
           <div class="exerciseNameDiv">
@@ -180,10 +181,10 @@
                             <input id="updateModalAddSet" class="w-input field feild2" type="number" placeholder="1" name="Set" required="required" data-name="exercisename">
                             <p  class="blackfont">Weight</p>
                             <input id="updateModalAddWeight" class="w-input field feild2" type="number" placeholder="1" name="Weight" required="required" data-name="exercisename">
-                            <p  class="blackfont">RPE</p>
-                            <input id="updateModalAddRPE" class="w-input field feild2" type="number" placeholder="1" name="RPE" required="required" data-name="exercisename">
-                            <p  class="blackfont">%1RM</p>
-                            <input id="updateModalAddRM" class="w-input field feild2" type="number" placeholder="1" name="%1RM" required="required" data-name="exercisename">
+                            <p  class="blackfont">Rated Perceived Exertion </p>
+                            <input id="updateModalAddRPE" class="w-input field feild2 inputLimit10" type="number" min="1" max="10" value="1" name="RPE" required="required" data-name="exercisename">
+                            <p  class="blackfont">%1 Rep Max</p>
+                            <input id="updateModalAddRM" class="w-input field feild2 inputLimit100" type="number" value="1" min="1" max="100"  name="%1RM" required="required" data-name="exercisename">
                             
 
                         </div>
@@ -226,10 +227,10 @@
                             <input id="updateModalChangeSet" class="w-input field feild2" type="number" placeholder="1" name="Set" required="required" data-name="exercisename">
                             <p  class="blackfont">Weight</p>
                             <input id="updateModalChangeWeight" class="w-input field feild2" type="number" placeholder="1" name="Weight" required="required" data-name="exercisename">
-                            <p  class="blackfont">RPE</p>
-                            <input id="updateModalChangeRPE" class="w-input field feild2" type="number" min="1" max="10" placeholder="1" name="RPE" required="required" data-name="exercisename">
-                            <p  class="blackfont">%1RM</p>
-                            <input id="updateModalChangeRM" class="w-input field feild2" type="number" min="1" max="100" placeholder="1" name="%1RM" required="required" data-name="exercisename">
+                            <p  class="blackfont">Rated Perceived Exertion </p>
+                            <input id="updateModalChangeRPE" class="w-input field feild2 inputLimit10" type="number" min="1" max="10" placeholder="1" name="RPE" required="required" data-name="exercisename">
+                            <p  class="blackfont">%1 Rep Max</p>
+                            <input id="updateModalChangeRM" class="w-input field feild2 inputLimit100" type="number" min="1" max="100" placeholder="1" name="%1RM" required="required" data-name="exercisename">
                             <br><hr>
                         </div>
                         <div id="basicModalUpdateButtons" class="modal-footer">
@@ -377,6 +378,46 @@
                 break; 
             }
         }
+        
+        var t = false;
+
+        $('.inputLimit10').focus(function () {
+            var $this = $(this);
+
+            t = setInterval(
+
+            function () {
+                if (($this.val() < 1 || $this.val() > 10) && $this.val().length != 0) {
+                    if ($this.val() < 1) {
+                        $this.val(1);
+                    }
+
+                    if ($this.val() > 10) {
+                        $this.val(10);
+                    }
+
+                }
+            }, 50);
+        });
+        
+        $('.inputLimit100').focus(function () {
+            var $this = $(this);
+
+            t = setInterval(
+
+            function () {
+                if (($this.val() < 1 || $this.val() > 100) && $this.val().length != 0) {
+                    if ($this.val() < 1) {
+                        $this.val(1);
+                    }
+
+                    if ($this.val() > 100) {
+                        $this.val(100);
+                    }
+
+                }
+            }, 50);
+        });
 
         window.addEventListener('orientationchange', doOnOrientationChange);
 
