@@ -361,7 +361,7 @@ function diaryEditExercise(inputID){
     $("#basicModalUpdateButtons").append(buttons);
     
     var options = {
-    "backdrop" : "static",
+    "backdrop" : "true",
     "show":"true"};
     $('#modalEditDiaryResult').modal(options);
     
@@ -420,7 +420,7 @@ function diaryModalHistory(inputID){
                 
 
     var options = {
-    "backdrop" : "static",
+    "backdrop" : "true",
     "show":"true"};
     $('#basicModalHistory').modal(options);
 }
@@ -437,7 +437,7 @@ function diaryModalDelete(inputID){
     $("#basicModalDeleteButtons").append(buttons);
     
     var options = {
-    "backdrop" : "static",
+    "backdrop" : "true",
     "show":"true"};
     $('#basicModalDelete').modal(options);
     
@@ -508,7 +508,7 @@ function diaryModalAddSet(inputID){
     $("#basicModalAddSetButtons").append(buttons);
     
     var options = {
-    "backdrop" : "static",
+    "backdrop" : "true",
     "show":"true"};
     $('#basicModalAddSet').modal(options);
 }
@@ -592,7 +592,7 @@ function modalDisplayWorkoutExercies(inputID){
     $("#modalDWEdetails").append(toAppend);
     
     var options = {
-    "backdrop" : "static",
+    "backdrop" : "true",
     "show":"true"};
     $('#modalDisplayWorkoutExercies').modal(options);
 }

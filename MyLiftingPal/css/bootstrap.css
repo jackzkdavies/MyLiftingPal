@@ -5499,8 +5499,10 @@ button.close {
 }
 .modal-open {
   overflow: hidden;
+
 }
 .modal {
+
   position: fixed;
   top: 0;
   right: 0;
@@ -5508,7 +5510,8 @@ button.close {
   left: 0;
   z-index: 1040;
   display: none;
-  overflow: hidden;
+overflow-x: hidden;
+overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   outline: 0;
 }

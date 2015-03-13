@@ -77,7 +77,15 @@ function signOut(){
 }
 
 function slideToggleCalender(){
-    $(".calender").slideToggle(800);
+    
+    if ($(".calender").is(':hidden')){
+        document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-up'></i></span>";
+        $(".calender").slideToggle(toggleSpeed);
+    }
+    else{
+        document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-down'></i></span>";
+        $(".calender").slideToggle(toggleSpeed);
+    }
     centerCalander();
 }
 
@@ -149,11 +157,90 @@ function addExToResults(data){
         
     }
 }
-function updateModalExerciseAdd(inputId){
-    var getExercise = mlpObject.getExercises({id:inputId});
-    console.log(getExercise['result']);
+
+
+function centerModal() {
+    $(this).css('display', 'block');
+    var $dialog = $(this).find(".modal-dialog");
+    var offset = ($(window).height() - $dialog.height()) / 2;
+    // Center modal vertically in window
+    $dialog.css("margin-top", offset);
+}
+
+
+function messageModal(caller){
+    console.log(caller);
+    $("#messageModalBody").empty();
+    
+    if(caller== '#basicModalAddEx'){
+        $("#messageModalBody").append('<img class="" src="images/loader.GIF" alt="Loading"><h3>Adding To Current Day</h3>');
+    }
+    else if(caller == '#calanderModal'){
+        $("#messageModalBody").append('<img class="" src="images/loader.GIF" alt="Loading"><h3>Adding To Selected Day</h3>');
+    }
+    else{ $("#messageModalBody").append('<img class="" src="images/loader.GIF" alt="Loading"><h3>Completing Action</h3>'); }
+    
+
+    $(caller).modal('hide');
+    
+    var options = {
+    "backdrop" : "true",
+    "show":"true"};
+    $('#messageModal').modal(options);
+    
+    
+    setTimeout(function(){
+
+        $("#messageModal").modal('hide');
+     }, 2000);
+
+        
+}
+
+function calanderModal(data){
+    var caller=data[1];
+    var inputID=data[0];
+    $(caller).modal('hide');
+    
+    
+    var buttons= '<hr>'+
+                 '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+
+                 '<button type="button" onclick="addExerciseCalanderModal('+inputID+')" class="btn btn-primary">Confirm</button>'+
+                 '<br><br>';
+    
+    $('#calanderModalButtons').empty();
+    $('#calanderModalButtons').append(buttons);
+    
+    
+    var options = {
+    "backdrop" : "true",
+    "show":"true"};
+    $('#calanderModal').modal(options);
+    
+    $('#date-Picker2').datepicker({
+        format: "dd/mm/yyyy",
+        orientation: "top",
+        keyboardNavigation: false,
+        calendarWeeks: true,
+        todayHighlight: true,
+        gotoCurrent: true
+        }).datepicker("setDate", new Date());
+}
+
+function addExerciseCalanderModal(exID){
+    
+    var date = $("#date-Picker2").datepicker('getDate').getDate();                 
+    var month = $("#date-Picker2").datepicker('getDate').getMonth();             
+    var year = $("#date-Picker2").datepicker('getDate').getFullYear();
+    var tdate=year+"-"+(month+1)+"-"+date;
+    
+    console.log(mlpObject.addResults({exerciseid:exID,assigneddate:tdate, reps:1,sets:1, rpe:1, weight:1, percentage:1}).result);
+    messageModal('#calanderModal');
+    
+}
+function updateModalExerciseAdd(inputId,name){
     $("#myModalLabelExerciseAdd").empty();
-    $("#myModalLabelExerciseAdd").append("Add " + getExercise['result']['data'][0]['name'] + " To:");
+    $("#myModalLabelExerciseAdd").append("Add " + name.toString() + " To: <hr>");
     
     $("#AddEdModalControls").empty();
     var toAppend = "";
@@ -161,16 +248,18 @@ function updateModalExerciseAdd(inputId){
     var useDate=[year,(month+1),date];
     var data=[inputId,useDate,1,1,1,1,1];
 
-    toAppend+= '<h3 onclick="addExToResults(['+data+'])"><i class="fa fa-book"></i>Current Day</h3>'+
+    var tempString="'#basicModalAddEx'";
+    var calanderData=[inputId,tempString];
+    toAppend+= '<h3 onclick="addExToResults(['+data+']);messageModal('+tempString+')"><i class="fa fa-book"></i>Current Day</h3>'+
                             '<p style="color:#77b2c9">or</p>'+
-                            '<h3><i class="fa fa-calendar"></i>Select Day</h3>'+
+                            '<h3 onclick="calanderModal(['+calanderData+'])"><i class="fa fa-calendar"></i>Select Day</h3>'+
                             '<br>'+
                             '<h3><i class="fa fa-child"></i>Select Workout</h3>';
                     
     $("#AddEdModalControls").append(toAppend);
     
     var options = {
-    "backdrop" : "static",
+    "backdrop" : "true",
     "show":"true"};
     $('#basicModalAddEx').modal(options);
     
@@ -249,7 +338,7 @@ function updateModalExerciseEdit(inputId){
     $("#editCalANDSav").append(buttons);
     
     var options = {
-    "backdrop" : "static",
+    "backdrop" : "true",
     "show":"true"};
     $('#basicModalEdit').modal(options);
     
@@ -308,8 +397,8 @@ function displayMyExercises(){
             toAppend +='<h3 onclick="displayMyExercisesDetails(' + "'" +'myExercises'+meo[objects]['id']+"'"+ ')" style="text-align:left;width:70%;padding: 8px; float:left">'+meo[objects]['name'];
             toAppend +='<span id="myExercisesDetailsArrow'+meo[objects]['id']+'"><i class="fa fa-caret-down"></i></span>';
             toAppend +='</h3>';
-
-            toAppend +='<a href="javascript:updateModalExerciseAdd(' +meo[objects]['id']+ ')" style="width:60px; margin-bottom: 4px; background-color: #77b2c9;color:white" class="btn btn-default btn-circle-main">';
+            var tempString = "'"+meo[objects]['name']+"'";
+            toAppend +='<a href="javascript:updateModalExerciseAdd(' +meo[objects]['id']+ ','+tempString+')" style="width:60px; margin-bottom: 4px; background-color: #77b2c9;color:white" class="btn btn-default btn-circle-main">';
 
             toAppend +='<i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i>';
             toAppend +='</a>';
@@ -343,8 +432,8 @@ function displayMyExercises(){
         toAppend +='<h3 onclick="displayMyExercisesDetails(' + "'" +'myExercises'+mreo[objects]['exerciseid']+"'"+ ')" style="text-align:left;width:70%;padding: 8px; float:left">'+mreo[objects]['name'];
         toAppend +='<span id="myExercisesDetailsArrow'+mreo[objects]['id']+'"><i class="fa fa-caret-down"></i></span>';
         toAppend +='</h3>';
-
-        toAppend +='<a href="javascript:updateModalExerciseAdd(' +mreo[objects]['exerciseid']+ ')" style="width:60px; margin-bottom: 4px; background-color: #77b2c9;color:white " class="btn btn-default btn-circle-main">';
+        var tempString = "'"+mreo[objects]['name']+"'";
+        toAppend +='<a href="javascript:updateModalExerciseAdd(' +mreo[objects]['exerciseid']+','+tempString+')" style="width:60px; margin-bottom: 4px; background-color: #77b2c9;color:white " class="btn btn-default btn-circle-main">';
 
         toAppend +='<i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i>';
         toAppend +='</a>';
@@ -434,7 +523,8 @@ function submitCreateExerciseForm(add){
             else{
                 if(addToDay === 1){
                     console.log(newEx);
-                    updateModalExerciseAdd(newEx['data'][0]['id']);
+                    var tempString = "'"+newEx['data'][0]['name']+"'";
+                    updateModalExerciseAdd(newEx['data'][0]['id'],tempString);
                     }
                 document.getElementById("createSuccess").innerHTML = '"'+sExerciseName +'"'+ " <span style='color:#66cc66'>Added Successfully!</span>";
                 displayMyExercises();
@@ -491,8 +581,8 @@ function submitSearchExcercise(){
     
         for (key in globalExerciseObjs){    
               if (globalExerciseObjs.hasOwnProperty(key)) {      
-
-        toAppend += "<tr onClick='updateModalExerciseAdd("+globalExerciseObjs[key]['id']+")'>";
+                var tempString = '"'+globalExerciseObjs[key]['name']+'"';
+                toAppend += "<tr onClick='updateModalExerciseAdd("+globalExerciseObjs[key]['id']+","+tempString+")'>";
         
         for (st in searchTerms){
             toAppend += "<td>";

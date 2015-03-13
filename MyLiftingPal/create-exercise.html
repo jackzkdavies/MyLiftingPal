@@ -112,7 +112,8 @@
             var year = $("#date-Picker").datepicker('getDate').getFullYear();
             var fullDate = days[day] + ", " + date +monthPrefix[date-1]+ " " + months[month]+", "+year;
             
-            document.getElementById("date").innerHTML = "<span style='color:#77b2c9'> <i class='fa fa-caret-left'></i> </span> " + fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-right'></i></span>";
+//            document.getElementById("date").innerHTML = "<span style='color:#77b2c9'> <i class='fa fa-caret-left'></i> </span> " + fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-right'></i></span>";
+              document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-down'></i></span>";
         </script>
             
             <br>
@@ -125,6 +126,35 @@
             <div id="myExercises">
                 
             </div>
+            
+            
+            <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body" id="messageModalBody"></div>
+                    </div>
+              </div>
+            </div>
+            
+            <div class="modal fade" id="calanderModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                        <h4 class="modal-title" id="myModalLabelExerciseAdd">Select Date</h4>
+                        </div>
+                        <div class="modal-body" id="calanderModalBody" style="background-color: #77b2c9" >
+                            <div class="calender"  id="date-Picker2" onClick="setVarDate()"></div>
+                            
+                        </div>
+                        <div class="modal-footer" id="calanderModalButtons">
+
+                        </div>
+                    </div>
+              </div>
+            </div>
+            
+            
             
             <div class="modal fade" id="basicModalAddEx" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                 <div class="modal-dialog">
