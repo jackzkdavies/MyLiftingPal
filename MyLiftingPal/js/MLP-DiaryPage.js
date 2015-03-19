@@ -201,7 +201,7 @@ function checkResults(){
             
             for (myRes in myDiaryResults['data']){
                 var toAppend ="";
-                test=[];
+                var test=[];
                 
                 
                 
@@ -215,11 +215,12 @@ function checkResults(){
                 if (document.getElementById(myResId) == null ){
                     
                     
-                    if (myRes != 0 ){
+                    if (myResId != 0 ){
                         
                         test.push([myDiaryResults['data'][myRes]['records']]);
+
                         toAppend +="<div style=''><hr style='width:100%;float:left;  border-top:3px solid #77b2c9; margin-top: 20px; */' /></div>";} 
-                    toAppend += '<div style="width:100%; float:left">'+
+                        toAppend += '<div style="width:100%; float:left">'+
                         '<div id="'+myResId+'" onclick="toggle('+"'"+myResId+"Second"+"'"+')" style="width:100%; float:left"><h3 style="text-align:left">'+
                             myDiaryResults['data'][myRes]['name']+
                             '</h3>';
@@ -299,7 +300,7 @@ function checkResults(){
                 document.getElementById(resId).innerHTML =toAppend;
 //                $(resId).append(toAppend);
 
-
+                
                 recordsList[myDiaryResults['data'][myRes]['exerciseid']]=test;
             
      
@@ -494,13 +495,13 @@ function bestVolume(exId){
 function diaryModalAddSet(inputID){
     $("#basicModalAddSetButtons").empty();
 
-    var records = recordsList[inputID][0];
+    var records = recordsList[inputID][0][0];
 
-
-    document.getElementById("updateModalAddRep").value = records[0]['amrap']['reps'];
-    document.getElementById("updateModalAddSet").value = $("#myResExNameDiv2Second> div").length+1;
-    document.getElementById("updateModalAddWeight").value = records[0]['amrap']['weight'];
-    document.getElementById("updateModalAddRPE").value = records[0]['amrap']['rpe'];
+    var temp = 'myResExNameDiv'+inputID+'Second';
+    document.getElementById("updateModalAddRep").value = records['amrap']['reps'];
+    document.getElementById("updateModalAddSet").value = document.getElementById(temp).childNodes.length +1;
+    document.getElementById("updateModalAddWeight").value = records['amrap']['weight'];
+    document.getElementById("updateModalAddRPE").value = records['amrap']['rpe'];
 //    document.getElementById("updateModalAddRM").value = result['percentage'];
 
     var buttons='<button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>'+

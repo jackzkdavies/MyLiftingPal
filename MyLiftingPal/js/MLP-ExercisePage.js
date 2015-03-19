@@ -1,5 +1,6 @@
 //Create MLP object
 var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
+var userId=mlpObject.getUser().result['data']['id'];
 
 //Global Variables 
 var toggleSpeed = window.localStorage.getItem("toggleSpeed");
@@ -34,8 +35,6 @@ function toggle(divID){
 //}
 }
 
-
-
 function checkLoginStatus(){
 //    if ($.cookie("mlpsession") === undefined){
 //        window.location.replace("index.html");
@@ -65,6 +64,7 @@ function logout(){
     mlpObject.logout();
     window.location.replace("index.html");
 }
+
 function signOut(){
     try{
         if (mlpObject.logout().result["success"] === true){
@@ -134,8 +134,6 @@ function centerCalander(){
 //        t.style.backgroundColor="#77b2c9";
 //    }
 }
-
-
 
 function addExToResults(data){
     
@@ -238,6 +236,40 @@ function addExerciseCalanderModal(exID){
     messageModal('#calanderModal');
     
 }
+
+function workoutModal(data){
+    var caller=data[1];
+    var inputID=data[0];
+    $(caller).modal('hide');
+
+    var buttons= '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+
+                 '<br>';
+    
+    $('#workoutListFooter').empty();
+    $('#workoutListFooter').append(buttons);
+    
+    var toAppend ='<p>Need to add functionallity still</p>';
+    var workouts = mlpObject.getWorkouts({userid:userId}).result['data'];
+    
+    for (workout in workouts){
+        toAppend+='<h3>'+workouts[workout]['name']+'</h3>';
+    }
+    $('#workoutListBody').empty();
+    $('#workoutListBody').append(toAppend);
+    
+    var options = {
+    "backdrop" : "true",
+    "show":"true"};
+    $('#workoutListModal').modal(options);
+    
+    
+    var workouts = mlpObject.getWorkouts({userid:userId}).result['data'];
+    for (workout in workouts){
+    console.log(workouts[workout]['name']);}
+    
+    
+}
+
 function updateModalExerciseAdd(inputId,name){
     $("#myModalLabelExerciseAdd").empty();
     $("#myModalLabelExerciseAdd").append("Add " + name.toString() + " To: <hr>");
@@ -250,11 +282,12 @@ function updateModalExerciseAdd(inputId,name){
 
     var tempString="'#basicModalAddEx'";
     var calanderData=[inputId,tempString];
+    
     toAppend+= '<h3 onclick="addExToResults(['+data+']);messageModal('+tempString+')"><i class="fa fa-book"></i>Current Day</h3>'+
                             '<p style="color:#77b2c9">or</p>'+
                             '<h3 onclick="calanderModal(['+calanderData+'])"><i class="fa fa-calendar"></i>Select Day</h3>'+
                             '<br>'+
-                            '<h3><i class="fa fa-child"></i>Select Workout</h3>';
+                            '<h3 onclick="workoutModal(['+calanderData+'])"><i class="fa fa-child"></i>Select Workout</h3>';
                     
     $("#AddEdModalControls").append(toAppend);
     
@@ -267,11 +300,10 @@ function updateModalExerciseAdd(inputId,name){
 
 }
 
-
 function deleteExercise(eid){
-//    mlpObject.deleteExercise({id:eid});
-//    $('#basicModalEdit').modal('hide');
-//    displayMyExercises();
+    mlpObject.deleteExercise({id:eid});
+    $('#basicModalEdit').modal('hide');
+    displayMyExercises();
 
 }
 
@@ -367,13 +399,15 @@ function displayMyExercises(){
     
     var append = "";
     append +='<div style="color:#77b2c9; float:left; margin-right:10px;padding-top:5px;padding-left:7px;padding-right:7px">'+
-                    '<p style="font-weight:bold"; >Sort by:</p></div>'+
-                    '<select id="myExOrder" style="width:40%; " class="form-control myexercises-editModal-muscle">'+
-                    '<option value="0">Name</option>'+
-                    '<option>M.Group</option>'+
-                    ' <option>Type</option>'+
-                    ' <option>ID</option>'+
-                    '</select><br>'+
+//                    '<p style="font-weight:bold"; >Sort by:</p>'+
+                    '</div>'+
+//                    '<select id="myExOrder" style="width:40%; " class="form-control myexercises-editModal-muscle">'+
+//                    '<option value="0">Name</option>'+
+//                    '<option>M.Group</option>'+
+//                    ' <option>Type</option>'+
+//                    ' <option>ID</option>'+
+//                    '</select>'+
+                    '<br>'+
                     '<div><input style="float:left; margin-right: -38px" class="w-input" id="myExerciseSearch" type="text" placeholder="Search My Exercises" name="addexercisetoworkout" required="required" data-name="addexercisetoworkout">'+
                     '<img class="searchImage" onclick="displayMyExercises();return false;" src="images/search.svg" alt="Search" onerror="this.src="your.png"></div>';
                     
