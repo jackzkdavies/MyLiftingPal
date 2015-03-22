@@ -31,13 +31,13 @@ border-radius: 30px;
     border-bottom: 1px solid #eee;
 }
 .dumbbells{
-    width: 16px;
+    width: 30px;
     margin-left: -12px;
     padding-right: 5px;
 }
 .tester{
-    background-image: url('../images/weights.jpg');
-    background-size: 450% auto;
+    background-image: url('../images/wood.jpg');
+    /*background-size: 450% auto; */
     background-repeat: no-repeat;
     background-position:-590px -150px;
     margin-left: -10px;
