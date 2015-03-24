@@ -5,6 +5,11 @@
     padding-right: 5px;
     width:85%;
 }
+.settingsPage p{
+    color:#77b2c9;
+    font-weight: 600;
+}
+
 .friendsProfilePicture{
     margin-top: 10px;
     margin-bottom: 5px;
@@ -51,7 +56,7 @@ border-radius: 30px;
     padding-right: 5px;
 }
 .tester{
-    background-image: url('../images/wood.jpg');
+    background-image: url('../images/weights.jpg');
     /*background-size: 450% auto; */
     background-repeat: no-repeat;
     background-position:-590px -150px;
