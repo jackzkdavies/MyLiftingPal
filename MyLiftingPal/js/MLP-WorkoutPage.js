@@ -514,7 +514,7 @@ function updateModalWorkoutAdd(wId)
      toAppend += '<h3 onclick='+'"addWorkoutToDiary('+wId+')"><i class="fa fa-book"></i>Current Day</h3>'+
                             '<p style="color:#77b2c9">or</p>'+
                             '<h3 onclick="calanderModal(['+calanderData+'])"><i class="fa fa-calendar"></i>Select Day</h3>';
-    $("#myModalLabelWorkoutAdd").append(toAppend);
+    $("#modalWorkoutAddTo").append(toAppend);
     var options = {
     "backdrop" : "static",
     "show":"true"};

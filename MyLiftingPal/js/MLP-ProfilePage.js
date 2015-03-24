@@ -3,13 +3,37 @@ var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
 
 var user = mlpObject.getUser().result;
 
-var userProfilePhoto = mlpObject.getUser().result['data']['dp'];
+var userProfilePhoto = user['data']['dp'];
 
-var userEmail = mlpObject.getUser().result['data']['email'];
+var userEmail = user['data']['email'];
 
-var username = mlpObject.getUser().result['data']['username'];
+var username = user['data']['username'];
 
-var dateCreated = mlpObject.getUser().result['data']['created'];
+var id = user['data']['id'];
+
+var dateCreated = user['data']['created'];
+
+var userInfo = mlpObject.getUsers({id:id}).result;
+
+var weight = userInfo['data'][7];
+
+var gender = userInfo['data'][8];
+
+var age = userInfo['data'][9];
+
+var about = userInfo['data'][11];
+
+var why = userInfo['data'][12];
+
+var goals = userInfo['data'][13];
+
+var friends = userInfo['data']['acceptedfriends'];
+
+var stats = userInfo['data']['stats'];
+
+var units = userInfo['data']['units'];
+
+//var weight = unserInfo[];
 
 function checkLoginStatus(){
 //    if ($.cookie("mlpsession") === undefined){
@@ -52,10 +76,46 @@ function signOut(){
     
 }
 
-
-
-function displayProfilePicture(){
+function displayUser(){
     var dp = '<img class="profilePicture" src="'+userProfilePhoto+'" alt="">';
     $("#profilePicture").append(dp);
+    
+    $("#username").append('<h3>'+username+'</h3>');
+    
+    $("#userEmail").append(userEmail);
+    
+    $("#weight").append(weight+units+'&nbsp;');
+    $("#gender").append(gender+',&nbsp;');
+    $("#age").append(age+'&nbsp;years old');
+    
+    $("#aboutMe").append(about);
+    $("#why").append(why);
+    $("#goals").append(goals);
+    displayMaxes();
+    displayFriends();
 }
-displayProfilePicture();
+
+function displayMaxes(){
+    for(lifts in stats){
+        var liftName = stats[lifts]['name'];
+        var liftWeight = stats[lifts]['onerm'];
+        var type = stats[lifts]['type'];
+        $("#maxes").append(liftName+': '+liftWeight+units+' ('+type+')<br>');
+    }
+}
+
+function displayFriends(){
+    for (friend in friends){
+        var f ='';
+        f += '<div> <img class="friendsProfilePicture" src='+friends[friend]['dp']+' alt=""><br>'+
+               friends[friend][1]+'</div>';
+       console.log(f);
+        $("#friends").append(f);
+
+    }
+    console.log(friends);
+} 
+
+
+
+
