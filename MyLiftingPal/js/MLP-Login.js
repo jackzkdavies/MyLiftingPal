@@ -162,3 +162,14 @@ function toggleForms(){
     }
     
 }
+
+function checkEmailaddress(){
+    var sEmail = document.getElementById("email").value;
+    if (validateEmail(sEmail) === false){document.getElementById("invalidemailresponse").innerHTML = "Invalid Email Address";}
+    else{document.getElementById("invalidemailresponse").innerHTML = " ";} 
+}
+//Client side email regex, make sure is also checked server side!
+function validateEmail(email) { 
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+} 
