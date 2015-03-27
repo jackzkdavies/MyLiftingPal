@@ -34,13 +34,14 @@
   <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/jquery.dataTables.js"></script>
+  <script type="text/javascript" src="js/stopwatch.js"></script>
   
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
   <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
 </head>
-<body class="plainbodybackground">
-  <div class="w-row">
-    <div id='page-top' class="w-col w-col-9 w-col-stack">
+<body id='page-top' class="plainbodybackground" onload="showStopwatch();">
+  <div class="w-row" >
+    <div  class="w-col w-col-9 w-col-stack">
         
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top" style="background-color: rgb(226, 218, 203);">
@@ -75,7 +76,26 @@
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container-fluid -->
-        <h4 >My Diary</h4>
+        <table style='width: 100%; text-align: center;'>
+            <tr>
+                <td width="25%"><i style="color:black;" class="fa fa-calculator"></i></td>
+                <td width="50%"><h4>My Diary</h4></td>
+                <td width="25%"><img onclick="$('#bottomNav').slideToggle();" style='height: 25px;' src="images/stopwatch.png" alt="STOPWATCH" ></td>
+                
+            </tr>
+        </table>
+        
+        <div>
+
+            
+        </div>
+    </nav>
+    
+    <nav id='bottomNav' class="navbar navbar-default navbar-fixed-bottom" style="display:none; background-color: rgb(226, 218, 203);">
+        <div><span id="stopwatchTime">00:00:00:000</span></div>
+        <input type="button" id='startStop' value="start" onclick="startStop();">
+        <!--<input type="button" value="stop" onclick="stop();">-->
+        <input type="button" value="reset" onclick="reset();">
     </nav>
     <br><br><br>
 <!--                  <div class='tester'>
