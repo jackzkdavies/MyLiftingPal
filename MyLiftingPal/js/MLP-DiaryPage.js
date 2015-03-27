@@ -806,3 +806,4 @@ function diaryPageWorkoutSeach(){
     catch(e){console.log(e);}
     finally{};
 }
+

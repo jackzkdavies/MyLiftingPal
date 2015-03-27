@@ -35,6 +35,7 @@
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/jquery.dataTables.js"></script>
   <script type="text/javascript" src="js/stopwatch.js"></script>
+  <script type="text/javascript" src="js/1rmcalc.js"></script>
   
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
   <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
@@ -78,9 +79,9 @@
         <!-- /.container-fluid -->
         <table style='width: 100%; text-align: center;'>
             <tr>
-                <td width="25%"><i style="color:black;" class="fa fa-calculator"></i></td>
+                <td width="25%"><i onclick="$('#bottomNavCalc').slideToggle();$('#bottomNavStopwatch').hide();" style="color:black;" class="fa fa-calculator"></i></td>
                 <td width="50%"><h4>My Diary</h4></td>
-                <td width="25%"><img onclick="$('#bottomNav').slideToggle();" style='height: 25px;' src="images/stopwatch.png" alt="STOPWATCH" ></td>
+                <td width="25%"><img onclick="$('#bottomNavStopwatch').slideToggle();$('#bottomNavCalc').hide();" style='height: 25px;' src="images/stopwatch.png" alt="STOPWATCH" ></td>
                 
             </tr>
         </table>
@@ -91,11 +92,32 @@
         </div>
     </nav>
     
-    <nav id='bottomNav' class="navbar navbar-default navbar-fixed-bottom" style="display:none; background-color: rgb(226, 218, 203);">
+    <nav id='bottomNavStopwatch' class="navbar navbar-default navbar-fixed-bottom" style="display:none; background-color: rgb(226, 218, 203);">
+        <br>
+        <button type="button" class="close" onclick="$('#bottomNavStopwatch').hide();"  aria-hidden="true"><i class="fa fa-times"></i></button>
         <div><span id="stopwatchTime">00:00:00:000</span></div>
-        <input type="button" id='startStop' value="start" onclick="startStop();">
+        <input class="btn btn-default" type="button" id='startStop' value="start" onclick="startStop();">
         <!--<input type="button" value="stop" onclick="stop();">-->
-        <input type="button" value="reset" onclick="reset();">
+        <input class="btn btn-default" type="button" value="reset" onclick="reset();">
+        <br><br>
+    </nav>
+    
+    <nav id='bottomNavCalc' class="navbar navbar-default navbar-fixed-bottom" style="display:none; background-color: rgb(226, 218, 203);">
+        
+        <br>
+        <div class="container">
+        <p style='font-weight: bold;'>1RM Calculator <button type="button" class="close" onclick="$('#bottomNavCalc').hide();"  aria-hidden="true"><i class="fa fa-times"></i></button><p>
+        
+        <input id='w' style='width: 40%;float:left' type="number" class="form-control weight-lifted" step="0.01" placeholder="0">
+        <p style='width: 60%;'>Weight</p>
+        <br>
+        <input id='r' style='width: 40%;float:left' type="number" class="inputLimit12 form-control reps-performed" placeholder="0">
+        <p style='width: 60%;'>Reps (1-12)</p>
+        
+        <input class="btn btn-default" type="button" value="Calculate" onclick="rmcalc()">
+        <p id='rmResult'></p>
+        <br>
+        </div>
     </nav>
     <br><br><br>
 <!--                  <div class='tester'>
@@ -452,6 +474,25 @@
 
                     if ($this.val() > 10) {
                         $this.val(10);
+                    }
+
+                }
+            }, 50);
+        });
+        
+        $('.inputLimit12').focus(function () {
+            var $this = $(this);
+
+            t = setInterval(
+
+            function () {
+                if (($this.val() < 1 || $this.val() > 12) && $this.val().length != 0) {
+                    if ($this.val() < 1) {
+                        $this.val(1);
+                    }
+
+                    if ($this.val() > 12) {
+                        $this.val(12);
                     }
 
                 }
