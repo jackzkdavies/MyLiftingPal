@@ -105,7 +105,7 @@ function setVarDate(){
 
 function centerCalander(){
     var t = document.getElementById("date-Picker");
-    t.style.backgroundColor="#77b2c9";
+    t.style.backgroundColor="white";
 //    t.style.paddingLeft=0;
 //    var sw= screen.availWidth;
 //    var tw = $("div.calender table").width();
@@ -178,10 +178,10 @@ function slideToggleCalender(){
 
 function toggleDropDownArrow(i){
     if (i.classList.contains('w--open')=== true){
-        document.getElementById("dropDownArrow").innerHTML = '<img class="dumbbells" src="images/open.png" alt="">My Training&nbsp;&nbsp<i class="fa fa-caret-down"></i>';
+        document.getElementById("dropDownArrow").innerHTML = '<img class="dumbbells" src="images/db.png" alt="">My Training&nbsp;&nbsp<i class="fa fa-caret-down"></i>';
     }
     else{
-        document.getElementById("dropDownArrow").innerHTML = '<img class="dumbbells" src="images/open.png" alt="">My Training&nbsp;&nbsp;<i class="fa fa-caret-up"></i>';
+        document.getElementById("dropDownArrow").innerHTML = '<img class="dumbbells" src="images/db.png" alt="">My Training&nbsp;&nbsp;<i class="fa fa-caret-up"></i>';
     }
 }
 
