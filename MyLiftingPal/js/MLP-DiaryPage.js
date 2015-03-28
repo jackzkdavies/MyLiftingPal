@@ -2,6 +2,7 @@
 var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
 
 //Global Variables 
+var user = mlpObject.getUser().result;
 var day ;
 var date ;                 
 var month ;            
@@ -14,8 +15,9 @@ var firstMainPageAddClicked=false;
 var toggleSpeed = window.localStorage.getItem("toggleSpeed");
 toggleSpeed=0;
 var submitDairySearchClass= 'e';
-var displayUnits = window.localStorage.getItem("displayUnits");
-if (displayUnits === null){displayUnits = 'kg';}
+//var displayUnits = window.localStorage.getItem("displayUnits");
+var displayUnits  = user['data']['units'];
+if (displayUnits === null){displayUnits = user['data']['units'];}
 var toggleList={};
 var recordsList={};
 
@@ -103,7 +105,7 @@ function setVarDate(){
 
 function centerCalander(){
     var t = document.getElementById("date-Picker");
-    t.style.backgroundColor="#77b2c9";
+    t.style.backgroundColor="white";
 //    t.style.paddingLeft=0;
 //    var sw= screen.availWidth;
 //    var tw = $("div.calender table").width();
@@ -804,3 +806,4 @@ function diaryPageWorkoutSeach(){
     catch(e){console.log(e);}
     finally{};
 }
+

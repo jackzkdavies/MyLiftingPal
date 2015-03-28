@@ -88,10 +88,10 @@ function slideToggleCalender(){
 
 function toggleDropDownArrow(i){
     if (i.classList.contains('w--open')=== true){
-        document.getElementById("dropDownArrow").innerHTML = '<img class="dumbbells" src="images/db.png" alt="">My Training&nbsp;&nbsp<i class="fa fa-caret-down"></i>';
+        document.getElementById("dropDownArrow").innerHTML = '<img class="dumbbells" src="images/open.png" alt="">My Training&nbsp;&nbsp<i class="fa fa-caret-down"></i>';
     }
     else{
-        document.getElementById("dropDownArrow").innerHTML = '<img class="dumbbells" src="images/db.png" alt="">My Training&nbsp;&nbsp;<i class="fa fa-caret-up"></i>';
+        document.getElementById("dropDownArrow").innerHTML = '<img class="dumbbells" src="images/open.png" alt="">My Training&nbsp;&nbsp;<i class="fa fa-caret-up"></i>';
     }
 }
 
@@ -240,7 +240,80 @@ function modalWorkoutExerciseEdit(inputID,wID){
     $('#modalWorkoutExerciseEdit').modal(options);
     
 }
+function addExerciseCalanderModal(inputID){
+    
+    var date = $("#date-Picker2").datepicker('getDate').getDate();                 
+    var month = $("#date-Picker2").datepicker('getDate').getMonth();             
+    var year = $("#date-Picker2").datepicker('getDate').getFullYear();
+    var tdate=year+"-"+(month+1)+"-"+date;
+    
+    try{
+        console.log(mlpObject.addResults({workoutid:inputID, assigneddate:tdate}).result);
+    }
+    catch(e){
+        
+    }
+    messageModal('#calanderModal');
+    
+}
 
+function messageModal(caller){
+    $("#messageModalBody").empty();
+    
+    if(caller== '#basicModalAddEx'){
+        $("#messageModalBody").append('<img class="" src="images/loader.GIF" alt="Loading"><h3>Adding To Current Day</h3>');
+    }
+    else if(caller == '#calanderModal'){
+        $("#messageModalBody").append('<img class="" src="images/loader.GIF" alt="Loading"><h3>Adding To Selected Day</h3>');
+    }
+    else{ $("#messageModalBody").append('<img class="" src="images/loader.GIF" alt="Loading"><h3>Completing Action</h3>'); }
+    
+
+    $(caller).modal('hide');
+    
+    var options = {
+    "backdrop" : "true",
+    "show":"true"};
+    $('#messageModal').modal(options);
+    
+    
+    setTimeout(function(){
+
+        $("#messageModal").modal('hide');
+     }, 2000);
+
+        
+}
+
+function calanderModal(data){
+    var caller=data[1];
+    var inputID=data[0];
+    $(caller).modal('hide');
+    
+    
+    var buttons= '<hr>'+
+                 '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+
+                 '<button type="button" onclick="addExerciseCalanderModal('+inputID+')" class="btn btn-primary">Confirm</button>'+
+                 '<br><br>';
+    
+    $('#calanderModalButtons').empty();
+    $('#calanderModalButtons').append(buttons);
+    
+    
+    var options = {
+    "backdrop" : "true",
+    "show":"true"};
+    $('#calanderModal').modal(options);
+    
+    $('#date-Picker2').datepicker({
+        format: "dd/mm/yyyy",
+        orientation: "top",
+        keyboardNavigation: false,
+        calendarWeeks: true,
+        todayHighlight: true,
+        gotoCurrent: true
+        }).datepicker("setDate", new Date());
+}
 function workoutSeach(){
     var searchTerms =['name','userid'];
     var searchTerm= (document.getElementById("workoutsearch").value.toString()).trim();
@@ -425,7 +498,6 @@ function deleteWorkout(wId){
 
 function updateModalWorkoutAdd(wId)
 {
-    console.log(wId);
     var workout = mlpObject.getWorkouts({id:wId});
 
 //
@@ -434,11 +506,15 @@ function updateModalWorkoutAdd(wId)
     $("#myModalLabelWorkoutAdd").append("Add " + workout.result['data'][0]['name'] + " To:");
     
     $("#modalWorkoutAddTo").empty();
+    
+    var tempString="'#basicModalAddWorkout'";
+    var calanderData=[wId,tempString];
+    
     var toAppend ='';
      toAppend += '<h3 onclick='+'"addWorkoutToDiary('+wId+')"><i class="fa fa-book"></i>Current Day</h3>'+
                             '<p style="color:#77b2c9">or</p>'+
-                            '<h3><i class="fa fa-calendar"></i>Select Day</h3>';
-    $("#myModalLabelWorkoutAdd").append(toAppend);
+                            '<h3 onclick="calanderModal(['+calanderData+'])"><i class="fa fa-calendar"></i>Select Day</h3>';
+    $("#modalWorkoutAddTo").append(toAppend);
     var options = {
     "backdrop" : "static",
     "show":"true"};
@@ -446,6 +522,7 @@ function updateModalWorkoutAdd(wId)
 }
 
 function addWorkoutToDiary(inputID){
+    messageModal('#basicModalAddWorkout');
     try{
         console.log(mlpObject.addResults({workoutid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result);
     }

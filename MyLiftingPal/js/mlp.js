@@ -1,5 +1,9 @@
 /*! myliftingpal v3.0.0 | (c) 2015 Taylor Hamling | myliftingpal.net */
+//mlpObject.updateUser({id:userId, password:password, email:email});
 
+//mlpObject.updateSettings({userid:userId,emailpreferences:preferences});
+
+//mlpObject.updateSettings({userid:userId,units:units});
 function mlp(key){
    var self = {};
    self.key = key;
@@ -169,6 +173,7 @@ function mlp(key){
    };
    
    self.updateUser = function(data){
+            //mlpObject.updateUser({id:userId, password:password, oldpassword: oldPassword});
 	   //id,email,username,password
        self.call('edit','updateuser', data, cb);
 	   return self;

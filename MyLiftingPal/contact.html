@@ -29,7 +29,7 @@
   <script type="text/javascript" src="js/modernizr.js"></script>
   <script type="text/javascript" src="js/jquery.cookie.js"></script>
   <script type="text/javascript" src="js/mlp.js"></script>
-  <script type="text/javascript" src="js/MLP-ProfilePage.js"></script>
+  <script type="text/javascript" src="js/MLP-Settings.js"></script>
   <script type="text/javascript" src="js/webflow.js"></script>
   <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
@@ -64,7 +64,7 @@
                   <div class="w-dropdown" data-delay="0">
                     <div class="w-dropdown-toggle createdropdown" onclick="toggleDropDownArrow(this)">
                       <div class="w-icon-dropdown-toggle"></div>
-                      <div id="dropDownArrow"><img class="dumbbells" src="images/db.png" alt="">My Training&nbsp;&nbsp;<i class="fa fa-caret-down"></i></div>
+                      <div id="dropDownArrow"><img class="dumbbells" src="images/open.png" alt="">My Training&nbsp;&nbsp;<i class="fa fa-caret-down"></i></div>
                     </div>
                     <nav class="w-dropdown-list">
                         <a class="w-dropdown-link" href="main-page.html"><i class="fa fa-book"></i> My Diary</a>
@@ -79,47 +79,41 @@
             </div>
               
           
-          </div>
-        
-        
-        <h4 class="myDiary">My Profile</h4>
-        
-
-        <div class="w-clearfix">
-            <div style='border-radius: 5px; background: linear-gradient( rgba(255, 255, 255, 0.7), rgba(255, 255,255, 0.7) ), url(images/header.jpg) no-repeat center center;background-size: cover;float:left;'>
-                <div style='float:left' id="profilePicture"></div>
-                <div style='float:left' id="username"></div>
-                <div style='float:left' id="userEmail"></div>
-                <br>
-                <div style='float:left' id="weight"></div>
-                <div style='float:left' id="gender"></div>
-                <div style='float:left' id="age"></div>
-            </div>
-            <div style='float:left'>
-                
-                <br>
-                <div id='aboutMe'><h5>About Me</h5></div>
-                <br>
-                <div id='why'><h5>Why I Lift</h5></div>
-                <br>
-                <div id='goals'><h5>My Goals</h5></div>
-                <br>
-                <div id='maxes'><h5>Maxes</h5></div>
-                <br>
-                <hr>
-            </div>
-            
-            <h3>Friends</h3>
-            <div style='float:left' id='friends'>
-                
-            </div>
-
         </div>
+        
+
+
+
+        <h4 class="myDiary">Contact Us</h4>
+        <div class="w-clearfix">
+            <h3>Our support</h3>
+            <p>You can contact us via our contact form <a style="color:#77b2c9 " href="http://www.myliftingpal.net/contact/">here</a>, or alternatively contact us directly by email below.</p>
+            <p>Support Email: <a style="color:#77b2c9" href="mailto:support@myliftingpal.net">support@myliftingpal.net</a><br>
+                Taylor Hamling: <a style="color:#77b2c9" href="mailto:taylor@myliftingpal.net">taylor@myliftingpal.net</a><br>
+                Jack Davies: <a style="color:#77b2c9" href="mailto:jack@myliftingpal.net">jack@myliftingpal.net</a>
+            </p>
+            <br>
+            <h3>Frequently Asked Questions</h3>
+            <p>Before you seek out our support, check the FAQ to see if your question has been answered.</p>
+            <br>
+            <div style="padding-bottom:10px;"><p><a style="color:#77b2c9;text-decoration: none;" href="javascript:void(0);" onclick="$('.answer1').slideToggle();">Why did we create MyLiftingPal?</a></p>
+            <div class="answer1" style="display:none;">
+                <p>We found that there wasn't an app out there for tracking lifting that was actually useful for people who train correctly. We wanted a platform that promotes the main goal that anyones program should have: lifting more over time.</p>
+            </div>
+                
+                <div style="padding-bottom:10px;"><p><a style="color:#77b2c9;text-decoration: none;" href="javascript:void(0);" onclick="$('.answer2').slideToggle();">Where are we from?</a></p>
+            <div class="answer2" style="display:none;">
+                <p>New Zealand</p>
+            </div>
+    
+            </div>
+    
+            </div>
+        </div>
+        
         <hr>
         <p><a style="color:#333" href="terms.html">Terms</a> | <a style="color:#333" href="privacy.html">Privacy</a> | <a style="color:#333" href="contact.html">Contact Us</a> | <a style="color:#333" href="http://www.myliftingpal.net/track/#api">API</a></p>
         <hr> 
-
-          
 
       </div>
         <br><br><hr>
@@ -146,7 +140,6 @@
     <script>    
         window.onload = function load(){
             checkLoginStatus();
-            displayUser();
 
             
         };
