@@ -11,6 +11,9 @@ var username = mlpObject.getUser().result['data']['username'];
 
 var dateCreated = mlpObject.getUser().result['data']['created'];
 
+var userID = mlpObject.getUser().result['data']['id'];
+
+var userData = mlpObject.getUsers({id:userID});
 function checkLoginStatus(){
 //    if ($.cookie("mlpsession") === undefined){
 //        window.location.replace("index.html");
@@ -59,3 +62,4 @@ function displayProfilePicture(){
     $("#profilePicture").append(dp);
 }
 displayProfilePicture();
+
