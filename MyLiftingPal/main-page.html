@@ -178,6 +178,22 @@
             <h5>%1RM</h5>
           </div>
         </div>
+          
+            <div class="modal fade" id="infoDataModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>-->
+                        <h4 class="modal-title" id="addModalLabel">Info</h4>
+                        </div>
+                        <div class="modal-body" id="infoDataModalBody"><p>test</p></div>
+                                                <div class="modal-footer" id='addModalFooter'>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="$('#addModal').show()">Close</button>
+                    </div>
+                    </div>
+              </div>
+            </div>
+          
             <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -216,15 +232,15 @@
                     <p id="searchResultsHeading"></p>
                  
                     
-                    <table id='mytable' style='display: none; text-align:left;  font-size: 12px; text-shadow: 0px 0px rgba(255, 255, 255, 0);'>
+                    <table id='mytable' style='display: none; text-align:left;   text-shadow: 0px 0px rgba(255, 255, 255, 0);'>
                       <thead>
                           <tr>
                               <td style='color:black; font-weight: bold;background-color: white'>Exercise</td>
-                              <td style='color:white; font-weight: 650;background-color: #77b2c9;' >M.Group</td>
-                              <td style='color:white; font-weight: 650;background-color: #77b2c9; border-radius:0px 3px 0px 0px'>Type</td>
+                              <td style='color:white; font-weight: 650;background-color: #77b2c9;' >info</td>
+                              <td style='color:white; font-weight: 650;background-color: #77b2c9; border-radius:0px 3px 0px 0px'>Add</td>
                           </tr>
                       </thead>
-                      <tbody id ="searchresults">
+                      <tbody id ="searchresults" style='font-size: 12px;'>
                           
                       </tbody>
                   </table>

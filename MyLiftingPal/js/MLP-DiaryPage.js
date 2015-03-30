@@ -658,7 +658,17 @@ function submitDairySearch(){
     }
     
 }
+function infoDataModal(data){
+    console.log(data);
+    document.getElementById("infoDataModalBody").innerHTML = data;
+    var options = {
+    "backdrop" : "true",
+    "show":"true"};
+    $('#infoDataModal').modal(options);
+    
 
+    $('#addModal').hide();
+}
 function dairyPageExSearch(){
     var searchTerms =['name','musclegroup','type'];
     var searchTerm= (document.getElementById("mainSearchTerm").value.toString()).trim();
@@ -692,20 +702,40 @@ function dairyPageExSearch(){
 
         var useDate=[year,(month+1),date];
         var resultData=[key,useDate,1,1,1,1,1];
-        toAppend += "<tr onClick='addExToResults(["+resultData+"])'>";
+        var infoData='';
+        toAppend += "<tr >";
        
 
         for (st in searchTerms){
-            toAppend += "<td>";
+            
    
             if (searchTerms[st] === 'userid'){
 //                toAppend += mlpObject.getUsers({id:results[obj][searchTerms[st]]}).result['data']['username'];
 
             }
-            else {
+            if (searchTerms[st] === 'name'){
+                toAppend += "<td>";
                 toAppend += globalExerciseObjs[key][searchTerms[st]];
+                toAppend += "</td>";
             }
-            toAppend += "</td>";
+            
+            else if (searchTerms[st] === 'musclegroup'){
+
+                infoData += '<h5>Muscle Group(s)</h5><p>'+(globalExerciseObjs[key][searchTerms[st]]).toString()+'</p>';
+                
+            }
+            
+            else if (searchTerms[st] === 'type'){
+                toAppend += "<td>";
+                infoData += '<h5>Type(s)</h5><p>'+(globalExerciseObjs[key][searchTerms[st]]).toString()+'</p>';
+                toAppend += '<i class="fa fa-info-circle" onClick="infoDataModal('+"'"+infoData+"'"+')"></i>';
+                toAppend += "</td>";
+                
+                toAppend += "<td>";
+                toAppend += '<i class="fa fa-plus-circle" onClick="addExToResults(['+resultData+'])"></i>';
+                toAppend += "</td>";
+            }
+            
         }
         
         toAppend += "</tr>";
