@@ -722,7 +722,9 @@ function dairyPageExSearch(){
     catch(e){console.log(e);}
     
     $("#searchresults").append(toAppend);
-    $('#mytable').DataTable({bFilter: false,sDom: '<"top">rt<"bottom"flp><"clear">'});
+    $('#mytable').DataTable({bFilter: false,"dom": '<"top"i>rt<"bottom"flp><"clear">',
+        "ordering": false,
+        "info":     false});
     document.getElementById('mytable').style.display='table';
     document.getElementById('searchResultsHeading').innerHTML='<div style="line-height:50px">Search results for Exercise: '+searchTerm+'</div>';
     
