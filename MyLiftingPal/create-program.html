@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <!-- This site was created in Webflow. http://www.webflow.com-->
 <!-- Last Published: Sun Dec 14 2014 22:12:09 GMT+0000 (UTC) -->
-<html data-wf-site="54697ee94e26f780049e790b" data-wf-page="5477f9f5a059c4845a7735af">
+<html data-wf-site="54697ee94e26f780049e790b" data-wf-page="5477f763b86e26a2209dc4a2">
 <head>
   <meta charset="utf-8">
-  <title>My Lifting Pal - Create Program</title>
+  <title>My Lifting Pal - Create Program </title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="generator" content="Webflow">
+  
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="css/datepicker3.css">
   <link rel="stylesheet" type="text/css" href="css/webflow.css">
-  <link rel="stylesheet" type="text/css" href="css/myliftingpal.webflow.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="css/myliftingpal.webflow.css"> 
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+  
+  
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
   <script>
     WebFont.load({
@@ -18,87 +25,356 @@
       }
     });
   </script>
+  
   <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
-  <!--<script type="text/javascript" src="js/jquery-1.11.2.js"></script>-->
   <script type="text/javascript" src="js/modernizr.js"></script>
   <script type="text/javascript" src="js/jquery.cookie.js"></script>
   <script type="text/javascript" src="js/mlp.js"></script>
-  <script type="text/javascript" src="js/main.js"></script>
+  <script type="text/javascript" src="js/MLP-WorkoutPage.js"></script>
   <script type="text/javascript" src="js/webflow.js"></script>
+  <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/jquery.dataTables.js"></script>
+  
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
   <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
 </head>
-<body class="plainbodybackground">
+<body id='page-top'  class="plainbodybackground">
   <div class="w-container">
     <div class="w-row">
-      <div class="w-col w-col-9 test"><img class="logoimage" src="images/mlp_logo.png" alt="546987585294c14035d7eda7_mlp_logo.png">
-        <div class="w-form sign-up-form">
-          <form name="wf-form-signup-form" data-name="Signup Form">
-            <div class="w-nav" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1">
-              <div class="w-container menucont">
-                <nav class="w-nav-menu" role="navigation"><a class="w-nav-link" href="main-page.html">Return</a><a class="w-nav-link" href="#">Settings</a><a class="w-nav-link" href="#">Sign Out</a>
-                </nav>
-                <div class="w-nav-button">
-                  <div class="w-icon-nav-menu"></div>
+        
+    
+        
+      <div class="w-col w-col-9">
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" style="background-color: rgb(226, 218, 203);">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll testBackground" style="background-image: url('../images/header.jpg')">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <i class="fa fa-bars"></i>
+                </button>
+                
+                <a style='width:75%' class="navbar-brand" href="#page-top"><img style='height: 55px;margin-top: -15px;  margin-left: 25%;' src="images/mlp_logo2.png" alt="MLP" ></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="background-color: rgb(226, 218, 203);">
+                <div>
+                
+                   <h5> <a href="main-page.html"><i class="fa fa-book"></i> My Diary</a></h5>
+                  <h5>  <a  href="create-exercise.html"><i class="fa fa-heart"></i> My Exercises</a></h5>
+                  <h5>  <a  href="create-workout.html"><i class="fa fa-child"></i> My Workouts</a></h5>
+                  <h5>  <a  href="create-program.html"><i class="fa fa-calendar"></i> My Programs</a></h5>
+                  <h5>  <a href="stats.html"><i class="fa fa-line-chart"></i> My Stats</a></h5>
+                
                 </div>
-                <div class="dropdowndiv">
-                  <div class="w-dropdown" data-delay="0">
-                    <div class="w-dropdown-toggle createdropdown">
-                      <div class="w-icon-dropdown-toggle"></div>
-                      <div>Create New</div>
+                <br>
+                <a  href="profile.html">Profile</a> |
+                <a  href="settings.html">Settings</a> |
+                <a  href="javascript:logout()">Logout</a>
+                
+                <hr>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+        <table style='width: 100%; text-align: center;'>
+            <tr>
+                <td width="25%"><i onclick="$('#bottomNavCalc').slideToggle();$('#bottomNavStopwatch').hide();" style="color:black;" class="fa fa-calculator"></i></td>
+                <td width="50%"><h4>My Programs</h4></td>
+                <td width="25%"><img onclick="$('#bottomNavStopwatch').slideToggle();$('#bottomNavCalc').hide();" style='height: 25px;' src="images/stopwatch.png" alt="STOPWATCH" ></td>
+                
+            </tr>
+        </table>
+        
+        <div>
+
+            
+        </div>
+    </nav>
+    
+    <nav id='bottomNavStopwatch' class="navbar navbar-default navbar-fixed-bottom" style="display:none; background-color: rgb(226, 218, 203);">
+        <br>
+        <button type="button" class="close" onclick="$('#bottomNavStopwatch').hide();"  aria-hidden="true"><i class="fa fa-times"></i></button>
+        <div><span id="stopwatchTime">00:00:00:000</span></div>
+        <input class="btn btn-default" type="button" id='startStop' value="start" onclick="startStop();">
+        <!--<input type="button" value="stop" onclick="stop();">-->
+        <input class="btn btn-default" type="button" value="reset" onclick="reset();">
+        <br><br>
+    </nav>
+    
+    <nav id='bottomNavCalc' class="navbar navbar-default navbar-fixed-bottom" style="display:none; background-color: rgb(226, 218, 203);">
+        
+        <br>
+        <div class="container">
+        <p style='font-weight: bold;'>1RM Calculator <button type="button" class="close" onclick="$('#bottomNavCalc').hide();"  aria-hidden="true"><i class="fa fa-times"></i></button><p>
+        
+        <input id='w' style='width: 40%;float:left' type="number" class="form-control weight-lifted" step="0.01" placeholder="0">
+        <p style='width: 60%;'>Weight</p>
+        <br>
+        <input id='r' style='width: 40%;float:left' type="number" class="inputLimit12 form-control reps-performed" placeholder="0">
+        <p style='width: 60%;'>Reps (1-12)</p>
+        
+        <input class="btn btn-default" type="button" value="Calculate" onclick="rmcalc()">
+        <p id='rmResult'></p>
+        <br>
+        </div>
+    </nav>
+    <br><br><br>
+        
+        <p id="date" onClick="slideToggleCalender()">  </p>      
+      
+            
+        <div class="calender"  id="date-Picker" style="display: none;" onClick="setVarDate()"></div>
+        <script>
+            $('#date-Picker').datepicker({
+            format: "dd/mm/yyyy",
+            orientation: "top",
+            keyboardNavigation: false,
+            calendarWeeks: true,
+            todayHighlight: true,
+            gotoCurrent: true
+            }).datepicker("setDate", new Date());
+            
+            
+            
+            var days= ["Sunday","Monday","Tuesday","Wednesday", "Thursday","Friday","Saturday"]; 
+            var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
+            var monthPrefix = ["st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"];
+            
+            var day = $("#date-Picker").datepicker('getDate').getDay();
+            var date = $("#date-Picker").datepicker('getDate').getDate();                 
+            var month = $("#date-Picker").datepicker('getDate').getMonth();             
+            var year = $("#date-Picker").datepicker('getDate').getFullYear();
+            var fullDate = days[day] + ", " + date +monthPrefix[date-1]+ " " + months[month]+", "+year;
+
+            document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-down'></i></span>";
+        </script>
+            
+            <br>
+            <div onclick="toggleMyWorkouts()">
+            <p id="numberExercises">Show My Workouts</p>
+            <div id="showWkToggleArrow"><i style="font-size:40px" class="fa fa-plus-circle"></i></div>
+            <hr>
+            </div>
+            
+            <div id="myWorkouts"></div>
+            
+            <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body" id="messageModalBody"></div>
                     </div>
-                    <nav class="w-dropdown-list"><a class="w-dropdown-link" href="create-exercise.html">exercise</a><a class="w-dropdown-link" href="create-workout.html">workout</a><a class="w-dropdown-link" href="create-program.html">program</a>
-                    </nav>
-                  </div>
+              </div>
+            </div>
+            
+            <div class="modal fade" id="calanderModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                        <h4 class="modal-title" id="myModalLabelExerciseAdd">Select Date</h4>
+                        </div>
+                        <div class="modal-body" id="calanderModalBody" style="background-color: #77b2c9" >
+                            <div class="calender"  id="date-Picker2" onClick="setVarDate()"></div>
+                            
+                        </div>
+                        <div class="modal-footer" id="calanderModalButtons">
+
+                        </div>
+                    </div>
+              </div>
+            </div>
+            
+            <div class="modal fade" id="basicModalAddWorkout" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                        <h4 class="modal-title" id="myModalLabelWorkoutAdd">Add to</h4>
+                        </div>
+                        
+                        <div class="modal-body" id="modalWorkoutAddTo">
+                            <h3><i class="fa fa-book"></i>Current Day</h3>
+                            <p style="color:#77b2c9">or</p>
+                            <h3><i class="fa fa-calendar"></i>Select Day</h3>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
                 </div>
               </div>
             </div>
-            <h4 id="date">  </h4>
-            <script> var d = new Date(); var date = d.getDate(); var day = d.getDay(); var year = d.getFullYear(); var month = d.getMonth();
-            var days= ["Sun","Mon","Tue","Wed", "Thur","Fri","Sat"]; var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
-            var monthPrefix = ["st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"];
-            document.getElementById("date").innerHTML = "◄ "+ days[day] +" "+ date+monthPrefix[day] +" "+ months[month] +" "+ year+ " ►";
-            </script>
+            
+            <div class="modal fade" id="modalDisplayWorkoutExercies" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                        <h4 class="modal-title" id="modalLabelDWE">WorkOut Contains</h4>
+                        </div>
+                        <div class="modal-body" id="modalDWEdetails">
+         
+                        </div>
+                        <div id="basicModalDWAdd" class="modal-footer">
+<!--                            <button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button onclick="deleteModalDiaryResult('+inputID+')" type="button" class="btn btn-primary">Confirm</button>-->
+                    </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="modal fade" id="basicModalEdit" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                        <h4 class="modal-title" id="myModalLabelWorkoutEdit"></h4>
+                        </div>
+                        <div class="modal-body">
+                             <p  class="blackfont">Name</p>
+                             <input id="updateWorkoutName" class="w-input field feild2" type="text" placeholder="" name="exercisename" required="required" data-name="exercisename">
+                             <br>
+                             <hr>
+                              <hr>
+                            <div id="deleteWorkoutButton"></div>
+                            
+                        </div>
+                        <div id="editCalANDSav" class="modal-footer">
+<!--                            <button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            
+                            <button type="button" class="btn btn-primary">Save</button>-->
+                    </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal fade" id="modalWorkoutExerciseEdit" style="overflow-y:auto" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                        <h4 class="modal-title" id="myModalLabelWorkoutExerciseEdit">Update</h4>
+                        </div>
+                        <div class="modal-body" id="basicModalNewSetBody">
+                            <p  class="blackfont">Reps</p>
+                            <input id="updateModalAddRep" class="w-input field feild2" type="number" placeholder="1" name="Reps" required="required" data-name="exercisename">
+                            <p  class="blackfont">Sets</p>
+                            <input id="updateModalAddSet" class="w-input field feild2" type="number" placeholder="1" name="Set" required="required" data-name="exercisename">
+                            <p  class="blackfont">Weight</p>
+                            <input id="updateModalAddWeight" class="w-input field feild2" type="number" placeholder="1" name="Weight" required="required" data-name="exercisename">
+                            <p  class="blackfont">RPE</p>
+                            <input id="updateModalAddRPE" class="w-input field feild2" type="number" placeholder="1" name="RPE" required="required" data-name="exercisename">
+                            <p  class="blackfont">%1RM</p>
+                            <input id="updateModalAddRM" class="w-input field feild2" type="number" placeholder="1" name="%1RM" required="required" data-name="exercisename">
+                            
+
+                        </div>
+                        <div id="modalWorkoutExerciseEditControls" class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            <i style="font-size: 40px;" class="fa fa-child"></i>
             <div class="w-tabs" data-duration-in="300" data-duration-out="100">
               <div class="w-tab-menu w-clearfix">
-                <a class="w-tab-link w-inline-block createtab" data-w-tab="Create New">
-                  <div><strong>Create New Program</strong>
+                    <a class="w-tab-link w--current w-inline-block searchtab" data-w-tab="Search">
+                    <div><strong><img class="searchImage2" src="images/search.svg" alt="">Search</strong>
+                    </div>
+                     </a>
+                  
+                  <a class="w-tab-link w-inline-block createtab" data-w-tab="Create New">
+                  <div><strong>Create New Workout</strong>
                   </div>
                 </a>
-                <a class="w-tab-link w--current w-inline-block searchtab" data-w-tab="Search">
-                  <div><strong>Search</strong>
-                  </div>
-                </a>
+
               </div>
               <div class="w-tab-content">
                 <div class="w-tab-pane w-clearfix" data-w-tab="Create New">
-                  <input class="w-input field feild2" id="cProgramName" type="text" placeholder="Enter program name" name="programname" required="required" data-name="programname">
-                  <input class="w-input field feild2" id="cProgramDuration" type="text" placeholder="Enter program duration in weeks" name="programduration" required="required" data-name="programduration">
-                  <input class="w-input" id="addexercisetoworkout" type="text" placeholder="Select workout to add" name="addexercisetoworkout" required="required" data-name="addexercisetoworkout"><a class="button signup" href="#"><span><strong>Create Program</strong></span></a>
-                </div>
+                <p id="errorCreatingWorkout"></p>
+              <input class="w-input field feild2" id="cWorkoutName" type="text" placeholder="Enter workout name" name="workoutname" required="required" data-name="workoutname">
+
+              <table id="exercisesToAdd" style="display:  none">
+                  <thead>
+                  <tr>
+                      <td>Exercise</td>
+                      <td>M/Group</td>
+                      <td>Type</td>
+                      <td></td>
+                  </tr>
+                  </thead>
+                  <tbody id="selectedExerciseToAdd">
+
+                  </tbody>
+              </table>
+              <hr>
+
+              <div style="width: 100%;">
+              <input style="float:left; margin-right: -38px" class="w-input" id="exercisesearch" type="text" placeholder="Select Exercise to add" name="addexercisetoworkout" required="required" data-name="addexercisetoworkout">
+              <img class="searchImage" onclick="submitSearchExcerciseInWorkout();return false;" src="images/search.svg" alt="Search" onerror="this.src='your.png'">
+              </div>
+              
+              
+              
+              <p id="searchResultsHeading"></p>
+
+              <table id='mytable' style='display: none; text-align:left; text-shadow: 0px 0px rgba(255, 255, 255, 0);'>
+                  <thead>
+                      <tr>
+                          <td style=''>Exercise</td>
+                          <td style=''>M/Group</td>
+                          <td style=''>Type</td>
+                      </tr>
+                  </thead>
+                  <tbody id ="searchresults">
+
+                  </tbody>
+              </table>
+
+              <hr>
+
+
+            <a class="button signup" href="javascript:submitCreateWorkoutForm()"><span><strong>Create Workout</strong></span></a>
+            </div>
+                  
+                  
+                  
+                  
                 <div class="w-tab-pane w--tab-active w-clearfix" data-w-tab="Search">
-                  <input class="w-input seachexerciseinput" id="programsearch" type="text" placeholder="Enter program name" name="programsearch" required="required" data-name="programsearch">
-                  <div class="searchresultsdiv">Search result show here&nbsp;</div><a class="button addexercisetocurrentday" href="#"><strong>Choose Start Date</strong></a>
+                  <input class="w-input seachexerciseinput" id="workoutsearch" type="text" placeholder="Search Existing Workouts" name="workoutsearch" required="required" data-name="workoutsearch">
+                  <div class="searchresultsWorkouts"></div><a class="button addexercisetocurrentday" href="#"><strong>Submit Search</strong></a>
+                    
+                  <table id='mytableWorkouts' style='display: none; text-align:left; text-shadow: 0px 0px rgba(255, 255, 255, 0);'>
+                      <thead>
+                          <tr>
+                              <td style='color:black; font-weight: bold;background-color: white'>Name</td>
+                              <td style='color:white; font-weight: 650;background-color: #77b2c9;' >Author</td>
+                              <!--<td style='color:white; font-weight: 650;background-color: #77b2c9; border-radius:0px 3px 0px 0px'>Type</td>-->
+                          </tr>
+                      </thead>
+                      <tbody id ="searchresultsWorkouts">
+                          
+                      </tbody>
+                  </table>
+                  
                 </div>
               </div>
             </div>
-          </form>
-          <div class="w-form-done success-message">
-            <p>Thanks! You have been added to our list.&nbsp;</p>
-            <p class="spread-word">Help spread the word!</p>
-            <div class="w-clearfix social-widget-wrapper">
-              <div class="w-widget w-widget-twitter social-widget full-opacity">
-                <iframe src="https://platform.twitter.com/widgets/tweet_button.html#url=http%3A%2F%2Fwebflow.com&amp;counturl=webflow.com&amp;text=Check%20out%20this%20site&amp;count=horizontal&amp;size=m&amp;dnt=true" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 110px; height: 20px;"></iframe>
-              </div>
-              <div class="w-widget w-widget-facebook social-widget full-opacity">
-                <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Ffacebook.com%2Fwebflow&amp;layout=button_count&amp;locale=en_US&amp;action=like&amp;show_faces=false&amp;share=false" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 90px; height: 20px;"></iframe>
-              </div>
-            </div>
-          </div>
-          <div class="w-form-fail error-message">
-            <p>Oops! Something went wrong while submitting the form. :(</p>
-          </div>
-        </div>
+                  <hr>
+        <p><a style="color:#333" href="terms.html">Terms</a> | <a style="color:#333" href="privacy.html">Privacy</a> | <a style="color:#333" href="contact.html">Contact Us</a> | <a style="color:#333" href="http://www.myliftingpal.net/track/#api">API</a></p>
+        <hr>     
+    </div>
+        
         <div class="share-text">Share with your friends:&nbsp;</div>
         <div class="w-clearfix social-widget-wrapper">
           <div class="w-widget w-widget-twitter social-widget">
@@ -109,8 +385,8 @@
           </div>
         </div>
       </div>
-      <div class="w-col w-col-3 image-column"><img class="advert" src="images/fakead.png" alt="5469870d5294c14035d7ed9f_fakead.png">
-      </div>
+<!--      <div class="w-col w-col-3 image-column"><img class="advert" src="images/fakead.png" alt="5469870d5294c14035d7ed9f_fakead.png">
+      </div>-->
     </div>
   </div>
   <div class="color-section">
@@ -120,6 +396,14 @@
       </div>
     </div>
   </div>
+    <script>
+        window.onload = function load(){
+            checkLoginStatus();
+//            displayMyWorkouts();
+            
+        };
+    </script>
+    
   <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
 </body>
 </html>

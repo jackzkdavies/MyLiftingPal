@@ -11,7 +11,7 @@
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
   <link rel="stylesheet" type="text/css" href="css/datepicker3.css">
   <link rel="stylesheet" type="text/css" href="css/webflow.css">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="css/myliftingpal.webflow.css"> 
   <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
@@ -42,47 +42,82 @@
   <div class="w-row">
     <div class="w-col w-col-9 w-col-stack">
         
-                  <div class='tester'>
-              
-              
-            <img class="logoimage"  src="images/header.svg" alt="Search" onerror="this.src='images/mlp_logo.png'">
-            <div class="w-nav" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1">
-              <div class="w-container menucont">
-                  
-                <nav class="w-nav-menu" role="navigation">
-                    <a class="w-nav-link" href="#">Profile</a>
-                    <a class="w-nav-link" href="#">Settings</a>
-                    <hr>
-                    <a class="w-nav-link" href="javascript:logout()">Logout</a>
-                </nav>
-                  
-                <div class="w-nav-button">
-                  <div class="w-icon-nav-menu"></div>
-                </div>
-                  
-                <div  class="dropdowndiv">
-                  <div class="w-dropdown" data-delay="0">
-                    <div class="w-dropdown-toggle createdropdown" onclick="toggleDropDownArrow(this)">
-                      <div class="w-icon-dropdown-toggle"></div>
-                      <div id="dropDownArrow"><img class="dumbbells" src="images/db.png" alt="">My Training&nbsp;&nbsp;<i class="fa fa-caret-down"></i></div>
-                    </div>
-                    <nav class="w-dropdown-list">
-                        <a class="w-dropdown-link" href="main-page.html"><i class="fa fa-book"></i> My Diary</a>
-                        <a class="w-dropdown-link" href="create-exercise.html"><i class="fa fa-heart"></i> My Exercises</a>
-                        <a class="w-dropdown-link" href="create-workout.html"><i class="fa fa-child"></i> My Workouts</a>
-                        <a class="w-dropdown-link" href="create-program.html"><i class="fa fa-calendar"></i> My Programs</a>
-                        <a class="w-dropdown-link" href="stats.html"><i class="fa fa-line-chart"></i> My Stats</a>
-                    </nav>
-                  </div>
-                </div>
-              </div>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" style="background-color: rgb(226, 218, 203);">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll testBackground" style="background-image: url('../images/header.jpg')">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <i class="fa fa-bars"></i>
+                </button>
+                
+                <a style='width:75%' class="navbar-brand" href="#page-top"><img style='height: 55px;margin-top: -15px;  margin-left: 25%;' src="images/mlp_logo2.png" alt="MLP" ></a>
             </div>
-              
-          
-          </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="background-color: rgb(226, 218, 203);">
+                <div>
+                
+                   <h5> <a href="main-page.html"><i class="fa fa-book"></i> My Diary</a></h5>
+                  <h5>  <a  href="create-exercise.html"><i class="fa fa-heart"></i> My Exercises</a></h5>
+                  <h5>  <a  href="create-workout.html"><i class="fa fa-child"></i> My Workouts</a></h5>
+                  <h5>  <a  href="create-program.html"><i class="fa fa-calendar"></i> My Programs</a></h5>
+                  <h5>  <a href="stats.html"><i class="fa fa-line-chart"></i> My Stats</a></h5>
+                
+                </div>
+                <br>
+                <a  href="profile.html">Profile</a> |
+                <a  href="settings.html">Settings</a> |
+                <a  href="javascript:logout()">Logout</a>
+                
+                <hr>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+        <table style='width: 100%; text-align: center;'>
+            <tr>
+                <td width="25%"><i onclick="$('#bottomNavCalc').slideToggle();$('#bottomNavStopwatch').hide();" style="color:black;" class="fa fa-calculator"></i></td>
+                <td width="50%"><h4>My Profile</h4></td>
+                <td width="25%"><img onclick="$('#bottomNavStopwatch').slideToggle();$('#bottomNavCalc').hide();" style='height: 25px;' src="images/stopwatch.png" alt="STOPWATCH" ></td>
+                
+            </tr>
+        </table>
         
+        <div>
+
+            
+        </div>
+    </nav>
+    
+    <nav id='bottomNavStopwatch' class="navbar navbar-default navbar-fixed-bottom" style="display:none; background-color: rgb(226, 218, 203);">
+        <br>
+        <button type="button" class="close" onclick="$('#bottomNavStopwatch').hide();"  aria-hidden="true"><i class="fa fa-times"></i></button>
+        <div><span id="stopwatchTime">00:00:00:000</span></div>
+        <input class="btn btn-default" type="button" id='startStop' value="start" onclick="startStop();">
+        <!--<input type="button" value="stop" onclick="stop();">-->
+        <input class="btn btn-default" type="button" value="reset" onclick="reset();">
+        <br><br>
+    </nav>
+    
+    <nav id='bottomNavCalc' class="navbar navbar-default navbar-fixed-bottom" style="display:none; background-color: rgb(226, 218, 203);">
         
-        <h4 class="myDiary">My Profile</h4>
+        <br>
+        <div class="container">
+        <p style='font-weight: bold;'>1RM Calculator <button type="button" class="close" onclick="$('#bottomNavCalc').hide();"  aria-hidden="true"><i class="fa fa-times"></i></button><p>
+        
+        <input id='w' style='width: 40%;float:left' type="number" class="form-control weight-lifted" step="0.01" placeholder="0">
+        <p style='width: 60%;'>Weight</p>
+        <br>
+        <input id='r' style='width: 40%;float:left' type="number" class="inputLimit12 form-control reps-performed" placeholder="0">
+        <p style='width: 60%;'>Reps (1-12)</p>
+        
+        <input class="btn btn-default" type="button" value="Calculate" onclick="rmcalc()">
+        <p id='rmResult'></p>
+        <br>
+        </div>
+    </nav>
+    <br><br><br>
         
 
         <div class="w-clearfix">

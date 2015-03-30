@@ -11,7 +11,7 @@
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
   <link rel="stylesheet" type="text/css" href="css/datepicker3.css">
   <link rel="stylesheet" type="text/css" href="css/webflow.css">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="css/myliftingpal.webflow.css"> 
   <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
@@ -38,59 +38,66 @@
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
   <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
 </head>
-<body class="plainbodybackground">
+<body id='page-top' class="plainbodybackground">
   <div class="w-row">
     <div class="w-col w-col-9 w-col-stack">
         
-                  <div class='tester'>
-              
-              
-            <img class="logoimage"  src="images/header.svg" alt="Search" onerror="this.src='images/mlp_logo.png'">
-            <div class="w-nav" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1">
-              <div class="w-container menucont">
-                  
-                <nav class="w-nav-menu" role="navigation">
-                    <a class="w-nav-link" href="#">Profile</a>
-                    <a class="w-nav-link" href="#">Settings</a>
-                    <hr>
-                    <a class="w-nav-link" href="javascript:logout()">Logout</a>
-                </nav>
-                  
-                <div class="w-nav-button">
-                  <div class="w-icon-nav-menu"></div>
-                </div>
-                  
-                <div  class="dropdowndiv">
-                  <div class="w-dropdown" data-delay="0">
-                    <div class="w-dropdown-toggle createdropdown" onclick="toggleDropDownArrow(this)">
-                      <div class="w-icon-dropdown-toggle"></div>
-                      <div id="dropDownArrow"><img class="dumbbells" src="images/db.png" alt="">My Training&nbsp;&nbsp;<i class="fa fa-caret-down"></i></div>
-                    </div>
-                    <nav class="w-dropdown-list">
-                        <a class="w-dropdown-link" href="main-page.html"><i class="fa fa-book"></i> My Diary</a>
-                        <a class="w-dropdown-link" href="create-exercise.html"><i class="fa fa-heart"></i> My Exercises</a>
-                        <a class="w-dropdown-link" href="create-workout.html"><i class="fa fa-child"></i> My Workouts</a>
-                        <a class="w-dropdown-link" href="create-program.html"><i class="fa fa-calendar"></i> My Programs</a>
-                        <a class="w-dropdown-link" href="stats.html"><i class="fa fa-line-chart"></i> My Stats</a>
-                    </nav>
-                  </div>
-                </div>
-              </div>
+                      <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" style="background-color: rgb(226, 218, 203);">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll testBackground" style="background-image: url('../images/header.jpg')">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <i class="fa fa-bars"></i>
+                </button>
+                
+                <a style='width:75%' class="navbar-brand" href="#page-top"><img style='height: 55px;margin-top: -15px;  margin-left: 25%;' src="images/mlp_logo2.png" alt="MLP" ></a>
             </div>
-              
-          
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="background-color: rgb(226, 218, 203);">
+                <div>
+                
+                   <h5> <a href="main-page.html"><i class="fa fa-book"></i> My Diary</a></h5>
+                  <h5>  <a  href="create-exercise.html"><i class="fa fa-heart"></i> My Exercises</a></h5>
+                  <h5>  <a  href="create-workout.html"><i class="fa fa-child"></i> My Workouts</a></h5>
+                  <h5>  <a  href="create-program.html"><i class="fa fa-calendar"></i> My Programs</a></h5>
+                  <h5>  <a href="stats.html"><i class="fa fa-line-chart"></i> My Stats</a></h5>
+                
+                </div>
+                <br>
+                <a  href="profile.html">Profile</a> |
+                <a  href="settings.html">Settings</a> |
+                <a  href="javascript:logout()">Logout</a>
+                
+                <hr>
+            </div>
+            <!-- /.navbar-collapse -->
         </div>
+        <!-- /.container-fluid -->
+        <table style='width: 100%; text-align: center;'>
+            <tr>
+                
+                <td width="100%"><h4>Privacy Policy</h4></td>
+                
+                
+            </tr>
+        </table>
         
+        <div>
+
+            
+        </div>
+    </nav>
 
 
-
-        <h4 class="myDiary">Privacy Policy</h4>
+                      <br><br><br><br>
 <div class="w-clearfix">
 
 <p>
 	Your privacy is very important to us. Accordingly, we have developed this Policy in order for you to understand how we collect, use, communicate and disclose and make use of personal information. The following outlines our privacy policy.
 </p>
-
+<br>
 <ul style="list-style: inherit;padding-left: 40px;">
 	<li style="list-style: inherit;">
 		Before or at the time of collecting personal information, we will identify the purposes for which information is being collected.
