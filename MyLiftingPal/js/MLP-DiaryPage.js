@@ -602,6 +602,11 @@ function modalDisplayWorkoutExercies(inputID){
 
 //Code for search section on diary page
 function mainPageAdd(){
+    var options = {
+    "backdrop" : "true",
+    "show":"true"};
+    $('#addModal').modal(options);
+    
       if(firstMainPageAddClicked === false){
         document.getElementById('mainExSearch').style.color='#77b2c9';
         document.getElementById('mainWorkSearch').style.color='#333';
@@ -610,18 +615,7 @@ function mainPageAdd(){
         firstMainPageAddClicked = true;  
       }
     
-     var t = $("#addToMyDiaryDropdown").is(':visible');
 
-     $("#addToMyDiaryDropdown").slideToggle(toggleSpeed);
-     if ( t === true){
-         
-        document.getElementById('mainPageAddButton').style.color='white';
-        document.getElementById('mainPageAddButton').style.background='#77b2c9';
-     }
-     else{
- 
-        document.getElementById('mainPageAddButton').style.color='#77b2c9';
-        document.getElementById('mainPageAddButton').style.background='white';}
 
     
 }
@@ -728,7 +722,7 @@ function dairyPageExSearch(){
     catch(e){console.log(e);}
     
     $("#searchresults").append(toAppend);
-    $('#mytable').DataTable({bFilter: false});
+    $('#mytable').DataTable({bFilter: false,sDom: '<"top">rt<"bottom"flp><"clear">'});
     document.getElementById('mytable').style.display='table';
     document.getElementById('searchResultsHeading').innerHTML='<div style="line-height:50px">Search results for Exercise: '+searchTerm+'</div>';
     
