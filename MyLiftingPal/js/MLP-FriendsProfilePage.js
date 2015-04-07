@@ -1,19 +1,19 @@
 //Create MLP object
 var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
 
-var user = mlpObject.getUser().result;
 
-var userProfilePhoto = user['data']['dp'];
 
-var userEmail = user['data']['email'];
+var userInfo = mlpObject.getUsers({id:window.localStorage.getItem("lastFriendView")}).result;
+console.log(userInfo);
+var userProfilePhoto = userInfo['data']['dp'];
 
-var username = user['data']['username'];
+var userEmail = userInfo['data']['email'];
 
-var id = user['data']['id'];
+var username = userInfo['data']['username'];
 
-var dateCreated = user['data']['created'];
+var id = userInfo['data']['id'];
 
-var userInfo = mlpObject.getUsers({id:id}).result;
+//var dateCreated = userInfo['data']['created'];
 
 var weight = userInfo['data'][7];
 
@@ -33,7 +33,6 @@ var stats = userInfo['data']['stats'];
 
 var units = userInfo['data']['units'];
 
-window.localStorage.setItem("lastFriendView", null);
 //var weight = unserInfo[];
 
 function checkLoginStatus(){
@@ -78,9 +77,9 @@ function signOut(){
 }
 
 function displayUser(){
-    var dp = '<img class="profilePicture" src="'+userProfilePhoto+'" alt="">';
+    var dp = '<img class="profilePicture" src='+userProfilePhoto+' alt="">';
     $("#profilePicture").append(dp);
-    
+    console.log(dp);
     $("#username").append('<h3>'+username+'</h3>');
     
     $("#userEmail").append(userEmail);
@@ -108,19 +107,14 @@ function displayMaxes(){
 function displayFriends(){
     for (friend in friends){
         var f ='';
-        f += '<div onclick="viewFriend('+friends[friend]['0']+')"> <img class="friendsProfilePicture" src='+friends[friend]['dp']+' alt=""><br>'+
+        f += '<div> <img class="friendsProfilePicture" src='+friends[friend]['dp']+' alt=""><br>'+
                friends[friend][1]+'</div>';
-       console.log(f);
         $("#friends").append(f);
 
     }
-    console.log(friends);
+//    console.log(friends);
 } 
 
 
-function viewFriend(id){
-    window.localStorage.setItem("lastFriendView", id);
-    console.log(window.localStorage.getItem("lastFriendView"));
-    window.location.replace("friendsProfile.html");
-}
+
 

@@ -45,15 +45,12 @@
     <div  class="w-col w-col-9 w-col-stack">
         
     <!-- Navigation -->
+
     <nav class="navbar navbar-default navbar-fixed-top" style="background-color: rgb(226, 218, 203);">
-        <div class="container">
+        <div class="container" >
             <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll testBackground" style="background-image: url('../images/header.jpg')">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <i class="fa fa-bars"></i>
-                </button>
-                
-                <a style='width:75%' class="navbar-brand" href="#page-top"><img style='height: 55px;margin-top: -15px;  margin-left: 25%;' src="images/mlp_logo2.png" alt="MLP" ></a>
+            <div class="navbar-header page-scroll testBackground" id="logoHeader"  style="background-image: url('../images/header.jpg')">
+                <a style='width:75%' class="navbar-brand"  href="#page-top"><img style='height: 50px;margin-top: -15px;  margin-left: 15%; position: fixed' src="images/mlp_logo2.png" alt="MLP" ></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -79,10 +76,15 @@
         <!-- /.container-fluid -->
         <table style='width: 100%; text-align: center;'>
             <tr>
-                <td width="25%"><i onclick="$('#bottomNavCalc').slideToggle();$('#bottomNavStopwatch').hide();" style="color:black; font-size: 20px" class="fa fa-calculator"></i></td>
-                <td width="50%"><h4>My Diary</h4></td>
-                <td width="25%"><img onclick="$('#bottomNavStopwatch').slideToggle();$('#bottomNavCalc').hide();" style='height: 25px;' src="images/stopwatch.png" alt="STOPWATCH" ></td>
+                <td width="25/2%"><i onclick="$('#bottomNavCalc').slideToggle();$('#bottomNavStopwatch').hide();" style="color:black; font-size: 20px" class="fa fa-calculator"></i></td>
+                <td width="25/2%"><img onclick="$('#bottomNavStopwatch').slideToggle();$('#bottomNavCalc').hide();" style='height: 24px; margin-top: -4px' src="images/stopwatch.png" alt="STOPWATCH" ></td>
                 
+                <td width="50%"><h4>My Diary</h4></td>
+                <td width="25%">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <i class="fa fa-bars"></i>
+                    </button>
+                </td>
             </tr>
         </table>
         
