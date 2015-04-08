@@ -50,7 +50,7 @@ function logout(){
 }
 //code for nav
 $(window).scroll(function() {
-  if ($(document).scrollTop() > 50) {
+  if ($(document).scrollTop() > 200) {
     $('#logoHeader').css({"margin-top":"-50px"});;
   } else {
     $('#logoHeader').css({"margin-top":"0px"});;
@@ -194,6 +194,7 @@ function toggleDropDownArrow(i){
 
 
 function checkResults(){
+    var firstDiv=true;
     var test = [];
     recordsList={};
     $("#myDairyResults").empty();
@@ -227,13 +228,19 @@ function checkResults(){
                     if (myResId != 0 ){
                         
                         test.push([myDiaryResults['data'][myRes]['records']]);
-
-                        toAppend +="<div style=''><hr style='width:100%;float:left;  border-top:3px solid #77b2c9; margin-top: 20px; */' /></div>";} 
+                        if (firstDiv == true){
+                            firstDiv =false;
+                            toAppend +="<div style=''></div>"; 
+                        }
+                        else{
+                            toAppend +="<div style=''><hr style='width:100%;float:left;  border-top:3px solid #77b2c9; margin-top: 20px; */' /></div>"; 
+                        }
+                        }
                         toAppend += '<div style="width:100%; float:left">'+
-                        '<div id="'+myResId+'" onclick="toggle('+"'"+myResId+"Second"+"'"+')" style="width:100%; float:left"><h3 style="text-align:left">'+
+                        '<div id="'+myResId+'" onclick="toggle('+"'"+myResId+"Second"+"'"+');toggle('+"'"+myResId+"Third"+"'"+')" style="width:100%; float:left"><h3 style="text-align:left">'+
                             myDiaryResults['data'][myRes]['name']+
-                            '</h3>';
-                            toAppend += bestVolume(myDiaryResults['data'][myRes]['exerciseid'])+'</div>';
+                            '<i class="fa fa-pencil-square-o" style="  font-size: 15px;  padding-left: 10px;"></i> </h3>';
+                            toAppend +='</div>';
 //                            '<div style="width:60%; float:left"><h3 style="text-align:right;font-size:50px">'+
 //                                '<i class="fa fa-plus-circle"></i>&nbsp;'+
 //                                '<i class="fa fa-pencil"></i>&nbsp;'+
@@ -242,7 +249,7 @@ function checkResults(){
 //                        '';
                         
             
-                    toAppend +='<div id="'+myResId+"Second"+'" style="width:100%"><div style="width:100%; float:left"><br>'+
+                    toAppend +='<div id="'+myResId+"Second"+'" style="display:none;width:100%"><div style="width:100%; float:left"><br>'+
                             '<div onclick="diaryEditExercise('+"'"+myDiaryResults['data'][myRes]['id']+"'"+')"><div class="exerciseRepsDiv" >'+
                             myDiaryResults['data'][myRes]['reps']+
                             ' </div>'+
@@ -258,10 +265,10 @@ function checkResults(){
 
                             ' <div class="exercise1RMdiv">'+
                             myDiaryResults['data'][myRes]['percentage'];
-                            toAppend+='%</div></div>'+
+                            toAppend+='% <i class="fa fa-pencil-square-o" style="color: rgb(119, 178, 201);margin-left: 4px;margin-right: -8px;"></i></div></div>'+
                             '<div id="'+myResId+myDiaryResults['data'][myRes]['id']+'" style="display:none; ">'+
                             '<div style=" margin-bottom: -35px; "><a href="javascript:diaryEditExercise('+myDiaryResults['data'][myRes]['id']+');" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a></div>'+
-                            '</div><br><hr></div></div><div id="'+myResId+"Third"+'"></div> ';
+                            '</div><br><hr></div></div><div id="'+myResId+"Third"+'" style="display:none"></div> ';
                             
                             
                             $("#myDairyResults").append(toAppend);
@@ -285,7 +292,7 @@ function checkResults(){
 
                             ' <div class="exercise1RMdiv">'+
                             myDiaryResults['data'][myRes]['percentage'];
-                            toAppend+='%</div></div>'+
+                            toAppend+='% <i class="fa fa-pencil-square-o" style="color: rgb(119, 178, 201);margin-left: 4px;margin-right: -8px;"></i></div></div>'+
                             '<div id="'+myResId+myDiaryResults['data'][myRes]['id']+'" style="display:none;">'+
                             
                             '<div style=" margin-bottom: -35px;"><a href="javascript:diaryEditExercise('+myDiaryResults['data'][myRes]['id']+');" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a></div>'+
@@ -302,7 +309,7 @@ function checkResults(){
                 toAppend = '';
                 toAppend += '<div id="DiaryControls'+myResId+'Second" style="width:100%;" >'+
                 '<a href="javascript:diaryModalAddSet('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 5px;padding-left: 1px; width:60px; margin-bottom: 4px; background-color: white; color:#77b2c9" class="btn btn-default btn-circle-main"  title="Add Result to your Exercise"><i class="fa fa-plus"></i></a>'+
-                '<a href="javascript:diaryModalDelete('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 5px; width:60px; margin-bottom: 4px; background-color: #ff6666; color:white" class="btn btn-default btn-circle-main" title="Delete exercise from your diary"><i class="fa fa-times"></i></a>'+
+                '<a href="javascript:diaryModalDelete('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 5px; width:60px; margin-bottom: 4px; background-color: #ff6666; color:white" class="btn btn-default btn-circle-main" title="Delete exercise from your diary"><i class="fa fa-trash"></i></a>'+
                 '<a href="javascript:diaryModalHistory('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 5px; width:60px; margin-bottom: 4px; background-color: #66cc66; color:white" class="btn btn-default btn-circle-main"  title="View your log for this exercise"><i class="fa fa-book"></i></a>'+
 //                '<a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a>'+
                 '</div>';
@@ -380,9 +387,12 @@ function diaryEditExercise(inputID){
 function diaryModalHistory(inputID){
     var records = recordsList[inputID][0];
     
+    
+    
     for (record in records){
         $("#modalHistoryRecords").empty();
-        var toAppend="";
+        var toAppend="<h5>Records for current weight</h5>";
+        $("#modalHistoryRecords").append(toAppend);
             
         try{
             if (typeof records[record]['amrap']['weight'] !='undefined'){
@@ -401,7 +411,9 @@ function diaryModalHistory(inputID){
 //    
 //            }
 //        }
-
+        var toAppend="<h5>Overal Records</h5>";
+        $("#modalHistoryRecords").append(toAppend);
+        
         try{
             if (typeof records[record]['overall']['max'] !='undefined'){
             toAppend ='<p>Best '+records[record]['overall']['rep']+' RM recorded: '+records[record]['overall']['max']+displayUnits+'</p><br>';
@@ -413,7 +425,7 @@ function diaryModalHistory(inputID){
 
         try{
             if (typeof records[record]['backoffs']['best'] !='undefined'){
-            toAppend ='<p>Best volume for '+records[record]['overall']['rep']+' rep sets: '+ records[record]['backoffs']['best'] +displayUnits+'</p><br>';
+            toAppend ='<p>Best set volume for '+records[record]['overall']['rep']+' rep sets: '+ records[record]['backoffs']['best'] +displayUnits+'</p><br>';
                 $("#modalHistoryRecords").append(toAppend);
     
             }
@@ -427,6 +439,7 @@ function diaryModalHistory(inputID){
         }
             catch(e){ console.log(e);}
         }
+        bestVolume(inputID);
                 
 
     var options = {
@@ -491,12 +504,12 @@ function bestVolume(exId){
         }
         if((volume) > maxVolume){
             maxVolume = volume;
-            toReturn='<div>'+
-                    'Best Volume: '+(volume)+displayUnits+' @ '+results[res]['weight']+displayUnits+' for '+results[res]['reps']+' reps.'+
-                    '</div>';
+            toReturn='<p>Best single set volume: '+(volume)+displayUnits+' @ '+results[res]['weight']+displayUnits+' for '+results[res]['reps']+' reps.</p>';
             }
     }
-    return toReturn;
+
+    $('#modalHistoryRecords').append(toReturn)
+    return;
     }
     catch(e){console.log(e);}
 }

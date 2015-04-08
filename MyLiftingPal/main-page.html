@@ -76,10 +76,10 @@
         <!-- /.container-fluid -->
         <table style='width: 100%; text-align: center;'>
             <tr>
-                <td width="25/2%"><i onclick="$('#bottomNavCalc').slideToggle();$('#bottomNavStopwatch').hide();" style="color:black; font-size: 20px" class="fa fa-calculator"></i></td>
-                <td width="25/2%"><img onclick="$('#bottomNavStopwatch').slideToggle();$('#bottomNavCalc').hide();" style='height: 24px; margin-top: -4px' src="images/stopwatch.png" alt="STOPWATCH" ></td>
-                
-                <td width="50%"><h4>My Diary</h4></td>
+                <td width="25/3%" style='padding-left: 15px;'><i onclick="$('#bottomNavCalc').slideToggle();$('#bottomNavStopwatch').hide();" style="color:black; font-size: 20px" class="fa fa-calculator"></i></td>
+                <td width="25/3%" style=''><img onclick="$('#bottomNavStopwatch').slideToggle();$('#bottomNavCalc').hide();" style="height: 24px; margin-top: -4px" src="images/stopwatch.png" alt="STOPWATCH" ></td>
+                <td width="25/3%" style=''><i onclick="javascript:mainPageAdd();" style="color:black; font-size: 20px" class="fa fa-plus-circle"></i></td>
+                <td width="50%" ><h4>My Diary</h4></td>
                 <td width="25%">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <i class="fa fa-bars"></i>
@@ -289,9 +289,15 @@
                                 
                             </div>
                             
+                            <div id="bestVolume">
+                                
+                            </div>
                             <div id="modalHistoryNotes">
                                 <textarea class="form-control note" rows="5" placeholder="Write Notes"></textarea>
                             </div>
+                            
+                            
+                            
 
                         </div>
                         <div class="modal-footer">
@@ -402,13 +408,15 @@
                       <p id="noResults"> 
                 
             </p>
-
-            <br>
-            <br>
-            <a href="javascript:mainPageAdd();" id="mainPageAddButton" style="width:60px; margin-bottom: 4px; background-color: #77b2c9;color:white" class="btn btn-default btn-circle-main">
-                <i class="fa fa-plus fa-2x" style="line-height: 1.9 !important;"></i>
-            </a>
-        
+            <!--temp fix for divs not ending somewhere in js.-->
+            </div></div></div>
+            <!--end of temp fix-->
+            <br><br>
+            <div>       
+                <a href="javascript:mainPageAdd();" id="mainPageAddButton" style="width:60px; margin-bottom: 4px; background-color: #77b2c9;color:white" class="btn btn-default btn-circle-main">
+                    <i class="fa fa-plus fa-2x" style="line-height: 1.9 !important;"></i>
+                </a>
+            </div>
       </div>
         <br><br>        <hr>
         <p><a style="color:#333" href="terms.html">Terms</a> | <a style="color:#333" href="privacy.html">Privacy</a> | <a style="color:#333" href="contact.html">Contact Us</a> | <a style="color:#333" href="http://www.myliftingpal.net/track/#api">API</a></p>
