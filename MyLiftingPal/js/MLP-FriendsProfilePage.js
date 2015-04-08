@@ -4,7 +4,7 @@ var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
 
 
 var userInfo = mlpObject.getUsers({id:window.localStorage.getItem("lastFriendView")}).result;
-console.log(userInfo);
+
 var userProfilePhoto = userInfo['data']['dp'];
 
 var userEmail = userInfo['data']['email'];

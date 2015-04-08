@@ -76,13 +76,17 @@
         <!-- /.container-fluid -->
         <table style='width: 100%; text-align: center;'>
             <tr>
-                <td width="25/2%" style='padding-left: 15px;'><i onclick="$('#bottomNavCalc').slideToggle();$('#bottomNavStopwatch').hide();" style="color:black; font-size: 20px" class="fa fa-calculator"></i></td>
+                <td width="10%" style='padding-left: 15px;'><i onclick="$('#bottomNavCalc').slideToggle();$('#bottomNavStopwatch').hide();$('#bottomNavNotifications').hide();" style="color:#333; font-size: 20px" class="fa fa-calculator"></i></td>
                 <td width="5%">  </td>
-                <td width="20/2%" style=''><img onclick="$('#bottomNavStopwatch').slideToggle();$('#bottomNavCalc').hide();" style="height: 24px; margin-top: -4px" src="images/stopwatch.png" alt="STOPWATCH" ></td>
+                <td width="10%" style=''><img onclick="$('#bottomNavStopwatch').slideToggle();$('#bottomNavCalc').hide();$('#bottomNavNotifications').hide();" style="height: 24px; margin-top: 0px" src="images/stopwatch.png" alt="STOPWATCH" ></td>
                 <td width="50%" ><h4>My Diary</h4></td>
-                <td width="25%">
+                
+                <td width="1%" style='padding-top: 15px; float:right;'><p id="numNot"></p></td>
+                <td width="14%" style='padding-top: 0px;'><i onclick="$('#bottomNavNotifications').slideToggle();$('#bottomNavStopwatch').hide();$('#bottomNavCalc').hide();" style="color:#333; font-size: 20px" class="fa fa-inbox"></i></td>
+
+                <td width="10%">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <i class="fa fa-bars"></i>
+                    <i style="color:#333; font-size: 20px" class="fa fa-bars"></i>
                     </button>
                 </td>
             </tr>
@@ -102,6 +106,15 @@
         <!--<input type="button" value="stop" onclick="stop();">-->
         <input class="btn btn-default" type="button" value="reset" onclick="reset();">
         <br><br>
+    </nav>
+    
+    <nav id='bottomNavNotifications' class="navbar navbar-default navbar-fixed-bottom" style="display:none; background-color: rgb(226, 218, 203);">
+        <br>
+        <div class="container">
+        <p style='font-weight: bold;'>Inbox <button type="button" class="close" onclick="$('#bottomNavCalc').hide();"  aria-hidden="true"><i class="fa fa-times"></i></button><p>
+        <div id="inboxNotifications"></div>
+        <br>
+        </div>
     </nav>
     
     <nav id='bottomNavCalc' class="navbar navbar-default navbar-fixed-bottom" style="display:none; background-color: rgb(226, 218, 203);">
@@ -412,11 +425,18 @@
             </div></div></div>
             <!--end of temp fix-->
             <br><br>
-            <div id='addButtom'>       
-                <a href="javascript:mainPageAdd();" id="mainPageAddButton" style="width:60px; margin-bottom: 4px; background-color: #77b2c9;color:white" class="btn btn-default btn-circle-main">
+            <div>       
+                <a href="javascript:mainPageAdd();" id="mainPageAddButton" style="width:60px; margin-bottom: 4px; background-color: rgba(119, 178, 201, 1); color:white" class="btn btn-default btn-circle-main">
                     <i class="fa fa-plus fa-2x" style="line-height: 1.9 !important;"></i>
                 </a>
             </div>
+            
+            <div id='addButtom'>       
+                <a href="javascript:mainPageAdd();" id="mainPageAddButton" style="width:60px; margin-bottom: 15px;margin-right: 5px; background-color: rgba(189, 202, 207, 0.25);z-index: 100 ;float:right; color:rgba(119, 178, 201, 0.27);" class="btn btn-default btn-circle-main">
+                    <i class="fa fa-plus fa-2x" style="line-height: 1.9 !important;"></i>
+                </a>
+            </div>
+            <br>
       </div>
         <br><br>        <hr>
         <p><a style="color:#333" href="terms.html">Terms</a> | <a style="color:#333" href="privacy.html">Privacy</a> | <a style="color:#333" href="contact.html">Contact Us</a> | <a style="color:#333" href="http://www.myliftingpal.net/track/#api">API</a></p>
@@ -445,6 +465,7 @@
         window.onload = function load(){
             checkLoginStatus();
             checkResults();
+            checkNotifications();
             
         };
         

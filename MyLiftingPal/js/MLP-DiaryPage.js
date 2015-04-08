@@ -13,8 +13,11 @@ var globalWorkoutObjs;
 var globalProgramObjs; 
 var firstMainPageAddClicked=false;
 var toggleSpeed = window.localStorage.getItem("toggleSpeed");
+var notifications = user['data']['requests'];
 toggleSpeed=0;
 var submitDairySearchClass= 'e';
+
+window.localStorage.setItem("lastFriendView", null);
 //var displayUnits = window.localStorage.getItem("displayUnits");
 var displayUnits  = user['data']['units'];
 if (displayUnits === null){displayUnits = user['data']['units'];}
@@ -50,7 +53,7 @@ function logout(){
 }
 //code for nav
 $(window).scroll(function() {
-  if ($(document).scrollTop() > 200) {
+  if ($(document).scrollTop() > 100) {
     $('#logoHeader').css({"margin-top":"-50px"});;
   } else {
     $('#logoHeader').css({"margin-top":"0px"});;
@@ -853,3 +856,25 @@ function diaryPageWorkoutSeach(){
     finally{};
 }
 
+function checkNotifications(){
+    var numberNotifications= notifications.length;
+    if (notifications != null){
+        for (request in notifications){
+            console.log(notifications);
+
+            if(numberNotifications > 99){
+                $('#numNot').append('99+');
+            }
+            else{
+                $('#numNot').append(numberNotifications);
+            }
+            
+            $('#inboxNotifications').append("Friend Request from: <h5 onclick='viewFriend("+notifications[request]['userid']+")'>"+notifications[request]['username']+"</h5>");
+        }
+    }
+}
+function viewFriend(id){
+    window.localStorage.setItem("lastFriendView", id);
+    console.log(window.localStorage.getItem("lastFriendView"));
+    window.location.replace("friendsProfile.html");
+}
