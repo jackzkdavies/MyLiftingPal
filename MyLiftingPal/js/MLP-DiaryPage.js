@@ -51,14 +51,6 @@ function logout(){
     mlpObject.logout();
     window.location.replace("index.html");
 }
-//code for nav
-$(window).scroll(function() {
-  if ($(document).scrollTop() > 100) {
-    $('#logoHeader').css({"margin-top":"-50px"});;
-  } else {
-    $('#logoHeader').css({"margin-top":"0px"});;
-  }
-});
 //Code section for date and calander 
     var days= ["Sunday","Monday","Tuesday","Wednesday", "Thursday","Friday","Saturday"]; 
     var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];

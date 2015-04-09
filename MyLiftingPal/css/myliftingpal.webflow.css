@@ -11,14 +11,32 @@
     color:#333;
 
 }
-#addButtom {
+.rigthFloatingButton{
+    width:60px; 
+    background-color: rgba(189, 202, 207, 0.25); 
+    color:rgba(119, 178, 201, 0.27);
+    z-index: 100 ;
+    margin-bottom: 15px;
+    margin-right: 5px; 
+    float:right;
+}
+.addButton {
     position: fixed;
     bottom: 0;
-    float:right;
+    float:left;
     width: 100%;
     filter: blur(1px); /* Doesn't work anywhere yet */
    -webkit-filter: blur(1px);
    filter: url('blur.svg#blur'); /* for Firefox - http://jordanhollinger.com/media/blur.svg */
+}
+.returnButton{
+    position: fixed;
+    bottom: 0;
+    float:left;
+    width: 100%;
+    filter: blur(1px); /* Doesn't work anywhere yet */
+   -webkit-filter: blur(1px);
+   filter: url('blur.svg#blur'); /* for Firefox - http://jordanhollinger.com/media/blur.svg */  
 }
 #logoHeader{
     transition: all 0.5s ease;

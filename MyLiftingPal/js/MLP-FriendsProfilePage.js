@@ -1,8 +1,12 @@
 //Create MLP object
 var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
 
+//User data
+var user = mlpObject.getUser().result;
+var notifications = user['data']['requests'];
+var displayUnits  = user['data']['units'];
 
-
+//Global Friend Variables 
 var userInfo = mlpObject.getUsers({id:window.localStorage.getItem("lastFriendView")}).result;
 
 var userProfilePhoto = userInfo['data']['dp'];
@@ -35,6 +39,14 @@ var units = userInfo['data']['units'];
 
 //var weight = unserInfo[];
 
+//code for nav
+$(window).scroll(function() {
+  if ($(document).scrollTop() > 100) {
+    $('#logoHeader').css({"margin-top":"-50px"});;
+  } else {
+    $('#logoHeader').css({"margin-top":"0px"});;
+  }
+});
 function checkLoginStatus(){
 //    if ($.cookie("mlpsession") === undefined){
 //        window.location.replace("index.html");
@@ -77,6 +89,8 @@ function signOut(){
 }
 
 function displayUser(){
+    $('#friendsName').empty();
+$('#friendsName').append(username+'s Profile');
     var dp = '<img class="profilePicture" src='+userProfilePhoto+' alt="">';
     $("#profilePicture").append(dp);
     console.log(dp);
@@ -92,7 +106,7 @@ function displayUser(){
     $("#why").append(why);
     $("#goals").append(goals);
     displayMaxes();
-    displayFriends();
+
 }
 
 function displayMaxes(){
@@ -115,6 +129,26 @@ function displayFriends(){
 //    console.log(friends);
 } 
 
+function viewFriendsDiary(){
+    window.location.replace("friendsMain-page.html");
+}
 
 
+function checkNotifications(){
+    var numberNotifications= notifications.length;
+    if (notifications != null){
+        for (request in notifications){
+            console.log(notifications);
+
+            if(numberNotifications > 99){
+                $('#numNot').append('99+');
+            }
+            else{
+                $('#numNot').append(numberNotifications);
+            }
+            
+            $('#inboxNotifications').append("Friend Request from: <h5 onclick='viewFriend("+notifications[request]['userid']+")'>"+notifications[request]['username']+"</h5>");
+        }
+    }
+}
 

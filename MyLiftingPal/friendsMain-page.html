@@ -11,7 +11,7 @@
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
   <link rel="stylesheet" type="text/css" href="css/datepicker3.css">
   <link rel="stylesheet" type="text/css" href="css/webflow.css">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/myliftingpal.webflow.css"> 
   <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
@@ -29,20 +29,18 @@
   <script type="text/javascript" src="js/modernizr.js"></script>
   <script type="text/javascript" src="js/jquery.cookie.js"></script>
   <script type="text/javascript" src="js/mlp.js"></script>
-  <script type="text/javascript" src="js/MLP-DiaryPage.js"></script>
+  <script type="text/javascript" src="js/MLP-FriendDiaryPage.js"></script>
   <script type="text/javascript" src="js/webflow.js"></script>
   <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/jquery.dataTables.js"></script>
-  <script type="text/javascript" src="js/stopwatch.js"></script>
-  <script type="text/javascript" src="js/1rmcalc.js"></script>
   
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
   <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
 </head>
-<body id='page-top' class="plainbodybackground" onload="showStopwatch();">
-  <div class="w-row" >
-    <div  class="w-col w-col-9 w-col-stack">
+<body class="plainbodybackground">
+  <div class="w-row">
+    <div class="w-col w-col-9 w-col-stack">
         
     <!-- Navigation -->
 
@@ -76,10 +74,7 @@
         <!-- /.container-fluid -->
         <table style='width: 100%; text-align: center;'>
             <tr>
-                <td width="10%" style='padding-left: 15px;'><i onclick="$('#bottomNavCalc').slideToggle();$('#bottomNavStopwatch').hide();$('#bottomNavNotifications').hide();" style="color:#333; font-size: 20px" class="fa fa-calculator"></i></td>
-                <td width="5%">  </td>
-                <td width="10%" style=''><img onclick="$('#bottomNavStopwatch').slideToggle();$('#bottomNavCalc').hide();$('#bottomNavNotifications').hide();" style="height: 24px; margin-top: 0px" src="images/stopwatch.png" alt="STOPWATCH" ></td>
-                <td width="50%" ><h4>My Diary</h4></td>
+                <td width="75%" ><h4 id="diaryOwner"></h4></td>
                 
                 <td width="1%" style='padding-top: 15px; float:right;'><p id="numNot"></p></td>
                 <td width="14%" style='padding-top: 0px;'><i onclick="$('#bottomNavNotifications').slideToggle();$('#bottomNavStopwatch').hide();$('#bottomNavCalc').hide();" style="color:#333; font-size: 20px" class="fa fa-inbox"></i></td>
@@ -98,16 +93,7 @@
         </div>
     </nav>
     
-    <nav id='bottomNavStopwatch' class="navbar navbar-default navbar-fixed-bottom" style="display:none; background-color: rgb(226, 218, 203);">
-        <br>
-        <button type="button" class="close" onclick="$('#bottomNavStopwatch').hide();"  aria-hidden="true"><i class="fa fa-times"></i></button>
-        <div><span id="stopwatchTime">00:00:00:000</span></div>
-        <input class="btn btn-default" type="button" id='startStop' value="start" onclick="startStop();">
-        <!--<input type="button" value="stop" onclick="stop();">-->
-        <input class="btn btn-default" type="button" value="reset" onclick="reset();">
-        <br><br>
-    </nav>
-    
+
     <nav id='bottomNavNotifications' class="navbar navbar-default navbar-fixed-bottom" style="display:none; background-color: rgb(226, 218, 203);">
         <br>
         <div class="container">
@@ -117,25 +103,10 @@
         </div>
     </nav>
     
-    <nav id='bottomNavCalc' class="navbar navbar-default navbar-fixed-bottom" style="display:none; background-color: rgb(226, 218, 203);">
-        
-        <br>
-        <div class="container">
-        <p style='font-weight: bold;'>1RM Calculator <button type="button" class="close" onclick="$('#bottomNavCalc').hide();"  aria-hidden="true"><i class="fa fa-times"></i></button><p>
-        
-        <input id='w' style='width: 40%;float:left' type="number" class="form-control weight-lifted" step="0.01" placeholder="0">
-        <p style='width: 60%;'>Weight</p>
-        <br>
-        <input id='r' style='width: 40%;float:left' type="number" class="inputLimit12 form-control reps-performed" placeholder="0">
-        <p style='width: 60%;'>Reps (1-12)</p>
-        
-        <input class="btn btn-default" type="button" value="Calculate" onclick="rmcalc()">
-        <p id='rmResult'></p>
-        <br>
-        </div>
-    </nav>
-    <br><br><br>
 
+    <br><br><br><br>
+    
+        
         
         <p id="date" onClick="slideToggleCalender()">  </p>      
       
@@ -194,100 +165,6 @@
           </div>
         </div>
           
-            <div class="modal fade" id="infoDataModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>-->
-                        <h4 class="modal-title" id="addModalLabel">Info</h4>
-                        </div>
-                        <div class="modal-body" id="infoDataModalBody"><p>test</p></div>
-                                                <div class="modal-footer" id='addModalFooter'>
-                            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="$('#addModal').show()">Close</button>
-                    </div>
-                    </div>
-              </div>
-            </div>
-          
-            <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-                        <h4 class="modal-title" id="addModalLabel"><i style="font-size:40px" class="fa fa-book"></i>Add</h4>
-                        </div>
-                        <div class="modal-body" id="addModalBody">
-                             <div class="w-clearfix exerciseinfotable exerciseinfotabledata">
-
-            
-            <div id="addToMyDiaryDropdown" style="display: visible">
-                <div style="width:33%; float:left">
-                     <a id="mainExSearch" style="text-align: center; text-decoration: none;" class="w-dropdown-link" href="javascript:mainSearchEx('e');"><i style="font-size: 40px" class="fa fa-heart"></i><br>Exercise</a>
-                    
-                     
-                </div>
-                
-                <div style="width:33%; float:left">
-                    <a id="mainWorkSearch" style="text-align: center; text-decoration: none;" class="w-dropdown-link" href="javascript:mainSearchEx('w');"><i style="font-size: 40px" class="fa fa-child"></i><br>Workout</a>
-                    
-                    
-                </div>
-                
-                <div style="width:33%; float:left">
-                    <a id="mainProSearch" style="text-align: center; text-decoration: none;" class="w-dropdown-link" href="javascript:mainSearchEx('p');"><i style="font-size: 40px" class="fa fa-calendar"></i><br>Program</a>
-                    
-                    
-                </div>
-
-                <div id="mainSearch" style="width: 100%;">
-                    <input id="mainSearchTerm" style="float:left; margin-right: -38px" class="w-input"  type="text" placeholder="Select Exercise to add" name="addexercisetoworkout" required="required" data-name="addexercisetoworkout">
-                    <img class="searchImage" onclick="submitDairySearch();return false;" src="images/search.svg" alt="Search" onerror="this.src='your.png'">
-                </div>
-                <div id="addDairySearchResults">
-                    <p id="searchResultsHeading"></p>
-                 
-                    
-                    <table id='mytable' style='display: none; text-align:left;   text-shadow: 0px 0px rgba(255, 255, 255, 0);'>
-                      <thead>
-                          <tr>
-                              <td style='color:black; font-weight: bold;background-color: white'>Exercise</td>
-                              <td style='color:white; font-weight: 650;background-color: #77b2c9;' >info</td>
-                              <td style='color:white; font-weight: 650;background-color: #77b2c9; border-radius:0px 3px 0px 0px'>Add</td>
-                          </tr>
-                      </thead>
-                      <tbody id ="searchresults" style='font-size: 12px;'>
-                          
-                      </tbody>
-                  </table>
-                    
-                    <table id='mytableWorkouts' style='display: none; text-align:left; text-shadow: 0px 0px rgba(255, 255, 255, 0);'>
-                      <thead>
-                          <tr>
-                              <td style='color:black; font-weight: bold;background-color: white'>Name</td>
-                              <td style='color:white; font-weight: 650;background-color: #77b2c9;' >Author</td>
-                              <!--<td style='color:white; font-weight: 650;background-color: #77b2c9; border-radius:0px 3px 0px 0px'>Type</td>-->
-                          </tr>
-                      </thead>
-                      <tbody id ="searchresultsWorkouts">
-                          
-                      </tbody>
-                  </table>
-                </div>
-                
-
-            </div>
-
-
-        </div>                        
-
-
-                        </div>
-                        <div class="modal-footer" id='addModalFooter'>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-              </div>
-            </div>
           
             <div class="modal fade" id="basicModalHistory" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                 <div class="modal-dialog">
@@ -302,15 +179,9 @@
                                 
                             </div>
                             
-                            <div id="bestVolume">
-                                
-                            </div>
                             <div id="modalHistoryNotes">
                                 <textarea class="form-control note" rows="5" placeholder="Write Notes"></textarea>
                             </div>
-                            
-                            
-                            
 
                         </div>
                         <div class="modal-footer">
@@ -394,7 +265,7 @@
               </div>
             </div>
           
-            <div class="modal fade" id="modalDisplayWorkoutExercies" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                      <div class="modal fade" id="modalDisplayWorkoutExercies" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -418,29 +289,29 @@
           <div id="myDairyResults">
               
           </div>
-                      <p id="noResults"> 
+          
+        <div class="w-clearfix exerciseinfotable exerciseinfotabledata">
+            <p id="noResults"> 
                 
             </p>
+            <br>
+            <br>
+
             <!--temp fix for divs not ending somewhere in js.-->
             </div></div></div>
-            <!--end of temp fix-->
-            <br><br>
-            <div>       
-                <a href="javascript:mainPageAdd();" id="mainPageAddButton" style="width:60px; margin-bottom: 4px; background-color: rgba(119, 178, 201, 1); color:white" class="btn btn-default btn-circle-main">
-                    <i class="fa fa-plus fa-2x" style="line-height: 1.9 !important; padding-left: 1px"></i>
-                </a>
-            </div>
+            <!--end of temp fix--> 
             
-            <div class='addButton'>       
-                <a href="javascript:mainPageAdd();" id="mainPageAddButton" class="btn btn-default btn-circle-main rigthFloatingButton">
-                    <i class="fa fa-plus fa-2x" style="line-height: 1.9 !important; padding-left: 1px"></i>
-                </a>
-            </div>
-            <br>
+            
+        <div class='returnButton'>       
+            <a href="friendsProfile.html" id="mainPageAddButton" class="btn btn-default btn-circle-main rigthFloatingButton">
+                <i class="fa fa-caret-square-o-left fa-2x" style="line-height: 1.9 !important; margin-top: -2px; margin-right: -1px;"></i>
+            </a>
+        </div>
+            
+        </div>
+        </div>
       </div>
-        <br><br>        <hr>
-        <p><a style="color:#333" href="terms.html">Terms</a> | <a style="color:#333" href="privacy.html">Privacy</a> | <a style="color:#333" href="contact.html">Contact Us</a> | <a style="color:#333" href="http://www.myliftingpal.net/track/#api">API</a></p>
-        <hr> 
+        <br><br><hr>
         <div class="share-text">Share with your friends:&nbsp;</div>
       <div class="w-clearfix social-widget-wrapper">
         <div class="w-widget w-widget-twitter social-widget">
@@ -505,25 +376,6 @@
             }, 50);
         });
         
-        $('.inputLimit12').focus(function () {
-            var $this = $(this);
-
-            t = setInterval(
-
-            function () {
-                if (($this.val() < 1 || $this.val() > 12) && $this.val().length != 0) {
-                    if ($this.val() < 1) {
-                        $this.val(1);
-                    }
-
-                    if ($this.val() > 12) {
-                        $this.val(12);
-                    }
-
-                }
-            }, 50);
-        });
-        
         $('.inputLimit100').focus(function () {
             var $this = $(this);
 
@@ -547,15 +399,6 @@
 
         // Initial execution if needed
         doOnOrientationChange();
-        
-        //code for nav
-        $(window).scroll(function() {
-          if ($(document).scrollTop() > 100) {
-            $('#logoHeader').css({"margin-top":"-50px"});;
-          } else {
-            $('#logoHeader').css({"margin-top":"0px"});;
-          }
-        });
     
    </script>
   <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
