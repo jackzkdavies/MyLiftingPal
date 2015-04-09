@@ -1,9 +1,5 @@
 /*! myliftingpal v3.0.0 | (c) 2015 Taylor Hamling | myliftingpal.net */
-//mlpObject.updateUser({id:userId, password:password, email:email});
 
-//mlpObject.updateSettings({userid:userId,emailpreferences:preferences});
-
-//mlpObject.updateSettings({userid:userId,units:units});
 function mlp(key){
    var self = {};
    self.key = key;
@@ -119,10 +115,16 @@ function mlp(key){
    };
    
    self.addResults = function(data){
-       //exerciseid, workoutid, programid, reps, sets, rpe, weight, percentage,assigneddate
+       //exerciseid, workoutid, programid, reps, sets, rpe, weight, percentage
        self.call('create','addresults', data, cb);
 	   return self;
    };
+   
+   self.addFriend = function(data){
+       //friendid
+       self.call('create','addfriend', data, cb);
+	   return self;
+   };   
    
    self.deleteUser = function(data){
 	   //id
@@ -167,14 +169,19 @@ function mlp(key){
    };
    
    self.removeResults = function(data){
-       //id exerciseid assigneddate
+       //id, exerciseid, assigneddate
        self.call('edit','removeresults', data, cb);
 	   return self;
    };
    
+   self.removeFriend = function(data){
+       //friendid
+       self.call('edit','removefriend', data, cb);
+	   return self;
+   };   
+   
    self.updateUser = function(data){
-            //mlpObject.updateUser({id:userId, password:password, oldpassword: oldPassword});
-	   //id,email,username,password
+	   //id,email,username,password, note
        self.call('edit','updateuser', data, cb);
 	   return self;
    };
@@ -251,11 +258,29 @@ function mlp(key){
 	   return self;
    };
    
+   self.getRequests = function(data){
+       
+       self.call('view','getrequests', data, cb);
+           return self;
+   }
+   
    self.selectStats = function(data){
        //id, exerciseid
        self.call('view','selectstats', data, cb);
 	   return self;
    };
+   
+   self.getData = function(data){
+       //metric, type, exerciseid, timeframe
+       self.call('view','getdata', data, cb);
+	   return self;
+   };    
+   
+   self.getMax = function(data){
+       //exerciseid
+       self.call('view','getmax', data, cb);
+	   return self;
+   };   
    
    self.getWorkouts = function(data){
        //id, name,userid
@@ -282,11 +307,40 @@ function mlp(key){
    };
    
    self.selectResults = function(data){
-       //id,userid,assigneddate
+       //id,exerciseid,workoutid,programid,userid,reps,sets,rpe,weight,percent,assigneddate
        self.call('view','selectresults', data, cb);
 	   return self;
    };
    
+   self.getReport = function(data){
+       //userid, reportstart, reportend, reporttype
+       self.call('view','getreport', data, cb);
+	   return self;
+   };  
+   
+   self.removeReport = function(data){
+       //filename
+       self.call('edit','removereport', data, cb);
+	   return self;
+   };   
+   
+   self.resetPassword = function(data){
+       //email
+       self.call('edit','resetpassword', data, cb);
+	   return self;
+   };   
+   
+   self.inviteFriend = function(data){
+       //email
+       self.call('create','invite', data, cb);
+	   return self;
+   };   
+   
+   self.syncMfp = function(data){
+       //(mfp) username, (mfp) password, date
+       self.call('create','syncmfp', data, cb);
+	   return self;
+   };    
 
    return self;
 }
