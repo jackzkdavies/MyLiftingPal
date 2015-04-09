@@ -5,6 +5,8 @@ var user = mlpObject.getUser().result;
 
 var userProfilePhoto = user['data']['dp'];
 
+var notifications = user['data']['requests'];
+
 var userEmail = user['data']['email'];
 
 var username = user['data']['username'];
@@ -195,4 +197,22 @@ function updateUnitPref(){
 
     }, 2000);
     
+}
+
+function checkNotifications(){
+    var numberNotifications= notifications.length;
+    if (notifications != null){
+        for (request in notifications){
+            console.log(notifications);
+
+            if(numberNotifications > 99){
+                $('#numNot').append('99+');
+            }
+            else{
+                $('#numNot').append(numberNotifications);
+            }
+            
+            $('#inboxNotifications').append("Friend Request from: <h5 onclick='viewFriend("+notifications[request]['userid']+")'>"+notifications[request]['username']+"</h5>");
+        }
+    }
 }

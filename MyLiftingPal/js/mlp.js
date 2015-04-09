@@ -262,7 +262,7 @@ function mlp(key){
        
        self.call('view','getrequests', data, cb);
            return self;
-   }
+   };
    
    self.selectStats = function(data){
        //id, exerciseid

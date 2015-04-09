@@ -72,20 +72,14 @@
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container-fluid -->
-        <table style='width: 100%; text-align: center;'>
-            <tr>
-                <td width="75%" ><h4 id='friendsName'></h4></td>
-                
-                <td width="1%" style='padding-top: 15px; float:right;'><p id="numNot"></p></td>
-                <td width="14%" style='padding-top: 0px;'><i onclick="$('#bottomNavNotifications').slideToggle();$('#bottomNavStopwatch').hide();$('#bottomNavCalc').hide();" style="color:#333; font-size: 20px" class="fa fa-inbox"></i></td>
-
-                <td width="10%">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <div style='width: 100%; text-align: center; float:left'>
+            <div style='width: 72%; float:left'><h4 id='friendsName'></h4></div>
+            <div style='width: 14%; float:left; padding-top: 12px;'><p id="numNot"></p><i onclick="$('#bottomNavNotifications').slideToggle();$('#bottomNavStopwatch').hide();$('#bottomNavCalc').hide();" style="color:#333; font-size: 20px" class="fa fa-inbox"></i></div>
+            <div style='width: 14%; float:left; padding-top: 9px;'><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <i style="color:#333; font-size: 20px" class="fa fa-bars"></i>
-                    </button>
-                </td>
-            </tr>
-        </table>
+                    </button></div>
+        </div>
+
         
         <div>
 
@@ -135,7 +129,8 @@
                 <i onclick="viewFriendsDiary()" class="fa fa-book" style='font-size: 2em;'></i>
             </div>
             <br>
-            <h3 style='float:left'>Remove Friend</h3>
+            <hr>
+            <h3 style='float:left' id='friendStatus'></h3>
 
             <!--temp fix for divs not ending somewhere in js.-->
             </div></div></div>
@@ -155,7 +150,6 @@
 
 
       </div>
-        <br><br><hr>
         <div class="share-text">Share with your friends:&nbsp;</div>
       <div class="w-clearfix social-widget-wrapper">
         <div class="w-widget w-widget-twitter social-widget">
@@ -181,6 +175,7 @@
             checkLoginStatus();
             displayUser();
             checkNotifications();
+            checkIfFriends();
 
             
         };

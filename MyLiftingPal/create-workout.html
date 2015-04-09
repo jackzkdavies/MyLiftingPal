@@ -76,23 +76,16 @@
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container-fluid -->
-        <table style='width: 100%; text-align: center;'>
-            <tr>
-                <td width="10%" style='padding-left: 15px;'><i onclick="$('#bottomNavCalc').slideToggle();$('#bottomNavStopwatch').hide();$('#bottomNavNotifications').hide();" style="color:#333; font-size: 20px" class="fa fa-calculator"></i></td>
-                <td width="5%">  </td>
-                <td width="10%" style=''><img onclick="$('#bottomNavStopwatch').slideToggle();$('#bottomNavCalc').hide();$('#bottomNavNotifications').hide();" style="height: 24px; margin-top: 0px" src="images/stopwatch.png" alt="STOPWATCH" ></td>
-                <td width="50%" ><h4>My Workouts</h4></td>
-                
-                <td width="1%" style='padding-top: 15px; float:right;'><p id="numNot"></p></td>
-                <td width="14%" style='padding-top: 0px;'><i onclick="$('#bottomNavNotifications').slideToggle();$('#bottomNavStopwatch').hide();$('#bottomNavCalc').hide();" style="color:#333; font-size: 20px" class="fa fa-inbox"></i></td>
-
-                <td width="10%">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <div style='width: 100%; text-align: center; float:left'>
+            <div style='width: 14%; float:left; padding-top: 12px;'><i onclick="$('#bottomNavCalc').slideToggle();$('#bottomNavStopwatch').hide();$('#bottomNavNotifications').hide();" style="color:#333; font-size: 20px" class="fa fa-calculator"></i></div>
+            <div style='width: 14%; float:left; padding-top: 11px;'><img onclick="$('#bottomNavStopwatch').slideToggle();$('#bottomNavCalc').hide();$('#bottomNavNotifications').hide();" style="height: 24px; margin-top: 0px" src="images/stopwatch.png" alt="STOPWATCH" ></div>
+            <div style='width: 44%; float:left'><h4>My Workouts</h4></div>
+            <div style='width: 14%; float:left; padding-top: 12px;'><p id="numNot"></p><i onclick="$('#bottomNavNotifications').slideToggle();$('#bottomNavStopwatch').hide();$('#bottomNavCalc').hide();" style="color:#333; font-size: 20px" class="fa fa-inbox"></i></div>
+            <div style='width: 14%; float:left; padding-top: 9px;'><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <i style="color:#333; font-size: 20px" class="fa fa-bars"></i>
-                    </button>
-                </td>
-            </tr>
-        </table>
+                    </button></div>
+        </div>
+
         
         <div>
 
@@ -424,6 +417,7 @@
     <script>
         window.onload = function load(){
             checkLoginStatus();
+            checkNotifications();
 //            displayMyWorkouts();
             
         };

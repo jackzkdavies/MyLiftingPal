@@ -1,9 +1,15 @@
 //Create MLP object
 var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
 
+//User data
 var user = mlpObject.getUser().result;
 
+var notifications = user['data']['requests'];
+
+var displayUnits  = user['data']['units'];
+
 var userProfilePhoto = user['data']['dp'];
+console.log(userProfilePhoto);
 
 var userEmail = user['data']['email'];
 
@@ -108,7 +114,7 @@ function displayMaxes(){
 function displayFriends(){
     for (friend in friends){
         var f ='';
-        f += '<div onclick="viewFriend('+friends[friend]['0']+')"> <img class="friendsProfilePicture" src='+friends[friend]['dp']+' alt=""><br>'+
+        f += '<div style="float:left" onclick="viewFriend('+friends[friend]['0']+')"> <img class="friendsProfilePicture" src='+friends[friend]['dp']+' alt=""><br>'+
                friends[friend][1]+'</div>';
        console.log(f);
         $("#friends").append(f);
@@ -124,3 +130,20 @@ function viewFriend(id){
     window.location.replace("friendsProfile.html");
 }
 
+function checkNotifications(){
+    var numberNotifications= notifications.length;
+    if (notifications != null){
+        for (request in notifications){
+            console.log(notifications);
+
+            if(numberNotifications > 99){
+                $('#numNot').append('99+');
+            }
+            else{
+                $('#numNot').append(numberNotifications);
+            }
+            
+            $('#inboxNotifications').append("Friend Request from: <h5 onclick='viewFriend("+notifications[request]['userid']+")'>"+notifications[request]['username']+"</h5>");
+        }
+    }
+}

@@ -6,8 +6,11 @@ var user = mlpObject.getUser().result;
 var notifications = user['data']['requests'];
 var displayUnits  = user['data']['units'];
 
+
 //Global Friend Variables 
 var userInfo = mlpObject.getUsers({id:window.localStorage.getItem("lastFriendView")}).result;
+
+var yourFriends = userInfo['data']['acceptedfriends'];
 
 var userProfilePhoto = userInfo['data']['dp'];
 
@@ -30,8 +33,6 @@ var about = userInfo['data'][11];
 var why = userInfo['data'][12];
 
 var goals = userInfo['data'][13];
-
-var friends = userInfo['data']['acceptedfriends'];
 
 var stats = userInfo['data']['stats'];
 
@@ -90,7 +91,7 @@ function signOut(){
 
 function displayUser(){
     $('#friendsName').empty();
-$('#friendsName').append(username+'s Profile');
+$('#friendsName').append(username+"'s Profile");
     var dp = '<img class="profilePicture" src='+userProfilePhoto+' alt="">';
     $("#profilePicture").append(dp);
     console.log(dp);
@@ -118,16 +119,7 @@ function displayMaxes(){
     }
 }
 
-function displayFriends(){
-    for (friend in friends){
-        var f ='';
-        f += '<div> <img class="friendsProfilePicture" src='+friends[friend]['dp']+' alt=""><br>'+
-               friends[friend][1]+'</div>';
-        $("#friends").append(f);
 
-    }
-//    console.log(friends);
-} 
 
 function viewFriendsDiary(){
     window.location.replace("friendsMain-page.html");
@@ -138,8 +130,6 @@ function checkNotifications(){
     var numberNotifications= notifications.length;
     if (notifications != null){
         for (request in notifications){
-            console.log(notifications);
-
             if(numberNotifications > 99){
                 $('#numNot').append('99+');
             }
@@ -150,5 +140,19 @@ function checkNotifications(){
             $('#inboxNotifications').append("Friend Request from: <h5 onclick='viewFriend("+notifications[request]['userid']+")'>"+notifications[request]['username']+"</h5>");
         }
     }
+}
+
+function checkIfFriends(){
+    $('#friendStatus').empty();
+    $('#friendStatus').append("<h5 class='goodText' onclick='console.log(mlpObject.addFriend({friendid:"+id+"}).result);history.go(0)'>Add Friend</h5>");
+    
+    for (f in yourFriends){
+        if (yourFriends[f]['username'] == username){
+            $('#friendStatus').empty();
+            $('#friendStatus').append("<h5 class='badText' onclick='console.log(mlpObject.removeFriend({friendid:"+id+"}).result);history.go(0)'>Remove Friend</h5>");
+        }
+    }
+
+    
 }
 

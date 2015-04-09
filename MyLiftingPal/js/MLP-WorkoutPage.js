@@ -1,5 +1,10 @@
 var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
-var userId=mlpObject.getUser().result['data']['id'];
+//User data
+var user = mlpObject.getUser().result;
+
+var userId=user['data']['id'];
+
+var notifications = user['data']['requests'];
 
 //Global Variables 
 var toggleSpeed = window.localStorage.getItem("toggleSpeed");
@@ -790,5 +795,23 @@ function submitCreateProgrammeForm(){
     finally{
         sWorkoutName = null; 
         sExercises = null;
+    }
+}
+
+function checkNotifications(){
+    var numberNotifications= notifications.length;
+    if (notifications != null){
+        for (request in notifications){
+            console.log(notifications);
+
+            if(numberNotifications > 99){
+                $('#numNot').append('99+');
+            }
+            else{
+                $('#numNot').append(numberNotifications);
+            }
+            
+            $('#inboxNotifications').append("Friend Request from: <h5 onclick='viewFriend("+notifications[request]['userid']+")'>"+notifications[request]['username']+"</h5>");
+        }
     }
 }
