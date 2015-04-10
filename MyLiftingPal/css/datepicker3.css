@@ -13,7 +13,10 @@
   direction: ltr;
 }
 .datepicker-inline {
-  width: 220px;
+  width: 100%;
+    text-align: center;
+  text-align: -webkit-center;
+
 }
 .datepicker.datepicker-rtl {
   direction: rtl;
@@ -97,7 +100,7 @@
 .datepicker table tr th {
   text-align: center;
   width: 30px;
-  height: 30px;
+  height: 25px;
   border-radius: 4px;
   border: none;
 }

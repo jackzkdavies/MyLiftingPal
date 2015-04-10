@@ -140,7 +140,6 @@ function setVarDate(){
 
 function centerCalander(){
     var t = document.getElementById("date-Picker");
-    t.style.backgroundColor="#77b2c9";
 //    t.style.paddingLeft=0;
 //    var sw= screen.availWidth;
 //    var tw = $("div.calender table").width();
