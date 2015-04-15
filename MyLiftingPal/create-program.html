@@ -30,7 +30,7 @@
   <script type="text/javascript" src="js/modernizr.js"></script>
   <script type="text/javascript" src="js/jquery.cookie.js"></script>
   <script type="text/javascript" src="js/mlp.js"></script>
-  <script type="text/javascript" src="js/MLP-WorkoutPage.js"></script>
+  <script type="text/javascript" src="js/MLP-ProgramPage.js"></script>
   <script type="text/javascript" src="js/webflow.js"></script>
   <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
@@ -168,13 +168,13 @@
         </script>
             
             <br>
-            <div onclick="toggleMyWorkouts()">
-            <p id="numberExercises">Show My Workouts</p>
+            <div onclick="toggleMyPrograms()">
+            <p id="numberExercises">Show My Programs</p>
             <div id="showWkToggleArrow"><i style="font-size:40px" class="fa fa-plus-circle"></i></div>
             <hr>
             </div>
             
-            <div id="myWorkouts"></div>
+            <div id="myPrograms"></div>
             
             <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                 <div class="modal-dialog">
@@ -227,7 +227,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-                        <h4 class="modal-title" id="modalLabelDWE">WorkOut Contains</h4>
+                        <h4 class="modal-title" id="modalLabelDWE">Program Contains</h4>
                         </div>
                         <div class="modal-body" id="modalDWEdetails">
          
@@ -309,7 +309,7 @@
                      </a>
                   
                   <a class="w-tab-link w-inline-block createtab" data-w-tab="Create New">
-                  <div><strong>Create New Workout</strong>
+                  <div><strong>Create New Program</strong>
                   </div>
                 </a>
 
@@ -359,14 +359,14 @@
               <hr>
 
 
-            <a class="button signup" href="javascript:submitCreateWorkoutForm()"><span><strong>Create Workout</strong></span></a>
+            <a class="button signup" href="javascript:submitCreateWorkoutForm()"><span><strong>Create Program</strong></span></a>
             </div>
                   
                   
                   
                   
                 <div class="w-tab-pane w--tab-active w-clearfix" data-w-tab="Search">
-                  <input class="w-input seachexerciseinput" id="workoutsearch" type="text" placeholder="Search Existing Workouts" name="workoutsearch" required="required" data-name="workoutsearch">
+                  <input class="w-input seachexerciseinput" id="workoutsearch" type="text" placeholder="Search Existing Programs" name="workoutsearch" required="required" data-name="workoutsearch">
                   <div class="searchresultsWorkouts"></div><a class="button addexercisetocurrentday" href="#"><strong>Submit Search</strong></a>
                     
                   <table id='mytableWorkouts' style='display: none; text-align:left; text-shadow: 0px 0px rgba(255, 255, 255, 0);'>
@@ -425,7 +425,7 @@
     <script>
         window.onload = function load(){
             checkLoginStatus();
-//            displayMyWorkouts();
+            checkNotifications();
             
         };
         
