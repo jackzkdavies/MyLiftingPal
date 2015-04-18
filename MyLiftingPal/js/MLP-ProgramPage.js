@@ -140,24 +140,7 @@ function setVarDate(){
 
 function centerCalander(){
     var t = document.getElementById("date-Picker");
-//    t.style.paddingLeft=0;
-//    var sw= screen.availWidth;
-//    var tw = $("div.calender table").width();
-//    var dpw = $("div.datepicker").width();
-//    if (tw !== 0){
-//            if(tw===217){
-//            t.style.paddingLeft= ((sw-tw)/2)-22+'px';
-//            t.style.backgroundColor="#77b2c9";
-//        }
-//        else{
-//            t.style.paddingLeft= ((sw-tw)/2)-25+'px';
-//            t.style.backgroundColor="#77b2c9";
-//        }
-//    }
-//    else{
-//        t.style.paddingLeft= ((sw-dpw)/2)-10+'px';
-//        t.style.backgroundColor="#77b2c9";
-//    }
+
 }
 
 function modalDisplayWorkoutExercies(inputID){
@@ -389,7 +372,6 @@ function workoutSeach(){
 }
 
 function addMyProgramDetails(input,duration){
-    console.log(duration);
     var toAppend ="";
     var divId='#'+input;
     var idNum =input.replace('myPrograms','');
@@ -405,11 +387,11 @@ function addMyProgramDetails(input,duration){
             
                 while(count <= duration){
                     var writeOut = false;
-                    toAppend += 'Day: ' + count; 
+                    toAppend += '<hr>Day: ' + count; 
                     for (workout in workouts['data']){ 
                         if (count == workouts['data'][workout]['day']){
                             writeOut = true;
-                            toAppend +='<div style="background-color:red">';
+                            toAppend +='<div style="background-color:rgba(226, 218, 203, 1);  padding-left: 10px;  padding-right: 10px;  padding-top: 1px;   margin-top: 5px;">';
                             var workoutDetails = workouts['data'][workout];
 
                             var workoutId=workouts['data'][workout]['workoutid'];
@@ -418,7 +400,7 @@ function addMyProgramDetails(input,duration){
 
                             var workoutName = workoutObj['data'][0]['name'];
 
-                            toAppend += '<h5>'+workoutName+'</h5>';
+                            toAppend += '<h5 style="color:#333">'+workoutName+'</h5>';
 
                             for (exercises in workoutObj['data'][0]['exercises']){
                                 toAppend += '<p style="text-align:left">'+workoutObj['data'][0]['exercises'][exercises]["name"]+'</p>';
@@ -441,7 +423,7 @@ function addMyProgramDetails(input,duration){
                        
                     }
                     if (writeOut === false){
-                        toAppend +='<div style="background-color:blue">' 
+                        toAppend +='<div style="background-color:white">' 
                         toAppend += '<p>rest day</p>';
                         toAppend += '</div>';
                     }
@@ -450,10 +432,8 @@ function addMyProgramDetails(input,duration){
                 }
             
         }
-        toAppend +='<a href="javascript:addWorkoutEdit('+idNum+');" style="border:6px solid transparent" class="btn btn-default btn-circle myexercises-edit">'+
-                '<i style="font-size:60px" class="fa fa-plus-square"></i></a><br>';
                 
-     toAppend +=  ' <a href="javascript:updateModalWorkoutEdit('+idNum+');" style="border:6px solid transparent" class="btn btn-default btn-circle myexercises-edit">'+
+     toAppend +=  ' <a href="javascript:modalProgramEdit('+idNum+","+duration+');" style="border:6px solid transparent" class="btn btn-default btn-circle myexercises-edit">'+
         '<i style="font-size:40px ;padding-left:5px" class="fa fa-pencil-square-o"></i></a>';
     
     
@@ -463,31 +443,19 @@ function addMyProgramDetails(input,duration){
     }
 }
 
-function updateModalWorkoutEdit(wId){
+function modalProgramEdit(idNum,duration){
 
-    var workout = mlpObject.getWorkouts({id:wId});
+    var workouts = mlpObject.selectWorkouts({programid:idNum}).result;
+    console.log(workouts);
 
-    $("#myModalLabelWorkoutEdit").empty();
-    $("#myModalLabelWorkoutEdit").append("Edit " + workout.result['data'][0]['name']);
     
     
-    
-    document.getElementById("updateWorkoutName").value = workout.result['data'][0]['name'];
-        
-    
-    $("#deleteWorkoutButton").empty();
-    var delBut = '<button onclick="deleteWorkout('+wId+')" type="button" class="btn btn-primary">Delete</button>';
-    $("#deleteWorkoutButton").append(delBut);
-    
-    $("#editCalANDSav").empty();
-    var buttons='<button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
-            '<button onclick="updateWorkout('+wId+')" type="button" class="btn btn-primary">Update</button>';
-    $("#editCalANDSav").append(buttons);
+    $("#updateProgramDuration").val(duration);
     
     var options = {
     "backdrop" : "static",
     "show":"true"};
-    $('#basicModalEdit').modal(options);
+    $('#modalProgramEdit').modal(options);
 }
 
 function updateWorkout(wId){
