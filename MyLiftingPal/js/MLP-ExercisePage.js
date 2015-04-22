@@ -366,7 +366,7 @@ function updateModalExerciseEdit(inputId){
     
     
     $("#deleteExerciseButton").empty();
-    var delBut = '<button onclick="deleteExercise('+inputId+')" type="button" class="btn btn-primary">Delete</button>';
+    var delBut = '<button style="background-color:#ff6666; border-color: #CDCDCD;" onclick="deleteExercise('+inputId+')" type="button" class="btn btn-primary">Delete</button>';
     $("#deleteExerciseButton").append(delBut);
     
     $("#editCalANDSav").empty();

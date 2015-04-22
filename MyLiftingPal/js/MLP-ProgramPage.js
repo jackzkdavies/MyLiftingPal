@@ -9,6 +9,7 @@ var notifications = user['data']['requests'];
 //Global Variables 
 var toggleSpeed = window.localStorage.getItem("toggleSpeed");
 var displayUnits = window.localStorage.getItem("displayUnits");
+var lastCallertoWorkoutSearch=null;
 if (displayUnits === null){displayUnits = 'kg';}
 
 function toggle(divID){
@@ -109,10 +110,10 @@ function toggleMyPrograms(){
         document.getElementById("showWkToggleArrow").innerHTML = '<i style="font-size:40px" class="fa fa-minus"></i>'
     }
     else{
-        var isVisible = $( "#myWorkouts" ).is( ":visible" ); 
+        var isVisible = $( "#myPrograms" ).is( ":visible" ); 
 
 
-        $("#myWorkouts").slideToggle(400);
+        $("#myPrograms").slideToggle(400);
 
         if (isVisible !== true){
             document.getElementById("showWkToggleArrow").innerHTML = '<i style="font-size:40px" class="fa fa-minus"></i>';
@@ -143,15 +144,36 @@ function centerCalander(){
 
 }
 
+function hideWorkoutShowSearch(){
+    $('#modalDisplayWorkoutExercies').modal('hide');
+    var options = {
+        "backdrop" : "true",
+        "show":"true"};
+    $('#modalDisplayWorkoutSearch').modal(options);
+}
+
+var globalWorkoutsToAdd={};
+
+function addWorkoutToProgramDay(id,name){
+   $('#modalDisplayWorkoutExercies').modal('hide');
+   console.log(lastCallertoWorkoutSearch);
+   var day = lastCallertoWorkoutSearch.replace("newprogramday", "");
+   
+   globalWorkoutsToAdd[day]=id;
+   
+   var divid= "#"+lastCallertoWorkoutSearch;
+   $(divid).val(name);   
+}
 function modalDisplayWorkoutExercies(inputID){
+    $('#modalDisplayWorkoutSearch').modal('hide');
 
     var searchResult = mlpObject.getWorkouts({id:inputID}).result['data'][0];
     var name = searchResult['name']
     var exercises = searchResult['exercises'];
  
     
-    $("#modalLabelDWE").empty();
-    $("#modalLabelDWE").append(name);
+    $("#workoutDetailsName").empty();
+    $("#workoutDetailsName").append(name);
     
     var toAppend='<table><tr style="color: #77b2c9; font-weight:bold;" ><td>Exercise</td><td>Weight</td><td>Reps</td><td>Sets</td><td>RPE</td></tr>';
     
@@ -177,15 +199,15 @@ function modalDisplayWorkoutExercies(inputID){
     }
     toAppend+='</table>'
     
-    var buttons='<button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
-            '<button onclick="addWorkoutToDiary('+inputID+')" type="button" class="btn btn-primary">Add</button>';
+    var buttons='<button type="button" style="color:#77b2c9;" class="btn btn-default" onclick="hideWorkoutShowSearch()">Cancel</button>'+
+            '<button onclick="addWorkoutToProgramDay('+"'"+inputID+"','"+name+"'"+')" type="button" class="btn btn-primary">Add</button>';
     
-    $("#basicModalDWAdd").empty();
-    $("#basicModalDWAdd").append(buttons);
+    $("#workoutDetailsButtons").empty();
+    $("#workoutDetailsButtons").append(buttons);
     
 
-    $("#modalDWEdetails").empty();
-    $("#modalDWEdetails").append(toAppend);
+    $("#modalWorkoutdetails").empty();
+    $("#modalWorkoutdetails").append(toAppend);
     
     var options = {
     "backdrop" : "true",
@@ -196,14 +218,6 @@ function modalDisplayWorkoutExercies(inputID){
 function modalWorkoutExerciseEdit(inputID,wID){
     console.log(wID);
     var workouts = mlpObject.getExercises({id:inputID}).result;
-
-     
-     
-//    document.getElementById("updateModalAddRep").value = workouts['data'][0]['name'];
-//    document.getElementById("updateModalAddSet").value = workouts['data'][0]['name'];
-//    document.getElementById("updateModalAddWeight").value = workouts['data'][0]['name'];
-//    document.getElementById("updateModalAddRPE").value = workouts['data'][0]['name'];
-//    document.getElementById("updateModalAddRM").value = workouts['data'][0]['name'];
      
     document.getElementById("updateModalAddRep").value = 0;
     document.getElementById("updateModalAddSet").value = 0;
@@ -371,13 +385,20 @@ function workoutSeach(){
     finally{};
 }
 
-function addMyProgramDetails(input,duration){
-    var toAppend ="";
+var globalProgramWorkouts = [];
+function addMyProgramDetails(input,duration,programname){
+    var toAppend =duration+" Day Program.";
     var divId='#'+input;
     var idNum =input.replace('myPrograms','');
     var workouts = mlpObject.selectWorkouts({programid:idNum}).result;
-    console.log(workouts);
-    if ((document.getElementById(input).innerHTML).trim() === ""){
+    
+    $('#programDetailsName').empty();
+    $('#programDetailsName').append(programname);
+    
+    globalProgramWorkouts[idNum]=workouts['data'];
+
+    
+    
         
         if (workouts['success'] === false){
             toAppend +='<p>No Workouts to display</p>';
@@ -387,11 +408,11 @@ function addMyProgramDetails(input,duration){
             
                 while(count <= duration){
                     var writeOut = false;
-                    toAppend += '<hr>Day: ' + count; 
+                    toAppend += '<hr><p style="color:#77b2c9; font-weight:bold">Day: ' + count+'</p>'; 
                     for (workout in workouts['data']){ 
                         if (count == workouts['data'][workout]['day']){
                             writeOut = true;
-                            toAppend +='<div style="background-color:rgba(226, 218, 203, 1);  padding-left: 10px;  padding-right: 10px;  padding-top: 1px;   margin-top: 5px;">';
+                            toAppend +='<div style="">';
                             var workoutDetails = workouts['data'][workout];
 
                             var workoutId=workouts['data'][workout]['workoutid'];
@@ -400,11 +421,11 @@ function addMyProgramDetails(input,duration){
 
                             var workoutName = workoutObj['data'][0]['name'];
 
-                            toAppend += '<h5 style="color:#333">'+workoutName+'</h5>';
+                            toAppend += '<p style="color:#77b2c9">'+workoutName+'</p><br>';
 
                             for (exercises in workoutObj['data'][0]['exercises']){
-                                toAppend += '<p style="text-align:left">'+workoutObj['data'][0]['exercises'][exercises]["name"]+'</p>';
-                                toAppend += '<table style="width:100%">';
+                                toAppend += '<p style="text-align:center;font-size: 14px;margin-bottom: -5px;font-weight: bold;">'+workoutObj['data'][0]['exercises'][exercises]["name"]+'</p>';
+                                toAppend += '<table style="width:100%;text-shadow:none">';
                                 toAppend += '<tr><td>reps</td><td>sets</td><td>weight</td><td>RPE</td><td>%1RM</td></tr>';
                                 toAppend += '<tr><td>'+workoutObj['data'][0]['exercises'][exercises]["reps"]+'</td>';
                                 toAppend += '<td>'+workoutObj['data'][0]['exercises'][exercises]["sets"]+'</td>';
@@ -412,9 +433,9 @@ function addMyProgramDetails(input,duration){
                                 toAppend += '<td>'+workoutObj['data'][0]['exercises'][exercises]["rpe"]+'</td>';
                                 toAppend += '<td>'+workoutObj['data'][0]['exercises'][exercises]["percentage"]+'</td></tr>';
                                 toAppend += '</table>';
-                                toAppend += '<br>';
+                                toAppend += '';
                             }
-                            toAppend += '</div>';
+                            toAppend += '<br></div>';
                             break;
                         }
                         else{
@@ -424,7 +445,7 @@ function addMyProgramDetails(input,duration){
                     }
                     if (writeOut === false){
                         toAppend +='<div style="background-color:white">' 
-                        toAppend += '<p>rest day</p>';
+                        toAppend += '<p style="color:#ff6666">Rest day.</p>';
                         toAppend += '</div>';
                     }
                     console.log(count);
@@ -433,30 +454,154 @@ function addMyProgramDetails(input,duration){
             
         }
                 
-     toAppend +=  ' <a href="javascript:modalProgramEdit('+idNum+","+duration+');" style="border:6px solid transparent" class="btn btn-default btn-circle myexercises-edit">'+
+     toAppend +=  ' <hr><a href="javascript:modalProgramEdit('+idNum+","+duration+');" style="border:6px solid transparent" class="btn btn-default btn-circle myexercises-edit">'+
         '<i style="font-size:40px ;padding-left:5px" class="fa fa-pencil-square-o"></i></a>';
     
+    $('#programDetailsBody').empty();
+    $('#programDetailsBody').append(toAppend);
     
-    $(divId).append(toAppend);
-    }
-     else{$(divId).slideToggle(400);
-    }
+    
+    var buttons='<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
+        '<button onclick="addProgramToDiary('+idNum+')" type="button" class="btn btn-primary">Add</button>';
+    
+    $('#programDetailscontrols').empty();
+    $('#programDetailscontrols').append(buttons);
+    
+    
+    var options = {
+    "backdrop" : "static",
+    "show":"true"};
+    $('#programDetails').modal(options);
+    
+
+}
+
+function programClearDay(){
+   
+   var day = lastCallertoWorkoutSearch.replace("newprogramday", "");
+   delete globalWorkoutsToAdd[day];
+   var divid= "#"+lastCallertoWorkoutSearch;
+   $(divid).val("Rest day.");   
+    
+}
+
+function displayWorkoutSearchModal(day,callerid){
+    lastCallertoWorkoutSearch = callerid;
+    
+    $('#programDay').empty();
+    $('#programDay').append("Update day: " + day);
+    
+    
+    $('#modalProgramEdit').modal('hide');
+    var options = {
+    "backdrop" : "static",
+    "show":"true"};
+    $('#modalDisplayWorkoutSearch').modal(options);
 }
 
 function modalProgramEdit(idNum,duration){
 
-    var workouts = mlpObject.selectWorkouts({programid:idNum}).result;
-    console.log(workouts);
-
+    var workouts = globalProgramWorkouts[idNum];
     
+    $("#updateProgramName").val();
     
     $("#updateProgramDuration").val(duration);
+    
+    $("#programWorkouts").empty();
+
+    for (count = 1; count <= duration; count++){
+        $("#programWorkouts").append('<div onclick="displayWorkoutSearchModal('+"'"+count+"','"+count+'programday'+idNum+"'"+')" id="'+count+'program'+idNum+'"><p>Day: '+count+'</p><input id="'+count+'programday'+idNum+'" class="w-input" type="text" placeholder="Rest day." name="Program Name" required="required" data-name="programename"></div>');
+  
+    }
+        
+    for (workout in workouts){
+        
+        var workoutDay = workouts[workout]['day'];
+        var divId = '#'+workoutDay+'program'+idNum;
+        var inputId = '#'+workoutDay+'programday'+idNum;
+        
+        var workoutObj = mlpObject.getWorkouts({id:workouts[workout]['workoutid']}).result;
+        var workoutName = workoutObj['data'][0]['name'];
+        $(inputId).val(workoutName);
+    }
+    
     
     var options = {
     "backdrop" : "static",
     "show":"true"};
     $('#modalProgramEdit').modal(options);
 }
+var globalWorkoutObjs;
+
+function workoutSeach(){
+    var searchTerms =['name','userid'];
+    var searchTerm= (document.getElementById("workoutsearchterm").value.toString()).trim();
+    document.getElementById("searchresultsWorkouts").innerHTML = "";
+    document.getElementById("searchResultsHeading").innerHTML="";
+    if (searchTerm ===""){
+        $("#searchresultsWorkouts").append("Please enter a keyword");
+        return;
+    }
+    globalWorkoutObjs={};
+    try{  
+    for (st in searchTerms){
+        var data = new Array();
+        data[searchTerms[st]] = searchTerm;
+        var searchResult = mlpObject.getWorkouts(data).result;
+        if (searchResult['success'] === true){
+            for ( objects in searchResult['data'] ){              
+                globalWorkoutObjs[searchResult['data'][objects]['id']]=searchResult['data'][objects];
+            };
+        
+            
+        }
+    }
+    
+    var toAppend="";   
+    
+        for (key in globalWorkoutObjs){    
+              if (globalWorkoutObjs.hasOwnProperty(key)) {    
+                  
+        var useDate=[year,(month+1),date];
+        toAppend += "<tr onClick='modalDisplayWorkoutExercies("+key+")'>";
+       
+
+        for (st in searchTerms){
+            toAppend += "<td>";
+   
+            if (searchTerms[st] === 'userid'){
+              
+                toAppend += mlpObject.getUsers({id:globalWorkoutObjs[key][searchTerms[st]]}).result['data'][1];
+
+            }
+            else {
+                toAppend += globalWorkoutObjs[key][searchTerms[st]];
+            }
+            toAppend += "</td>";
+        }
+        
+        toAppend += "</tr>";
+
+    }}
+    
+    try{
+    $("#mytable").dataTable().fnDestroy();
+    $("#mytableWorkouts").dataTable().fnDestroy();
+    $("#searchresultsWorkouts").empty();
+    document.getElementById('mytable').style.display='none';
+    }
+    catch(e){console.log(e);}
+    
+    $("#searchresultsWorkouts").append(toAppend);
+    $('#mytableWorkouts').DataTable({bFilter: false});
+    document.getElementById('mytableWorkouts').style.display='table';
+    document.getElementById('searchResultsHeading').innerHTML='<div style="line-height:50px">Search results for workout: '+searchTerm+'</div>';
+    
+    }
+    catch(e){console.log(e);}
+    finally{};
+}
+
 
 function updateWorkout(wId){
     mlpObject.updateWorkout({id:wId,name:document.getElementById("updateWorkoutName").value});
@@ -515,16 +660,16 @@ function displayMyPrograms(){
 //        console.log(mwo[objects])
     var toAppend = "";
     toAppend +='<div>';
-    toAppend +='<div onclick="addMyProgramDetails(' + "'" +'myPrograms'+mpo[objects]['id']+"'"+','+mpo[objects]['duration']+ ')">';
-    toAppend +='<h3 style="text-align:left;width:70%;padding: 8px; float:left">'+mpo[objects]['name'];
-    toAppend +='<i class="fa fa-caret-down"></i>';
-    toAppend +='</h3></div>';
+    toAppend +='<div style="width:70%;float:left" onclick="addMyProgramDetails(' + "'" +'myPrograms'+mpo[objects]['id']+"'"+','+mpo[objects]['duration']+",'"+mpo[objects]["name"]+"'"+')">';
+    toAppend +='<h3 style="text-align:left;;padding: 8px;" >'+mpo[objects]['name'];
+    toAppend +='&nbsp;&nbsp;<i class="fa fa-list"></i>';
+    toAppend +='</h3><p style="margin-top: -20px;  font-size: 10px;margin-left: -50px;">Duration: '+mpo[objects]["duration"]+'Day(s)</p></div>';
     
     
     toAppend +='<a href="javascript:updateModalWorkoutAdd('+mpo[objects]['id']+');" style="width:60px; margin-bottom: 4px; z-index:10;" class="btn btn-default btn-circle-main">';
     toAppend +='<i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i>';
     toAppend +='</a>';
-    toAppend +='<p>'+mpo[objects]["duration"]+' Day Program</p>';
+    toAppend +='';
     toAppend +='<div id="myPrograms'+mpo[objects]['id']+'" style="width: 100%; position: relative" class="tabsdivMyWorkOutsBackAndBis"></div>';
 
 
@@ -534,44 +679,41 @@ function displayMyPrograms(){
     }
 }
 
-//create Workout
-function submitCreateWorkoutForm(){
-    var sWorkoutName;
+//create Program
+function submitCreateProgramForm(){
+    var sProgramName;
+    var duration = $('#programDuration').val();
+    console.log(duration);
     var temp;
 //    var addExercises = []; 
     
     try {
-        sWorkoutName = document.getElementById("cWorkoutName").value; 
-        if(sWorkoutName.trim() ===""){
-            document.getElementById("errorCreatingWorkout").innerHTML="Please Enter Name for Workout";
+        sProgramName = document.getElementById("cProgramName").value; 
+        if(sProgramName.trim() ===""){
+            document.getElementById("errorCreatingProgram").innerHTML="Please Enter Name for Program!";
             return;
         }
-        console.log(sWorkoutName);
-
         
+        if(duration < 1 || duration > 365){
+            document.getElementById("errorCreatingProgram").innerHTML="Duration must be bewteen 1-365 days!";
+            return;
+        }
+
         if (mlpObject !== null){ 
-            console.log("In Create new workoutLoop.");
+            console.log("In Create new program loop.");
             //name
-            var newWorkout = mlpObject.createWorkout({name:sWorkoutName});
-                var nwi = newWorkout['result']['data']['id'];
-                if(globalExerciseIds !== {}){
+            var newProgram = mlpObject.createProgram({name:sProgramName, duration:duration});
+                var npi = newProgram['result']['data']['id'];
+                if(globalWorkoutsToAdd !== {}){
                     console.log("in add exercises to new Workoutout:");
-                    for (key in globalExerciseIds){    
-                        if (globalExerciseIds.hasOwnProperty(key)) {
-                            //exerciseid, workoutid,ordering, reps, sets, rpe, weight, percentage
-//                            try{
-//                            mlpObject.addexercise({exerciseid:globalExerciseIds[key]['id'], workoutid:newWorkout['id'], ordering:key, 
-//                            reps:globalExerciseIds[key]['reps'], sets:globalExerciseIds[key]['sets'], rpe:globalExerciseIds[key]['rpe'],weight:globalExerciseIds[key]['weight'], percentage:globalExerciseIds[key]['percentage']});
-//                            }
-                            console.log("globalExerciseIds[key]['id']:");
-                            console.log(globalExerciseIds[key]['id']);
-                            console.log("newWorkout['id']:");
-                            console.log(newWorkout['id']);
-                            console.log("key:");
+                    for (key in globalWorkoutsToAdd){    
+                        if (globalWorkoutsToAdd.hasOwnProperty(key)) {
+
+                            console.log(globalWorkoutsToAdd[key]);
                             console.log(key);
+                            
                             try{
-                            temp = mlpObject.addExercise({exerciseid:globalExerciseIds[key]['id'], workoutid:nwi, ordering:key.toString(), 
-                            reps:'0', sets:'0', rpe:'0',weight:'0', percentage:'0'});
+                            temp = mlpObject.addWorkout({workoutid:globalWorkoutsToAdd[key], day:key, programid:npi});
                             console.log(temp);
                              }
 
@@ -592,8 +734,8 @@ function submitCreateWorkoutForm(){
     }
     
     finally{
-        displayMyWorkouts()
-        sWorkoutName = null; 
+        displayMyPrograms();
+        sProgramName = null; 
         sExercises = null; 
     }
 
@@ -766,7 +908,15 @@ function submitCreateProgrammeForm(){
         sExercises = null;
     }
 }
-
+function programDuration(dur){
+    $("#newProgramWorkouts").empty();
+    for (i = 1; i <= dur; i++){
+        $("#newProgramWorkouts").append('<div onclick="displayWorkoutSearchModal('+"'"+i+"','"+i+'newprogramday'+"'"+')" id="'+i+'newprogram"><p>Day: '+i+'</p><input id="'+i+'newprogramday" class="w-input" type="text" placeholder="Rest day." name="Program Name" required="required" data-name="programename"></div>');
+  
+    }
+//    $('#programWorkouts')
+    
+}
 function checkNotifications(){
     var numberNotifications= notifications.length;
     if (notifications != null){
