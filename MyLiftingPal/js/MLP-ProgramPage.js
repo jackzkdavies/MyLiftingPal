@@ -615,22 +615,19 @@ function deleteWorkout(wId){
     displayMyPrograms();
 }
 
-function updateModalWorkoutAdd(wId)
+function updateModalProgramAdd(pId,programNam)
 {
-    var workout = mlpObject.getWorkouts({id:wId});
 
-//
-//    addWorkoutToDiary
     $("#myModalLabelWorkoutAdd").empty();
-    $("#myModalLabelWorkoutAdd").append("Add " + workout.result['data'][0]['name'] + " To:");
+    $("#myModalLabelWorkoutAdd").append("Add " + programNam + " To:");
     
     $("#modalWorkoutAddTo").empty();
     
     var tempString="'#basicModalAddWorkout'";
-    var calanderData=[wId,tempString];
+    var calanderData=[pId,tempString];
     
     var toAppend ='';
-     toAppend += '<h3 onclick='+'"addWorkoutToDiary('+wId+')"><i class="fa fa-book"></i>Current Day</h3>'+
+     toAppend += '<h3 onclick='+'"addProgramToDiary('+pId+')"><i class="fa fa-book"></i>Current Day</h3>'+
                             '<p style="color:#77b2c9">or</p>'+
                             '<h3 onclick="calanderModal(['+calanderData+'])"><i class="fa fa-calendar"></i>Select Day</h3>';
     $("#modalWorkoutAddTo").append(toAppend);
@@ -640,10 +637,10 @@ function updateModalWorkoutAdd(wId)
     $('#basicModalAddWorkout').modal(options);
 }
 
-function addWorkoutToDiary(inputID){
+function addProgramToDiary(inputID){
     messageModal('#basicModalAddWorkout');
     try{
-        console.log(mlpObject.addResults({workoutid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result);
+        console.log(mlpObject.addResults({programid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result);
     }
     catch(e){
         
@@ -666,7 +663,7 @@ function displayMyPrograms(){
     toAppend +='</h3><p style="margin-top: -20px;  font-size: 10px;margin-left: -50px;">Duration: '+mpo[objects]["duration"]+'Day(s)</p></div>';
     
     
-    toAppend +='<a href="javascript:updateModalWorkoutAdd('+mpo[objects]['id']+');" style="width:60px; margin-bottom: 4px; z-index:10;" class="btn btn-default btn-circle-main">';
+    toAppend +='<a href="javascript:updateModalProgramAdd('+mpo[objects]['id']+",'"+mpo[objects]['name']+"'"+');" style="width:60px; margin-bottom: 4px; z-index:10;" class="btn btn-default btn-circle-main">';
     toAppend +='<i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i>';
     toAppend +='</a>';
     toAppend +='';
