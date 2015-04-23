@@ -32,8 +32,8 @@
 .returnButton{
     position: fixed;
     bottom: 0;
-    float:left;
-    width: 100%;
+    float:right;
+    margin-left: 80%;
     filter: blur(1px); /* Doesn't work anywhere yet */
    -webkit-filter: blur(1px);
    filter: url('blur.svg#blur'); /* for Firefox - http://jordanhollinger.com/media/blur.svg */  
