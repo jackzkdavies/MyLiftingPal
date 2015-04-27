@@ -16,6 +16,7 @@ var toggleSpeed = window.localStorage.getItem("toggleSpeed");
 var notifications = user['data']['requests'];
 toggleSpeed=0;
 var submitDairySearchClass= 'e';
+var currentTotals={};
 
 window.localStorage.setItem("lastFriendView", null);
 //var displayUnits = window.localStorage.getItem("displayUnits");
@@ -189,6 +190,7 @@ function toggleDropDownArrow(i){
 
 
 function checkResults(){
+    currentTotals={};
     var firstDiv=true;
     var test = [];
     recordsList={};
@@ -300,9 +302,12 @@ function checkResults(){
                     
                 }                               
 //                var resId="#"+myResId+"Third";
-                var resId=myResId+"Third"
+                currentTotalVolumeCalc(myDiaryResults['data'][myRes]);
+                var currentTotalVolume = currentTotals[myDiaryResults['data'][myRes]['exerciseid']];
+                var resId=myResId+"Third";
                 toAppend = '';
                 toAppend += '<div id="DiaryControls'+myResId+'Second" style="width:100%;" >'+
+                        '<p>Current Total Volume: <span style="font-weight:600">'+currentTotalVolume+'</span></p>'+
                 '<a href="javascript:diaryModalAddSet('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 5px;padding-left: 1px; width:60px; margin-bottom: 4px; background-color: white; color:#77b2c9" class="btn btn-default btn-circle-main"  title="Add Result to your Exercise"><i class="fa fa-plus"></i></a>'+
                 '<a href="javascript:diaryModalDelete('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 5px; width:60px; margin-bottom: 4px; background-color: #ff6666; color:white" class="btn btn-default btn-circle-main" title="Delete exercise from your diary"><i class="fa fa-trash"></i></a>'+
                 '<a href="javascript:diaryModalHistory('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 5px; width:60px; margin-bottom: 4px; background-color: #66cc66; color:white" class="btn btn-default btn-circle-main"  title="View your log for this exercise"><i class="fa fa-book"></i></a>'+
@@ -329,6 +334,17 @@ function checkResults(){
     toggleListActivate();
 }
 
+function currentTotalVolumeCalc(diaryres){
+
+    if (currentTotals[diaryres['exerciseid']] == null){
+        currentTotals[diaryres['exerciseid']] = (parseInt(diaryres['weight']) * parseInt(diaryres['reps']));
+    }
+    else{
+        
+    currentTotals[diaryres['exerciseid']] = (parseInt(currentTotals[diaryres['exerciseid']]) + (parseInt(diaryres['weight']) * parseInt(diaryres['reps'])));
+}
+    
+}
 function updateDiaryResults(inputID){
     try{
         var rep=document.getElementById("updateModalChangeRep").value;
@@ -635,6 +651,48 @@ function mainPageAdd(){
     
 }
 
+
+
+function infoDataModal(data){
+    console.log(data);
+    document.getElementById("infoDataModalBody").innerHTML = data;
+    var options = {
+    "backdrop" : "true",
+    "show":"true"};
+    $('#infoDataModal').modal(options);
+    
+
+    $('#addModal').hide();
+}
+
+function checkNotifications(){
+    var numberNotifications= notifications.length;
+    if (notifications != null){
+        for (request in notifications){
+            console.log(notifications);
+
+            if(numberNotifications > 99){
+                $('#numNot').append('99+');
+            }
+            else{
+                $('#numNot').append(numberNotifications);
+            }
+            
+            $('#inboxNotifications').append("Friend Request from: <h5 onclick='viewFriend("+notifications[request]['userid']+")'>"+notifications[request]['username']+"</h5>");
+        }
+    }
+}
+function viewFriend(id){
+    window.localStorage.setItem("lastFriendView", id);
+    console.log(window.localStorage.getItem("lastFriendView"));
+    window.location.replace("friendsProfile.html");
+}
+
+
+
+
+
+
 function mainSearchEx(inp){
 
     if (inp === 'e'){   
@@ -672,17 +730,10 @@ function submitDairySearch(){
         diaryPageWorkoutSeach();
     }
     
-}
-function infoDataModal(data){
-    console.log(data);
-    document.getElementById("infoDataModalBody").innerHTML = data;
-    var options = {
-    "backdrop" : "true",
-    "show":"true"};
-    $('#infoDataModal').modal(options);
+    if (submitDairySearchClass === 'p'){
+        programSearch();
+    }
     
-
-    $('#addModal').hide();
 }
 function dairyPageExSearch(){
     var searchTerms =['name','musclegroup','type'];
@@ -760,6 +811,7 @@ function dairyPageExSearch(){
     try{
     $("#mytable").dataTable().fnDestroy();
     $("#mytableWorkouts").dataTable().fnDestroy();
+    $("#programSearchTable").dataTable().fnDestroy();
     $("#searchresults").empty();
     $("#searchresultsWorkouts").empty();
     document.getElementById('mytableWorkouts').style.display='none';
@@ -832,6 +884,7 @@ function diaryPageWorkoutSeach(){
     try{
     $("#mytable").dataTable().fnDestroy();
     $("#mytableWorkouts").dataTable().fnDestroy();
+    $("#programSearchTable").dataTable().fnDestroy();
     $("#searchresults").empty();
     $("#searchresultsWorkouts").empty();
     document.getElementById('mytable').style.display='none';
@@ -848,25 +901,259 @@ function diaryPageWorkoutSeach(){
     finally{};
 }
 
-function checkNotifications(){
-    var numberNotifications= notifications.length;
-    if (notifications != null){
-        for (request in notifications){
-            console.log(notifications);
 
-            if(numberNotifications > 99){
-                $('#numNot').append('99+');
-            }
-            else{
-                $('#numNot').append(numberNotifications);
-            }
+function programSearch(){
+    
+    //clean up from any past searches
+    try{
+        $("#mytable").dataTable().fnDestroy();
+        $("#mytableWorkouts").dataTable().fnDestroy();
+        $("#programSearchTable").dataTable().fnDestroy();
+        $("#searchResultsProgram").empty();
+        document.getElementById('programSearchTable').style.display='none';
+    }
+    catch(e){console.log(e);}
+    
+    
+    var searchTerms =['name','userid'];
+    var searchTerm= (document.getElementById("mainSearchTerm").value.toString()).trim();
+    
+    if (searchTerm ===""){
+        $("#failedProgramSearch").append("Please enter a search term");
+        return;
+    }
+    
+    globalProgramObjs={};
+    try{
+    document.getElementById('searchResultsHeading').innerHTML='<div style="line-height:50px">Search results for Program: '+searchTerm+'</div>';
+    for (st in searchTerms){
+        var data = new Array();
+        data[searchTerms[st]] = searchTerm;
+        var searchResult = mlpObject.getPrograms(data).result;
+        if (searchResult['success'] === true){
+            for ( objects in searchResult['data'] ){              
+                globalProgramObjs[searchResult['data'][objects]['id']]=searchResult['data'][objects];
+            };
+        
             
-            $('#inboxNotifications').append("Friend Request from: <h5 onclick='viewFriend("+notifications[request]['userid']+")'>"+notifications[request]['username']+"</h5>");
         }
     }
+    }
+    catch(e){
+        
+    }
+    
+    for (key in globalProgramObjs){    
+        if (globalProgramObjs.hasOwnProperty(key)) { 
+            toAppend = "<tr onclick='rightResultsContainerUpdate("+key+")'><td>" + globalProgramObjs[key]['name'] +"</td></tr>";
+            $('#searchResultsProgram').append(toAppend);
+        }
+
+    }
+        
+
+    
+    $('#programSearchTable').DataTable({bFilter: false});
+    document.getElementById('programSearchTable').style.display='table';
+        
+    console.log(globalProgramObjs);
+    
 }
-function viewFriend(id){
-    window.localStorage.setItem("lastFriendView", id);
-    console.log(window.localStorage.getItem("lastFriendView"));
-    window.location.replace("friendsProfile.html");
+
+function displayLeftSearchContainer(){
+    $("#leftResultsContainer").css({"width": "100%","display":"block"});
+    $("#rightResultsContainer").css({"width": "0px","display":"none", "overflow": "hidden"});
+    
+}
+
+function rightResultsContainerUpdate(programId){
+    var name=globalProgramObjs[programId]['name'];
+    var duration=globalProgramObjs[programId]['duration'];
+    var workouts=globalProgramObjs[programId]['workouts'];
+    console.log(globalProgramObjs);
+    $('#rightSearchResultsName').empty();
+    $('#rightSearchResultsName').append('<hr><h3>'+name+'</h3><h2><i onclick="displayLeftSearchContainer()"class="fa fa-arrow-left"></i></h2>');
+    
+    toAppend='';
+    if (typeof workouts === null){
+            toAppend +='<p>No Workouts to display</p>';
+        }
+        else{
+            var count = 1;
+            
+                while(count <= duration){
+                    var header=false;
+                    var writeOut = false;
+                    toAppend += '<hr><p style="color:#77b2c9; font-weight:bold">Day: ' + count+'</p>'; 
+                    for (workout in workouts){ 
+                        if (count == workouts[workout]['day']){
+    
+                            
+                            writeOut = true;
+                            toAppend +='<div style="text-align:center;">';
+                            
+                            if(header === false){
+                                toAppend+='<p style="text-align:center;">'+workouts[workout]['workoutname']+'</p>';
+                                header = true;
+                                
+                            }
+                            
+                            var workoutDetails = workouts[workout];
+
+                            var workoutId=workouts[workout]['workoutid'];
+
+                            var workoutName = workouts[workout]['workoutname'];
+                            
+                            var exerciseName = workouts[workout]['name']
+
+//                            toAppend += '<p style="color:#77b2c9">'+workoutName+'</p><br>';
+
+
+                            toAppend += '<p style="text-align:center;font-size: 14px;margin-bottom: -5px;font-weight: bold;">'+exerciseName+'</p>';
+                            
+                            toAppend += '<table style="width:100%;text-shadow:none; style="text-align:center;"">';
+                            toAppend += '<tr><td>reps</td><td>sets</td><td>weight</td><td>RPE</td><td>%1RM</td></tr>';
+                            toAppend += '<tr><td>'+workouts[workout]["reps"]+'</td>';
+                            toAppend += '<td>'+workouts[workout]["sets"]+'</td>';
+                            toAppend += '<td>'+workouts[workout]["weight"]+'</td>';
+                            toAppend += '<td>'+workouts[workout]["rpe"]+'</td>';
+                            toAppend += '<td>'+workouts[workout]["percentage"]+'</td></tr>';
+                            toAppend += '</table>';
+
+                            
+                            toAppend += '<br></div>';
+                            
+                        }
+                        else{
+
+                        }
+                       
+                    }
+                    if (writeOut === false){
+                        toAppend +='<div style="background-color:white">' 
+                        toAppend += '<p style="color:#ff6666">Rest day.</p>';
+                        toAppend += '</div>';
+                    }
+                    console.log(count);
+                    count = count+1;
+                }
+            
+        }
+     toAppend+='<div style="width:100%"><a href="javascript:updateModalProgramAdd('+programId+','+"'"+name+"'"+');" style="width:60px; margin-bottom: 4px; z-index:10; background-color: #77b2c9;color:white" class="btn btn-default btn-circle-main"><i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i></a></div>';
+     toAppend+='<br><h2><i onclick="displayLeftSearchContainer()" class="fa fa-arrow-left"></i></h2>';
+    $('#rightResultsContent').empty();
+    $('#rightResultsContent').append(toAppend);
+    
+    $("#rightResultsContainer").css({"width": "100%","display":"block"});
+    $("#leftResultsContainer").css({"width": "0px", "overflow": "hidden","display":"none"});
+
+    
+}
+
+function updateModalProgramAdd(pId,programNam){
+    $('#addModal').modal('hide');
+
+    $("#myModalLabelWorkoutAdd").empty();
+    $("#myModalLabelWorkoutAdd").append("Add " + programNam + " To:");
+    
+    $("#modalWorkoutAddTo").empty();
+    
+    var tempString="'#basicModalAddWorkout'";
+    var calanderData=[pId,tempString];
+    
+    var toAppend ='';
+     toAppend += '<h3 onclick='+'"addProgramToDiary('+pId+')"><i class="fa fa-book"></i>Current Day</h3>'+
+                            '<p style="color:#77b2c9">or</p>'+
+                            '<h3 onclick="calanderModal(['+calanderData+'])"><i class="fa fa-calendar"></i>Select Day</h3>';
+    $("#modalWorkoutAddTo").append(toAppend);
+    var options = {
+    "backdrop" : "static",
+    "show":"true"};
+    $('#basicModalAddWorkout').modal(options);
+}
+
+function addProgramToDiary(inputID){
+    messageModal('#basicModalAddWorkout');
+    try{
+        console.log(mlpObject.addResults({programid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result);
+    }
+    catch(e){
+        
+    }
+    
+}
+
+function calanderModal(data){
+    var caller=data[1];
+    var inputID=data[0];
+    $(caller).modal('hide');
+    
+    
+    var buttons= '<hr>'+
+                 '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+
+                 '<button type="button" onclick="addExerciseCalanderModal('+inputID+')" class="btn btn-primary">Confirm</button>'+
+                 '<br><br>';
+    
+    $('#calanderModalButtons').empty();
+    $('#calanderModalButtons').append(buttons);
+    
+    
+    var options = {
+    "backdrop" : "true",
+    "show":"true"};
+    $('#calanderModal').modal(options);
+    
+    $('#date-Picker2').datepicker({
+        format: "dd/mm/yyyy",
+        orientation: "top",
+        keyboardNavigation: false,
+        calendarWeeks: true,
+        todayHighlight: true,
+        gotoCurrent: true
+        }).datepicker("setDate", new Date());
+}
+
+function addExerciseCalanderModal(inputID){
+    
+    var date = $("#date-Picker2").datepicker('getDate').getDate();                 
+    var month = $("#date-Picker2").datepicker('getDate').getMonth();             
+    var year = $("#date-Picker2").datepicker('getDate').getFullYear();
+    var tdate=year+"-"+(month+1)+"-"+date;
+    
+    try{
+        console.log(mlpObject.addResults({workoutid:inputID, assigneddate:tdate}).result);
+    }
+    catch(e){
+        
+    }
+    messageModal('#calanderModal');
+    
+}
+
+function messageModal(caller){
+    $("#messageModalBody").empty();
+    
+    if(caller== '#basicModalAddEx'){
+        $("#messageModalBody").append('<img class="" src="images/loader.GIF" alt="Loading"><h3>Adding To Current Day</h3>');
+    }
+    else if(caller == '#calanderModal'){
+        $("#messageModalBody").append('<img class="" src="images/loader.GIF" alt="Loading"><h3>Adding To Selected Day</h3>');
+    }
+    else{ $("#messageModalBody").append('<img class="" src="images/loader.GIF" alt="Loading"><h3>Completing Action</h3>'); }
+    
+
+    $(caller).modal('hide');
+    
+    var options = {
+    "backdrop" : "true",
+    "show":"true"};
+    $('#messageModal').modal(options);
+    
+    
+    setTimeout(function(){
+
+        $("#messageModal").modal('hide');
+     }, 2000);
+
+        
 }

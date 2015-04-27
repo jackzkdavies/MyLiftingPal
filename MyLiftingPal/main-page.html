@@ -201,6 +201,52 @@
                     </div>
               </div>
             </div>
+          <div class="modal fade" id="calanderModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                        <h4 class="modal-title" id="myModalLabelExerciseAdd">Select Date</h4>
+                        </div>
+                        <div class="modal-body" id="calanderModalBody" >
+                            <div class="calender"  id="date-Picker2" onClick="setVarDate()"></div>
+                            
+                        </div>
+                        <div class="modal-footer" id="calanderModalButtons">
+
+                        </div>
+                    </div>
+              </div>
+            </div>
+          
+                      <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body" id="messageModalBody"></div>
+                    </div>
+              </div>
+            </div>
+          
+                      <div class="modal fade" id="basicModalAddWorkout" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                        <h4 class="modal-title" id="myModalLabelWorkoutAdd">Add to</h4>
+                        </div>
+                        
+                        <div class="modal-body" id="modalWorkoutAddTo">
+                            <h3><i class="fa fa-book"></i>Current Day</h3>
+                            <p style="color:#77b2c9">or</p>
+                            <h3><i class="fa fa-calendar"></i>Select Day</h3>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+            
           
             <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                 <div class="modal-dialog">
@@ -265,6 +311,30 @@
                           
                       </tbody>
                   </table>
+                    
+                    <p id='failedProgramSearch'></p>
+                  <div id="outerResultsContainer" style=";width: 100%;background-color: ;float:left">
+                        <div id="leftResultsContainer" style="height:100%;width: 100%;float:left;background-color:">
+                            <table id='programSearchTable' style='display: none; text-align:left; text-shadow: 0px 0px rgba(255, 255, 255, 0);'>
+                                <thead>
+                                    <tr>
+                                        <td style='color:black; font-weight: bold;text-align: center'>Name</td>
+                                    </tr>
+                                </thead>
+                                <tbody id ="searchResultsProgram">
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div id="rightResultsContainer" style="height:100%;width: 0%;float:left;background-color: ">
+                            <p id="rightSearchResultsName"></p>
+                            <div id='rightResultsContent'></div>
+
+                        </div>
+                      
+                  </div>
+                    
                 </div>
                 
 

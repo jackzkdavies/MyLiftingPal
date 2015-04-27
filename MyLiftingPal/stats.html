@@ -29,18 +29,20 @@
   <script type="text/javascript" src="js/modernizr.js"></script>
   <script type="text/javascript" src="js/jquery.cookie.js"></script>
   <script type="text/javascript" src="js/mlp.js"></script>
-  <script type="text/javascript" src="js/MLP-Settings.js"></script>
+  <script type="text/javascript" src="js/MLP-DiaryPage.js"></script>
   <script type="text/javascript" src="js/webflow.js"></script>
   <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/jquery.dataTables.js"></script>
+  <script type="text/javascript" src="js/stopwatch.js"></script>
+  <script type="text/javascript" src="js/1rmcalc.js"></script>
   
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
   <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
 </head>
-<body id='page-top'  class="plainbodybackground">
-  <div class="w-row">
-    <div class="w-col w-col-9 w-col-stack">
+<body id='page-top' class="plainbodybackground" onload="showStopwatch();">
+  <div class="w-row" >
+    <div  class="w-col w-col-9 w-col-stack">
         
     <!-- Navigation -->
 
@@ -75,7 +77,7 @@
         <div style='width: 100%; text-align: center; float:left'>
             <div style='width: 14%; float:left; padding-top: 12px;'><i onclick="$('#bottomNavCalc').slideToggle();$('#bottomNavStopwatch').hide();$('#bottomNavNotifications').hide();" style="color:#333; font-size: 20px" class="fa fa-calculator"></i></div>
             <div style='width: 14%; float:left; padding-top: 11px;'><img onclick="$('#bottomNavStopwatch').slideToggle();$('#bottomNavCalc').hide();$('#bottomNavNotifications').hide();" style="height: 24px; margin-top: 0px" src="images/stopwatch.png" alt="STOPWATCH" ></div>
-            <div style='width: 44%; float:left'><h4>My Settings</h4></div>
+            <div style='width: 44%; float:left'><h4>My Stats</h4></div>
             <div style='width: 14%; float:left; padding-top: 12px;'><p id="numNot"></p><i onclick="$('#bottomNavNotifications').slideToggle();$('#bottomNavStopwatch').hide();$('#bottomNavCalc').hide();" style="color:#333; font-size: 20px" class="fa fa-inbox"></i></div>
             <div style='width: 14%; float:left; padding-top: 9px;'><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <i style="color:#333; font-size: 20px" class="fa fa-bars"></i>
@@ -102,7 +104,7 @@
     <nav id='bottomNavNotifications' class="navbar navbar-default navbar-fixed-bottom" style="display:none; background-color: rgb(226, 218, 203);">
         <br>
         <div class="container">
-        <p style='font-weight: bold;'>Inbox <button type="button" class="close" onclick="$('#bottomNavCalc').hide();"  aria-hidden="true"><i class="fa fa-times"></i></button><p>
+        <p style='font-weight: bold;'>Inbox <button type="button" class="close" onclick="$('#bottomNavNotifications').hide();"  aria-hidden="true"><i class="fa fa-times"></i></button><p>
         <div id="inboxNotifications"></div>
         <br>
         </div>
@@ -126,138 +128,59 @@
         </div>
     </nav>
     <br><br><br>
-        
-        <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-                    <h4 class="modal-title" id="changePasswordModalLabel">Change Password</h4>
-                    </div>
-                    <div class="modal-body" id="changePasswordModalBody" >
-                        <p id='newPwMessage'></p>
-                        <form>
-                        <div class="form-group">
-                            <input type="password" id='oldPw' class="form-control new-password-current" placeholder="Current Password" required="">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" id='newPw1' class="form-control new-password" placeholder="New Password" required="">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" id='newPw2' class="form-control new-password-repeat" placeholder="Re-enter New Password" required="">
-                        </div>            
-                            <hr>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="button" onclick='updatePassword();' class="btn btn-primary password-change">Change</button>
-                        </form>
-                    </div>
-                </div>
-          </div>
-        </div>
-        
-        <div class="modal fade" id="changeEmailModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-                    <h4 class="modal-title" id="changeEmailModalLabel">Change Email</h4>
-                    </div>
-                    <div class="modal-body" id="changeEmailModalBody" >
-                        <p id='newEmailMessage'></p>
-                        <form>
-                        <div class="form-group">
-                            <input type="password" id='emailPassword' class="form-control new-password-current" placeholder="Enter Password" required="">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id='newEmail1' class="form-control new-password" placeholder="New Email" required="">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id='newEmail2' class="form-control new-password-repeat" placeholder="Re-enter New Email" required="">
-                        </div>            
-                            <hr>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="button" onclick='updateEmail();' class="btn btn-primary password-change">Change</button>
-                        </form>
-                    </div>
-                </div>
-          </div>
-        </div>
-        
-        <div class="modal fade" id="changeEmailPrefModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-                    <h4 class="modal-title" id="changeEmailPrefModalLabel">Change Email Preferences </h4>
-                    </div>
-                    <div class="modal-body" id="changeEmailPrefModalBody" >
-                        <p id='newEmailPrefMessage'></p>
-                        <p>Receive Email Updates</p>
-                        <select id='emailPref'>
-                            <option value="1">On</option>
-                            <option value="0">Off</option>
-                        </select>           
-                        <hr>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="button" onclick='updateEmailPref();' class="btn btn-primary password-change">Change</button>
-                        
-                    </div>
-                </div>
-          </div>
-        </div>
-        
-                <div class="modal fade" id="changeUnitPrefModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-                    <h4 class="modal-title" id="changeUniyPrefModalLabel">Change Unit Preferences </h4>
-                    </div>
-                    <div class="modal-body" id="changeUnitPrefModalBody" >
-                        <p id='newUnitPrefMessage'></p>
-                        <p>Set working units</p>
-                        <select id='unitPref'>
-                            <option value="kg">kg</option>
-                            <option value="lbs">lbs</option>
-                            <option value="swg">swags</option>
-                        </select>           
-                        <hr>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="button" onclick='updateUnitPref();' class="btn btn-primary password-change">Change</button>
-                        
-                    </div>
-                </div>
-          </div>
-        </div>
-        
-        
-        <h4 class="myDiary">My Settings</h4>
-        
 
-        <div class="w-clearfix">
-            <div class='settingsPage'>
-            <p onclick='changePassword()'>Change password<p>
-            <p onclick='changeEmail()'>Change Email address<p>
-            <p onclick='changeEmailPref()'>Update Email Preferences<p>
-            <p onclick='changeUnitPref()'>Change Units<p>
-            </div>
-        </div>
         
+        <p id="date" onClick="slideToggleCalender()">  </p>      
+      
+            
+        <div class="calender"  id="date-Picker" style="display: none;" onClick="setVarDate()">
+        <script>
+            $('#date-Picker').datepicker({
+            format: "dd/mm/yyyy",
+            orientation: "top",
+            keyboardNavigation: false,
+            calendarWeeks: true,
+            todayHighlight: true,
+            gotoCurrent: true
+            }).datepicker("setDate", new Date());
+            
+            
+            
+            var days= ["Sunday","Monday","Tuesday","Wednesday", "Thursday","Friday","Saturday"]; 
+            var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
+            var monthPrefix = ["st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"];
+            
+            var day = $("#date-Picker").datepicker('getDate').getDay();
+            var date = $("#date-Picker").datepicker('getDate').getDate();                 
+            var month = $("#date-Picker").datepicker('getDate').getMonth();             
+            var year = $("#date-Picker").datepicker('getDate').getFullYear();
+            var fullDate = days[day] + ", " + date +monthPrefix[date-1]+ " " + months[month]+", "+year;
+            
+//            document.getElementById("date").innerHTML = "<span style='color:#77b2c9'> <i class='fa fa-caret-left'></i> </span> " + fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-right'></i></span>";
+              document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-down'></i></span>";
+        </script>
+        </div>
+
+        <br>
+        <i style="font-size:40px" class="fa fa-line-chart" onclick="slideToggleCalender()"></i>    
         <hr>
+      <div class="statsdiv">
+          <br>
+
+          
+          <p>Stats page for mobile isn't ready just yet :( HOWEVER, you can still check your statistics out online at <a style='color:blue' href="http://www.myliftingpal.net">www.myliftingpal.net</a>.</p>
+          
+
+            <!--temp fix for divs not ending somewhere in js.-->
+            </div></div></div>
+            <!--end of temp fix-->
+            <br><br>
+
+            <br>
+      </div>
+        <br><br>        <hr>
         <p><a style="color:#333" href="terms.html">Terms</a> | <a style="color:#333" href="privacy.html">Privacy</a> | <a style="color:#333" href="contact.html">Contact Us</a> | <a style="color:#333" href="http://www.myliftingpal.net/track/#api">API</a></p>
         <hr> 
-        
-                <!--temp fix for divs not ending somewhere in js.-->
-        </div></div></div>
-        <!--end of temp fix-->
-        <div class='returnButton'>       
-            <a href="main-page.html" id="mainPageAddButton" class="btn btn-default btn-circle-main rigthFloatingButton">
-                <i class="fa fa-book fa-2x" style="line-height: 1.9 !important; margin-top: -2px; margin-right: -1px;"></i>
-            </a>
-        </div>
-
-      </div>
-       
         <div class="share-text">Share with your friends:&nbsp;</div>
       <div class="w-clearfix social-widget-wrapper">
         <div class="w-widget w-widget-twitter social-widget">
@@ -267,7 +190,7 @@
           <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Ffacebook.com%2Fwebflow&amp;layout=button_count&amp;locale=en_US&amp;action=like&amp;show_faces=false&amp;share=false" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 90px; height: 20px;"></iframe>
         </div>
       </div>
-        <br><br><br><br><br><br>
+    </div>
 
   </div>
   <div class="color-section">
@@ -281,14 +204,14 @@
     <script>    
         window.onload = function load(){
             checkLoginStatus();
+            checkResults();
             checkNotifications();
-
             
         };
         
         function doOnOrientationChange()
         {
-            
+            centerCalander();
             switch(window.orientation) 
             {  
               case -90:
@@ -322,6 +245,25 @@
             }, 50);
         });
         
+        $('.inputLimit12').focus(function () {
+            var $this = $(this);
+
+            t = setInterval(
+
+            function () {
+                if (($this.val() < 1 || $this.val() > 12) && $this.val().length != 0) {
+                    if ($this.val() < 1) {
+                        $this.val(1);
+                    }
+
+                    if ($this.val() > 12) {
+                        $this.val(12);
+                    }
+
+                }
+            }, 50);
+        });
+        
         $('.inputLimit100').focus(function () {
             var $this = $(this);
 
@@ -346,11 +288,14 @@
         // Initial execution if needed
         doOnOrientationChange();
         
-                $(window).scroll(function() {
+        //code for nav
+        $(window).scroll(function() {
           if ($(document).scrollTop() > 100) {
-            $('#logoHeader').css({"margin-top":"-50px"});;
+            $('#logoHeader').css({"margin-top":"-50px"});
+            $('#MLPlogo').css({"display":"none"});;
           } else {
-            $('#logoHeader').css({"margin-top":"0px"});;
+            $('#logoHeader').css({"margin-top":"0px"});
+            $('#MLPlogo').css({"display":"visible"});;
           }
         });
     

@@ -760,8 +760,7 @@ function deleteWorkout(wId){
     displayMyPrograms();
 }
 
-function updateModalProgramAdd(pId,programNam)
-{
+function updateModalProgramAdd(pId,programNam){
 
     $("#myModalLabelWorkoutAdd").empty();
     $("#myModalLabelWorkoutAdd").append("Add " + programNam + " To:");
@@ -1075,4 +1074,34 @@ function checkNotifications(){
             $('#inboxNotifications').append("Friend Request from: <h5 onclick='viewFriend("+notifications[request]['userid']+")'>"+notifications[request]['username']+"</h5>");
         }
     }
+}
+
+function calanderModal(data){
+    var caller=data[1];
+    var inputID=data[0];
+    $(caller).modal('hide');
+    
+    
+    var buttons= '<hr>'+
+                 '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+
+                 '<button type="button" onclick="addExerciseCalanderModal('+inputID+')" class="btn btn-primary">Confirm</button>'+
+                 '<br><br>';
+    
+    $('#calanderModalButtons').empty();
+    $('#calanderModalButtons').append(buttons);
+    
+    
+    var options = {
+    "backdrop" : "true",
+    "show":"true"};
+    $('#calanderModal').modal(options);
+    
+    $('#date-Picker2').datepicker({
+        format: "dd/mm/yyyy",
+        orientation: "top",
+        keyboardNavigation: false,
+        calendarWeeks: true,
+        todayHighlight: true,
+        gotoCurrent: true
+        }).datepicker("setDate", new Date());
 }
