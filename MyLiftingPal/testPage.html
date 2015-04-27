@@ -37,7 +37,9 @@
   <script type="text/javascript" src="js/stopwatch.js"></script>
   <script type="text/javascript" src="js/1rmcalc.js"></script>
   
+  
   <script type="text/javascript" src="js/cordova.js"></script>
+  <script type="text/javascript" src="js/require.js"></script>
   <script type="text/javascript" src="js/SocialSharing.js"></script>
   
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
@@ -67,7 +69,6 @@
                   <h5>  <a  href="create-workout.html"><i class="fa fa-child"></i> My Workouts</a></h5>
                   <h5>  <a  href="create-program.html"><i class="fa fa-calendar"></i> My Programs</a></h5>
                   <h5>  <a href="stats.html"><i class="fa fa-line-chart"></i> My Stats</a></h5>
-                  <h5>  <a href="testPage.html"><i class="fa fa-line-chart"></i>TEST</a></h5>
                 
                 </div>
                 <br>
@@ -170,6 +171,23 @@
         <br>
         <i style="font-size:40px" class="fa fa-book" onclick="slideToggleCalender()"></i>    
       <div class="exersicediv">
+          <br><br><br><br><br>
+          <a href='javascript:tester()'>test</a>
+          
+          <button onclick="window.plugins.socialsharing.canShareVia('com.apple.social.facebook', 'msg', null, null, null, function(e){alert(e)}, function(e){alert(e)})">is facebook available on iOS?</button>
+          <script>
+              function tester(){
+                  console.log("test");
+            window.plugins.socialsharing.shareViaFacebook('Message',
+                    subject,
+                    file,
+                    url,
+                  [successCallback], // e.g. function(result) {console.log('result: ' + result)}
+                  [errorCallback]    // e.g. function(result) {alert('error: ' + result);
+            );}
+        </script>
+          
+          
         <div class="w-clearfix exerciseinfotable">
           <div class="exerciseNameDiv">
               <br><h5>Exercise</h5>
