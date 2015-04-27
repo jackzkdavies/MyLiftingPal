@@ -11,9 +11,8 @@
         <preference name="Orientation" value="landscape" />
 		<preference name="permissions" value="none" />
         <icon src="images/mlpicon.png" />
-    </widget>
-	
-	<!-- Social Sharing -->
+		
+			<!-- Social Sharing -->
 	<!-- for iOS -->
 <feature name="SocialSharing">
   <param name="ios-package" value="SocialSharing" />
@@ -31,3 +30,6 @@
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 <gap:plugin name="nl.x-services.plugins.socialsharing" source="plugins.cordova.io" />
+		
+    </widget>
+	
