@@ -1,35 +1,25 @@
-<widget id="com.myliftingpal" version="2.1.0">
-        <name>MyLiftingPal</name>
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns   = "http://www.w3.org/ns/widgets"
+    xmlns:gap   = "http://phonegap.com/ns/1.0"
+    id          = "com.myliftingpal"
+    versionCode = "10"
+    version     = "1.0.0" >
+
+    <!-- versionCode is optional and Android only -->
+
+	<name>MyLiftingPal</name>
         <description>
             An app used to track your lifting in the gym.
         </description>
         <author email="support@myliftingpal.net" href="http://www.myliftingpal.net">
             MyLiftingPal
         </author>
-        <content src="index.html" />
-        <access origin="*" />
-        <preference name="Orientation" value="landscape" />
-		<preference name="permissions" value="none" />
-        <icon src="images/mlpicon.png" />
 		
-			<!-- Social Sharing -->
-	<!-- for iOS -->
-<feature name="SocialSharing">
-  <param name="ios-package" value="SocialSharing" />
-</feature>
+		<feature name="SocialSharing">
+			<param name="android-package" value="nl.xservices.plugins.SocialSharing" />
+		</feature>
 
-<!-- for Android (you will find one in res/xml) -->
-<feature name="SocialSharing">
-  <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
-</feature>
 
-<feature name="SocialSharing">
-  <param name="wp-package" value="SocialSharing"/>
-</feature>
+	<gap:plugin name="nl.x-services.plugins.socialsharing" source="plugins.cordova.io" />
+</widget>
 
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-<gap:plugin name="nl.x-services.plugins.socialsharing" source="plugins.cordova.io" />
-		
-    </widget>
-	
