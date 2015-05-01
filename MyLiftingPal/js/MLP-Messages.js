@@ -1,9 +1,6 @@
 //Create MLP object
 var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
 
-var retrievedObject = localStorage.getItem('user');
-console.log('retrievedObject: ', JSON.parse(retrievedObject));
-
 //Global Variables 
 var user = mlpObject.getUser().result;
 var day ;

@@ -1,156 +1,41 @@
 <!DOCTYPE html>
-<!-- This site was created in Webflow. http://www.webflow.com-->
-<!-- Last Published: Sun Dec 14 2014 22:12:09 GMT+0000 (UTC) -->
 <html data-wf-site="54697ee94e26f780049e790b" data-wf-page="54697ee94e26f780049e790d">
 <head>
-  <meta charset="utf-8">
-  <title>My Lifting Pal - Home</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-  <meta name="generator" content="Webflow">
-  <link rel="stylesheet" type="text/css" href="css/normalize.css">
-  <link rel="stylesheet" type="text/css" href="css/webflow.css">
-  <link rel="stylesheet" type="text/css" href="css/myliftingpal.webflow.css">
-  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
-  <script>
-    WebFont.load({
-      google: {
-        families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic","Lily Script One:regular"]
-      }
-    });    
-  </script>
-  
-  
-  <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
-  <script type="text/javascript" src="js/bootstrap.js"></script>
-  <script type="text/javascript" src="js/modernizr.js"></script>
-  <script type="text/javascript" src="js/jquery.cookie.js"></script>
-  <script type="text/javascript" src="js/mlp.js"></script>
-  <script type="text/javascript" src="js/MLP-Login.js"></script>
-  <script type="text/javascript" src="js/webflow.js"></script>
-  
-  <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
-  <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
+    <meta charset="utf-8">
+    <title>My Lifting Pal - Login/Sign up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/webflow.css">
+    <link rel="stylesheet" type="text/css" href="css/myliftingpal.webflow.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+
+    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/modernizr.js"></script>
+    
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/mlp.js"></script>
+    <script type="text/javascript" src="js/MLP-Login.js"></script>
+    <script type="text/javascript" src="js/webflow.js"></script>
+    <script type="text/javascript" src="js/MLP-LocalVariables.js"></script>
+
 </head>
-<body>
+<body style="background-image:url('../images/login-bg.jpg')">
   <div class="w-container">
     <div class="w-row">
-      <img class="logoimage" src="images/testLogo.jpg" alt="My Lifting Pal">
-      <div  class="w-col w-col-8 w-clearfix"> 
-          
-          
-          
-            <script>
-          // This is called with the results from from FB.getLoginStatus().
-          function statusChangeCallback(response) {
-            console.log('statusChangeCallback');
-            console.log(response);
-            // The response object is returned with a status field that lets the
-            // app know the current login status of the person.
-            // Full docs on the response object can be found in the documentation
-            // for FB.getLoginStatus().
-            if (response.status === 'connected') {
-              // Logged into your app and Facebook.
-              testAPI();
-            } else if (response.status === 'not_authorized') {
-              // The person is logged into Facebook, but not your app.
-              document.getElementById('status').innerHTML = 'Please log ' +
-                'into this app.';
-            } else {
-              // The person is not logged into Facebook, so we're not sure if
-              // they are logged into this app or not.
-              document.getElementById('status').innerHTML = 'Please log ' +
-                'into Facebook.';
-            }
-          }
-
-          // This function is called when someone finishes with the Login
-          // Button.  See the onlogin handler attached to it in the sample
-          // code below.
-          function checkLoginState() {
-            FB.getLoginStatus(function(response) {
-              statusChangeCallback(response);
-            });
-          }
-
-          window.fbAsyncInit = function() {
-          FB.init({
-            appId      : '1538067003114411',
-            cookie     : true,  // enable cookies to allow the server to access 
-                                // the session
-            xfbml      : true,  // parse social plugins on this page
-            version    : 'v2.2' // use version 2.2
-          });
-
-          // Now that we've initialized the JavaScript SDK, we call 
-          // FB.getLoginStatus().  This function gets the state of the
-          // person visiting this page and can return one of three states to
-          // the callback you provide.  They can be:
-          //
-          // 1. Logged into your app ('connected')
-          // 2. Logged into Facebook, but not your app ('not_authorized')
-          // 3. Not logged into Facebook and can't tell if they are logged into
-          //    your app or not.
-          //
-          // These three cases are handled in the callback function.
-
-          FB.getLoginStatus(function(response) {
-            statusChangeCallback(response);
-          });
-
-          };
-
-          // Load the SDK asynchronously
-          (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-          }(document, 'script', 'facebook-jssdk'));
-
-          // Here we run a very simple test of the Graph API after login is
-          // successful.  See statusChangeCallback() for when this call is made.
-          function testAPI() {
-            console.log('Welcome!  Fetching your information.... ');
-            FB.api('/me', function(response) {
-              console.log('Successful login for: ' + response.name);
-              document.getElementById('status').innerHTML =
-                'Thanks for logging in, ' + response.name + '!';
-            });
-          }
-        </script>
-
-<!--
-  Below we include the Login Button social plugin. This button uses
-  the JavaScript SDK to present a graphical Login button that triggers
-  the FB.login() function when clicked.
--->
-
-<!--<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>-->
-
-<div id="status">
-</div>
-          
-          
-          
-          
-          
-        <!--<p class="subtitle">The new way to accomplish your goals and get ahead in life. Don’t look at, be looked at.&nbsp;&nbsp;</p>-->
-<!--        <p class="subtitle"><font color="#333">The resistance that you fight physically in the gym and the resistance that you fight in life can only build a strong character.
-            </font><span style="text-align: right;">-Arnold Schwarzenegger&nbsp;&nbsp;</span></p>-->
-        <br>
-        <div id="whiteBackground">
-        <h4 >Login or <a href="javascript:toggleForms();" style="color:#77b2c9" > Sign up <i class="fa fa-users"></i></a></h4>
-        <br>
-        <img class="thirdpartybutton" src="images/fb.png" alt="fb">
-        <!--<img class="thirdpartybutton" src="images/twitter.png" alt="twitter">-->
+      <div  class="w-col w-col-8 w-clearfix" > <img src="../images/mlplogo.png" alt="" style="background-color: rgba(1,1,1,0.1);  width: 90%;padding-left: 10px;
+  background-color: rgba(119, 178, 201, 1);">
+        <h4 ><a href="javascript:toggleForms();" style="color:#77b2c9; text-decoration: underline" > Sign up <i class="fa fa-users"></i></a></h4>
         
+        <br>
+        
+        <img class="thirdpartybutton" src="images/fb.png" alt="fb">
         <img class="thirdpartybutton" src="images/google.png" alt="google">
         
-        <hr>
+        
+        
         <p style="margin-top: -5px" >or</p>
+        <h4>Login</h4>
         <div class="w-form signin-form" id="signindiv" style="display: block;">
           <form class="w-clearfix" name="wf-form-signup-form" data-name="Signup Form" data-redirect="/main-page">
             <p class ="invalidinput" id="usernameNotFound"></p>
@@ -165,37 +50,21 @@
         </div>
         
         <div class="w-form sign-up-form" id="signupdiv" style="display: none;" >
-          <form class="w-clearfix" name="wf-form-signup-form" data-name="Signup Form">
-            <p class ="invalidinput" id="invalidemailresponse"></p>
-            <input class="w-input field feild2" id="email" type="email" placeholder="Enter your email adress" name="email" required="required" data-name="email" >
-            <p class ="invalidinput" id="invalidusernameresponse"></p>
-            <input class="w-input field feild2" id="username" type="text" placeholder="Select username" name="username" required="required" data-name="username" onclick="checkEmailaddress(); return false;">
-            <p class ="invalidinput" id="invalidpasswordmatch"></p>
-            <input class="w-input field feild2" id="password" type="password" placeholder="Select your Password" name="password" required="required" data-name="password" onclick="checkEmailaddress(); return false;">
-            <input class="w-input field" id="passwordconfirm" type="password" placeholder="Re-enter your password" name="passwordconfirm" data-name="passwordconfirm" required="required" onclick="checkEmailaddress(); return false;" onkeyup="checkPassword(); return false;">
-            <a class="w-button button" href="javascript: submitSignUpForm()">sign up</a>
-          </form>
-          
-          
-          <a class="button backbutton" href="javascript: toggleForms()">return</a>
+            <form class="w-clearfix" name="wf-form-signup-form" data-name="Signup Form">
+                <p class ="invalidinput" id="invalidemailresponse"></p>
+                <input class="w-input field feild2" id="email" type="email" placeholder="Enter your email adress" name="email" required="required" data-name="email" >
+                <p class ="invalidinput" id="invalidusernameresponse"></p>
+                <input class="w-input field feild2" id="username" type="text" placeholder="Select username" name="username" required="required" data-name="username" onclick="checkEmailaddress(); return false;">
+                <p class ="invalidinput" id="invalidpasswordmatch"></p>
+                <input class="w-input field feild2" id="password" name="signuppw1" type="password" placeholder="Select your Password" name="password" required="required" data-name="password" onclick="checkEmailaddress(); return false;">
+                <input class="w-input field" id="passwordconfirm" type="password" placeholder="Re-enter your password" name="passwordconfirm" data-name="passwordconfirm" required="required" onclick="checkEmailaddress(); return false;" onkeyup="checkPassword(); return false;">
+                <a class="w-button button" href="javascript: submitSignUpForm()">sign up</a>
+            </form>
+
+
+            <a class="button backbutton" href="javascript: toggleForms()">return</a>
         </div>
-        <br>
-        </div>
-        
-<!--        <div id="successSignUp" class="whiteBackground" style="display: none;"><h2><font color="#2da1cf">Thank you for joining</font> MyLiftingPal!</h2></div>
-          
-        <div  class="share-text"><h3> <font color="#2da1cf">Share with your friends:&nbsp;</font></h3></div>
-        <div class="w-clearfix social-widget-wrapper whiteBackground">
-          <div class="w-widget w-widget-twitter social-widget">
-            <iframe src="http://platform.twitter.com/widgets/tweet_button.html#url=http%3A%2F%2Fwebflow.com&amp;counturl=webflow.com&amp;text=Check%20out%20this%20site&amp;count=horizontal&amp;size=m&amp;dnt=true" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 110px; height: 20px;"></iframe>
-          </div>
-          <div class="w-widget w-widget-facebook social-widget">
-            <iframe src="http://www.facebook.com/plugins/like.php?href=https%3A%2F%2Ffacebook.com%2Fwebflow&amp;layout=button_count&amp;locale=en_US&amp;action=like&amp;show_faces=false&amp;share=false" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 90px; height: 20px;"></iframe>
-          </div>
-        </div>-->
-        
-        
-<br>
+        <br><br>
         
       </div>
 <!--      <div class="w-col w-col-4 image-column"><img class="adhomepage" src="images/fakead.png" alt="5469870d5294c14035d7ed9f_fakead.png">
