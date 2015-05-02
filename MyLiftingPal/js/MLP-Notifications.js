@@ -21,15 +21,15 @@ function checkNotifications(){
 
             if(numberNotifications > 99){
                 $('#numNot').append('99+');
-                $('#notifcationsHeader').innerHtml('Inbox(99+)');
+                $('#notifcationsHeader').innerHTML='Inbox(99+)';
                 
             }
             else{
                 $('#numNot').append(numberNotifications);
-                $('#notifcationsHeader').innerHtml('Inbox('+numberNotifications+')');
+                $('#notifcationsHeader').innerHTML='Inbox('+numberNotifications+')';
             }
             
-            $('#notifcationsFriendRequest').append("<h5 onclick='viewFriend("+notifications[request]['userid']+")'>"+notifications[request]['username']+"</h5>");
+            $('#notifcationsFriendRequest').append("<p >"+notifications[request]['username']+"<i onclick='viewFriend("+notifications[request]['userid']+")'class='fa fa-user'></i> <i class='fa fa-check'></i> <i class='fa fa-times'></i></p>");
         }
     }
 }

@@ -1,7 +1,5 @@
-
 try{
     var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
-    window.localStorage.setItem("mlp", JSON.stringify(mlpObject));
 }
 
 catch(e){
@@ -125,10 +123,10 @@ function submitSignUpForm(){
 
 function checkLoginStatus(){
     var user = JSON.parse(localStorage.getItem('user'));
-
     var locationTest = [(window.location.pathname).toLocaleString(), "/index.html"];
-
-    if (typeof user != undefined){
+    
+    console.log(user);
+    if (user['success'] == true){
         if(locationTest[0].indexOf('index') > -1){
             window.location.replace("main-page.html"); 
         }

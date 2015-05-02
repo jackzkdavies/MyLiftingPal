@@ -1,66 +1,62 @@
-//Create MLP object
+//          MLP
+//          Jack Z K Davies 2014 copywrite
+//          www.thesoftengineer.com
+
 var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
+var user = JSON.parse(localStorage.getItem('user'));
+var notifications = user['data']['requests'];
+var displayUnits  = user['data']['units'];
 
-var retrievedObject = localStorage.getItem('user');
-console.log('retrievedObject: ', JSON.parse(retrievedObject));
-
-//Global Variables 
-var user = mlpObject.getUser().result;
 var day ;
 var date ;                 
 var month ;            
 var year ;
 var fullDate;
+
 var globalExerciseObjs; 
 var globalWorkoutObjs;
 var globalProgramObjs; 
+
 var firstMainPageAddClicked=false;
-var toggleSpeed = window.localStorage.getItem("toggleSpeed");
-var notifications = user['data']['requests'];
-toggleSpeed=0;
 var submitDairySearchClass= 'e';
+
 var currentTotals={};
 
 window.localStorage.setItem("lastFriendView", null);
 //var displayUnits = window.localStorage.getItem("displayUnits");
-var displayUnits  = user['data']['units'];
-if (displayUnits === null){displayUnits = user['data']['units'];}
+
 var toggleList={};
 var recordsList={};
+var toggleSpeed=0;
 
 //Code section for checking login state
 function checkLoginStatus(){
-    var userData = mlpObject.getUser().result;
     var locationTest = [(window.location.pathname).toLocaleString(), "/index.html"];
-
-    if (userData["success"] === true){
+    if (user['success'] == true){
         if(locationTest[0].indexOf('index') > -1){
             window.location.replace("main-page.html"); 
         }
     }
-    
-    else if (userData['errormsg'].indexOf('You are already logged in as') > -1){
-        window.location.replace("main-page.html");
-    }
-            
     else{
 
-        if(locationTest[0].indexOf('index') < -1 )
+        if(locationTest[0].indexOf('index') < -1 ){
             window.location.replace("index.html");
-            
         }
+    }
 }
 
 function logout(){
     mlpObject.logout();
+    localStorage.clear();
     window.location.replace("index.html");
 }
 //Code section for date and calander 
+
+
+function setVarDate(){
     var days= ["Sunday","Monday","Tuesday","Wednesday", "Thursday","Friday","Saturday"]; 
     var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
     var monthPrefix = ["st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"];
-
-function setVarDate(){
 
     day = $("#date-Picker").datepicker('getDate').getDay();
     date = $("#date-Picker").datepicker('getDate').getDate();                 
@@ -68,8 +64,7 @@ function setVarDate(){
     year = $("#date-Picker").datepicker('getDate').getFullYear();
     fullDate = days[day] + ", " + date +monthPrefix[date-1]+ " " + months[month]+", "+year;
 
-//    document.getElementById("date").innerHTML = "<span style='color:#77b2c9'><i class='fa fa-caret-left'></i> </span> " + fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-right' onclick='dateScroll(1)'></i></span>";
-    if ($(".calender").is(':hidden')){
+     if ($(".calender").is(':hidden')){
         document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-down'></i></span>";
 
     }
@@ -77,59 +72,13 @@ function setVarDate(){
         document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-up'></i></span>";
 
     }
-    
     checkResults();
 }
-
-//function dateScroll(i){
-//    if(i >= 1){
-//        if(day < 6){day += 1;}else{day = 0;}
-//        date+= 1;
-//        var realDate = new Date(date, month - 1, year); 
-//        date+= 1;
-//        var fullDate = days[day] + ", " + date +monthPrefix[date-1]+ " " + months[month]+", "+year;
-//        
-//        $('#datePicker').datepicker('setDate', realDate);
-//        document.getElementById("date").innerHTML = "<span style='color:#77b2c9'><i class='fa fa-caret-left'></i> </span> " + fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-right'></i></span>";
-//        checkResults();
-//    }
-//    else{
-//        var realDate = new Date(day - 1, month - 1, year);
-//        date+= -1;
-//        var fullDate = days[day-1] + ", " + date +monthPrefix[date-1]+ " " + months[month]+", "+year;
-//        
-//        $('#datePicker').datepicker('setDate', realDate);
-//        document.getElementById("date").innerHTML = "<span style='color:#77b2c9'><i class='fa fa-caret-left'></i> </span> " + fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-right'></i></span>";
-//        checkResults();
-//    }
-//
-//
-////$('#datePicker').datepicker({ dateFormat: 'yy-mm-dd' }); // format to show
-//  
-//}
 
 
 function centerCalander(){
     var t = document.getElementById("date-Picker");
     t.style.backgroundColor="white";
-//    t.style.paddingLeft=0;
-//    var sw= screen.availWidth;
-//    var tw = $("div.calender table").width();
-//    var dpw = $("div.datepicker").width();
-//    if (tw !== 0){
-//            if(tw===217){
-//            t.style.paddingLeft= ((sw-tw)/2)-22+'px';
-//            t.style.backgroundColor="#77b2c9";
-//        }
-//        else{
-//            t.style.paddingLeft= ((sw-tw)/2)-25+'px';
-//            t.style.backgroundColor="#77b2c9";
-//        }
-//    }
-//    else{
-//        t.style.paddingLeft= ((sw-dpw)/2)-10+'px';
-//        t.style.backgroundColor="#77b2c9";
-//    }
 }
 
 //Code section for setting toggle states
@@ -668,23 +617,7 @@ function infoDataModal(data){
     $('#addModal').hide();
 }
 
-function checkNotifications(){
-    var numberNotifications= notifications.length;
-    if (notifications != null){
-        for (request in notifications){
-            console.log(notifications);
 
-            if(numberNotifications > 99){
-                $('#numNot').append('99+');
-            }
-            else{
-                $('#numNot').append(numberNotifications);
-            }
-            
-            $('#inboxNotifications').append("Friend Request from: <h5 onclick='viewFriend("+notifications[request]['userid']+")'>"+notifications[request]['username']+"</h5>");
-        }
-    }
-}
 function viewFriend(id){
     window.localStorage.setItem("lastFriendView", id);
     console.log(window.localStorage.getItem("lastFriendView"));
