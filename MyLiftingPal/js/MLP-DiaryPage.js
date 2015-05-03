@@ -3,6 +3,7 @@
 //          www.thesoftengineer.com
 
 var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
+if (mlpObject['result'] === []){mlpObject.login({username:user['data']['username'],password:JSON.parse(localStorage.getItem('p'))});}
 var user = JSON.parse(localStorage.getItem('user'));
 var notifications = user['data']['requests'];
 var displayUnits  = user['data']['units'];
@@ -63,7 +64,7 @@ function setVarDate(){
     month = $("#date-Picker").datepicker('getDate').getMonth();             
     year = $("#date-Picker").datepicker('getDate').getFullYear();
     fullDate = days[day] + ", " + date +monthPrefix[date-1]+ " " + months[month]+", "+year;
-
+    document.getElementById("headerDate").innerHTML =fullDate;
      if ($(".calender").is(':hidden')){
         document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-down'></i></span>";
 
@@ -150,6 +151,7 @@ function checkResults(){
     document.getElementById("noResults").innerHTML = "";
     try{
         var myDiaryResults = mlpObject.selectResults({assigneddate:year+"-"+(month+1)+"-"+date}).result;
+        console.log(mlpObject);
         if (myDiaryResults['success'] === false){
             document.getElementById("noResults").innerHTML = "Rest day is it?";
         }

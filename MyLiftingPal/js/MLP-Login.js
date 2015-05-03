@@ -25,6 +25,8 @@ function submitLoginForm(){
             try{
                 var user = mlpObject.getUser().result;
                 window.localStorage.setItem("user", JSON.stringify(user));
+                
+                window.localStorage.setItem("p", JSON.stringify(lPassword));
 
                 var notifications = user['data']['requests'];
                 window.localStorage.setItem("notifications", JSON.stringify(notifications));
@@ -41,7 +43,7 @@ function submitLoginForm(){
 
         if(mlpObject.result["success"] === false){            
             errormsg = 'usernameNotFound';
-            if (mlpObject.result["errormsg"] === "Password incorrect."){
+            if (mlpObject.result["errormsg"] === "Incorrect password ."){
                 errormsg = 'incorrectPassword';
             }
             else if (mlpObject.result["errormsg"].indexOf('You are already logged in as') > -1){
@@ -127,9 +129,7 @@ function checkLoginStatus(){
     
     console.log(user);
     if (user['success'] == true){
-        if(locationTest[0].indexOf('index') > -1){
             window.location.replace("main-page.html"); 
-        }
     }
     else{
 

@@ -1,15 +1,15 @@
-//Create MLP object
+//          MLP
+//          Jack Z K Davies 2014 copywrite
+//          www.thesoftengineer.com
 var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
-
-//User data
-var user = mlpObject.getUser().result;
+var user = JSON.parse(localStorage.getItem('user'));
 var notifications = user['data']['requests'];
 var displayUnits  = user['data']['units'];
 
 
 //Global Friend Variables 
 var userInfo = mlpObject.getUsers({id:window.localStorage.getItem("lastFriendView")}).result;
-
+console.log(userInfo);
 var yourFriends = userInfo['data']['acceptedfriends'];
 
 var userProfilePhoto = userInfo['data']['dp'];
@@ -18,7 +18,7 @@ var userEmail = userInfo['data']['email'];
 
 var username = userInfo['data']['username'];
 
-var id = userInfo['data']['id'];
+var id = userInfo['data'][0];
 
 //var dateCreated = userInfo['data']['created'];
 

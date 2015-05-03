@@ -87,12 +87,12 @@
             <div style='width: 14%; float:left; padding-top: 9px;'><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <i style="color:#333; font-size: 20px" class="fa fa-bars"></i>
                     </button></div>
-        </div>
+        </div >
 
         
-        <div>
-
-            
+        <div id='headerDateDiv'  style='display:none; width: 100%; text-align: center; float:left;  margin-top: -12px;  
+              border-bottom-style: solid;border-color: rgb(183, 182, 182); border-bottom-width: 1px;'> 
+            <p style="font-size: smaller;  margin-bottom: 1px;" id="headerDate"></p>
         </div>
     </nav>
     
@@ -163,6 +163,7 @@
             
 //            document.getElementById("date").innerHTML = "<span style='color:#77b2c9'> <i class='fa fa-caret-left'></i> </span> " + fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-right'></i></span>";
               document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-down'></i></span>";
+              document.getElementById("headerDate").innerHTML = fullDate;
         </script>
         </div>
 
@@ -215,12 +216,23 @@
                         <h4 class="modal-title" id="notifcationsHeader">Inbox</h4>
                         </div>
                         <div class="modal-body" id="notifcationsBody">
-                            <h5>Friend Request:</h5>
-                            <div id="notifcationsFriendRequest"></div>
+                            <h6>Friend Request:</h6>
+                            <div id="notifcationsFriendRequest">  
+                                <p>Empty.</p>
+                            </div>
+                            <br>
+                            <div>
+                                <h6>Received Templates:</h6>
+                                <p>Empty.</p>
+                            </div>
+                            <br><br>
+                            <div>
+                                 <button onclick="" type="button" class="btn btn-primary">Send Template:</button>
+                            </div>
                             
                         </div>
                         <div class="modal-footer" id='notifcationsFooter'>
-                            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="$('#addModal').show()">Close</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
                     </div>
                     </div>
               </div>
@@ -658,9 +670,13 @@
           if ($(document).scrollTop() > 100) {
             $('#logoHeader').css({"margin-top":"-50px"});
             $('#MLPlogo').css({"display":"none"});;
+            $('#headerDateDiv').css({"display":"block"});;
+            
+            
           } else {
             $('#logoHeader').css({"margin-top":"0px"});
-            $('#MLPlogo').css({"display":"visible"});;
+            $('#MLPlogo').css({"display":"block"});;
+            $('#headerDateDiv').css({"display":"none"});;
           }
         });
         

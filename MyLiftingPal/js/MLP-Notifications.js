@@ -16,20 +16,23 @@ function notifcationsModal(){
 function checkNotifications(){
     var numberNotifications = notifications.length;
     if (notifications != null){
+        $('#notifcationsFriendRequest').empty();
         for (request in notifications){
             console.log(notifications);
 
             if(numberNotifications > 99){
                 $('#numNot').append('99+');
-                $('#notifcationsHeader').innerHTML='Inbox(99+)';
+                document.getElementById("notifcationsHeader").innerHTML='(99+) Inbox';
                 
             }
             else{
                 $('#numNot').append(numberNotifications);
-                $('#notifcationsHeader').innerHTML='Inbox('+numberNotifications+')';
+                document.getElementById("notifcationsHeader").innerHTML='('+numberNotifications+') Inbox';
             }
             
-            $('#notifcationsFriendRequest').append("<p >"+notifications[request]['username']+"<i onclick='viewFriend("+notifications[request]['userid']+")'class='fa fa-user'></i> <i class='fa fa-check'></i> <i class='fa fa-times'></i></p>");
+            $('#notifcationsFriendRequest').append("<p >"+notifications[request]['username']+"&nbsp;&nbsp;&nbsp;&nbsp;<i style='color: rgb(119, 178, 201);' onclick='viewFriend("+notifications[request]['userid']+")'class='fa fa-user'></i>&nbsp;&nbsp;&nbsp;&nbsp;\n\
+            <i class='fa fa-check goodText' onclick='mlpObject.addFriend({friendid:"+notifications[request]['userid']+"})'></i>&nbsp;&nbsp;&nbsp;&nbsp;\n\
+            <i class='fa fa-times badText'></i></p>");
         }
     }
 }
