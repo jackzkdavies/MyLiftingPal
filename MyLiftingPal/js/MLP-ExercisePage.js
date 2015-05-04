@@ -1,17 +1,21 @@
-//Create MLP object
+//          MLP
+//          Jack Z K Davies 2014 copywrite
+//          www.thesoftengineer.com
+
 var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
-
-//User data
-var user = mlpObject.getUser().result;
-
-var userId=user['data']['id'];
-
+console.log(mlpObject.getUser()['result']['success']);
+var user = JSON.parse(localStorage.getItem('user'));
 var notifications = user['data']['requests'];
+var userid = user['data']['id'];
+var displayUnits  = user['data']['units'];
+if (mlpObject.getUser()['result']['success'] == false){
+    console.log(mlpObject.login({username:user['data']['username'],password:JSON.parse(localStorage.getItem('p'))}));}
+
 
 //Global Variables 
-var toggleSpeed = window.localStorage.getItem("toggleSpeed");
-var displayUnits = window.localStorage.getItem("displayUnits");
-if (displayUnits === null){displayUnits = 'kg';}
+var toggleSpeed = 0
+
+
 
 
 
@@ -66,35 +70,6 @@ var userData = mlpObject.getUser().result;
             }
 }
 
-function logout(){
-    mlpObject.logout();
-    window.location.replace("index.html");
-}
-
-function signOut(){
-    try{
-        if (mlpObject.logout().result["success"] === true){
-        window.location.replace("index.html");       }
-    }
-    catch(e){
-        console.log(e);
-    }
-    
-}
-
-function slideToggleCalender(){
-    
-    if ($(".calender").is(':hidden')){
-        document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-up'></i></span>";
-        $(".calender").slideToggle(toggleSpeed);
-    }
-    else{
-        document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-down'></i></span>";
-        $(".calender").slideToggle(toggleSpeed);
-    }
-    centerCalander();
-}
-
 function toggleDropDownArrow(i){
     if (i.classList.contains('w--open')=== true){
         document.getElementById("dropDownArrow").innerHTML = '<img class="dumbbells" src="images/open.png" alt="">My Training&nbsp;&nbsp<i class="fa fa-caret-down"></i>';
@@ -102,42 +77,6 @@ function toggleDropDownArrow(i){
     else{
         document.getElementById("dropDownArrow").innerHTML = '<img class="dumbbells" src="images/open.png" alt="">My Training&nbsp;&nbsp;<i class="fa fa-caret-up"></i>';
     }
-}
-
-function setVarDate(){
-        var days= ["Sunday","Monday","Tuesday","Wednesday", "Thursdat","Friday","Saturday"]; 
-        var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
-        var monthPrefix = ["st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"];
-
-        day = $("#date-Picker").datepicker('getDate').getDay();
-        date = $("#date-Picker").datepicker('getDate').getDate();                 
-        month = $("#date-Picker").datepicker('getDate').getMonth();             
-        year = $("#date-Picker").datepicker('getDate').getFullYear();
-        fullDate = days[day] + ", " + date +monthPrefix[date-1]+ " " + months[month]+", "+year;
-
-        document.getElementById("date").innerHTML = "<span style='color:#77b2c9'><i class='fa fa-caret-left'></i> </span> " + fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-right'></i></span>";
-}
-
-function centerCalander(){
-    var t = document.getElementById("date-Picker");
-//    t.style.paddingLeft=0;
-//    var sw= screen.availWidth;
-//    var tw = $("div.calender table").width();
-//    var dpw = $("div.datepicker").width();
-//    if (tw !== 0){
-//            if(tw===217){
-//            t.style.paddingLeft= ((sw-tw)/2)-22+'px';
-//            t.style.backgroundColor="#77b2c9";
-//        }
-//        else{
-//            t.style.paddingLeft= ((sw-tw)/2)-25+'px';
-//            t.style.backgroundColor="#77b2c9";
-//        }
-//    }
-//    else{
-//        t.style.paddingLeft= ((sw-dpw)/2)-10+'px';
-//        t.style.backgroundColor="#77b2c9";
-//    }
 }
 
 function addExToResults(data){
@@ -726,26 +665,4 @@ function selectedExercise(r){
     $('#exercisesToAdd').DataTable({bFilter: false});
 
 }
-//create programme
 
-//////////////////////////////////
-//idex page 
-
-
-function checkNotifications(){
-    var numberNotifications= notifications.length;
-    if (notifications != null){
-        for (request in notifications){
-            console.log(notifications);
-
-            if(numberNotifications > 99){
-                $('#numNot').append('99+');
-            }
-            else{
-                $('#numNot').append(numberNotifications);
-            }
-            
-            $('#inboxNotifications').append("Friend Request from: <h5 onclick='viewFriend("+notifications[request]['userid']+")'>"+notifications[request]['username']+"</h5>");
-        }
-    }
-}

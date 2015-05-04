@@ -28,15 +28,21 @@
   <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
   <script type="text/javascript" src="js/jquery.cookie.js"></script>
   <script type="text/javascript" src="js/mlp.js"></script>
-  <script type="text/javascript" src="js/MLP-DiaryPage.js"></script>
+
   <script type="text/javascript" src="js/webflow.js"></script>
   <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/jquery.dataTables.js"></script>
   <script type="text/javascript" src="js/stopwatch.js"></script>
   <script type="text/javascript" src="js/1rmcalc.js"></script>
+  
+  <!--multi page MLP js-->
+  <script type="text/javascript" src="js/MLP-logincheck-logout.js"></script>
   <script type="text/javascript" src="js/MLP-Notifications.js"></script>
+  <script type="text/javascript" src="js/MLP-Date-and-Nav.js"></script>
    
+  <script type="text/javascript" src="js/MLP-DiaryPage.js"></script>
+    
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
   <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
 </head>
@@ -105,16 +111,7 @@
         <input class="btn btn-default" type="button" value="reset" onclick="reset();">
         <br><br>
     </nav>
-    
-    <nav id='bottomNavNotifications' class="navbar navbar-default navbar-fixed-bottom" style="display:none; background-color: rgb(226, 218, 203);">
-        <br>
-        <div class="container">
-        <p style='font-weight: bold;'>Inbox <button type="button" class="close" onclick="$('#bottomNavNotifications').hide();"  aria-hidden="true"><i class="fa fa-times"></i></button><p>
-        <div id="inboxNotifications"></div>
-        <br>
-        </div>
-    </nav>
-    
+        
     <nav id='bottomNavCalc' class="navbar navbar-default navbar-fixed-bottom" style="display:none; background-color: rgb(226, 218, 203);">
         
         <br>
@@ -138,7 +135,7 @@
         <p id="date" onClick="slideToggleCalender()">  </p>      
       
             
-        <div class="calender"  id="date-Picker" style="display: none;" onClick="setVarDate()">
+        <div class="calender"  id="date-Picker" style="display: none;" onClick="setVarDate();checkResults()">
         <script>
             $('#date-Picker').datepicker({
             format: "dd/mm/yyyy",
@@ -148,22 +145,7 @@
             todayHighlight: true,
             gotoCurrent: true
             }).datepicker("setDate", new Date());
-            
-            
-            
-            var days= ["Sunday","Monday","Tuesday","Wednesday", "Thursday","Friday","Saturday"]; 
-            var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
-            var monthPrefix = ["st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"];
-            
-            var day = $("#date-Picker").datepicker('getDate').getDay();
-            var date = $("#date-Picker").datepicker('getDate').getDate();                 
-            var month = $("#date-Picker").datepicker('getDate').getMonth();             
-            var year = $("#date-Picker").datepicker('getDate').getFullYear();
-            var fullDate = days[day] + ", " + date +monthPrefix[date-1]+ " " + months[month]+", "+year;
-            
-//            document.getElementById("date").innerHTML = "<span style='color:#77b2c9'> <i class='fa fa-caret-left'></i> </span> " + fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-right'></i></span>";
-              document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-down'></i></span>";
-              document.getElementById("headerDate").innerHTML = fullDate;
+            setVarDate();
         </script>
         </div>
 
@@ -582,13 +564,11 @@
             checkLoginStatus();
             checkResults();
             checkNotifications();
-            
-            
+ 
         };
         
         function doOnOrientationChange()
         {
-            centerCalander();
             switch(window.orientation) 
             {  
               case -90:
@@ -665,20 +645,7 @@
         // Initial execution if needed
         doOnOrientationChange();
         
-        //code for nav
-        $(window).scroll(function() {
-          if ($(document).scrollTop() > 100) {
-            $('#logoHeader').css({"margin-top":"-50px"});
-            $('#MLPlogo').css({"display":"none"});;
-            $('#headerDateDiv').css({"display":"block"});;
-            
-            
-          } else {
-            $('#logoHeader').css({"margin-top":"0px"});
-            $('#MLPlogo').css({"display":"block"});;
-            $('#headerDateDiv').css({"display":"none"});;
-          }
-        });
+
         
 
     

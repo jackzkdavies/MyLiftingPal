@@ -1,17 +1,20 @@
+//          MLP
+//          Jack Z K Davies 2014 copywrite
+//          www.thesoftengineer.com
 var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
-//User data
-var user = mlpObject.getUser().result;
-
-var userId=user['data']['id'];
-
+console.log(mlpObject.getUser()['result']['success']);
+var user = JSON.parse(localStorage.getItem('user'));
 var notifications = user['data']['requests'];
+var displayUnits  = user['data']['units'];
+if (mlpObject.getUser()['result']['success'] == false){
+    console.log(mlpObject.login({username:user['data']['username'],password:JSON.parse(localStorage.getItem('p'))}));}
 
 //Global Variables 
 var toggleSpeed = window.localStorage.getItem("toggleSpeed");
 var displayUnits = window.localStorage.getItem("displayUnits");
 var lastCallertoWorkoutSearch=null;
-var globalProgramObjs={}
-if (displayUnits === null){displayUnits = 'kg';}
+var globalProgramObjs={};
+
 
 function toggle(divID){
     if (!(divID in toggleList)){
@@ -80,18 +83,7 @@ function signOut(){
     
 }
 
-function slideToggleCalender(){
-    
-    if ($(".calender").is(':hidden')){
-        document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-up'></i></span>";
-        $(".calender").slideToggle(toggleSpeed);
-    }
-    else{
-        document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-down'></i></span>";
-        $(".calender").slideToggle(toggleSpeed);
-    }
-    centerCalander();
-}
+
 
 function toggleDropDownArrow(i){
     if (i.classList.contains('w--open')=== true){
@@ -126,24 +118,8 @@ function toggleMyPrograms(){
  
 }
 
-function setVarDate(){
-        var days= ["Sunday","Monday","Tuesday","Wednesday", "Thursdat","Friday","Saturday"]; 
-        var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
-        var monthPrefix = ["st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"];
 
-        day = $("#date-Picker").datepicker('getDate').getDay();
-        date = $("#date-Picker").datepicker('getDate').getDate();                 
-        month = $("#date-Picker").datepicker('getDate').getMonth();             
-        year = $("#date-Picker").datepicker('getDate').getFullYear();
-        fullDate = days[day] + ", " + date +monthPrefix[date-1]+ " " + months[month]+", "+year;
 
-        document.getElementById("date").innerHTML = "<span style='color:#77b2c9'><i class='fa fa-caret-left'></i> </span> " + fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-right'></i></span>";
-}
-
-function centerCalander(){
-    var t = document.getElementById("date-Picker");
-
-}
 
 function hideWorkoutShowSearch(){
     $('#modalDisplayWorkoutExercies').modal('hide');
@@ -553,7 +529,7 @@ function addMyProgramDetails(input,duration,programname){
             
                 while(count <= duration){
                     var writeOut = false;
-                    toAppend += '<hr><p style="color:#77b2c9; font-weight:bold">Day: ' + count+'</p>'; 
+                    toAppend += '<hr><h6 style="font-weight:bold">Day: ' + count+'</h6>'; 
                     for (workout in workouts['data']){ 
                         if (count == workouts['data'][workout]['day']){
                             writeOut = true;
@@ -593,21 +569,20 @@ function addMyProgramDetails(input,duration,programname){
                         toAppend += '<p style="color:#ff6666">Rest day.</p>';
                         toAppend += '</div>';
                     }
-                    console.log(count);
                     count = count+1;
                 }
             
         }
                 
-     toAppend +=  ' <hr><a href="javascript:modalProgramEdit('+idNum+","+duration+');" style="border:6px solid transparent" class="btn btn-default btn-circle myexercises-edit">'+
-        '<i style="font-size:40px ;padding-left:5px" class="fa fa-pencil-square-o"></i></a>';
-    
+     toAppend +=  ' <hr><i onclick="deleteProgram('+idNum+')" style="font-size:40px" class="fa fa-times badText"></i>&nbsp;&nbsp;&nbsp;&nbsp;'+
+            '<i onclick="modalProgramEdit('+idNum+","+duration+')" style="font-size:35px; color:#77B2C9;" class="fa fa-eraser"></i></a>';
+            
     $('#programDetailsBody').empty();
     $('#programDetailsBody').append(toAppend);
     
     
-    var buttons='<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
-        '<button onclick="addProgramToDiary('+idNum+')" type="button" class="btn btn-primary">Add</button>';
+    var buttons='<button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
+        '<button onclick="addProgramToDiary('+idNum+')" type="button" class="btn btn-primary">Add+</button>';
     
     $('#programDetailscontrols').empty();
     $('#programDetailscontrols').append(buttons);
@@ -619,6 +594,12 @@ function addMyProgramDetails(input,duration,programname){
     $('#programDetails').modal(options);
     
 
+}
+function deleteProgram(idNum){
+    console.log("tet");
+    mlpObject.deleteProgram({'id':idNum});
+    $('#programDetails').modal('hide');
+    displayMyPrograms();
 }
 
 function programClearDay(){
@@ -645,6 +626,9 @@ function displayWorkoutSearchModal(day,callerid){
 }
 
 function modalProgramEdit(idNum,duration){
+    var tempWorkoutNames={};
+    $('#programDetails').modal('hide');
+    
 
     var workouts = globalProgramWorkouts[idNum];
     
@@ -654,6 +638,25 @@ function modalProgramEdit(idNum,duration){
     
     $("#programWorkouts").empty();
 
+    document.getElementById('updateProgramDuration').addEventListener("change", 
+    function(){
+        $("#programWorkouts").empty();
+        for (count = 1; count <= $("#updateProgramDuration").val(); count++){
+        $("#programWorkouts").append('<div id="tester" onclick="displayWorkoutSearchModal('+"'"+count+"','"+count+'programday'+idNum+"'"+')" id="'+count+'program'+idNum+'"><p>Day: '+count+'</p><input id="'+count+'programday'+idNum+'" class="w-input" type="text" placeholder="Rest day." name="Program Name" required="required" data-name="programename"></div>');
+        for (workout in workouts){
+        try{
+            var workoutDay = workouts[workout]['day'];
+            var inputId = '#'+workoutDay+'programday'+idNum;
+            $(inputId).val(tempWorkoutNames[workout]);
+            }
+        catch(e){}
+        }   
+        
+
+    }
+    }
+    );
+    
     for (count = 1; count <= duration; count++){
         $("#programWorkouts").append('<div onclick="displayWorkoutSearchModal('+"'"+count+"','"+count+'programday'+idNum+"'"+')" id="'+count+'program'+idNum+'"><p>Day: '+count+'</p><input id="'+count+'programday'+idNum+'" class="w-input" type="text" placeholder="Rest day." name="Program Name" required="required" data-name="programename"></div>');
   
@@ -668,14 +671,42 @@ function modalProgramEdit(idNum,duration){
         var workoutObj = mlpObject.getWorkouts({id:workouts[workout]['workoutid']}).result;
         var workoutName = workoutObj['data'][0]['name'];
         $(inputId).val(workoutName);
+        tempWorkoutNames[workout]=workoutName;
     }
-    
+    var buttons = '<button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
+                 '<button onclick="updateProgram('+idNum+')" type="button" class="btn btn-primary">Confirm</button>';
+   
+    document.getElementById('programEditModalButtons').innerHTML=buttons;
+
     
     var options = {
     "backdrop" : "static",
     "show":"true"};
     $('#modalProgramEdit').modal(options);
 }
+function updateProgram(idNum){
+    var name = $("#updateProgramName").val();
+    var dur = $("#updateProgramDuration").val();
+    var workouts = $("#programWorkouts");
+    
+    for (children in workouts[0]['children']){
+        if(children.indexOf("program") > -1){
+            if (typeof workouts[0]['children'][children].id !== 'undefined'){
+                var temp = workouts[0]['children'][children].id;
+                var test = temp.replace("program", "programday");
+                console.log(document.getElementById(test).value);
+            }
+    }
+           
+            
+
+    
+    }
+        
+   
+    
+}
+
 var globalWorkoutObjs;
 
 function workoutSeach(){
@@ -803,7 +834,6 @@ function displayMyPrograms(){
     toAppend +='<div>';
     toAppend +='<div style="width:70%;float:left" onclick="addMyProgramDetails(' + "'" +'myPrograms'+mpo[objects]['id']+"'"+','+mpo[objects]['duration']+",'"+mpo[objects]["name"]+"'"+')">';
     toAppend +='<h3 style="text-align:left;;padding: 8px;" >'+mpo[objects]['name'];
-    toAppend +='&nbsp;&nbsp;<i class="fa fa-list"></i>';
     toAppend +='</h3><p style="margin-top: -20px;  font-size: 10px;margin-left: -50px;">Duration: '+mpo[objects]["duration"]+'Day(s)</p></div>';
     
     
@@ -1058,24 +1088,6 @@ function programDuration(dur){
 //    $('#programWorkouts')
     
 }
-function checkNotifications(){
-    var numberNotifications= notifications.length;
-    if (notifications != null){
-        for (request in notifications){
-            console.log(notifications);
-
-            if(numberNotifications > 99){
-                $('#numNot').append('99+');
-            }
-            else{
-                $('#numNot').append(numberNotifications);
-            }
-            
-            $('#inboxNotifications').append("Friend Request from: <h5 onclick='viewFriend("+notifications[request]['userid']+")'>"+notifications[request]['username']+"</h5>");
-        }
-    }
-}
-
 function calanderModal(data){
     var caller=data[1];
     var inputID=data[0];

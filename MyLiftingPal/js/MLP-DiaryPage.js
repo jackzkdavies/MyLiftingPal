@@ -3,16 +3,14 @@
 //          www.thesoftengineer.com
 
 var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
-if (mlpObject['result'] === []){mlpObject.login({username:user['data']['username'],password:JSON.parse(localStorage.getItem('p'))});}
+console.log(mlpObject.getUser()['result']['success']);
 var user = JSON.parse(localStorage.getItem('user'));
 var notifications = user['data']['requests'];
+var userid = user['data']['id'];
 var displayUnits  = user['data']['units'];
+if (mlpObject.getUser()['result']['success'] == false){
+    console.log(mlpObject.login({username:user['data']['username'],password:JSON.parse(localStorage.getItem('p'))}));}
 
-var day ;
-var date ;                 
-var month ;            
-var year ;
-var fullDate;
 
 var globalExerciseObjs; 
 var globalWorkoutObjs;
@@ -29,58 +27,6 @@ window.localStorage.setItem("lastFriendView", null);
 var toggleList={};
 var recordsList={};
 var toggleSpeed=0;
-
-//Code section for checking login state
-function checkLoginStatus(){
-    var locationTest = [(window.location.pathname).toLocaleString(), "/index.html"];
-    if (user['success'] == true){
-        if(locationTest[0].indexOf('index') > -1){
-            window.location.replace("main-page.html"); 
-        }
-    }
-    else{
-
-        if(locationTest[0].indexOf('index') < -1 ){
-            window.location.replace("index.html");
-        }
-    }
-}
-
-function logout(){
-    mlpObject.logout();
-    localStorage.clear();
-    window.location.replace("index.html");
-}
-//Code section for date and calander 
-
-
-function setVarDate(){
-    var days= ["Sunday","Monday","Tuesday","Wednesday", "Thursday","Friday","Saturday"]; 
-    var months = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
-    var monthPrefix = ["st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"];
-
-    day = $("#date-Picker").datepicker('getDate').getDay();
-    date = $("#date-Picker").datepicker('getDate').getDate();                 
-    month = $("#date-Picker").datepicker('getDate').getMonth();             
-    year = $("#date-Picker").datepicker('getDate').getFullYear();
-    fullDate = days[day] + ", " + date +monthPrefix[date-1]+ " " + months[month]+", "+year;
-    document.getElementById("headerDate").innerHTML =fullDate;
-     if ($(".calender").is(':hidden')){
-        document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-down'></i></span>";
-
-    }
-    else{
-        document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-up'></i></span>";
-
-    }
-    checkResults();
-}
-
-
-function centerCalander(){
-    var t = document.getElementById("date-Picker");
-    t.style.backgroundColor="white";
-}
 
 //Code section for setting toggle states
 function toggleListActivate(){
@@ -119,18 +65,7 @@ function toggle(divID){
     $(div).slideToggle(toggleSpeed);
 }
 
-function slideToggleCalender(){
-    
-    if ($(".calender").is(':hidden')){
-        document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-up'></i></span>";
-        $(".calender").slideToggle(toggleSpeed);
-    }
-    else{
-        document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-down'></i></span>";
-        $(".calender").slideToggle(toggleSpeed);
-    }
-    centerCalander();
-}
+
 
 function toggleDropDownArrow(i){
     if (i.classList.contains('w--open')=== true){
@@ -143,6 +78,7 @@ function toggleDropDownArrow(i){
 
 
 function checkResults(){
+    console.log(year,month+1,date)
     currentTotals={};
     var firstDiv=true;
     var test = [];
