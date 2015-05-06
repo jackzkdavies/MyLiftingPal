@@ -11,8 +11,7 @@ function checkLoginStatus(){
         }
     }
     else{
-
-        if(locationTest[0].indexOf('index') < -1 ){
+        if(locationTest[0].indexOf('index') <= -1 ){
             window.location.replace("index.html");
         }
     }

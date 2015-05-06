@@ -133,12 +133,22 @@ function hideWorkoutShowSearch(){
 var globalWorkoutsToAdd={};
 
 function addWorkoutToProgramDay(id,name){
+
+    
    $('#modalDisplayWorkoutExercies').modal('hide');
-   console.log(lastCallertoWorkoutSearch);
-   var day = lastCallertoWorkoutSearch.replace("newprogramday", "");
+
+//   var day = lastCallertoWorkoutSearch.replace("newprogramday", "")
+   if (lastCallertoWorkoutSearch.indexOf("new") > -1){var res = lastCallertoWorkoutSearch.split("newprogramday");}
+   else {
+        var options = {
+        "backdrop" : "true",
+        "show":"true"};
+        $('#modalProgramEdit').modal(options);
+        var res = lastCallertoWorkoutSearch.split("programday");
+    }
    
-   globalWorkoutsToAdd[day]=id;
-   
+    globalWorkoutsToAdd[res[0]]=id;
+
    var divid= "#"+lastCallertoWorkoutSearch;
    $(divid).val(name);   
 }
@@ -686,26 +696,28 @@ function modalProgramEdit(idNum,duration){
     $('#modalProgramEdit').modal(options);
 }
 function updateProgram(idNum){
+    $('#modalProgramEdit').modal('hide');
+    
+    
     var name = $("#updateProgramName").val();
     var dur = $("#updateProgramDuration").val();
-    var workouts = $("#programWorkouts");
+ 
     
-    for (children in workouts[0]['children']){
-        if(children.indexOf("program") > -1){
-            if (typeof workouts[0]['children'][children].id !== 'undefined'){
-                var temp = workouts[0]['children'][children].id;
-                var test = temp.replace("program", "programday");
-                console.log(document.getElementById(test).value);
-            }
+    mlpObject.updateProgram({name:name,id:idNum,duration:dur});
+//    var workouts = $("#programWorkouts");
+//    for (children in workouts[0]['children']){
+//        if(children.indexOf("program") > -1){
+//            if (typeof workouts[0]['children'][children].id !== 'undefined'){
+//                var temp = workouts[0]['children'][children].id;
+//                var test = temp.replace("program", "programday");
+//                console.log(document.getElementById(test).value);
+//            }
+//    }
+//    }
+    for (key in globalWorkoutsToAdd){    
+        mlpObject.addWorkout({programid:idNum,day:key,workoutid:globalWorkoutsToAdd[key]});    
     }
-           
-            
-
-    
-    }
-        
-   
-    
+    displayMyPrograms();
 }
 
 var globalWorkoutObjs;
