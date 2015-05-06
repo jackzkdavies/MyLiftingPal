@@ -8,15 +8,21 @@
     <!-- versionCode is optional and Android only -->
 
 	<name>MyLiftingPal</name>
-        <description>
-            An app used to track your lifting in the gym.
-        </description>
-        <author email="support@myliftingpal.net" href="http://www.myliftingpal.net">
-            MyLiftingPal
-        </author>
-		
-		<preference name="permissions" value="none"/>
-		<feature name="http://api.phonegap.com/1.0/network"/>
+	<description>
+		An app used to track your lifting in the gym.
+	</description>
+	<author email="support@myliftingpal.net" href="http://www.myliftingpal.net">
+		MyLiftingPal
+	</author>
+	<icon src="icon.png" />
+	
+	<gap:splash src="splash.png" />
+	
+	<preference name="Fullscreen" value="true" />
+	<preference name="DisallowOverscroll" value="true"/>
+	<preference name="permissions" value="none"/>
+	
+	<feature name="http://api.phonegap.com/1.0/network"/>
 		
 
 </widget>
