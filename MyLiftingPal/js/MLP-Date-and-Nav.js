@@ -29,24 +29,31 @@ var year ;
 var fullDate ;
 
 function setVarDate(){
-        day = $("#date-Picker").datepicker('getDate').getDay();
-        date = $("#date-Picker").datepicker('getDate').getDate();                 
-        month = $("#date-Picker").datepicker('getDate').getMonth();             
-        year = $("#date-Picker").datepicker('getDate').getFullYear();
-        fullDate = days[day] + ", " + date +monthPrefix[date-1]+ " " + months[month]+", "+year;
+    day = $("#date-Picker").datepicker('getDate').getDay();
+    date = $("#date-Picker").datepicker('getDate').getDate();                 
+    month = $("#date-Picker").datepicker('getDate').getMonth();             
+    year = $("#date-Picker").datepicker('getDate').getFullYear();
+    fullDate = days[day] + ", " + date +monthPrefix[date-1]+ " " + months[month]+", "+year;
 
-        document.getElementById("date").innerHTML = "<span style='color:#77b2c9'><i class='fa fa-caret-left'></i> </span> " + fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-right'></i></span>";
-        document.getElementById("headerDate").innerHTML = fullDate;    
-}
-
-function slideToggleCalender(){
-    
-    if ($(".calender").is(':hidden')){
+    if ($(".calender").is(':visible')){
         document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-up'></i></span>";
-        $(".calender").slideToggle(toggleSpeed);
     }
     else{
         document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-down'></i></span>";
+    }
+    
+    document.getElementById("headerDate").innerHTML = fullDate; 
+
+}
+
+function slideToggleCalender(){
+
+    if ($(".calender").is(':visible')){
+        document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-down'></i></span>";
+        $(".calender").slideToggle(toggleSpeed);
+    }
+    else{
+        document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-up'></i></span>";
         $(".calender").slideToggle(toggleSpeed);
     }
 }

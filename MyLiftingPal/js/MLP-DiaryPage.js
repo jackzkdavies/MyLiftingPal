@@ -227,11 +227,11 @@ function checkResults(){
 function currentTotalVolumeCalc(diaryres){
 
     if (currentTotals[diaryres['exerciseid']] == null){
-        currentTotals[diaryres['exerciseid']] = (parseInt(diaryres['weight']) * parseInt(diaryres['reps']));
+        currentTotals[diaryres['exerciseid']] = (parseFloat(diaryres['weight']) * parseFloat(diaryres['reps']));
     }
     else{
         
-    currentTotals[diaryres['exerciseid']] = (parseInt(currentTotals[diaryres['exerciseid']]) + (parseInt(diaryres['weight']) * parseInt(diaryres['reps'])));
+    currentTotals[diaryres['exerciseid']] = (parseFloat(currentTotals[diaryres['exerciseid']]) + (parseFloat(diaryres['weight']) * parseFloat(diaryres['reps'])));
 }
     
 }
