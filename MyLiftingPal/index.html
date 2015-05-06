@@ -16,6 +16,7 @@
     <script type="text/javascript" src="js/mlp.js"></script>
     <script type="text/javascript" src="js/MLP-Login.js"></script>
     <script type="text/javascript" src="js/webflow.js"></script>
+    <script type="text/javascript" src="js/auth.js"></script>	
 
 </head>
 <body style="background-image:url('../images/login-bg.jpg')">
@@ -26,9 +27,16 @@
         <h4 ><a href="javascript:toggleForms();" style="color:#77b2c9; text-decoration: underline" > Sign up <i class="fa fa-users"></i></a></h4>
         
         <br>
-        
-        <img class="thirdpartybutton" src="images/fb.png" alt="fb">
-        <img class="thirdpartybutton" src="images/google.png" alt="google">
+                         <span id="signinButton" style="display:none;">
+                            <span class="g-signin"
+                                data-callback="signinCallback"
+                                data-clientid="178923840211-65u32ia6ur0m3mtj62kqvprovfvqlee6.apps.googleusercontent.com"
+                                data-cookiepolicy="single_host_origin"
+                                data-scope="https://www.googleapis.com/auth/userinfo.email">
+                            </span>
+                        </span>              
+        <img onclick="fb_login();" class="thirdpartybutton" src="images/fb.png" alt="fb">
+        <img onclick="$('#signinButton button').click();" class="thirdpartybutton" src="images/google.png" alt="google">
         
         
         
