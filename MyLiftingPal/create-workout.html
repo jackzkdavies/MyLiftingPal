@@ -357,7 +357,19 @@
               <img class="searchImage" onclick="submitSearchExcerciseInWorkout();return false;" src="images/search.svg" alt="Search" onerror="this.src='your.png'">
               </div>
               
-              
+                <script>
+                $("#cWorkoutName").keyup(function (e) {
+                   if (e.keyCode == 13) {
+                        document.getElementById("exercisesearch").focus();
+                   }
+               });
+               
+                $("#exercisesearch").keyup(function (e) {
+                   if (e.keyCode == 13) {
+                       submitSearchExcerciseInWorkout();
+                   }
+               });
+                </script>
               
               <p id="searchResultsHeading"></p>
 
@@ -385,6 +397,14 @@
                   
                 <div class="w-tab-pane w--tab-active w-clearfix" data-w-tab="Search">
                   <input class="w-input seachexerciseinput" id="workoutsearch" type="text" placeholder="Search Existing Workouts" name="workoutsearch" required="required" data-name="workoutsearch">
+                        <script>
+                            $("#workoutsearch").keyup(function (e) {
+                               if (e.keyCode == 13) {
+                                workoutSeach();
+                               }
+                           });
+                        </script>
+                  
                   <div class="searchresultsWorkouts"></div><a class="button addexercisetocurrentday" href="javascript:workoutSeach()"><strong>Submit Search</strong></a>
                     
                   <table id='mytableWorkouts' style='display: none; text-align:left; text-shadow: 0px 0px rgba(255, 255, 255, 0);'>

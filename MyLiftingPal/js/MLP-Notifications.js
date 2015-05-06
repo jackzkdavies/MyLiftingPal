@@ -18,7 +18,6 @@ function checkNotifications(){
     if (notifications != null){
         $('#notifcationsFriendRequest').empty();
         for (request in notifications){
-            console.log(notifications);
 
             if(numberNotifications > 99){
                 $('#numNot').append('99+');

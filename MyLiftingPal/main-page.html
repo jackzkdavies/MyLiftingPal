@@ -280,8 +280,7 @@
             <div id="addToMyDiaryDropdown" style="display: visible">
                 <div style="width:33%; float:left">
                      <a id="mainExSearch" style="text-align: center; text-decoration: none;" class="w-dropdown-link" href="javascript:mainSearchEx('e');"><i style="font-size: 40px" class="fa fa-heart"></i><br>Exercise</a>
-                    
-                     
+
                 </div>
                 
                 <div style="width:33%; float:left">
@@ -298,6 +297,15 @@
 
                 <div id="mainSearch" style="width: 100%;">
                     <input id="mainSearchTerm" style="float:left; margin-right: -38px" class="w-input"  type="text" placeholder="Select Exercise to add" name="addexercisetoworkout" required="required" data-name="addexercisetoworkout">
+                    <script>
+                        $("#mainSearchTerm").keyup(function (e) {
+                           if (e.keyCode == 13) {
+                            submitDairySearch();
+                           }
+                       });
+                     </script>
+                     
+                    
                     <img class="searchImage" onclick="submitDairySearch();return false;" src="images/search.svg" alt="Search" onerror="this.src='your.png'">
                 </div>
                 <div id="addDairySearchResults">
@@ -420,6 +428,33 @@
                             <p  class="blackfont">%1 Rep Max</p>
                             <input id="updateModalAddRM" class="w-input field feild2 inputLimit100" type="number" value="1" min="1" max="100"  name="%1RM" required="required" data-name="exercisename">
                             
+                            <script>
+                                $("#updateModalAddRep").keyup(function (e) {
+                                   if (e.keyCode == 13) {
+                                    document.getElementById("updateModalAddSet").focus();
+                                   }
+                               });
+                               
+                                $("#updateModalAddSet").keyup(function (e) {
+                                   if (e.keyCode == 13) {
+                                    document.getElementById("updateModalAddWeight").focus();
+                                   }
+                               });
+                               
+                                $("#updateModalAddWeight").keyup(function (e) {
+                                   if (e.keyCode == 13) {
+                                    document.getElementById("updateModalAddRPE").focus();
+                                   }
+                               });
+                               
+                                $("#updateModalAddRPE").keyup(function (e) {
+                                   if (e.keyCode == 13) {
+                                    document.getElementById("updateModalAddRM").focus();
+                                   }
+                               });
+                               
+                               
+                             </script>
 
                         </div>
                         <div id="basicModalAddSetButtons" class="modal-footer">
@@ -465,6 +500,34 @@
                             <input id="updateModalChangeRPE" class="w-input field feild2 inputLimit10" type="number" min="1" max="10" placeholder="1" name="RPE" required="required" data-name="exercisename">
                             <p  class="blackfont">%1 Rep Max</p>
                             <input id="updateModalChangeRM" class="w-input field feild2 inputLimit100" type="number" min="1" max="100" placeholder="1" name="%1RM" required="required" data-name="exercisename">
+                                                        <script>
+                                $("#updateModalChangeRep").keyup(function (e) {
+                                   if (e.keyCode == 13) {
+                                    document.getElementById("updateModalChangeSet").focus();
+                                   }
+                               });
+                               
+                                $("#updateModalChangeSet").keyup(function (e) {
+                                   if (e.keyCode == 13) {
+                                    document.getElementById("updateModalChangeWeight").focus();
+                                   }
+                               });
+                               
+                                $("#updateModalChangeWeight").keyup(function (e) {
+                                   if (e.keyCode == 13) {
+                                    document.getElementById("updateModalChangeRPE").focus();
+                                   }
+                               });
+                               
+                                $("#updateModalChangeRPE").keyup(function (e) {
+                                   if (e.keyCode == 13) {
+                                    document.getElementById("updateModalChangeRM").focus();
+                                   }
+                               });
+                               
+                               
+                             </script>
+                            
                             <br><hr>
                         </div>
                         <div id="basicModalUpdateButtons" class="modal-footer">

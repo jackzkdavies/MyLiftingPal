@@ -4,6 +4,7 @@
 var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
 console.log(mlpObject.getUser()['result']['success']);
 var user = JSON.parse(localStorage.getItem('user'));
+var userId = user['data']['id'];
 var notifications = user['data']['requests'];
 var displayUnits  = user['data']['units'];
 if (mlpObject.getUser()['result']['success'] == false){
@@ -292,10 +293,10 @@ function calanderModal(data){
         gotoCurrent: true
         }).datepicker("setDate", new Date());
 }
-function workoutSeach(){
+function workoutSearch(){
     var searchTerms =['name','userid'];
-    var searchTerm= (document.getElementById("workoutsearch").value.toString()).trim();
-    document.getElementById("searchresults").innerHTML = "";
+    var searchTerm= (document.getElementById("workoutsearchterm").value.toString()).trim();
+//    document.getElementById("searchresultsWorkouts").innerHTML = "";
     document.getElementById("searchResultsHeading").innerHTML="";
     if (searchTerm ===""){
         $("#searchresultsWorkouts").append("Please enter a keyword");

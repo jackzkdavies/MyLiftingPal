@@ -9,7 +9,7 @@ var notifications = user['data']['requests'];
 var userid = user['data']['id'];
 var displayUnits  = user['data']['units'];
 if (mlpObject.getUser()['result']['success'] == false){
-    console.log(mlpObject.login({username:user['data']['username'],password:JSON.parse(localStorage.getItem('p'))}));}
+    mlpObject.login({username:user['data']['username'],password:JSON.parse(localStorage.getItem('p'))});}
 
 
 var globalExerciseObjs; 
@@ -78,7 +78,6 @@ function toggleDropDownArrow(i){
 
 
 function checkResults(){
-    console.log(year,month+1,date)
     currentTotals={};
     var firstDiv=true;
     var test = [];
@@ -87,7 +86,6 @@ function checkResults(){
     document.getElementById("noResults").innerHTML = "";
     try{
         var myDiaryResults = mlpObject.selectResults({assigneddate:year+"-"+(month+1)+"-"+date}).result;
-        console.log(mlpObject);
         if (myDiaryResults['success'] === false){
             document.getElementById("noResults").innerHTML = "Rest day is it?";
         }
