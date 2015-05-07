@@ -29,11 +29,17 @@
   <script type="text/javascript" src="js/modernizr.js"></script>
   <script type="text/javascript" src="js/jquery.cookie.js"></script>
   <script type="text/javascript" src="js/mlp.js"></script>
-  <script type="text/javascript" src="js/MLP-ProfilePage.js"></script>
   <script type="text/javascript" src="js/webflow.js"></script>
   <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/jquery.dataTables.js"></script>
+  
+    <!--multi page MLP js-->
+    <script type="text/javascript" src="js/MLP-logincheck-logout.js"></script>
+    <script type="text/javascript" src="js/MLP-Notifications.js"></script>
+    <script type="text/javascript" src="js/MLP-Date-and-Nav.js"></script>
+
+    <script type="text/javascript" src="js/MLP-ProfilePage.js"></script>
   
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
   <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
@@ -76,16 +82,16 @@
             <div style='width: 14%; float:left; padding-top: 12px;'><i onclick="$('#bottomNavCalc').slideToggle();$('#bottomNavStopwatch').hide();$('#bottomNavNotifications').hide();" style="color:#333; font-size: 20px" class="fa fa-calculator"></i></div>
             <div style='width: 14%; float:left; padding-top: 11px;'><img onclick="$('#bottomNavStopwatch').slideToggle();$('#bottomNavCalc').hide();$('#bottomNavNotifications').hide();" style="height: 24px; margin-top: 0px" src="images/stopwatch.png" alt="STOPWATCH" ></div>
             <div style='width: 44%; float:left'><h4>My Profile</h4></div>
-            <div style='width: 14%; float:left; padding-top: 12px;'><p id="numNot"></p><i onclick="$('#bottomNavNotifications').slideToggle();$('#bottomNavStopwatch').hide();$('#bottomNavCalc').hide();" style="color:#333; font-size: 20px" class="fa fa-inbox"></i></div>
+            <div style='width: 14%; float:left; padding-top: 12px;'><p id="numNot"></p><i onclick="notifcationsModal()" style="color:#333; font-size: 20px" class="fa fa-inbox"></i></div>
             <div style='width: 14%; float:left; padding-top: 9px;'><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <i style="color:#333; font-size: 20px" class="fa fa-bars"></i>
                     </button></div>
-        </div>
+        </div >
 
         
-        <div>
-
-            
+        <div id='headerDateDiv'  style='display:none; width: 100%; text-align: center; float:left;  margin-top: -12px;  
+              border-bottom-style: solid;border-color: rgb(183, 182, 182); border-bottom-width: 1px;'> 
+            <p style="font-size: smaller;  margin-bottom: 1px;" id="headerDate"></p>
         </div>
     </nav>
     
@@ -99,14 +105,6 @@
         <br><br>
     </nav>
     
-    <nav id='bottomNavNotifications' class="navbar navbar-default navbar-fixed-bottom" style="display:none; background-color: rgb(226, 218, 203);">
-        <br>
-        <div class="container">
-        <p style='font-weight: bold;'>Inbox <button type="button" class="close" onclick="$('#bottomNavCalc').hide();"  aria-hidden="true"><i class="fa fa-times"></i></button><p>
-        <div id="inboxNotifications"></div>
-        <br>
-        </div>
-    </nav>
     
     <nav id='bottomNavCalc' class="navbar navbar-default navbar-fixed-bottom" style="display:none; background-color: rgb(226, 218, 203);">
         
@@ -125,33 +123,139 @@
         <br>
         </div>
     </nav>
-    <br><br><br>
+    <br><br><br>  
+    <p id="date" style="display: none;">  </p>  
+    <div class="calender"  id="date-Picker" style="display: none;" onClick="setVarDate()"></div>
+            <script>
+            $('#date-Picker').datepicker({
+            format: "dd/mm/yyyy",
+            orientation: "top",
+            keyboardNavigation: false,
+            calendarWeeks: true,
+            todayHighlight: true,
+            gotoCurrent: true
+            }).datepicker("setDate", new Date());
+            setVarDate();
+        </script>
+    <div class="modal fade" id="notifcationsModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                        <h4 class="modal-title" id="notifcationsHeader">Inbox</h4>
+                        </div>
+                        <div class="modal-body" id="notifcationsBody">
+                            <h6>Friend Request:</h6>
+                            <div id="notifcationsFriendRequest">  
+                                <p>Empty.</p>
+                            </div>
+                            <br>
+                            <div>
+                                <h6>Received Templates:</h6>
+                                <p>Empty.</p>
+                            </div>
+                            <br><br>
+                            <div>
+                                 <button onclick="" type="button" class="btn btn-primary">Send Template:</button>
+                            </div>
+                            
+                        </div>
+                        <div class="modal-footer" id='notifcationsFooter'>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                    </div>
+                    </div>
+              </div>
+            </div>
+        
+        <div class="modal fade" id="updateProfileModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                        <h4 class="modal-title">Update Profile</h4>
+                        </div>
+                        <div class="modal-body" id="updateProfileBody">
+                            <h6>Display Picture URL</h6>
+                            <p>Must be 120pxX120px</p>
+                            <input type="url" class="form-control edit-profile-url" placeholder="URL">
+                            
+                            <h6>Gender</h6>
+                                <select class="form-control edit-profile-gender" id="edit-profile-gender">
+                                <option>Alien</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                                </select>
+                            <h6>Age</h6>
+                                <input type='number'>
+                             
+                            
+                                
+                            <h6>Weight</h6>
+                                <input type='number'>
+                            <h6>About</h6>
+                                <textarea class="form-control edit-profile-about" id='aboutUpdate' placeholder="About Me" rows="5"></textarea>
+                            <h6>Why</h6>
+                                <textarea class="form-control edit-profile-about" id='whyUpdate' placeholder="Why I lift" rows="5"></textarea>
+
+                            <h6>Goals</h6>
+                                <textarea class="form-control edit-profile-about" id='goalsUpdate' placeholder="My Goals" rows="5"></textarea>
+
+                            
+                        </div>
+                        <div class="modal-footer" id='profileEditFooter'>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                    </div>
+                    </div>
+              </div>
+            </div>
         
 
         <div class="w-clearfix">
-            <div style='border-radius: 5px; background: linear-gradient( rgba(255, 255, 255, 0.7), rgba(255, 255,255, 0.7) ), url(images/header.jpg) no-repeat center center;background-size: cover;float:left;'>
-                <div style='float:left' id="profilePicture"></div>
-                <div style='float:left' id="username"></div>
-                <div style='float:left' id="userEmail"></div>
-                <br>
-                <div style='float:left' id="weight"></div>
-                <div style='float:left' id="gender"></div>
-                <div style='float:left' id="age"></div>
+            <div style='border-radius: 5px; background: linear-gradient( rgba(255, 255, 255, 0.7), rgba(255, 255,255, 0.7) ), url(images/header.jpg) no-repeat center center;background-size: cover;float:left; width:100%'>
+                <div style='float:left;width:30%' id="profilePicture"></div>
+                <div style='float:left;width:70%'>
+                    <div style='float:left; width:100%' id="username"></div>
+                    <div style='float:left; width:100%' id="userEmail"></div>
+                    <br>
+                    <div style='float:left; ' id="weight"></div>
+                    <div style='float:left; ' id="gender"></div>
+                    <div style='float:left; ' id="age"></div>
+                </div>
             </div>
-            <div>
-                
+            <div style='  width: 100%; float:left'>
                 <br>
+            <a href="javascript:profileEditModal();" class="btn btn-primary edit-profile"><i class="fa fa-pencil-square-o"></i> Edit Profile</a>
+            </div>
+            <div style='  width: 100%;
+                    padding: 10px;
+                    border-radius: 3px;
+                    margin-top: 10px;
+                    float: left;
+                    '>
+                
                 <div id='aboutMe'><h5>About Me</h5></div>
                 <br>
                 <div id='why'><h5>Why I Lift</h5></div>
                 <br>
                 <div id='goals'><h5>My Goals</h5></div>
-                <br>
-                <div id='maxes'><h5>Maxes</h5></div>
-                <br>
-                <hr>
+                
+                
             </div>
+               
+
+            <div id='maxes' style='width:100%;float:left'>
+                 <br>
+                <hr style=';  margin-top: 0px;margin-bottom: 0px;border: 0;border-top: 5px solid red;'>
+                <h2 style='color:red'>!!!MAX LIFTS!!!</h2>
+                <hr style=';  margin-top: 0px;margin-bottom: 0px;border: 0;border-top: 5px solid red;'>
+
+            </div>
+            <div style='width:100%;float:left'>
+            <br>
             
+            <hr style=';  margin-top: 0px;margin-bottom: 0px;border: 0;border-top: 5px solid red;'>
+            </div>
             <h3 style='float:left' >Friends</h3>
             <div style='float:left' id='friends'>
                 
@@ -279,13 +383,7 @@
         // Initial execution if needed
         doOnOrientationChange();
         
-                $(window).scroll(function() {
-          if ($(document).scrollTop() > 100) {
-            $('#logoHeader').css({"margin-top":"-50px"});;
-          } else {
-            $('#logoHeader').css({"margin-top":"0px"});;
-          }
-        });
+
     
    </script>
   <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->

@@ -1,15 +1,16 @@
-//Create MLP object
+//          MLP
+//          Jack Z K Davies 2014 copywrite
+//          www.thesoftengineer.com
 var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
-
-//User data
-var user = mlpObject.getUser().result;
-
+console.log(mlpObject.getUser()['result']['success']);
+var user = JSON.parse(localStorage.getItem('user'));
+var userId = user['data']['id'];
 var notifications = user['data']['requests'];
-
 var displayUnits  = user['data']['units'];
+if (mlpObject.getUser()['result']['success'] == false){
+    console.log(mlpObject.login({username:user['data']['username'],password:JSON.parse(localStorage.getItem('p'))}));}
 
 var userProfilePhoto = user['data']['dp'];
-console.log(userProfilePhoto);
 
 var userEmail = user['data']['email'];
 
@@ -42,63 +43,37 @@ var units = userInfo['data']['units'];
 window.localStorage.setItem("lastFriendView", null);
 //var weight = unserInfo[];
 
-function checkLoginStatus(){
-//    if ($.cookie("mlpsession") === undefined){
-//        window.location.replace("index.html");
-//    }
-
-var userData = mlpObject.getUser().result;
-        var locationTest = [(window.location.pathname).toLocaleString(), "/index.html"];
-        if (userData["success"] === true){
-
-                if(locationTest[0].indexOf('index') > -1){
-                    window.location.replace("main-page.html"); 
-                }
-                        
-            }
-        else if (userData['errormsg'].indexOf('You are already logged in as') > -1){
-                    window.location.replace("main-page.html");
-                }
-        else{
-
-                if(locationTest[0].indexOf('index') < -1 )
-                    window.location.replace("index.html");
-                
-            }
-}
-
-function logout(){
-    mlpObject.logout();
-    window.location.replace("index.html");
-}
-
-function signOut(){
-    try{
-        if (mlpObject.logout().result["success"] === true){
-        window.location.replace("index.html");       }
-    }
-    catch(e){
-        console.log(e);
-    }
-    
-}
-
 function displayUser(){
-    var dp = '<img class="profilePicture" src="'+userProfilePhoto+'" alt="">';
-    $("#profilePicture").append(dp);
+    
+    $.get(userProfilePhoto+'.jpg')
+    .done(function() { 
+            var dp = '<img class="profilePicture" src="'+userProfilePhoto+'" alt="">';
+            $("#profilePicture").append(dp);
+
+    }).fail(function() { 
+        var dp = '<img class="profilePicture" src="../images/icongp.png" alt="">';
+        $("#profilePicture").append(dp);
+    	
+
+    });
+
     
     $("#username").append('<h3>'+username+'</h3>');
     
-    $("#userEmail").append(userEmail);
+//    $("#userEmail").append(userEmail);
     
-    $("#weight").append(weight+units+'&nbsp;');
-    $("#gender").append(gender+',&nbsp;');
-    $("#age").append(age+'&nbsp;years old');
+    $("#weight").append(weight+units+'&nbsp;&#x2022;&nbsp;');
+    $("#gender").append(gender+'&nbsp;&#x2022;&nbsp;');
+    $("#age").append(age+'&nbsp;years strong');
     
-    $("#aboutMe").append(about);
-    $("#why").append(why);
-    $("#goals").append(goals);
+    document.getElementById('aboutMe').innerHTML='<h6 style="">About '+username+'</h6><p>'+about+'</p>';
+    
+    document.getElementById('why').innerHTML='<h6 style="">Why I lift</h6><p>'+why+'</p>';
+    
+    document.getElementById('goals').innerHTML='<h6 style="">My Goals</h6><p>'+goals+'</p>';
+    
     displayMaxes();
+    
     displayFriends();
 }
 
@@ -107,7 +82,7 @@ function displayMaxes(){
         var liftName = stats[lifts]['name'];
         var liftWeight = stats[lifts]['onerm'];
         var type = stats[lifts]['type'];
-        $("#maxes").append(liftName+': '+liftWeight+units+' ('+type+')<br>');
+        $("#maxes").append('<h4>'+liftName+': '+liftWeight+units+' ('+type+')</h4>');
     }
 }
 
@@ -129,21 +104,9 @@ function viewFriend(id){
     console.log(window.localStorage.getItem("lastFriendView"));
     window.location.replace("friendsProfile.html");
 }
-
-function checkNotifications(){
-    var numberNotifications= notifications.length;
-    if (notifications != null){
-        for (request in notifications){
-            console.log(notifications);
-
-            if(numberNotifications > 99){
-                $('#numNot').append('99+');
-            }
-            else{
-                $('#numNot').append(numberNotifications);
-            }
-            
-            $('#inboxNotifications').append("Friend Request from: <h5 onclick='viewFriend("+notifications[request]['userid']+")'>"+notifications[request]['username']+"</h5>");
-        }
-    }
+function profileEditModal(){
+    var options = {
+        "backdrop" : "true",
+        "show":"true"};
+    $('#updateProfileModal').modal(options);
 }

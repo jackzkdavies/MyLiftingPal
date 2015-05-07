@@ -43,49 +43,6 @@ function toggle(divID){
 //}
 }
 
-function checkLoginStatus(){
-//    if ($.cookie("mlpsession") === undefined){
-//        window.location.replace("index.html");
-//    }
-
-var userData = mlpObject.getUser().result;
-        var locationTest = [(window.location.pathname).toLocaleString(), "/index.html"];
-        if (userData["success"] === true){
-
-                if(locationTest[0].indexOf('index') > -1){
-                    window.location.replace("main-page.html"); 
-                }
-                        
-            }
-        else if (userData['errormsg'].indexOf('You are already logged in as') > -1){
-                    window.location.replace("main-page.html");
-                }
-        else{
-
-                if(locationTest[0].indexOf('index') < -1 )
-                    window.location.replace("index.html");
-                
-            }
-}
-
-function logout(){
-    mlpObject.logout();
-    window.location.replace("index.html");
-}
-
-function signOut(){
-    try{
-        if (mlpObject.logout().result["success"] === true){
-        window.location.replace("index.html");       }
-    }
-    catch(e){
-        console.log(e);
-    }
-    
-}
-
-
-
 function toggleDropDownArrow(i){
     if (i.classList.contains('w--open')=== true){
         document.getElementById("dropDownArrow").innerHTML = '<img class="dumbbells" src="images/open.png" alt="">My Training&nbsp;&nbsp<i class="fa fa-caret-down"></i>';
