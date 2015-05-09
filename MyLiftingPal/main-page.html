@@ -174,6 +174,8 @@
             <h5>%1RM</h5>
           </div>
         </div>
+            <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+            </div>
           
             <div class="modal fade" id="infoDataModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                 <div class="modal-dialog">
@@ -184,7 +186,7 @@
                         </div>
                         <div class="modal-body" id="infoDataModalBody"><p>test</p></div>
                                                 <div class="modal-footer" id='addModalFooter'>
-                            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="$('#addModal').show()">Close</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="$('#addModal').show()"><i class="fa fa-arrow-left"></i></button>
                     </div>
                     </div>
               </div>
@@ -372,7 +374,7 @@
 
                         </div>
                         <div class="modal-footer" id='addModalFooter'>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>
                     </div>
                 </div>
               </div>
@@ -570,7 +572,7 @@
             <!--end of temp fix-->
             <br><br>
             <div>       
-                <a href="javascript:mainPageAdd();" id="mainPageAddButton" style="width:60px; margin-bottom: 4px; background-color: rgba(119, 178, 201, 1); color:white" class="btn btn-default btn-circle-main">
+                <a href="javascript:mainPageAdd();" id="mainPageAddButton" class="addingButtonsMain btn btn-default btn-circle-main">
                     <i class="fa fa-plus fa-2x" style="line-height: 1.9 !important; padding-left: 1px"></i>
                 </a>
             </div>

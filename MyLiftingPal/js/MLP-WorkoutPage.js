@@ -110,7 +110,7 @@ function modalDisplayWorkoutExercies(inputID){
     }
     toAppend+='</table>'
     
-    var buttons='<button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
+    var buttons='<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
             '<button onclick="addWorkoutToDiary('+inputID+')" type="button" class="btn btn-primary">Add</button>';
     
     $("#basicModalDWAdd").empty();
@@ -149,7 +149,7 @@ function modalWorkoutExerciseEdit(inputID,wID){
     
     
     $("#modalWorkoutExerciseEditControls").empty();
-    var buttons='<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
+    var buttons='<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
             '<button onclick="workoutExerciseEdit('+inputID+','+wID+')" type="button" class="btn btn-primary">Save</button>';
     $("#modalWorkoutExerciseEditControls").append(buttons);
     
@@ -212,7 +212,7 @@ function calanderModal(data){
     
     
     var buttons= '<hr>'+
-                 '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+
+                 '<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
                  '<button type="button" onclick="addExerciseCalanderModal('+inputID+')" class="btn btn-primary">Confirm</button>'+
                  '<br><br>';
     
@@ -394,7 +394,7 @@ function updateModalWorkoutEdit(wId){
     $("#deleteWorkoutButton").append(delBut);
     
     $("#editCalANDSav").empty();
-    var buttons='<button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
+    var buttons='<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
             '<button onclick="updateWorkout('+wId+')" type="button" class="btn btn-primary">Update</button>';
     $("#editCalANDSav").append(buttons);
     
@@ -467,7 +467,7 @@ function displayMyWorkouts(){
     toAppend +='<i class="fa fa-caret-down"></i>';
     toAppend +='</h3></div>';
     
-    toAppend +='<a href="javascript:updateModalWorkoutAdd('+mwo[objects]['id']+');" style="width:60px; margin-bottom: 4px; z-index:10;" class="btn btn-default btn-circle-main">';
+    toAppend +='<a href="javascript:updateModalWorkoutAdd('+mwo[objects]['id']+');" class="addingButtonsMain btn btn-default btn-circle-main">';
     toAppend +='<i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i>';
     toAppend +='</a>';
 

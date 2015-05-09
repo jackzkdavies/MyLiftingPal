@@ -175,7 +175,7 @@ function modalWorkoutExerciseEdit(inputID,wID){
     
     
     $("#modalWorkoutExerciseEditControls").empty();
-    var buttons='<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
+    var buttons='<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
             '<button onclick="workoutExerciseEdit('+inputID+','+wID+')" type="button" class="btn btn-primary">Save</button>';
     $("#modalWorkoutExerciseEditControls").append(buttons);
     
@@ -238,7 +238,7 @@ function calanderModal(data){
     
     
     var buttons= '<hr>'+
-                 '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+
+                 '<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
                  '<button type="button" onclick="addExerciseCalanderModal('+inputID+')" class="btn btn-primary">Confirm</button>'+
                  '<br><br>';
     
@@ -463,7 +463,7 @@ function rightResultsContainerUpdate(programId){
                 }
             
         }
-     toAppend+='<div style="width:100%"><a href="javascript:updateModalProgramAdd('+programId+','+"'"+name+"'"+');" style="width:60px; margin-bottom: 4px; z-index:10; background-color: #77b2c9;color:white" class="btn btn-default btn-circle-main"><i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i></a></div>';
+     toAppend+='<div style="width:100%"><a href="javascript:updateModalProgramAdd('+programId+','+"'"+name+"'"+');" class="addingButtonsMain btn btn-default btn-circle-main"><i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i></a></div>';
      toAppend+='<br><h2><i onclick="displayLeftSearchContainer()" class="fa fa-arrow-left"></i></h2>';
     $('#rightResultsContent').empty();
     $('#rightResultsContent').append(toAppend);
@@ -549,7 +549,7 @@ function addMyProgramDetails(input,duration,programname){
     $('#programDetailsBody').append(toAppend);
     
     
-    var buttons='<button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
+    var buttons='<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
         '<button onclick="addProgramToDiary('+idNum+')" type="button" class="btn btn-primary">Add+</button>';
     
     $('#programDetailscontrols').empty();
@@ -641,7 +641,7 @@ function modalProgramEdit(idNum,duration){
         $(inputId).val(workoutName);
         tempWorkoutNames[workout]=workoutName;
     }
-    var buttons = '<button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
+    var buttons = '<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
                  '<button onclick="updateProgram('+idNum+')" type="button" class="btn btn-primary">Confirm</button>';
    
     document.getElementById('programEditModalButtons').innerHTML=buttons;
@@ -807,7 +807,7 @@ function displayMyPrograms(){
     toAppend +='</h3><p style="margin-top: -20px;  font-size: 10px;margin-left: -50px;">Duration: '+mpo[objects]["duration"]+'Day(s)</p></div>';
     
     
-    toAppend +='<a href="javascript:updateModalProgramAdd('+mpo[objects]['id']+",'"+mpo[objects]['name']+"'"+');" style="width:60px; margin-bottom: 4px; z-index:10;" class="btn btn-default btn-circle-main">';
+    toAppend +='<a href="javascript:updateModalProgramAdd('+mpo[objects]['id']+",'"+mpo[objects]['name']+"'"+');" class="addingButtonsMain btn btn-default btn-circle-main">';
     toAppend +='<i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i>';
     toAppend +='</a>';
     toAppend +='';
@@ -1065,7 +1065,7 @@ function calanderModal(data){
     
     
     var buttons= '<hr>'+
-                 '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+
+                 '<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
                  '<button type="button" onclick="addExerciseCalanderModal('+inputID+')" class="btn btn-primary">Confirm</button>'+
                  '<br><br>';
     

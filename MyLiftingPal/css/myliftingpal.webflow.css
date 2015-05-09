@@ -11,6 +11,15 @@
     color:#333;
 
 }
+.addingButtonsMain{
+
+  width: 60px;
+  margin-bottom: 4px;
+  background-color: rgba(119, 178, 201, 1);
+  color: white;
+
+}
+
 .rigthFloatingButton{
     width:60px; 
     background-color: rgba(189, 202, 207, 0.25); 

@@ -272,7 +272,7 @@ function diaryEditExercise(inputID){
     $("#basicModalUpdateButtons").empty();
 
     var buttons='<button onclick="diaryRemoveResults('+inputID+')" type="button" style="background-color:#ff6666;border-color:#ff6666" class="btn btn-primary">Remove</button>'+
-            '<button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
+            '<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
             '<button onclick="updateDiaryResults('+inputID+')" type="button" class="btn btn-primary">Update</button>';
     $("#basicModalUpdateButtons").append(buttons);
     
@@ -354,7 +354,7 @@ function diaryModalDelete(inputID){
 //    $("#basicModalAddSetButtons").append(delBut);
     
 
-    var buttons='<button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
+    var buttons='<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
             '<button onclick="deleteModalDiaryResult('+inputID+')" type="button" class="btn btn-primary">Remove</button>';
     $("#basicModalDeleteButtons").append(buttons);
     
@@ -425,7 +425,7 @@ function diaryModalAddSet(inputID){
     document.getElementById("updateModalAddRPE").value = records['amrap']['rpe'];
 //    document.getElementById("updateModalAddRM").value = result['percentage'];
 
-    var buttons='<button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
+    var buttons='<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
             '<button onclick="addModalDiaryResult('+inputID+')" type="button" class="btn btn-primary">Add</button>';
     $("#basicModalAddSetButtons").append(buttons);
     
@@ -436,6 +436,7 @@ function diaryModalAddSet(inputID){
 }
 
 function addExToResults(data){
+    loadingModal("Adding Exercise to Diary...");
     
     var exID = data[0];
     var tdate = (data[1]+"-"+data[2]+"-"+data[3]);
@@ -457,6 +458,8 @@ function addExToResults(data){
 }
 
 function addWorkoutToDiary(inputID){
+    
+    loadingModal("Adding Workout...")
     try{
         mlpObject.addResults({workoutid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result;
         $('#modalDisplayWorkoutExercies').modal('hide');
@@ -503,7 +506,7 @@ function modalDisplayWorkoutExercies(inputID){
     }
     toAppend+='</table>'
     
-    var buttons='<button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
+    var buttons='<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
             '<button onclick="addWorkoutToDiary('+inputID+')" type="button" class="btn btn-primary">Add</button>';
     
     $("#basicModalDWAdd").empty();
@@ -542,15 +545,33 @@ function mainPageAdd(){
 
 
 function infoDataModal(data){
-    console.log(data);
+    
     document.getElementById("infoDataModalBody").innerHTML = data;
+    
     var options = {
     "backdrop" : "true",
     "show":"true"};
     $('#infoDataModal').modal(options);
     
-
     $('#addModal').hide();
+        
+}
+function loadingModal(data){
+    document.getElementById("loadingModal").innerHTML = "<h6>"+data+"</h6>";
+    var options = {
+    "backdrop" : "true",
+    "show":"true"};
+    $('#loadingModal').modal(options);
+    
+    $('#addModal').modal('hide');
+    $('#modalDisplayWorkoutExercies').hide()
+    
+    setTimeout(function() {
+        $('#addModal').modal(options);
+    
+        $('#loadingModal').modal('hide');
+    }, 2000);
+    
 }
 
 
@@ -607,11 +628,39 @@ function submitDairySearch(){
     }
     
 }
+function clearSearchTables(){
+    //clean up from any past searches
+    
+    try{
+        
+        document.getElementById("searchresults").innerHTML = "";
+        document.getElementById("searchResultsHeading").innerHTML="";
+    
+        $("#mytable").dataTable().fnDestroy();
+        $("#mytableWorkouts").dataTable().fnDestroy();
+        $("#programSearchTable").dataTable().fnDestroy();
+        
+        
+        $("#searchresults").empty();
+        $("#searchresultsWorkouts").empty();
+        $("#searchResultsProgram").empty();
+        
+        document.getElementById('mytable').style.display='none';
+        document.getElementById('mytableWorkouts').style.display='none';
+        document.getElementById('programSearchTable').style.display='none';
+    }
+    catch(e){
+        console.log(e);
+    }
+}
 function dairyPageExSearch(){
+    //clean up from any past searches
+    clearSearchTables();
+    
     var searchTerms =['name','musclegroup','type'];
     var searchTerm= (document.getElementById("mainSearchTerm").value.toString()).trim();
-    document.getElementById("searchresults").innerHTML = "";
-    document.getElementById("searchResultsHeading").innerHTML="";
+    
+   
     if (searchTerm ===""){
         $("#searchresults").append("Please enter a keyword");
         return;
@@ -680,15 +729,7 @@ function dairyPageExSearch(){
 
     }}
     
-    try{
-    $("#mytable").dataTable().fnDestroy();
-    $("#mytableWorkouts").dataTable().fnDestroy();
-    $("#programSearchTable").dataTable().fnDestroy();
-    $("#searchresults").empty();
-    $("#searchresultsWorkouts").empty();
-    document.getElementById('mytableWorkouts').style.display='none';
-    }
-    catch(e){console.log(e);}
+  
     
     $("#searchresults").append(toAppend);
     $('#mytable').DataTable({bFilter: false,"dom": '<"top"i>rt<"bottom"flp><"clear">',
@@ -703,10 +744,14 @@ function dairyPageExSearch(){
 }
 
 function diaryPageWorkoutSeach(){
+
+    //clean up from any past searches
+    clearSearchTables();
+    
     var searchTerms =['name','userid'];
     var searchTerm= (document.getElementById("mainSearchTerm").value.toString()).trim();
-    document.getElementById("searchresults").innerHTML = "";
-    document.getElementById("searchResultsHeading").innerHTML="";
+
+    
     if (searchTerm ===""){
         $("#searchresultsWorkouts").append("Please enter a keyword");
         return;
@@ -753,15 +798,6 @@ function diaryPageWorkoutSeach(){
 
     }}
     
-    try{
-    $("#mytable").dataTable().fnDestroy();
-    $("#mytableWorkouts").dataTable().fnDestroy();
-    $("#programSearchTable").dataTable().fnDestroy();
-    $("#searchresults").empty();
-    $("#searchresultsWorkouts").empty();
-    document.getElementById('mytable').style.display='none';
-    }
-    catch(e){console.log(e);}
     
     $("#searchresultsWorkouts").append(toAppend);
     $('#mytableWorkouts').DataTable({bFilter: false});
@@ -777,15 +813,7 @@ function diaryPageWorkoutSeach(){
 function programSearch(){
     
     //clean up from any past searches
-    try{
-        $("#mytable").dataTable().fnDestroy();
-        $("#mytableWorkouts").dataTable().fnDestroy();
-        $("#programSearchTable").dataTable().fnDestroy();
-        $("#searchResultsProgram").empty();
-        document.getElementById('programSearchTable').style.display='none';
-    }
-    catch(e){console.log(e);}
-    
+    clearSearchTables();
     
     var searchTerms =['name','userid'];
     var searchTerm= (document.getElementById("mainSearchTerm").value.toString()).trim();
@@ -962,7 +990,7 @@ function calanderModal(data){
     
     
     var buttons= '<hr>'+
-                 '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+
+                 '<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
                  '<button type="button" onclick="addExerciseCalanderModal('+inputID+')" class="btn btn-primary">Confirm</button>'+
                  '<br><br>';
     
