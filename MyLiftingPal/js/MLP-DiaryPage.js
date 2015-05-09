@@ -135,7 +135,7 @@ function checkResults(){
                         
             
                     toAppend +='<div id="'+myResId+"Second"+'" style="display:none;width:100%"><div style="width:100%; float:left"><br>'+
-                            '<div onclick="diaryEditExercise('+"'"+myDiaryResults['data'][myRes]['id']+"'"+')"><div class="exerciseRepsDiv" >'+
+                            '<div id="'+myDiaryResults['data'][myRes]['id']+'" onclick="diaryEditExercise('+"'"+myDiaryResults['data'][myRes]['id']+"'"+')"><div class="exerciseRepsDiv" >'+
                             myDiaryResults['data'][myRes]['reps']+
                             ' </div>'+
                             '<div class="exerciseSetDiv">'+
@@ -162,7 +162,7 @@ function checkResults(){
                     
                     test.push([myDiaryResults['data'][myRes]['records']]);
                     toAppend +='<div style="width:100%; float:left"><br>'+
-                            '<div onclick="diaryEditExercise('+"'"+myDiaryResults['data'][myRes]['id']+"'"+')"><div class="exerciseRepsDiv" onclick="toggle('+"'"+myResId+myDiaryResults['data'][myRes]['id']+"'"+')">'+
+                            '<div id="'+myDiaryResults['data'][myRes]['id']+'" onclick="diaryEditExercise('+"'"+myDiaryResults['data'][myRes]['id']+"'"+')"><div class="exerciseRepsDiv" onclick="toggle('+"'"+myResId+myDiaryResults['data'][myRes]['id']+"'"+')">'+
                             myDiaryResults['data'][myRes]['reps']+
                             ' </div>'+
                             '<div class="exerciseSetDiv">'+
@@ -196,7 +196,7 @@ function checkResults(){
                 toAppend = '';
                 toAppend += '<div id="DiaryControls'+myResId+'Second" style="width:100%;" >'+
                         '<p>Current Total Volume: <span style="font-weight:600">'+currentTotalVolume+'</span></p>'+
-                '<a href="javascript:diaryModalAddSet('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 5px;padding-left: 1px; width:60px; margin-bottom: 4px; background-color: white; color:#77b2c9" class="btn btn-default btn-circle-main"  title="Add Result to your Exercise"><i class="fa fa-plus"></i></a>'+
+                '<a href="javascript:diaryModalAddSet(['+myDiaryResults['data'][myRes]['exerciseid']+','+myDiaryResults['data'][myRes]['id']+']);" style="font-size: 24px; margin: 4px; padding-top: 5px;padding-left: 1px; width:60px; margin-bottom: 4px; background-color: white; color:#77b2c9" class="btn btn-default btn-circle-main"  title="Add Result to your Exercise"><i class="fa fa-plus"></i></a>'+
                 '<a href="javascript:diaryModalDelete('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 5px; width:60px; margin-bottom: 4px; background-color: #ff6666; color:white" class="btn btn-default btn-circle-main" title="Delete exercise from your diary"><i class="fa fa-trash"></i></a>'+
                 '<a href="javascript:diaryModalHistory('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 5px; width:60px; margin-bottom: 4px; background-color: #66cc66; color:white" class="btn btn-default btn-circle-main"  title="View your log for this exercise"><i class="fa fa-book"></i></a>'+
 //                '<a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a>'+
@@ -269,10 +269,12 @@ function diaryEditExercise(inputID){
     document.getElementById("updateModalChangeWeight").value = result['weight'];
     document.getElementById("updateModalChangeRPE").value = result['rpe'];
     document.getElementById("updateModalChangeRM").value = result['percentage'];
+    
+    document.getElementById("updateResultRemove").innerHTML ='<button onclick="diaryRemoveResults('+inputID+')" type="button" style="background-color:#ff6666;border-color:#ff6666" class="btn btn-primary">Remove</button>';
+    
     $("#basicModalUpdateButtons").empty();
 
-    var buttons='<button onclick="diaryRemoveResults('+inputID+')" type="button" style="background-color:#ff6666;border-color:#ff6666" class="btn btn-primary">Remove</button>'+
-            '<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
+    var buttons='<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
             '<button onclick="updateDiaryResults('+inputID+')" type="button" class="btn btn-primary">Update</button>';
     $("#basicModalUpdateButtons").append(buttons);
     
@@ -416,14 +418,17 @@ function bestVolume(exId){
 function diaryModalAddSet(inputID){
     $("#basicModalAddSetButtons").empty();
 
-    var records = recordsList[inputID][0][0];
 
-    var temp = 'myResExNameDiv'+inputID+'Second';
-    document.getElementById("updateModalAddRep").value = records['amrap']['reps'];
+    var records = recordsList[inputID[0]][0][0];
+
+    var temp = 'myResExNameDiv'+inputID[0]+'Second';
+    var rpe = parseFloat((document.getElementById(inputID[1]).childNodes[7]['innerText']).replace("%","")); 
+    console.log(rpe);
+    document.getElementById("updateModalAddRep").value = records['overall']['rep'];
     document.getElementById("updateModalAddSet").value = document.getElementById(temp).childNodes.length +1;
     document.getElementById("updateModalAddWeight").value = records['amrap']['weight'];
     document.getElementById("updateModalAddRPE").value = records['amrap']['rpe'];
-//    document.getElementById("updateModalAddRM").value = result['percentage'];
+    document.getElementById("updateModalAddRM").value = rpe;
 
     var buttons='<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
             '<button onclick="addModalDiaryResult('+inputID+')" type="button" class="btn btn-primary">Add</button>';
@@ -564,7 +569,8 @@ function loadingModal(data){
     $('#loadingModal').modal(options);
     
     $('#addModal').modal('hide');
-    $('#modalDisplayWorkoutExercies').hide()
+    $('#modalDisplayWorkoutExercies').hide();
+    $('#basicModalAddWorkout').hide();
     
     setTimeout(function() {
         $('#addModal').modal(options);
@@ -630,11 +636,11 @@ function submitDairySearch(){
 }
 function clearSearchTables(){
     //clean up from any past searches
-    
+    document.getElementById("searchresults").innerHTML = "";
+    document.getElementById("searchResultsHeading").innerHTML="";
     try{
         
-        document.getElementById("searchresults").innerHTML = "";
-        document.getElementById("searchResultsHeading").innerHTML="";
+        
     
         $("#mytable").dataTable().fnDestroy();
         $("#mytableWorkouts").dataTable().fnDestroy();
@@ -973,7 +979,7 @@ function updateModalProgramAdd(pId,programNam){
 }
 
 function addProgramToDiary(inputID){
-    messageModal('#basicModalAddWorkout');
+    loadingModal("Adding Program...");
     try{
         console.log(mlpObject.addResults({programid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result);
     }
