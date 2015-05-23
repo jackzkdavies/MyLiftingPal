@@ -118,7 +118,7 @@ function checkResults(){
                             toAppend +="<div style=''></div>"; 
                         }
                         else{
-                            toAppend +="<div style=''><hr style='width:100%;float:left;  border-top:3px solid #77b2c9; margin-top: 20px; */' /></div>"; 
+                            toAppend +="<div style=''><hr style='width:100%;float:left;  border-top:3px solid rgb(174, 125, 125); margin-top: 20px; */' /></div>"; 
                         }
                         }
                         toAppend += '<div style="width:100%; float:left">'+
@@ -150,9 +150,9 @@ function checkResults(){
 
                             ' <div class="exercise1RMdiv">'+
                             myDiaryResults['data'][myRes]['percentage'];
-                            toAppend+='% <i class="fa fa-pencil-square-o" style="color: rgb(119, 178, 201);margin-left: 4px;margin-right: -8px;"></i></div></div>'+
+                            toAppend+='% <i class="redFont fa fa-pencil-square-o" style="margin-left: 4px;margin-right: -8px;"></i></div></div>'+
                             '<div id="'+myResId+myDiaryResults['data'][myRes]['id']+'" style="display:none; ">'+
-                            '<div style=" margin-bottom: -35px; "><a href="javascript:diaryEditExercise('+myDiaryResults['data'][myRes]['id']+');" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a></div>'+
+                            '<div style=" margin-bottom: -35px; "><a href="javascript:diaryEditExercise('+myDiaryResults['data'][myRes]['id']+');" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: rgb(174, 125, 125); color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a></div>'+
                             '</div><br><hr></div></div><div id="'+myResId+"Third"+'" style="display:none"></div> ';
                             
                             
@@ -177,10 +177,10 @@ function checkResults(){
 
                             ' <div class="exercise1RMdiv">'+
                             myDiaryResults['data'][myRes]['percentage'];
-                            toAppend+='% <i class="fa fa-pencil-square-o" style="color: rgb(119, 178, 201);margin-left: 4px;margin-right: -8px;"></i></div></div>'+
+                            toAppend+='% <i class="redFont fa fa-pencil-square-o" style="margin-left: 4px;margin-right: -8px;"></i></div></div>'+
                             '<div id="'+myResId+myDiaryResults['data'][myRes]['id']+'" style="display:none;">'+
                             
-                            '<div style=" margin-bottom: -35px;"><a href="javascript:diaryEditExercise('+myDiaryResults['data'][myRes]['id']+');" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a></div>'+
+                            '<div style=" margin-bottom: -35px;"><a href="javascript:diaryEditExercise('+myDiaryResults['data'][myRes]['id']+');" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: rgb(174, 125, 125); color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a></div>'+
                             '</div><br><hr></div>';
                             
                             var resId="#"+myResId+"Second";
@@ -196,10 +196,10 @@ function checkResults(){
                 toAppend = '';
                 toAppend += '<div id="DiaryControls'+myResId+'Second" style="width:100%;" >'+
                         '<p>Current Total Volume: <span style="font-weight:600">'+currentTotalVolume+'</span></p>'+
-                '<a href="javascript:diaryModalAddSet(['+myDiaryResults['data'][myRes]['exerciseid']+','+myDiaryResults['data'][myRes]['id']+']);" style="font-size: 24px; margin: 4px; padding-top: 5px;padding-left: 1px; width:60px; margin-bottom: 4px; background-color: white; color:#77b2c9" class="btn btn-default btn-circle-main"  title="Add Result to your Exercise"><i class="fa fa-plus"></i></a>'+
+                '<a href="javascript:diaryModalAddSet(['+myDiaryResults['data'][myRes]['exerciseid']+','+myDiaryResults['data'][myRes]['id']+']);" style="font-size: 24px; margin: 4px; padding-top: 5px;padding-left: 1px; width:60px; margin-bottom: 4px; background-color: white; color:rgb(174, 125, 125)" class="btn btn-default btn-circle-main"  title="Add Result to your Exercise"><i class="fa fa-plus"></i></a>'+
                 '<a href="javascript:diaryModalDelete('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 5px; width:60px; margin-bottom: 4px; background-color: #ff6666; color:white" class="btn btn-default btn-circle-main" title="Delete exercise from your diary"><i class="fa fa-trash"></i></a>'+
                 '<a href="javascript:diaryModalHistory('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 5px; width:60px; margin-bottom: 4px; background-color: #66cc66; color:white" class="btn btn-default btn-circle-main"  title="View your log for this exercise"><i class="fa fa-book"></i></a>'+
-//                '<a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: #77b2c9; color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a>'+
+//                '<a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: rgb(174, 125, 125); color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a>'+
                 '</div>';
                 document.getElementById(resId).innerHTML =toAppend;
 //                $(resId).append(toAppend);
@@ -487,7 +487,7 @@ function modalDisplayWorkoutExercies(inputID){
     $("#modalLabelDWE").empty();
     $("#modalLabelDWE").append(name);
     
-    var toAppend='<table><tr style="color: #77b2c9; font-weight:bold;" ><td>Exercise</td><td>Weight</td><td>Reps</td><td>Sets</td><td>RPE</td></tr>';
+    var toAppend='<table><tr style="color: rgb(174, 125, 125); font-weight:bold;" ><td>Exercise</td><td>Weight</td><td>Reps</td><td>Sets</td><td>RPE</td></tr>';
     
     for(i in exercises){
         toAppend+='<tr>';
@@ -535,7 +535,7 @@ function mainPageAdd(){
     $('#addModal').modal(options);
     
       if(firstMainPageAddClicked === false){
-        document.getElementById('mainExSearch').style.color='#77b2c9';
+        document.getElementById('mainExSearch').style.color='rgb(174, 125, 125)';
         document.getElementById('mainWorkSearch').style.color='#333';
         document.getElementById('mainProSearch').style.color='#333';  
         document.getElementById("mainSearchTerm").placeholder="Select Exercise to add";
@@ -595,7 +595,7 @@ function viewFriend(id){
 function mainSearchEx(inp){
 
     if (inp === 'e'){   
-        document.getElementById('mainExSearch').style.color='#77b2c9';
+        document.getElementById('mainExSearch').style.color='rgb(174, 125, 125)';
         document.getElementById('mainWorkSearch').style.color='#333';
         document.getElementById('mainProSearch').style.color='#333';  
         document.getElementById("mainSearchTerm").placeholder="Select Exercise to add";
@@ -604,7 +604,7 @@ function mainSearchEx(inp){
     else if (inp === 'w'){   
 
         document.getElementById('mainExSearch').style.color='#333';
-        document.getElementById('mainWorkSearch').style.color='#77b2c9';
+        document.getElementById('mainWorkSearch').style.color='rgb(174, 125, 125)';
         document.getElementById('mainProSearch').style.color='#333';
         document.getElementById("mainSearchTerm").placeholder="Select Workout to add";
         submitDairySearchClass= 'w';
@@ -612,7 +612,7 @@ function mainSearchEx(inp){
     else if (inp === 'p'){   
         document.getElementById('mainExSearch').style.color='#333';
         document.getElementById('mainWorkSearch').style.color='#333'; 
-        document.getElementById('mainProSearch').style.color='#77b2c9';
+        document.getElementById('mainProSearch').style.color='rgb(174, 125, 125)';
         document.getElementById("mainSearchTerm").placeholder="Select Programme to add";
         submitDairySearchClass= 'p';
     }
@@ -890,7 +890,7 @@ function rightResultsContainerUpdate(programId){
                 while(count <= duration){
                     var header=false;
                     var writeOut = false;
-                    toAppend += '<hr><p style="color:#77b2c9; font-weight:bold">Day: ' + count+'</p>'; 
+                    toAppend += '<hr><p style="color:rgb(174, 125, 125); font-weight:bold">Day: ' + count+'</p>'; 
                     for (workout in workouts){ 
                         if (count == workouts[workout]['day']){
     
@@ -912,7 +912,7 @@ function rightResultsContainerUpdate(programId){
                             
                             var exerciseName = workouts[workout]['name']
 
-//                            toAppend += '<p style="color:#77b2c9">'+workoutName+'</p><br>';
+//                            toAppend += '<p style="color:rgb(174, 125, 125)">'+workoutName+'</p><br>';
 
 
                             toAppend += '<p style="text-align:center;font-size: 14px;margin-bottom: -5px;font-weight: bold;">'+exerciseName+'</p>';
@@ -945,7 +945,7 @@ function rightResultsContainerUpdate(programId){
                 }
             
         }
-     toAppend+='<div style="width:100%"><a href="javascript:updateModalProgramAdd('+programId+','+"'"+name+"'"+');" style="width:60px; margin-bottom: 4px; z-index:10; background-color: #77b2c9;color:white" class="btn btn-default btn-circle-main"><i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i></a></div>';
+     toAppend+='<div style="width:100%"><a href="javascript:updateModalProgramAdd('+programId+','+"'"+name+"'"+');" style="width:60px; margin-bottom: 4px; z-index:10; background-color: rgb(174, 125, 125);color:white" class="btn btn-default btn-circle-main"><i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i></a></div>';
      toAppend+='<br><h2><i onclick="displayLeftSearchContainer()" class="fa fa-arrow-left"></i></h2>';
     $('#rightResultsContent').empty();
     $('#rightResultsContent').append(toAppend);
@@ -969,7 +969,7 @@ function updateModalProgramAdd(pId,programNam){
     
     var toAppend ='';
      toAppend += '<h3 onclick='+'"addProgramToDiary('+pId+')"><i class="fa fa-book"></i>Current Day</h3>'+
-                            '<p style="color:#77b2c9">or</p>'+
+                            '<p style="color:rgb(174, 125, 125)">or</p>'+
                             '<h3 onclick="calanderModal(['+calanderData+'])"><i class="fa fa-calendar"></i>Select Day</h3>';
     $("#modalWorkoutAddTo").append(toAppend);
     var options = {

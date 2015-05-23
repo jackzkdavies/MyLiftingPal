@@ -426,7 +426,7 @@ textarea.w-select {
 .w-hidden-main {
   display: none !important;
 }
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 2768px) {
   .w-container {
     max-width: 728px;
   }
@@ -577,7 +577,7 @@ textarea.w-select {
     right: auto;
   }
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 2768px) {
   .w-hidden-main {
     display: inherit !important;
   }
@@ -733,7 +733,7 @@ textarea.w-select {
     margin-left: 91.66666667%;
   }
 }
-@media screen and (max-width: 479px) {
+@media screen and (max-width: 2768px) {
   .w-container {
     max-width: none;
   }
@@ -1118,7 +1118,7 @@ textarea.w-select {
 .w-nav[data-collapse="all"] .w-dropdown-list {
   position: static;
 }
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 2768px) {
   .w-nav[data-collapse="medium"] .w-dropdown,
   .w-nav[data-collapse="medium"] .w-dropdown-toggle {
     display: block;
@@ -1127,7 +1127,7 @@ textarea.w-select {
     position: static;
   }
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 2768px) {
   .w-nav[data-collapse="small"] .w-dropdown,
   .w-nav[data-collapse="small"] .w-dropdown-toggle {
     display: block;
@@ -1139,7 +1139,7 @@ textarea.w-select {
     padding-left: 10px;
   }
 }
-@media screen and (max-width: 479px) {
+@media screen and (max-width: 2768px) {
   .w-nav[data-collapse="tiny"] .w-dropdown,
   .w-nav[data-collapse="tiny"] .w-dropdown-toggle {
     display: block;
@@ -1403,7 +1403,7 @@ textarea.w-select {
 .w-lightbox-noscroll {
   overflow: hidden;
 }
-@media (min-width: 768px) {
+@media (min-width: 2768px) {
   .w-lightbox-content {
     height: 96vh;
     margin-top: 2vh;
@@ -1548,7 +1548,7 @@ textarea.w-select {
 .w-nav[data-collapse="all"] .w-nav-button {
   display: block;
 }
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 2768px) {
   .w-nav[data-collapse="medium"] .w-nav-menu {
     display: none;
   }
@@ -1556,7 +1556,7 @@ textarea.w-select {
     display: block;
   }
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 2768px) {
   .w-nav[data-collapse="small"] .w-nav-menu {
     display: none;
   }
@@ -1567,7 +1567,7 @@ textarea.w-select {
     padding-left: 10px;
   }
 }
-@media screen and (max-width: 479px) {
+@media screen and (max-width: 2768px) {
   .w-nav[data-collapse="tiny"] .w-nav-menu {
     display: none;
   }
@@ -1614,7 +1614,7 @@ textarea.w-select {
 .w--tab-active {
   display: block;
 }
-@media screen and (max-width: 479px) {
+@media screen and (max-width: 2768px) {
   .w-tab-link {
     display: block;
   }

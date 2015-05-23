@@ -16,7 +16,7 @@
 	</author>
 	<icon src="icon.png" />
 	
-	<gap:splash src="splash.png" />
+	<gap:splash src="splash.jpg" />
 	
 	<preference name="Fullscreen" value="true" />
 	<preference name="DisallowOverscroll" value="true"/>

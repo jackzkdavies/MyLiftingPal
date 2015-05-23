@@ -36,10 +36,10 @@ function setVarDate(){
     fullDate = days[day] + ", " + date +monthPrefix[date-1]+ " " + months[month]+", "+year;
 
     if ($(".calender").is(':visible')){
-        document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-up'></i></span>";
+        document.getElementById("date").innerHTML = fullDate + "<span class='themeColour'> <i class='fa fa-caret-up'></i></span>";
     }
     else{
-        document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-down'></i></span>";
+        document.getElementById("date").innerHTML = fullDate + "<span class='themeColour'> <i class='fa fa-caret-down'></i></span>";
     }
     
     document.getElementById("headerDate").innerHTML = fullDate; 
@@ -49,11 +49,11 @@ function setVarDate(){
 function slideToggleCalender(){
 
     if ($(".calender").is(':visible')){
-        document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-down'></i></span>";
+        document.getElementById("date").innerHTML = fullDate + "<span class='themeColour'> <i class='fa fa-caret-down'></i></span>";
         $(".calender").slideToggle(toggleSpeed);
     }
     else{
-        document.getElementById("date").innerHTML = fullDate + "<span style='color:#77b2c9'> <i class='fa fa-caret-up'></i></span>";
+        document.getElementById("date").innerHTML = fullDate + "<span class='themeColour'> <i class='fa fa-caret-up'></i></span>";
         $(".calender").slideToggle(toggleSpeed);
     }
 }

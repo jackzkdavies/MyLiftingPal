@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <!-- This site was created in Webflow. http://www.webflow.com-->
 <!-- Last Published: Sun Dec 14 2014 22:12:09 GMT+0000 (UTC) -->
-<html data-wf-site="54697ee94e26f780049e790b" data-wf-page="546989c85294c14035d7ee01">
+<html  data-wf-site="54697ee94e26f780049e790b" data-wf-page="546989c85294c14035d7ee01" style="max-width:100%">
 <head>
   <meta charset="utf-8">
   <title>My Lifting Pal - Main Page</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="generator" content="Webflow">
   
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
@@ -24,6 +24,7 @@
       }
     });
   </script>
+
   
   <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
   <script type="text/javascript" src="js/jquery.cookie.js"></script>
@@ -46,26 +47,23 @@
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
   <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
 </head>
-<body id='page-top' class="plainbodybackground" onload="showStopwatch();">
-    
 
+<body id='page-top' >
 
-    
-    
   <div class="w-row" >
     <div  class="w-col w-col-9 w-col-stack">
         
     <!-- Navigation -->
 
-    <nav class="navbar navbar-default navbar-fixed-top" style="background-color: rgb(226, 218, 203);">
-        <div class="container" >
+    <nav style="max-width:100%" class="redBackground navbar navbar-default navbar-fixed-top"   >
+        <div class="" >
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll testBackground" id="logoHeader"  style="background-image: url('images/header.jpg')">
                 <a style='width:75%' class="navbar-brand"  href="#page-top"><img id='mlpLogo' style='height: 35px; margin-top: -10px;  margin-left: 40%; ' src="images/mlplogo.png" alt="MyLiftingPal" ></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="background-color: rgb(226, 218, 203);">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="background-color: rgb(186, 190, 191);">
                 <div>
                 
                    <h5> <a href="main-page.html"><i class="fa fa-book"></i> My Diary</a></h5>
@@ -80,7 +78,7 @@
                 <a  href="settings.html">Settings</a> |
                 <a  href="javascript:logout()">Logout</a>
                 
-                <hr>
+                <hr style="border-top: 1px solid #333333;">
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -174,6 +172,7 @@
             <h5>%1RM</h5>
           </div>
         </div>
+		</div>
             <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
             </div>
           
@@ -257,7 +256,7 @@
                         
                         <div class="modal-body" id="modalWorkoutAddTo">
                             <h3><i class="fa fa-book"></i>Current Day</h3>
-                            <p style="color:#77b2c9">or</p>
+                            <p style="color:#888888">or</p>
                             <h3><i class="fa fa-calendar"></i>Select Day</h3>
                         </div>
                         <div class="modal-footer">
@@ -318,8 +317,8 @@
                       <thead>
                           <tr>
                               <td style='color:black; font-weight: bold;background-color: white'>Exercise</td>
-                              <td style='color:white; font-weight: 650;background-color: #77b2c9;' >info</td>
-                              <td style='color:white; font-weight: 650;background-color: #77b2c9; border-radius:0px 3px 0px 0px'>Add</td>
+                              <td style='color:white; font-weight: 650;background-color: #888888;' >info</td>
+                              <td style='color:white; font-weight: 650;background-color: #888888; border-radius:0px 3px 0px 0px'>Add</td>
                           </tr>
                       </thead>
                       <tbody id ="searchresults" style='font-size: 12px;'>
@@ -331,8 +330,8 @@
                       <thead>
                           <tr>
                               <td style='color:black; font-weight: bold;background-color: white'>Name</td>
-                              <td style='color:white; font-weight: 650;background-color: #77b2c9;' >Author</td>
-                              <!--<td style='color:white; font-weight: 650;background-color: #77b2c9; border-radius:0px 3px 0px 0px'>Type</td>-->
+                              <td style='color:white; font-weight: 650;background-color: #888888;' >Author</td>
+                              <!--<td style='color:white; font-weight: 650;background-color: #888888; border-radius:0px 3px 0px 0px'>Type</td>-->
                           </tr>
                       </thead>
                       <tbody id ="searchresultsWorkouts">
@@ -487,7 +486,7 @@
                             Are you sure you want to delete all sets for this exercise?
                         </div>
                         <div id="basicModalDeleteButtons" class="modal-footer">
-<!--                            <button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>
+<!--                            <button type="button" style="color:#888888;" class="btn btn-default" data-dismiss="modal">Cancel</button>
                             <button onclick="deleteModalDiaryResult('+inputID+')" type="button" class="btn btn-primary">Confirm</button>-->
                     </div>
                 </div>
@@ -543,7 +542,7 @@
                             <br>
                         </div>
                         <div id="basicModalUpdateButtons" class="modal-footer">
-<!--                            <button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>
+<!--                            <button type="button" style="color:#888888;" class="btn btn-default" data-dismiss="modal">Cancel</button>
                             <button onclick="deleteModalDiaryResult('+inputID+')" type="button" class="btn btn-primary">Confirm</button>-->
                     </div>
                 </div>
@@ -561,7 +560,7 @@
          
                         </div>
                         <div id="basicModalDWAdd" class="modal-footer">
-<!--                            <button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>
+<!--                            <button type="button" style="color:#888888;" class="btn btn-default" data-dismiss="modal">Cancel</button>
                             <button onclick="deleteModalDiaryResult('+inputID+')" type="button" class="btn btn-primary">Confirm</button>-->
                     </div>
                 </div>
@@ -578,7 +577,7 @@
                 
             </p>
             <!--temp fix for divs not ending somewhere in js.-->
-            </div></div></div>
+            </div>
             <!--end of temp fix-->
             <br><br>
             <div>       
@@ -600,28 +599,48 @@
         
         
         
-        <div class="share-text">Share with your friends!</div>       
-        <div class="w-clearfix social-widget-wrapper">
-            <div id="fb-root"></div>
+       <div class="share-text">Share with your friends!</div>      
+		
+       <div class="w-clearfix social-widget-wrapper"  style="max-width:50%">
+	   
+            <div id="fb-root">
+			
+			</div>
             <script>
-                (function(d, s, id) {
+					(function(d, s, id) {
                     var js, fjs = d.getElementsByTagName(s)[0];
                     if (d.getElementById(id)) return;
                     js = d.createElement(s); js.id = id;
                     js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3";
                     fjs.parentNode.insertBefore(js, fjs);
                   }(document, 'script', 'facebook-jssdk'));
-
             </script>
+			
             <div class="fb-like" data-href="https://www.facebook.com/myliftingpal" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>   
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.myliftingpal.net/" data-text="Lift with purpose!" data-via="myliftingpal" data-hashtags="myliftingpal">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>         
+			
+			<div style="max-width:100%">
+<!--             <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.myliftingpal.net/" data-text="Lift with purpose!" data-via="myliftingpal" data-hashtags="myliftingpal">Tweet</a>	
+            <script>
+			setTimeout(function() { 
+				!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+	
+			}, 5000);
+
+			</script>
+			
+            <a href="https://twitter.com/myliftingpal" class="twitter-follow-button" data-show-count="true">Follow @myliftingpal</a>
+            <script>
+			
+			setTimeout(function() { 
+				!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+			
+			}, 5000);
+
+			</script>  -->
+            </div>
+			<br><br>
             
-            <a href="https://twitter.com/myliftingpal" class="twitter-follow-button" data-show-count="false">Follow @myliftingpal</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-            <br><br>
-            
-        </div>
+        </div> 
         
     </div>
 
