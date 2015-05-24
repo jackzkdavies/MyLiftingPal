@@ -18,7 +18,7 @@
 	
 	<gap:splash src="splash.jpg" />
 	
-	<gap:plugin name="com.phonegap.plugins.facebookconnect" version="<VERSION>">
+	<gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.8.0">
         <param name="APP_ID" value="1538067003114411" />
         <param name="APP_NAME" value="Plus Strength" />
     </gap:plugin>	
