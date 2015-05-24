@@ -20,7 +20,9 @@ function loginToFB(){
   
   
 function fb_login(){
+alert("wow1");
     FB.login(function(response) {
+		alert("wow");
         if ($.cookie('mlpsession') !== undefined){
 		$(".main-login-content").hide();
 		$(".main-logout-content").show();
