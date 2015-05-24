@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<!-- This site was created in Webflow. http://www.webflow.com-->
+<!-- Last Published: Sun Dec 14 2014 22:12:09 GMT+0000 (UTC) -->
+<html data-wf-site="54697ee94e26f780049e790b" data-wf-page="546989c85294c14035d7ee01">
+<head>
+  <meta charset="utf-8">
+  <title>My Lifting Pal - Main Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Webflow">
+  
+  <link rel="stylesheet" type="text/css" href="css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="css/datepicker3.css">
+  <link rel="stylesheet" type="text/css" href="css/webflow.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="css/myliftingpal.webflow.css"> 
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic","Lily Script One:regular"]
+      }
+    });
+  </script>
+  
+  <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+  <script type="text/javascript" src="js/modernizr.js"></script>
+  <script type="text/javascript" src="js/jquery.cookie.js"></script>
+  <script type="text/javascript" src="js/mlp.js"></script>
+  <script type="text/javascript" src="js/MLP-Settings.js"></script>
+  <script type="text/javascript" src="js/webflow.js"></script>
+  <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/jquery.dataTables.js"></script>
+  
+  <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
+  <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
+</head>
+<body id='page-top' class="plainbodybackground">
+  <div class="w-row">
+    <div class="w-col w-col-9 w-col-stack">
+        
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-default navbar-fixed-top" >
+        <div class="container" >
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll testBackground" id="logoHeader"   >
+                <a style='width:75%' class="navbar-brand"  href="#page-top"><img id='mlpLogo' style='height: 35px; margin-top: -10px;  margin-left: 40%; ' src="images/mlplogo.png" alt="MyLiftingPal" ></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+                <div>
+                
+                   <h5> <a href="main-page.html"><i class="fa fa-book"></i> My Diary</a></h5>
+                  <h5>  <a  href="create-exercise.html"><i class="fa fa-heart"></i> My Exercises</a></h5>
+                  <h5>  <a  href="create-workout.html"><i class="fa fa-child"></i> My Workouts</a></h5>
+                  <h5>  <a  href="create-program.html"><i class="fa fa-calendar"></i> My Programs</a></h5>
+                  <h5>  <a href="stats.html"><i class="fa fa-line-chart"></i> My Stats</a></h5>
+                
+                </div>
+                <br>
+                <a  href="profile.html">Profile</a> |
+                <a  href="settings.html">Settings</a> |
+                <a  href="javascript:logout()">Logout</a>
+                
+                <hr>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+        <div style='width: 100%; text-align: center; float:left'>
+            <div style='width: 72%; float:left'><h4>Terms and Conditions</h4></div>            
+            <div style='width: 14%; float:left; padding-top: 12px;'><p id="numNot"></p><i onclick="$('#bottomNavNotifications').slideToggle();$('#bottomNavStopwatch').hide();$('#bottomNavCalc').hide();" style="color:#333; font-size: 20px" class="fa fa-inbox"></i></div>
+            <div style='width: 14%; float:left; padding-top: 9px;'><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <i style="color:#333; font-size: 20px" class="fa fa-bars"></i>
+                    </button></div>
+        </div>
+
+        
+        <div>
+
+            
+        </div>
+    </nav>
+    
+
+    
+    <nav id='bottomNavNotifications' class="navbar navbar-default navbar-fixed-bottom" style="display:none; background-color: rgb(226, 218, 203);">
+        <br>
+        <div class="container">
+        <p style='font-weight: bold;'>Inbox <button type="button" class="close" onclick="$('#bottomNavNotifications').hide();"  aria-hidden="true"><i class="fa fa-times"></i></button><p>
+        <div id="inboxNotifications"></div>
+        <br>
+        </div>
+    </nav>
+    
+
+    <br><br><br>
+    
+        <div class="w-clearfix" style="text-align: left">
+
+        <h3 style="margin-top: 0px;">
+                1. Terms
+        </h3>
+
+        <p>
+            By accessing this web site, you are agreeing to be bound by these 
+            web site Terms and Conditions of Use, all applicable laws and regulations, 
+            and agree that you are responsible for compliance with any applicable local 
+            laws. If you do not agree with any of these terms, you are prohibited from 
+            using or accessing this site. The materials contained in this web site are 
+            protected by applicable copyright and trade mark law.
+        </p>
+
+        <h3>
+                2. Use License
+        </h3>
+
+        <ol type="a">
+            <li>
+                    Permission is granted to temporarily download one copy of the materials 
+                    (information or software) on MyLiftingPal's web site for personal, 
+                    non-commercial transitory viewing only. This is the grant of a license, 
+                    not a transfer of title, and under this license you may not:
+
+                    <ol type="i">
+                            <li >modify or copy the materials;</li>
+                            <li >use the materials for any commercial purpose, or for any public display (commercial or non-commercial);</li>
+                            <li >attempt to decompile or reverse engineer any software contained on MyLiftingPal's web site;</li>
+                            <li >remove any copyright or other proprietary notations from the materials; or</li>
+                            <li >transfer the materials to another person or "mirror" the materials on any other server.</li>
+                    </ol>
+            </li>
+            <li>
+                    This license shall automatically terminate if you violate any of these restrictions and may be terminated by MyLiftingPal at any time. Upon terminating your viewing of these materials or upon the termination of this license, you must destroy any downloaded materials in your possession whether in electronic or printed format.
+            </li>
+        </ol>
+
+<h3>
+	3. Disclaimer
+</h3>
+
+<ol type="a">
+	<li style="list-style: inherit;">
+		The materials on MyLiftingPal's web site are provided "as is". MyLiftingPal makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties, including without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights. Further, MyLiftingPal does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the materials on its Internet web site or otherwise relating to such materials or on any sites linked to this site.
+	</li>
+</ol>
+
+<h3>
+	4. Limitations
+</h3>
+
+<p>
+	In no event shall MyLiftingPal or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption,) arising out of the use or inability to use the materials on MyLiftingPal's Internet site, even if MyLiftingPal or a MyLiftingPal authorized representative has been notified orally or in writing of the possibility of such damage. Because some jurisdictions do not allow limitations on implied warranties, or limitations of liability for consequential or incidental damages, these limitations may not apply to you.
+</p>
+			
+<h3>
+	5. Revisions and Errata
+</h3>
+
+<p>
+	The materials appearing on MyLiftingPal's web site could include technical, typographical, or photographic errors. MyLiftingPal does not warrant that any of the materials on its web site are accurate, complete, or current. MyLiftingPal may make changes to the materials contained on its web site at any time without notice. MyLiftingPal does not, however, make any commitment to update the materials.
+</p>
+
+<h3>
+	6. Links
+</h3>
+
+<p>
+	MyLiftingPal has not reviewed all of the sites linked to its Internet web site and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by MyLiftingPal of the site. Use of any such linked web site is at the user's own risk.
+</p>
+
+<h3>
+	7. Site Terms of Use Modifications
+</h3>
+
+<p>
+	MyLiftingPal may revise these terms of use for its web site at any time without notice. By using this web site you are agreeing to be bound by the then current version of these Terms and Conditions of Use.
+</p>
+
+<h3>
+	8. Governing Law
+</h3>
+
+<p>
+	Any claim relating to MyLiftingPal's web site shall be governed by the laws of the country New Zealand without regard to its conflict of law provisions.
+</p>
+
+<p>
+	General Terms and Conditions applicable to Use of a Web Site.
+</p>
+    
+    </div>
+                <!--temp fix for divs not ending somewhere in js.-->
+        </div></div></div>
+        <!--end of temp fix-->
+        <div class='returnButton'>       
+            <a href="javascript:window.history.back(-1);" id="mainPageAddButton" class="btn btn-default btn-circle-main rigthFloatingButton">
+                <i class="fa fa-caret-square-o-left fa-2x" style="line-height: 1.9 !important; margin-top: -2px; margin-right: -1px;"></i>
+            </a>
+        </div>
+    
+        <hr>
+        <p><a style="color:#333" href="terms.html">Terms</a> | <a style="color:#333" href="privacy.html">Privacy</a> | <a style="color:#333" href="contact.html">Contact Us</a> | <a style="color:#333" href="http://www.myliftingpal.net/track/#api">API</a></p>
+        <hr> 
+
+      </div>
+
+        <div class="share-text">Share with your friends!</div>       
+        <div class="w-clearfix social-widget-wrapper">
+            <div id="fb-root"></div>
+            <script>
+                (function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                    js = d.createElement(s); js.id = id;
+                    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3";
+                    fjs.parentNode.insertBefore(js, fjs);
+                  }(document, 'script', 'facebook-jssdk'));
+
+            </script>
+            
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.myliftingpal.net/" data-text="Lift with purpose!" data-via="myliftingpal" data-hashtags="myliftingpal">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>         
+            
+            <a href="https://twitter.com/myliftingpal" class="twitter-follow-button" data-show-count="false">Follow @myliftingpal</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            <br><br>
+            <div class="fb-like" data-href="https://www.facebook.com/myliftingpal" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>   
+        </div>
+    
+
+  </div>
+  <div class="color-section">
+    <div class="w-container">
+
+      <div class="footer-section">
+          <div class="copyright">© 2014 MyLiftingPal. All rights reserved.&nbsp;</div>
+      </div>
+    </div>
+  </div>
+    <script>    
+        window.onload = function load(){
+            checkLoginStatus();
+            checkNotifications();
+            
+        };
+        var user = mlpObject.getUser().result;
+        var notifications = user['data']['requests'];
+        
+        function checkNotifications(){
+        var numberNotifications= notifications.length;
+        if (notifications != null){
+            for (request in notifications){
+                console.log(notifications);
+
+                if(numberNotifications > 99){
+                    $('#numNot').append('99+');
+                }
+                else{
+                    $('#numNot').append(numberNotifications);
+                }
+
+                $('#inboxNotifications').append("Friend Request from: <h5 onclick='viewFriend("+notifications[request]['userid']+")'>"+notifications[request]['username']+"</h5>");
+            }
+        }
+    }
+        
+        function doOnOrientationChange()
+        {
+            
+            switch(window.orientation) 
+            {  
+              case -90:
+              case 90:
+                console.log('landscape');
+                break; 
+              default:
+                console.log('portrait');
+                break; 
+            }
+        }
+        
+        var t = false;
+
+        $('.inputLimit10').focus(function () {
+            var $this = $(this);
+
+            t = setInterval(
+
+            function () {
+                if (($this.val() < 1 || $this.val() > 10) && $this.val().length != 0) {
+                    if ($this.val() < 1) {
+                        $this.val(1);
+                    }
+
+                    if ($this.val() > 10) {
+                        $this.val(10);
+                    }
+
+                }
+            }, 50);
+        });
+        
+        $('.inputLimit100').focus(function () {
+            var $this = $(this);
+
+            t = setInterval(
+
+            function () {
+                if (($this.val() < 1 || $this.val() > 100) && $this.val().length != 0) {
+                    if ($this.val() < 1) {
+                        $this.val(1);
+                    }
+
+                    if ($this.val() > 100) {
+                        $this.val(100);
+                    }
+
+                }
+            }, 50);
+        });
+
+        window.addEventListener('orientationchange', doOnOrientationChange);
+
+        // Initial execution if needed
+        doOnOrientationChange();
+    
+   </script>
+  <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+</body>
+</html>
