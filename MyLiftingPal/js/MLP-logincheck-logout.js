@@ -5,7 +5,6 @@
 //Code section for checking login state
 var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
 var user = mlpObject.getUser().result;
-console.log("Check login: "+user)
 window.localStorage.setItem("user", JSON.stringify(user));
 function checkLoginStatus(){
     var locationTest = [(window.location.pathname).toLocaleString(), "/index.html"];

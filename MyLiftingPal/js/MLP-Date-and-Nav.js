@@ -4,6 +4,59 @@
 
 
 //code for nav
+
+$( window ).load(function() { 
+var myElement = document.getElementById('page-top');
+
+// create a simple instance
+// by default, it only adds horizontal recognizers
+var mc = new Hammer(myElement);
+// listen to events...
+var locationTest = [(window.location.pathname).toLocaleString()];
+ console.log(locationTest);
+mc.on("panleft panright tap press", function(ev) {
+	if(locationTest[0].indexOf('main-page') > -1){
+			if (ev.type ==="panright" ){
+		window.location.replace("create-exercise.html");
+		}
+		else{
+			window.location.replace("create-program.html");
+		}	
+	}
+	
+	if(locationTest[0].indexOf('create-exercise') > -1){
+			if (ev.type ==="panright" ){
+		window.location.replace("create-workout.html");
+		}
+		else{
+			window.location.replace("main-page.html");
+		}	
+	}
+	
+		if(locationTest[0].indexOf('create-workout') > -1){
+			if (ev.type ==="panright" ){
+		window.location.replace("create-program.html");
+		}
+		else{
+			window.location.replace("create-exercise.html");
+		}	
+	}
+	
+	if(locationTest[0].indexOf('create-program') > -1){
+			if (ev.type ==="panright" ){
+		window.location.replace("main-page.html");
+		}
+		else{
+			window.location.replace("create-workout.html");
+		}	
+	}
+});
+
+mc.add( new Hammer.Pan({threshold: 100 }) );
+
+
+ }) 
+
 $(window).scroll(function() {
   if ($(document).scrollTop() > 100) {
     $('#logoHeader').css({"margin-top":"-50px"});
