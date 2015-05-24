@@ -35,7 +35,7 @@
                                 data-scope="https://www.googleapis.com/auth/userinfo.email">
                             </span>
                         </span>              
-        <img onclick="fb_login();" class="thirdpartybutton" src="images/fb.png" alt="fb">
+        <img onclick="facebookConnectPlugin.login(['email','public_profile', 'user_friends'], function(){alert('done!')}, function(){alert('fail!')})" class="thirdpartybutton" src="images/fb.png" alt="fb">
         <img onclick="$('#signinButton button').click();" class="thirdpartybutton" src="images/google.png" alt="google">
         
         
