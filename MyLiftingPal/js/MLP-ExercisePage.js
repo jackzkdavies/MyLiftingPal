@@ -228,7 +228,7 @@ function updateModalExerciseAdd(inputId,name){
     var calanderData=[inputId,tempString];
     
     toAppend+= '<h3 onclick="addExToResults(['+data+']);messageModal('+tempString+')"><i class="fa fa-book"></i>Current Day</h3>'+
-                            '<p style="color:#77b2c9">or</p>'+
+                            '<p style="color:rgb(174, 125, 125)">or</p>'+
                             '<h3 onclick="calanderModal(['+calanderData+'])"><i class="fa fa-calendar"></i>Select Day</h3>'+
                             '<br>'+
                             '<h3 onclick="workoutModal(['+calanderData+'])"><i class="fa fa-child"></i>Select Workout</h3>';
@@ -309,7 +309,7 @@ function updateModalExerciseEdit(inputId){
     $("#deleteExerciseButton").append(delBut);
     
     $("#editCalANDSav").empty();
-    var buttons='<button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
+    var buttons='<button type="button" style="color:rgb(174, 125, 125);" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
             '<button onclick="updateExercise('+inputId+')" type="button" class="btn btn-primary">Save</button>';
     $("#editCalANDSav").append(buttons);
     
@@ -342,7 +342,7 @@ function displayMyExercises(){
 
     
     var append = "";
-    append +='<div style="color:#77b2c9; float:left; margin-right:10px;padding-top:5px;padding-left:7px;padding-right:7px">'+
+    append +='<div style="color:rgb(174, 125, 125); float:left; margin-right:10px;padding-top:5px;padding-left:7px;padding-right:7px">'+
 //                    '<p style="font-weight:bold"; >Sort by:</p>'+
                     '</div>'+
 //                    '<select id="myExOrder" style="width:40%; " class="form-control myexercises-editModal-muscle">'+
@@ -355,7 +355,7 @@ function displayMyExercises(){
                     '<div><input style="float:left; margin-right: -38px" class="w-input" id="myExerciseSearch" type="text" placeholder="Search My Exercises" name="addexercisetoworkout" required="required" data-name="addexercisetoworkout">'+
                     '<img class="searchImage" onclick="displayMyExercises();return false;" src="images/search.svg" alt="Search" onerror="this.src="your.png"></div>';
                     
-    if (searchTerm !==""){append +="<div>Showing search results for: '<span style='color:#77b2c9; font-weight:bold'>" + searchTerm +"</span>'.</div>";}
+    if (searchTerm !==""){append +="<div>Showing search results for: '<span style='color:rgb(174, 125, 125); font-weight:bold'>" + searchTerm +"</span>'.</div>";}
     
     append +='<div><p>&nbsp;</p><br></div>';
     $("#myExercises").append(append);
@@ -376,7 +376,7 @@ function displayMyExercises(){
             toAppend +='<span id="myExercisesDetailsArrow'+meo[objects]['id']+'"><i class="fa fa-caret-down"></i></span>';
             toAppend +='</h3>';
             var tempString = "'"+meo[objects]['name']+"'";
-            toAppend +='<a href="javascript:updateModalExerciseAdd(' +meo[objects]['id']+ ','+tempString+')" style="width:60px; margin-bottom: 4px; background-color: #77b2c9;color:white" class="btn btn-default btn-circle-main">';
+            toAppend +='<a href="javascript:updateModalExerciseAdd(' +meo[objects]['id']+ ','+tempString+')"  class="addingButtonsMain btn btn-default btn-circle-main">';
 
             toAppend +='<i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i>';
             toAppend +='</a>';
@@ -411,7 +411,7 @@ function displayMyExercises(){
         toAppend +='<span id="myExercisesDetailsArrow'+mreo[objects]['id']+'"><i class="fa fa-caret-down"></i></span>';
         toAppend +='</h3>';
         var tempString = "'"+mreo[objects]['name']+"'";
-        toAppend +='<a href="javascript:updateModalExerciseAdd(' +mreo[objects]['exerciseid']+','+tempString+')" style="width:60px; margin-bottom: 4px; background-color: #77b2c9;color:white " class="btn btn-default btn-circle-main">';
+        toAppend +='<a href="javascript:updateModalExerciseAdd(' +mreo[objects]['exerciseid']+','+tempString+')" class="addingButtonsMain btn btn-default btn-circle-main">';
 
         toAppend +='<i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i>';
         toAppend +='</a>';
@@ -419,7 +419,7 @@ function displayMyExercises(){
         toAppend +='<div id="myExercises'+mreo[objects]['exerciseid']+'" style="width: 100%; position: relative" class="tabsdivMyWorkOutsBackAndBis"></div>';
 
         if ((objects) == mreo.length-1){
-        toAppend+="</div><div><br><hr style='border-top:3px solid #77b2c9;' /><br></div>";
+        toAppend+="</div><div><br><hr style='border-top:3px solid rgb(174, 125, 125);' /><br></div>";
         }
         else{toAppend+="</div><hr>";
         }
@@ -444,8 +444,8 @@ function displayMyExercisesDetails(input){
     var exercise = mlpObject.getExercises({id:idNum}).result['data'][0];;
     if ((document.getElementById(input).innerHTML).trim() === ""){
 
-        toAppend +='<p style="text-align:left; color:#77b2c9;">&nbsp;&nbsp;&nbsp;'+exercise['musclegroup']+'</p>'+
-                '<p style="text-align:left; color:#77b2c9;">&nbsp;&nbsp;&nbsp;'+exercise['type']+'</p>'+
+        toAppend +='<p style="text-align:left; color:rgb(174, 125, 125);">&nbsp;&nbsp;&nbsp;'+exercise['musclegroup']+'</p>'+
+                '<p style="text-align:left; color:rgb(174, 125, 125);">&nbsp;&nbsp;&nbsp;'+exercise['type']+'</p>'+
                 
                 
                ' <a href="javascript:updateModalExerciseEdit('+idNum+');" style="border:1px solid transparent" class="btn btn-default btn-circle myexercises-edit">'+
@@ -646,7 +646,7 @@ function selectedExercise(r){
                 }
                 Append += "</td>";
             }
-            Append +="<td> <span style='color:#77b2c9'> <i class='fa fa-pencil-square-o'></i> </span> </td>";
+            Append +="<td> <span style='color:rgb(174, 125, 125)'> <i class='fa fa-pencil-square-o'></i> </span> </td>";
     Append +="</tr>";
             
     }

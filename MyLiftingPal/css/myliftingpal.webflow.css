@@ -1,5 +1,8 @@
-.redBackground{
-    background-color: rgb(174, 125, 125);
+.navbar hr{
+    border-top: 1px solid #333333;
+}
+.navbar{
+    background-color:rgb(190, 178, 159)
 }
 .redFont{
 	color: rgb(174, 125, 125);
@@ -55,6 +58,7 @@
    filter: url('blur.svg#blur'); /* for Firefox - http://jordanhollinger.com/media/blur.svg */  
 }
 #logoHeader{
+	background-image: url('../images/header.jpg');
     transition: all 0.5s ease;
 }
 #numNot{
