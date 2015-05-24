@@ -9,14 +9,7 @@ window.fbAsyncInit = function() {
     });
   };
   
-function loginToFB(){
-	facebookConnectPlugin.login(["public_profile"]),
-	function() {alert("hey");},
-	function() {alert("error")}
-	
 
-}
-  
   
   
 function fb_login(){

@@ -17,7 +17,6 @@
     <script type="text/javascript" src="js/MLP-Login.js"></script>
     <script type="text/javascript" src="js/webflow.js"></script>
 	    <script type="text/javascript" src="js/auth.js"></script>
-    <script type="text/javascript" src="js/facebookConnectPlugin.js"></script>	
 
 </head>
 <body style="background-image:url('images/login-bg.jpg')">
@@ -36,10 +35,10 @@
                                 data-scope="https://www.googleapis.com/auth/userinfo.email">
                             </span>
                         </span>              
-        <img onclick="facebookConnectPlugin.login(['email','public_profile', 'user_friends'], function(){alert('done!')}, function(){alert('fail!')})" class="thirdpartybutton" src="images/fb.png" alt="fb">
+        <img onclick="fb_login()" class="thirdpartybutton" src="images/fb.png" alt="fb">
         <img onclick="$('#signinButton button').click();" class="thirdpartybutton" src="images/google.png" alt="google">
         
-        <input type="button" value="login to FB" onclick="fb_login()" />
+
         
         <p style="margin-top: -5px" >or</p>
         <h4>Login</h4>
