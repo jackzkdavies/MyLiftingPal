@@ -127,8 +127,8 @@ function checkLoginStatus(){
     var user = JSON.parse(localStorage.getItem('user'));
     var locationTest = [(window.location.pathname).toLocaleString(), "/index.html"];
     
-    console.log(user);
-    if (user['success'] == true){
+
+    if (user && user['success'] == true){
             window.location.replace("main-page.html"); 
     }
     else{
