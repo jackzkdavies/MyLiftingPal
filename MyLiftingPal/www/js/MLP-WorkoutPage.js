@@ -126,9 +126,9 @@ function modalDisplayWorkoutExercies(inputID){
     $('#modalDisplayWorkoutExercies').modal(options);
 }
 
-function modalWorkoutExerciseEdit(inputID,wID){
+function modalWorkoutExerciseEdit(exerciseid,wID){
     console.log(wID);
-    var workouts = mlpObject.getExercises({id:inputID}).result;
+    var workouts = mlpObject.getExercises({id:exerciseid}).result;
 
      
      
@@ -150,7 +150,7 @@ function modalWorkoutExerciseEdit(inputID,wID){
     
     $("#modalWorkoutExerciseEditControls").empty();
     var buttons='<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
-            '<button onclick="workoutExerciseEdit('+inputID+','+wID+')" type="button" class="btn btn-primary">Save</button>';
+            '<button onclick="workoutExerciseEdit('+exerciseid+','+wID+')" type="button" class="btn btn-primary">Save</button>';
     $("#modalWorkoutExerciseEditControls").append(buttons);
     
     
@@ -159,6 +159,15 @@ function modalWorkoutExerciseEdit(inputID,wID){
     "show":"true"};
     $('#modalWorkoutExerciseEdit').modal(options);
     
+}
+function workoutExerciseEdit(exerciseid,wID){
+    reps = document.getElementById("updateModalAddRep").value;
+    sets = document.getElementById("updateModalAddSet").value;
+    weight = document.getElementById("updateModalAddWeight").value;
+    RPE = document.getElementById("updateModalAddRPE").value;
+    RM = document.getElementById("updateModalAddRM").value;
+    
+    console.log(mlpObject.changeExercise({id:wID,exerciseid:exerciseid, reps:reps, sets:sets, rpe:RPE, weight:weight,percentage:RM}));
 }
 function addExerciseCalanderModal(inputID){
     
@@ -364,10 +373,10 @@ function addMyworkoutDetails(input){
                 }
             }
         }
-        toAppend +='<a href="javascript:addWorkoutEdit('+idNum+');" style="border:6px solid transparent" class="btn btn-default btn-circle myexercises-edit">'+
+        toAppend +='<a href="javascript:addWorkoutEdit('+idNum+');" style="border:6px solid transparent" class="no-background btn btn-default btn-circle myexercises-edit">'+
                 '<i style="font-size:60px" class="fa fa-plus-square"></i></a><br>';
                 
-     toAppend +=  ' <a href="javascript:updateModalWorkoutEdit('+idNum+');" style="border:6px solid transparent" class="btn btn-default btn-circle myexercises-edit">'+
+     toAppend +=  ' <a href="javascript:updateModalWorkoutEdit('+idNum+');" style="border:6px solid transparent" class="no-background btn btn-default btn-circle myexercises-edit">'+
         '<i style="font-size:40px ;padding-left:5px" class="fa fa-pencil-square-o"></i></a>';
     
     

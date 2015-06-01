@@ -5539,6 +5539,7 @@ overflow-y: auto;
 .modal-open .modal {
   overflow-x: hidden;
   overflow-y: auto;
+  padding-bottom: 300px;
 }
 .modal-dialog {
   position: relative;

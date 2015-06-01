@@ -280,6 +280,7 @@ function diaryEditExercise(inputID){
     
     var options = {
     "backdrop" : "true",
+    "keyboard":true,
     "show":"true"};
     $('#modalEditDiaryResult').modal(options);
     
