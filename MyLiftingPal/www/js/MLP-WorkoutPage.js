@@ -611,7 +611,7 @@ function submitSearchExcerciseInWorkout(){
     $("#searchresults").append(toAppend);
     $('#mytable').DataTable({bFilter: false});
     document.getElementById('mytable').style.display='table';
-    document.getElementById('searchResultsHeading').innerHTML='Search results for: '+searchTerm;
+    document.getElementById('searchResultsHeading').innerHTML='Search results for: '+searchTerm+'.<br> Tap to add.';
     
     }
     catch(e){console.log(e);}
@@ -619,67 +619,47 @@ function submitSearchExcerciseInWorkout(){
     
 }
 var globalExerciseIds ={};
+var exerciseAddOrder =[];
 function selectedExercise(r){
-    var searchTerms =['name','musclegroup','type'];
+    var searchTerms =['name'];
     
-    var Append="";
-    Append +="<tr>";
-//    for (obj in globalExerciseObjs){
-//        if( globalExerciseObjs[obj]['id'] == r){
-//            globalExerciseIds.push(globalExerciseObjs[obj]['id']);
-//                for (st in searchTerms ){
-//                Append += "<td>";
-//                Append+= globalExerciseObjs[obj][searchTerms[st]];
-//                Append += "</td>";
-//            }
-//        }
-//    }
-
     for (obj in globalExerciseObjs){
         if( globalExerciseObjs[obj]['id'] == r){
-//            globalExerciseIds.push(globalExerciseObjs[obj]);
             globalExerciseIds[globalExerciseObjs[obj]['id']]=globalExerciseObjs[obj];
+            exerciseAddOrder.push(globalExerciseIds[globalExerciseObjs[obj]['id']]);
         }
     }
+   
+    var Append="";
     
-//    for (obj in globalExerciseIds){
-//            for (st in searchTerms ){
-//            Append += "<td>";
-//            Append+= globalExerciseIds[obj][searchTerms[st]];
-//            Append += "</td>";
-//        }
-//    }
-    
-    for (key in globalExerciseIds){ 
+    Append +="<h3>Workout Exercises</h3><hr>";
+    for (items in exerciseAddOrder){ 
+        Append +="<div style='width:100%; float:left; padding-bottom: 20px;'>";
         for (st in searchTerms){
-                Append += "<td>";
-
-                if (searchTerms[st] === 'userid'){
-    //                toAppend += mlpObject.getUsers({id:results[obj][searchTerms[st]]}).result['data']['username'];
-
-                }
-                else {
-                    Append += globalExerciseIds[key][searchTerms[st]];
-                }
-                Append += "</td>";
-            }
-            Append +="<td> <span style='color:#77b2c9'> <i class='fa fa-pencil-square-o'></i> </span> </td>";
-    Append +="</tr>";
-            
+                Append += "<p class='redFont'>";
+                Append += exerciseAddOrder[items][searchTerms[st]];
+                Append += "</p>"; 
+            }    
+            Append +=   ' <input id="updateModalAddRep" class="w-input field feild2" type="number" placeholder="reps" name="Reps" required="required" data-name="exercisename">'+
+                           ' <input id="updateModalAddSet" class="w-input field feild2" type="number" placeholder="sets" name="Set" required="required" data-name="exercisename">'+
+                           ' <input id="updateModalAddWeight" class="w-input field feild2" type="number" placeholder="weight" name="Weight" required="required" data-name="exercisename">'+
+                           ' <input id="updateModalAddRPE" class="w-input field feild2" type="number" placeholder="RPE" name="RPE" required="required" data-name="exercisename">'+
+                           '<input id="updateModalAddRM" class="w-input field feild2" type="number" placeholder="%1RM" name="%1RM" required="required" data-name="exercisename">';
+                            
+                            
+    Append +="</div>";  
     }
-       
+     
     
     
     try{
-        $("#exercisesToAdd").dataTable().fnDestroy();
         $("#selectedExerciseToAdd").empty();
     }
     catch(e){coneole.log(e);}
     
     
-    $("#selectedExerciseToAdd").append(Append);
-    document.getElementById("exercisesToAdd").style.display='table';
-    $('#exercisesToAdd').DataTable({bFilter: false});
+   $("#selectedExerciseToAdd").append(Append);
+
 
 }
 //create programme

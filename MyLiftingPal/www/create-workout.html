@@ -37,6 +37,10 @@
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/jquery.dataTables.js"></script>
     <script type="text/javascript" src="js/hammer.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    
+    <script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
+    
   
     <!--multi page MLP js-->
   <script type="text/javascript" src="js/MLP-logincheck-logout.js"></script>
@@ -337,20 +341,15 @@
                 <div class="w-tab-pane w-clearfix" data-w-tab="Create New">
                 <p id="errorCreatingWorkout"></p>
               <input class="w-input field feild2" id="cWorkoutName" type="text" placeholder="Enter workout name" name="workoutname" required="required" data-name="workoutname">
+               <script>$('#sortable').sortable();</script>
+              <div id="exercisesToAdd" style="">
 
-              <table id="exercisesToAdd" style="display:  none">
-                  <thead>
-                  <tr>
-                      <td>Exercise</td>
-                      <td>M/Group</td>
-                      <td>Type</td>
-                      <td></td>
-                  </tr>
-                  </thead>
-                  <tbody id="selectedExerciseToAdd">
 
-                  </tbody>
-              </table>
+                  <div id="selectedExerciseToAdd" style="width:100%">
+
+                  </div>
+                  <script>$('#selectedExerciseToAdd').sortable();</script>
+              </div>
               <hr>
 
               <div style="width: 100%;">
@@ -372,7 +371,7 @@
                });
                 </script>
               
-              <p id="searchResultsHeading"></p>
+              <p id="searchResultsHeading" class="redFont"></p>
 
               <table id='mytable' style='display: none; text-align:left; text-shadow: 0px 0px rgba(255, 255, 255, 0);'>
                   <thead>
