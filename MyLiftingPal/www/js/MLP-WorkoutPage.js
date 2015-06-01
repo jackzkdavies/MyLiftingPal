@@ -640,11 +640,12 @@ function selectedExercise(r){
                 Append += exerciseAddOrder[items][searchTerms[st]];
                 Append += "</p>"; 
             }    
-            Append +=   ' <input id="updateModalAddRep" class="w-input field feild2" type="number" placeholder="reps" name="Reps" required="required" data-name="exercisename">'+
-                           ' <input id="updateModalAddSet" class="w-input field feild2" type="number" placeholder="sets" name="Set" required="required" data-name="exercisename">'+
-                           ' <input id="updateModalAddWeight" class="w-input field feild2" type="number" placeholder="weight" name="Weight" required="required" data-name="exercisename">'+
-                           ' <input id="updateModalAddRPE" class="w-input field feild2" type="number" placeholder="RPE" name="RPE" required="required" data-name="exercisename">'+
-                           '<input id="updateModalAddRM" class="w-input field feild2" type="number" placeholder="%1RM" name="%1RM" required="required" data-name="exercisename">';
+            Append +=   ' <table style="width:100%"><tr><td style="width: 20%;">reps</td><td style="width: 20%;">sets</td><td style="width: 20%;">weight</td><td style="width: 20%;">RPE</td style="width: 20%;"><td style="width: 20%;">%1RM</td></tr>'+
+						'<tr><td><input id="updateModalAddRep" class="createWorkoutExerciseTable" type="number" placeholder="12" name="Reps" required="required" data-name="exercisename"></td>'+
+                           '<td> <input id="updateModalAddSet" class="createWorkoutExerciseTable" type="number" placeholder="3" name="Set" required="required" data-name="exercisename"></td>'+
+                           ' <td><input id="updateModalAddWeight" class="createWorkoutExerciseTable" type="number" placeholder="10" name="Weight" required="required" data-name="exercisename"></td>'+
+                           '<td> <input id="updateModalAddRPE" class="createWorkoutExerciseTable" type="number" placeholder="8" name="RPE" required="required" data-name="exercisename"></td>'+
+                           '<td><input id="updateModalAddRM" class="createWorkoutExerciseTable" type="number" placeholder="1" name="%1RM" required="required" data-name="exercisename"></td></tr></table>';
                             
                             
     Append +="</div>";  
