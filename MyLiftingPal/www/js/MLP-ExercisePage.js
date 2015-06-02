@@ -193,7 +193,7 @@ function workoutModal(data){
     $('#workoutListFooter').append(buttons);
     
     var toAppend ='<p>Need to add functionallity still</p>';
-    var workouts = mlpObject.getWorkouts({userid:userId}).result['data'];
+    var workouts = mlpObject.getWorkouts({userid:userid}).result['data'];
     
     for (workout in workouts){
         toAppend+='<h3>'+workouts[workout]['name']+'</h3>';
@@ -207,7 +207,7 @@ function workoutModal(data){
     $('#workoutListModal').modal(options);
     
     
-    var workouts = mlpObject.getWorkouts({userid:userId}).result['data'];
+    var workouts = mlpObject.getWorkouts({userid:userid}).result['data'];
     for (workout in workouts){
     console.log(workouts[workout]['name']);}
     
@@ -330,13 +330,13 @@ function displayMyExercises(){
     catch(e){}
     console.log(searchTerm);
     $("#myExercises").empty();
-    var userId=mlpObject.getUser().result['data']['id'];
+    var userid=mlpObject.getUser().result['data']['id'];
     var meo;
     if (searchTerm !== ""){
-        var meo=mlpObject.getExercises({userid:userId, name:searchTerm}).result['data'];   
+        var meo=mlpObject.getExercises({userid:userid, name:searchTerm}).result['data'];   
     }
     else{
-        var meo=mlpObject.getExercises({userid:userId}).result['data'];
+        var meo=mlpObject.getExercises({userid:userid}).result['data'];
     }
     
 
@@ -394,11 +394,11 @@ function displayMyExercises(){
     $("#myExercises").append(toAppend);
     
     if (searchTerm !== ""){
-        try{var mreo = mlpObject.selectResults({limit:20,userid:userId,type:'exercises', name:searchTerm}).result['data'];}
+        try{var mreo = mlpObject.selectResults({limit:20,userid:userid,type:'exercises', name:searchTerm}).result['data'];}
         catch(e){console.log(e);}
     }
     else{
-        try{var mreo = mlpObject.selectResults({limit:20,userid:userId,type:'exercises'}).result['data'];}
+        try{var mreo = mlpObject.selectResults({limit:20,userid:userid,type:'exercises'}).result['data'];}
         catch(e){console.log(e);}
     }
     

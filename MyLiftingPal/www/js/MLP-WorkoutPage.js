@@ -182,8 +182,8 @@ function addExerciseCalanderModal(inputID){
     catch(e){
         
     }
-    messageModal('#calanderModal');
-    
+    /* messageModal('#calanderModal'); */
+    loadingModal("Adding Workout to Diary...");
 }
 
 function messageModal(caller){
@@ -373,7 +373,7 @@ function addMyworkoutDetails(input){
                 }
             }
         }
-        toAppend +='<a href="javascript:addWorkoutEdit('+idNum+');" style="border:6px solid transparent" class="no-background btn btn-default btn-circle myexercises-edit">'+
+        toAppend +='<a href="javascript:updateModalWorkoutAdd('+idNum+');" style="border:6px solid transparent" class="no-background btn btn-default btn-circle myexercises-edit">'+
                 '<i style="font-size:60px" class="fa fa-plus-square"></i></a><br>';
                 
      toAppend +=  ' <a href="javascript:updateModalWorkoutEdit('+idNum+');" style="border:6px solid transparent" class="no-background btn btn-default btn-circle myexercises-edit">'+
@@ -451,7 +451,7 @@ function updateModalWorkoutAdd(wId)
 }
 
 function addWorkoutToDiary(inputID){
-    messageModal('#basicModalAddWorkout');
+	loadingModal("Adding Workout To Diary...")
     try{
         console.log(mlpObject.addResults({workoutid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result);
     }
@@ -511,31 +511,30 @@ function submitCreateWorkoutForm(){
                 var nwi = newWorkout['result']['data']['id'];
                 if(globalExerciseIds !== {}){
                     console.log("in add exercises to new Workoutout:");
-                    for (key in globalExerciseIds){    
-                        if (globalExerciseIds.hasOwnProperty(key)) {
-                            //exerciseid, workoutid,ordering, reps, sets, rpe, weight, percentage
-//                            try{
-//                            mlpObject.addexercise({exerciseid:globalExerciseIds[key]['id'], workoutid:newWorkout['id'], ordering:key, 
-//                            reps:globalExerciseIds[key]['reps'], sets:globalExerciseIds[key]['sets'], rpe:globalExerciseIds[key]['rpe'],weight:globalExerciseIds[key]['weight'], percentage:globalExerciseIds[key]['percentage']});
-//                            }
-                            console.log("globalExerciseIds[key]['id']:");
-                            console.log(globalExerciseIds[key]['id']);
-                            console.log("newWorkout['id']:");
-                            console.log(newWorkout['id']);
-                            console.log("key:");
-                            console.log(key);
-                            try{
-                            temp = mlpObject.addExercise({exerciseid:globalExerciseIds[key]['id'], workoutid:nwi, ordering:key.toString(), 
-                            reps:'0', sets:'0', rpe:'0',weight:'0', percentage:'0'});
-                            console.log(temp);
+					var t = $('#selectedExerciseToAdd').children();
+					for(i in t){
+						if(typeof t[i].id != 'undefined' && t[i].id != ""){
+						     try{
+								console.log(t[i]);
+								var reps=$(" #" +t[i].id+ " #updateModalAddRep").val();
+								var sets=$(" #" +t[i].id+ " #updateModalAddSet").val();
+								var weight=$(" #" +t[i].id+ " #updateModalAddWeight").val();
+								var rpe=$(" #" +t[i].id+ " #updateModalAddRPE").val();
+								var rm=$(" #" +t[i].id+ " #updateModalAddRM").val();
+
+								console.log(reps);
+								temp = mlpObject.addExercise({exerciseid:t[i].id, workoutid:nwi, ordering:(i - 2), 
+								reps:reps, sets:sets, rpe:rpe,weight:weight, percentage:rm});
+								console.log(temp);
                              }
 
                             catch(e){
                                 console.log(e);}
 
                                 }
-                    }
-                }
+						}
+					}
+
             
         }
         else{ throw "Session is null";
@@ -632,9 +631,10 @@ function selectedExercise(r){
    
     var Append="";
     
-    Append +="<h3>Workout Exercises</h3><hr>";
+    Append +="<h3>Workout Exercises</h3><p>Tap and Drag to Reorder</p><hr>";
     for (items in exerciseAddOrder){ 
-        Append +="<div style='width:100%; float:left; padding-bottom: 20px;'>";
+        Append +="<div style='width:100%; float:left; padding-bottom: 20px;' id="+exerciseAddOrder[items]['id']+">";
+										
         for (st in searchTerms){
                 Append += "<p class='redFont'>";
                 Append += exerciseAddOrder[items][searchTerms[st]];
@@ -660,6 +660,13 @@ function selectedExercise(r){
     
     
    $("#selectedExerciseToAdd").append(Append);
+   for (items in exerciseAddOrder){ 
+		$(" #" +exerciseAddOrder[items]['id']+ " #updateModalAddRep").val(12);
+		$(" #" +exerciseAddOrder[items]['id']+ " #updateModalAddSet").val(3);
+		$(" #" +exerciseAddOrder[items]['id']+ " #updateModalAddWeight").val(0);
+		$(" #" +exerciseAddOrder[items]['id']+ " #updateModalAddRPE").val(0);
+		$(" #" +exerciseAddOrder[items]['id']+ " #updateModalAddRM").val(0);
+	}
 
 
 }
@@ -701,5 +708,26 @@ function submitCreateProgrammeForm(){
         sWorkoutName = null; 
         sExercises = null;
     }
+}
+
+function loadingModal(data){
+    document.getElementById("loadingModal").innerHTML = "<h6>"+data+"</h6>";
+    var options = {
+    "backdrop" : "true",
+    "show":"true"};
+    $('#loadingModal').modal(options);
+    
+    $('#basicModalAddWorkout').modal('hide');
+    $('#basicModalAddWorkout').hide();
+	$('#calanderModal').modal('hide');
+    $('#calanderModal').hide();
+
+    
+    setTimeout(function() {
+        $('#addModal').modal(options);
+    
+        $('#loadingModal').modal('hide');
+    }, 2000);
+    
 }
 

@@ -176,6 +176,8 @@
                     </div>
               </div>
             </div>
+			 <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+            </div>
             
             <div class="modal fade" id="calanderModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                 <div class="modal-dialog">
@@ -341,15 +343,11 @@
                 <div class="w-tab-pane w-clearfix" data-w-tab="Create New">
                 <p id="errorCreatingWorkout"></p>
               <input class="w-input field feild2" id="cWorkoutName" type="text" placeholder="Enter workout name" name="workoutname" required="required" data-name="workoutname">
-               <script>$('#sortable').sortable();</script>
-              <div id="exercisesToAdd" style="">
+			  <div id="selectedExerciseToAdd" style="width:100%">
 
-
-                  <div id="selectedExerciseToAdd" style="width:100%">
-
-                  </div>
-                  <script>$('#selectedExerciseToAdd').sortable();</script>
-              </div>
+			  </div>
+			  <script>$('#selectedExerciseToAdd').sortable();</script>
+             
               <hr>
 
               <div style="width: 100%;">
