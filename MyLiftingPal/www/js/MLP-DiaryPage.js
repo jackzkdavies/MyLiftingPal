@@ -196,9 +196,9 @@ function checkResults(){
                 toAppend = '';
                 toAppend += '<div id="DiaryControls'+myResId+'Second" style="width:100%;" >'+
                         '<p>Current Total Volume: <span style="font-weight:600">'+currentTotalVolume+'</span></p>'+
-                '<a href="javascript:diaryModalAddSet(['+myDiaryResults['data'][myRes]['exerciseid']+','+myDiaryResults['data'][myRes]['id']+']);" style="font-size: 24px; margin: 4px; padding-top: 5px;padding-left: 1px; width:60px; margin-bottom: 4px; background-color: white; color:rgb(174, 125, 125)" class="btn btn-default btn-circle-main"  title="Add Result to your Exercise"><i class="fa fa-plus"></i></a>'+
-                '<a href="javascript:diaryModalDelete('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 5px; width:60px; margin-bottom: 4px; background-color: #ff6666; color:white" class="btn btn-default btn-circle-main" title="Delete exercise from your diary"><i class="fa fa-trash"></i></a>'+
-                '<a href="javascript:diaryModalHistory('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 5px; width:60px; margin-bottom: 4px; background-color: #66cc66; color:white" class="btn btn-default btn-circle-main"  title="View your log for this exercise"><i class="fa fa-book"></i></a>'+
+                '<a href="javascript:diaryModalAddSet(['+myDiaryResults['data'][myRes]['exerciseid']+','+myDiaryResults['data'][myRes]['id']+']);" style="font-size: 24px; margin: 4px; padding-top: 18px;padding-left: 2px; width:60px; margin-bottom: 4px; background-color: white; color:rgb(174, 125, 125)" class="btn btn-default btn-circle-main"  title="Add Result to your Exercise"><i class="fa fa-plus"></i></a>'+
+                '<a href="javascript:diaryModalDelete('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 18px;padding-left: 2px;  width:60px; margin-bottom: 4px; background-color: #ff6666; color:white" class="btn btn-default btn-circle-main" title="Delete exercise from your diary"><i class="fa fa-trash"></i></a>'+
+                '<a href="javascript:diaryModalHistory('+myDiaryResults['data'][myRes]['exerciseid']+');" style="font-size: 24px; margin: 4px; padding-top: 18px;padding-left: 2px;  width:60px; margin-bottom: 4px; background-color: #66cc66; color:white" class="btn btn-default btn-circle-main"  title="View your log for this exercise"><i class="fa fa-book"></i></a>'+
 //                '<a href="javascript:void(0);" style="font-size: 24px; margin: 4px; padding-top: 6px; width:60px; margin-bottom: 4px; background-color: rgb(174, 125, 125); color:white" class="btn btn-default btn-circle-main" title="View settings for this set"><i class="fa fa-cog"></i></a>'+
                 '</div>';
                 document.getElementById(resId).innerHTML =toAppend;
@@ -637,6 +637,7 @@ function submitDairySearch(){
 }
 function clearSearchTables(){
     //clean up from any past searches
+	$("#outerResultsContainer").css({"width": "100%","display":"hidden","float":"left"});
     document.getElementById("searchresults").innerHTML = "";
     document.getElementById("searchResultsHeading").innerHTML="";
     try{
@@ -752,6 +753,7 @@ function dairyPageExSearch(){
 
 function diaryPageWorkoutSeach(){
 
+
     //clean up from any past searches
     clearSearchTables();
     
@@ -818,6 +820,7 @@ function diaryPageWorkoutSeach(){
 
 
 function programSearch(){
+	$("#outerResultsContainer").css({"width": "100%","display":"block","float":"left"});
     
     //clean up from any past searches
     clearSearchTables();
