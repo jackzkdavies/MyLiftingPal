@@ -2,7 +2,7 @@
 <script type="text/javascript" src="js/MLP-Notifications.js"></script>
 <script type="text/javascript" src="js/MLP-Date-and-Nav.js"></script>
 
-<div class="col-lg-12">
+
 <nav class="navbar navbar-default navbar-fixed-top" >
 	<div class="container" >
 		<!-- Brand and toggle get grouped for better mobile display -->
@@ -14,8 +14,8 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
 			<div>
 			
-			   <h5> <a href="main-page.html"><i class="fa fa-book"></i> My Diary</a></h5>
-			  <h5>  <a  href="create-exercise.html"><i class="fa fa-heart"></i> My Exercises</a></h5>
+			   <h5> <a href="javascript:$('#body').load('diary.html');"><i class="fa fa-book"></i> My Diary</a></h5>
+			  <h5>  <a  href="javascript:$('#body').load('exercise.html');"><i class="fa fa-heart"></i> My Exercises</a></h5>
 			  <h5>  <a  href="create-workout.html"><i class="fa fa-child"></i> My Workouts</a></h5>
 			  <h5>  <a  href="create-program.html"><i class="fa fa-calendar"></i> My Programs</a></h5>
 			  <h5>  <a href="stats.html"><i class="fa fa-line-chart"></i> My Stats</a></h5>
@@ -141,25 +141,45 @@
 	</div>
 	</div>
 	
-	<br><br><br>
-	        <p id="date" onClick="slideToggleCalender()">  </p>      
-        <div class="calender"  id="date-Picker" style="display: none;" onClick="setVarDate()"></div>
-        <script>
-            $('#date-Picker').datepicker({
-            format: "dd/mm/yyyy",
-            orientation: "top",
-            keyboardNavigation: false,
-            calendarWeeks: true,
-            todayHighlight: true,
-            gotoCurrent: true
-            }).datepicker("setDate", new Date());
-            setVarDate();
-        </script>
-		
-		    <script>
-        window.onload = function load(){
-            checkLoginStatus();
-            checkNotifications();            
-        };
+	<div class="modal fade" id="calanderModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+			<h4 class="modal-title" id="myModalLabelExerciseAdd">Select Date</h4>
+			</div>
+			<div class="modal-body" id="calanderModalBody" >
+				<div class="calender"  id="date-Picker2" onClick="setVarDate()"></div>
+				
+			</div>
+			<div class="modal-footer" id="calanderModalButtons">
 
-    </script>
+			</div>
+		</div>
+	</div>
+	</div>
+	
+<br><br><br>
+
+<p id="date"  onchange="" onClick="slideToggleCalender()">  </p>      
+<div class="calender"  id="date-Picker" style="display: none;" onClick="setVarDate()"></div>
+
+<script>
+	$('#date-Picker').datepicker({
+	format: "dd/mm/yyyy",
+	orientation: "top",
+	keyboardNavigation: false,
+	calendarWeeks: true,
+	todayHighlight: true,
+	gotoCurrent: true
+	}).datepicker("setDate", new Date());
+	setVarDate();
+</script>
+
+<script>
+window.onload = function load(){
+	checkLoginStatus();
+	checkNotifications();  
+};
+
+</script>

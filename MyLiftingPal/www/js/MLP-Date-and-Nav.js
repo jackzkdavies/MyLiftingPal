@@ -96,6 +96,11 @@ function setVarDate(){
     }
     
     document.getElementById("headerDate").innerHTML = fullDate; 
+	
+	try{
+		checkResults();
+	}
+	catch(e){}
 
 }
 

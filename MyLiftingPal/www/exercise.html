@@ -1,0 +1,181 @@
+<script type="text/javascript" src="js/MLP-ExercisePage.js"></script>
+<script type="text/javascript" src="js/webflow.js"></script>
+
+<div class="modal fade" id="workoutListModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+			<h4 class="modal-title" id="workoutListHeader">Select Workout</h4>
+		</div>
+		<div class="modal-body" id="workoutListBody"></div>
+		<div class="modal-footer" id="workoutListFooter"></div>
+	</div>
+</div>
+</div>
+
+<div class="modal fade" id="basicModalAddEx" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+			<h4 class="modal-title" id="myModalLabelExerciseAdd">Add to</h4>
+		</div>
+		<div class="modal-body" id="AddEdModalControls"></div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>
+		</div>
+	</div>
+</div>
+</div>
+
+<div class="modal fade" id="basicModalEdit" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+			<h4 class="modal-title" id="myModalLabelExerciseEdit">Edit Exercise</h4>
+		</div>
+		<div class="modal-body">
+			<p  class="blackfont">Name</p>
+			<input id="updateExerciseName" class="w-input field feild2" type="text" placeholder="" name="exercisename" required="required" data-name="exercisename">
+			<p class="blackfont">Muscle</p>
+				<select id="updateExerciseMuscle" class="form-control myexercises-editModal-muscle">
+				<option value="0">None</option>
+				<option>Rectus Abdominis</option>
+				<option>Biceps</option>
+				<option>Deltoids</option>
+				<option>Erector Spinae</option>
+				<option>Gastrocnemius</option>
+				<option>Soleus</option>
+				<option>Gluteus</option>
+				<option>Hamstrings</option>
+				<option>Latissimus Dorsi</option>
+				<option>Rhomboids</option>
+				<option>Obliques</option>
+				<option>Pectoralis</option>
+				<option>Quadriceps</option>
+				<option>Trapezius</option>
+				<option>Triceps</option>
+				</select>
+			<p class="blackfont">Type</p>
+				<select id="updateExerciseType" class="form-control myexercises-editModal-type">
+				<option value="0">None</option>
+				<option>Isolation</option>
+				<option>Compound</option>                    
+				<option>Squat</option>
+				<option>Press</option>
+				<option>Deadlift</option>
+				<option>Push</option>
+				<option>Pull</option>
+				<option>Legs</option>
+				<option>Upper</option>
+				<option>Lower</option>                    
+				</select>
+			<hr>
+			<div id="deleteExerciseButton"></div>
+			
+		</div>
+		<div id="editCalANDSav" class="modal-footer">
+		</div>
+	</div>
+</div>
+</div>
+           
+
+<div onclick="toggleMyExercises()">
+	<p id="numberExercises">Show My Exercises</p>
+	<div id="showExToggleArrow"><i style="font-size:40px" class="fa fa-plus-circle"></i></div>
+	<hr>
+</div>
+
+<div id="myExercises"></div>
+
+<i style="font-size: 40px;" class="fa fa-heart"></i>
+
+<div class="w-tabs" data-duration-in="300" data-duration-out="100">
+	<div class="w-tab-menu w-clearfix">
+		<a class="w--current w-tab-link w-inline-block searchtab" data-w-tab="Search">
+			<div><img class="searchImage2" src="images/search.svg" alt=""><strong>Search</strong></div>
+		</a>
+		<a class="w-tab-link w-inline-block createtab" data-w-tab="CreateNew">
+			<div><strong>Create New Exercise</strong></div>
+		</a>
+  </div>
+  
+	<div class="w-tab-content">
+	<div class="w-tab-pane w-clearfix" data-w-tab="CreateNew">
+		<input class="w-input field feild2" id="cExerciseName" type="text" placeholder="Enter exercise name" name="exercisename" required="required" data-name="exercisename">
+		<script>
+			$("#cExerciseName").keyup(function (e) {
+			   if (e.keyCode == 13) {
+				document.getElementById("cExerciseMusclegroup").focus();
+			   }
+		   });
+		 </script>
+		<p>Muscle group</p>   
+		<select id="cExerciseMusclegroup" class="form-control myexercises-editModal-muscle">
+			<option value="0">None</option>
+			<option>Rectus Abdominis</option>
+			<option>Biceps</option>
+			<option>Deltoids</option>
+			<option>Erector Spinae</option>
+			<option>Gastrocnemius</option>
+			<option>Soleus</option>
+			<option>Gluteus</option>
+			<option>Hamstrings</option>
+			<option>Latissimus Dorsi</option>
+			<option>Rhomboids</option>
+			<option>Obliques</option>
+			<option>Pectoralis</option>
+			<option>Quadriceps</option>
+			<option>Trapezius</option>
+			<option>Triceps</option>
+		</select>
+		<p>Type</p>                 
+		<select id="cExerciseType" class="form-control myexercises-editModal-type">
+			<option value="0">None</option>
+			<option>Isolation</option>
+			<option>Compound</option>                    
+			<option>Squat</option>
+			<option>Press</option>
+			<option>Deadlift</option>
+			<option>Push</option>
+			<option>Pull</option>
+			<option>Legs</option>
+			<option>Upper</option>
+			<option>Lower</option>                    
+		</select>
+		<p id="createSuccess"></p>
+		<a class="button signup" href="javascript: submitCreateExerciseForm(0)"><span><strong>Create Exercise</strong></span></a>
+		<p>&nbsp;</p>
+		<a class="button signup" href="javascript: submitCreateExerciseForm(1)"><span><strong>Create and Add </strong></span></a>
+	</div>
+	
+	<div class="w-tab-pane w--tab-active w-clearfix" data-w-tab="Search">
+		<input class="w-input seachexerciseinput" id="exercisesearch" type="text" placeholder="Search Existing Exercises" name="exercisesearch" required="required" data-name="exercisesearch">
+		<a class="button addexercisetocurrentday" href="javascript: submitSearchExcercise()"><strong>Submit Search</strong></a>
+		<script>
+			$("#exercisesearch").keyup(function (e) {
+				if (e.keyCode == 13) {
+				submitSearchExcercise();
+			}
+			});
+		</script>
+		<p id="searchResultsHeading"></p>
+
+		<table id='mytable' style='display: none; text-align:left; text-shadow: 0px 0px rgba(255, 255, 255, 0);'>
+			<thead>
+				<tr>
+					<td style='color:black; font-weight: bold;background-color: white'>Exercise</td>
+					<td style='color:white; font-weight: 650;background-color: #77b2c9;' >M.Group</td>
+					<td style='color:white; font-weight: 650;background-color: #77b2c9; border-radius:0px 3px 0px 0px'>Type</td>
+				</tr>
+			</thead>
+			<tbody id ="searchresults"></tbody>
+		</table>
+	</div>
+	</div>
+</div>
+  
+<div class='returnButton'> </div>
