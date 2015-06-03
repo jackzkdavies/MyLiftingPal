@@ -7,18 +7,29 @@
 	<div class="container" >
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header page-scroll testBackground" id="logoHeader"  >
-			<a style='width:75%' class="navbar-brand"  href="#page-top"><img id='mlpLogo' style='height: 35px; margin-top: -10px;  margin-left: 40%; ' src="images/mlplogo.png" alt="MyLiftingPal" ></a>
+			<img id='mlpLogo' style='height: 35px; margin: 6px;' src="images/mlplogo.png" alt="MyLiftingPal" >
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
 			<div>
+				<script>
+				function divtoshow(i){
+					$('#diary').css({'display':'none'})
+					$('#exercises').css({'display':'none'})
+					$('#workouts').css({'display':'none'})
+					$('#programs').css({'display':'none'})
+					$(i).css({'display':'block'})
+				}
+				</script>
 			
-			   <h5> <a href="javascript:$('#body').load('diary.html');"><i class="fa fa-book"></i> My Diary</a></h5>
-			  <h5>  <a  href="javascript:$('#body').load('exercise.html');"><i class="fa fa-heart"></i> My Exercises</a></h5>
-			  <h5>  <a  href="create-workout.html"><i class="fa fa-child"></i> My Workouts</a></h5>
-			  <h5>  <a  href="create-program.html"><i class="fa fa-calendar"></i> My Programs</a></h5>
-			  <h5>  <a href="stats.html"><i class="fa fa-line-chart"></i> My Stats</a></h5>
+				<h5 data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <a href="javascript:divtoshow('#diary')"><i class="fa fa-book"></i> My Diary</a></h5>
+				<h5 data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">  <a  href="javascript:divtoshow('#exercises')"><i class="fa fa-heart"></i> My Exercises</a></h5>
+				<h5 data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">  <a  href="javascript:divtoshow('#workouts')"><i class="fa fa-child"></i> My Workouts</a></h5>
+				<h5 data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">  <a  href="javascript:divtoshow('#programs')"><i class="fa fa-calendar"></i> My Programs</a></h5>
+				<h5>  <a href="stats.html"><i class="fa fa-line-chart"></i> My Stats</a></h5>
+			  
+
 			
 			</div>
 			<br>
