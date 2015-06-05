@@ -42,11 +42,14 @@
 	<script type="text/javascript" src="js/mlp.js"></script>
 	
 	<!--MyLiftinPal JS-->
-	<script type="text/javascript" src="js/stopwatch.js"></script>
+        <script type="text/javascript" src="js/MLP-Login.js"></script>
+        <script type="text/javascript" src="js/MLP-Notifications.js"></script>
+        <script type="text/javascript" src="js/MLP-Date-and-Nav.js"></script>
+        
+	<script type="text/javascript" async src="js/stopwatch.js"></script>
 	<script type="text/javascript" src="js/1rmcalc.js"></script>
-	<script type="text/javascript" src="js/MLP-logincheck-logout.js"></script>
-	<script type="text/javascript" src="js/MLP-Notifications.js"></script>
-	<script type="text/javascript" src="js/MLP-Date-and-Nav.js"></script>
+	
+	
 </head>
 
 
@@ -59,8 +62,7 @@
 <div id="exercises" class="col-lg-12" style="display:none"></div>
 <div id="workouts" class="col-lg-12" style="display:none"></div>
 <div id="programs" class="col-lg-12" style="display:none"></div>
-
-<div id="footer"></div>
+</div><div id="footer"></div>
 
 
 
@@ -83,8 +85,7 @@
 	
 	
 	window.onload = function load(){
-		<!-- checkLoginStatus(); -->
-		<!-- checkNotifications(); -->
+		checkNotifications();
 	};
 </script> 
 

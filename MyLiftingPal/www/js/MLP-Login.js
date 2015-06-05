@@ -1,10 +1,54 @@
 try{
+    var locationTest = [(window.location.pathname).toLocaleString(), "/index.html"];
     var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
+    
+    //Check if already loged in, and/or if login details are saved, if so attempt to login.
+    if (mlpObject.getUser().result['success'] == true){
+        console.log('Already logged in');
+        if(locationTest[0].indexOf('index') > -1){
+            window.location.replace("PlusStrength.html");}
+    }
+    else{
+        if(localStorage.getItem('un') != null && localStorage.getItem('pw') != null){
+            console.log("Creditials saved, attempting auto login");
+            if (mlpObject.login({username:localStorage.getItem('un'),password:localStorage.getItem('pw')}).result["success"] === true){
+                var user = mlpObject.getUser().result;
+                window.localStorage.setItem("user", JSON.stringify(user));
+                if(locationTest[0].indexOf('index') > -1){
+                    window.location.replace("PlusStrength.html");  
+                }                       
+            }
+            else{
+                console.log('Auto Login Failed, Returning to login page.')
+                alert('Auto Login Failed, Returning to login page.');
+                localStorage.clear();
+                setTimeout(function () {
+                    if(locationTest[0].indexOf('index') <= -1 ){
+                        window.location.replace("index.html");
+                    }
+                }, 2000);
+
+            }
+        }
+    
+    //login dtails not saved
+        else{
+            console.log("Login details not saved, directing to login page")
+            if(locationTest[0].indexOf('index') <= -1 ){
+                window.location.replace("index.html");}
+        }
+    }
 }
 
 catch(e){
+    if(locationTest[0].indexOf('index') <= -1 ){
+        window.location.replace("index.html");
+    }
+    message.innerHTML = "Can not connect to servers, make sure you are connected to th internet."
+    console.log(e+' :Could not create connection with server. Ending Sesson');
     alert(e+' :Could not create connection with server. Ending Sesson');
-    throw new Error();       
+    throw new Error();  
+     
 }
 
 //Code Section for Loging in
@@ -25,8 +69,8 @@ function submitLoginForm(){
             try{
                 var user = mlpObject.getUser().result;
                 window.localStorage.setItem("user", JSON.stringify(user));
-                
-                window.localStorage.setItem("p", JSON.stringify(lPassword));
+                window.localStorage.setItem("un", JSON.stringify(lPassword));
+                window.localStorage.setItem("pw", JSON.stringify(lPassword));
 
                 var notifications = user['data']['requests'];
                 window.localStorage.setItem("notifications", JSON.stringify(notifications));
@@ -34,7 +78,7 @@ function submitLoginForm(){
                 var displayUnits  = user['data']['units'];
                 window.localStorage.setItem("displayUnits", JSON.stringify(displayUnits));
 
-                window.location.replace("main-page.html");
+                window.location.replace("PlusStrength.html");
                 }
                 catch(e){
                     console.log("Error creating local storage vaiables in 'submitLoginForm'"+e)
@@ -47,7 +91,7 @@ function submitLoginForm(){
                 errormsg = 'incorrectPassword';
             }
             else if (mlpObject.result["errormsg"].indexOf('You are already logged in as') > -1){
-                    window.location.replace("main-page.html");
+                    window.location.replace("PlusStrength.html");
             }
 
             message = document.getElementById(errormsg);
@@ -87,7 +131,7 @@ function submitSignUpForm(){
                     document.getElementById('whiteBackground').style.display="none";
                     document.getElementById('successSignUp').style.display="block";
                     setTimeout(function () {
-                        window.location.replace("main-page.html");
+                        window.location.replace("PlusStrength.html");
                     }, 2000);
 
                 }
@@ -104,7 +148,7 @@ function submitSignUpForm(){
         else{
             var message = document.getElementById('invalidpasswordmatch');
             var badColor = "#ff6666";
-            passwordconfirm.style.backgroundColor = badColor;
+            passwordconfirm.style.backgroundColor = 'rgba(255, 102, 102, 0.7)';
             message.style.color = badColor;
             message.innerHTML = "Passwords Do Not Match"; 
             throw "Email or Password falid check";
@@ -123,21 +167,21 @@ function submitSignUpForm(){
     }
 }
 
-function checkLoginStatus(){
-    var user = JSON.parse(localStorage.getItem('user'));
-    var locationTest = [(window.location.pathname).toLocaleString(), "/index.html"];
-    
-
-    if (user && user['success'] == true){
-            window.location.replace("main-page.html"); 
-    }
-    else{
-
-        if(locationTest[0].indexOf('index') < -1 ){
-            window.location.replace("index.html");
-        }
-    }
-}
+//function checkLoginStatus(){
+//    var user = JSON.parse(localStorage.getItem('user'));
+//    var locationTest = [(window.location.pathname).toLocaleString(), "/index.html"];
+//    
+//
+//    if (user && user['success'] == true){
+//            window.location.replace("PlusStrength.html"); 
+//    }
+//    else{
+//
+//        if(locationTest[0].indexOf('index') < -1 ){
+//            window.location.replace("index.html");
+//        }
+//    }
+//}
 
 //Code Section for Toggling between signup/login forms
 function toggleForms(){
@@ -170,3 +214,9 @@ function validateEmail(email) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 } 
+
+function logout(){
+    mlpObject.logout();
+    localStorage.clear();
+    window.location.replace("index.html");
+}
