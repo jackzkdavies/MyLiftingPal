@@ -2,8 +2,6 @@
 //          Jack Z K Davies 2014 copywrite
 //          www.thesoftengineer.com
 
-var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
-var user = JSON.parse(localStorage.getItem('user'));
 var notifications = user['data']['requests'];
 
 function notifcationsModal(){
@@ -16,7 +14,7 @@ function notifcationsModal(){
 function checkNotifications(){
     $('#notifcationsFriendRequest').empty();
     var numberNotifications = notifications.length;
-    if (notifications != null){   w
+    if (notifications != null){
         for (request in notifications){
 
             if(numberNotifications > 99){

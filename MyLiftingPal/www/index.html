@@ -16,14 +16,10 @@
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/jquery.cookie.js"></script>
     
-    <script type="text/javascript" src="js/mlp.js"></script>
-    <script type="text/javascript" src="js/MLP-Login.js"></script>
-    <script type="text/javascript" src="js/webflow.js"></script>
-    <script type="text/javascript" src="js/auth.js"></script>
-
 </head>
 <body>
     <img src="images/mlplogored.png" alt="PlusStrength">
+	<h4 id="ConnectionError"></h4>
     <br><br><br>
     <div  class="col-lg-12" style="padding: 10px; "> 
         <h4>Login</h4>
@@ -35,6 +31,19 @@
               <input class="w-input field" id="signInPassword" type="password" placeholder="Enter your password" name="password" data-name="password" required="required">
               <a class="w-button button" href="javascript: submitLoginForm()">login</a>
             </form>
+            <script>
+                $("#signInUsername").keyup(function (e) {
+                   if (e.keyCode == 13) {
+                        document.getElementById("signInPassword").focus();
+                   }
+               });
+               
+                $("#signInPassword").keyup(function (e) {
+                   if (e.keyCode == 13) {
+                       submitLoginForm();
+                   }
+               });
+            </script>
               <br>
               <h4>New user?</h4>
           <a class="button signup" href="javascript: toggleForms()"><span>sign up</span></a>
@@ -51,6 +60,29 @@
                 <input class="w-input field" id="passwordconfirm" type="password" placeholder="Re-enter your password" name="passwordconfirm" data-name="passwordconfirm" required="required" onclick="checkEmailaddress(); return false;" onkeyup="checkPassword(); return false;">
                 <a class="w-button button" href="javascript: submitSignUpForm()">sign up</a>
             </form>
+            <script>
+                $("#email").keyup(function (e) {
+                   if (e.keyCode == 13) {
+                        document.getElementById("username").focus();
+                   }
+               });                
+               $("#username").keyup(function (e) {
+                   if (e.keyCode == 13) {
+                        document.getElementById("password").focus();
+                   }
+               });
+                $("#password").keyup(function (e) {
+                   if (e.keyCode == 13) {
+                        document.getElementById("passwordconfirm").focus();
+                   }
+               });
+               
+                $("#passwordconfirm").keyup(function (e) {
+                   if (e.keyCode == 13) {
+                       submitSignUpForm();
+                   }
+               });
+            </script>
             <br><br>
             <a class="button backbutton" href="javascript: toggleForms()">return</a>
         </div>
@@ -66,12 +98,10 @@
     </div>
   </div>
 
-    <script>       
-        window.onload = function load(){
-            checkLoginStatus();
-
-        };
-    </script>
+    <script type="text/javascript" src="js/mlp.js"></script>
+    <script type="text/javascript" src="js/MLP-Login.js"></script>
+    <script type="text/javascript" src="js/webflow.js"></script>
+    <script type="text/javascript" src="js/auth.js"></script>
   <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
 </body>
 </html>

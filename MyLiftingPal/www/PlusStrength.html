@@ -43,38 +43,36 @@
 	
 	<!--MyLiftinPal JS-->
         <script type="text/javascript" src="js/MLP-Login.js"></script>
-        <script type="text/javascript" src="js/MLP-Notifications.js"></script>
-        <script type="text/javascript" src="js/MLP-Date-and-Nav.js"></script>
-        
-	<script type="text/javascript" async src="js/stopwatch.js"></script>
-	<script type="text/javascript" src="js/1rmcalc.js"></script>
-	
 	
 </head>
 
-
-
 <body id='page-top' >
-<div id="splash"><h2 class="redFont" style="padding-top: 40%;">Stacking Plates<h2><p style="color:white">please wait...</p></div>
+<div id="splash"><h2 class="redFont" style="padding-top: 40%;">Stacking Plates</h2><p style="color:white">please wait...</p></div>
 <div id="header" style="" ></div>
-
+<div id="modals"></div>
 <div id="diary" class="col-lg-12" ></div>
 <div id="exercises" class="col-lg-12" style="display:none"></div>
 <div id="workouts" class="col-lg-12" style="display:none"></div>
 <div id="programs" class="col-lg-12" style="display:none"></div>
-</div><div id="footer"></div>
-
+<div id="footer"></div>
 
 
 <script> 
+        document.addEventListener("deviceready", onDeviceReady, false); function onDeviceReady() { 
+            document.addEventListener("backbutton", handleBackButton, false); 
+        } 
+        
+        function handleBackButton(){ $('.modal').modal('hide'); } 
+
 	function SplashBeGone() { 
-		document.getElementById('splash').style.display = 'none'; 
-		<!-- document.getElementById('header').style.display = 'block';  -->
+            document.getElementById('splash').style.display = 'none'; 
+            <!-- document.getElementById('header').style.display = 'block';  -->
 	}
 	document.getElementById('splash').style.display = 'block'; 
 	setTimeout(function(){ SplashBeGone(); }, 5000);
 
 	$("#header").load("header.html");
+        $("#modals").load("modals.html");
 	$("#diary").load("diary.html");
 	$("#exercises").load("exercises.html");
 	$("#workouts").load("workouts.html");
@@ -82,12 +80,17 @@
 	$("#footer").load("footer.html"); 
 	$("#pagename").html('bababa');
 	
-	
-	
 	window.onload = function load(){
 		checkNotifications();
 	};
 </script> 
+
+    <!--MyLiftinPal JS-->
+    <script type="text/javascript" src="js/MLP-Notifications.js"></script>
+    <script type="text/javascript" src="js/MLP-Date-and-Nav.js"></script>
+
+    <script type="text/javascript" async src="js/stopwatch.js"></script>
+    <script type="text/javascript" src="js/1rmcalc.js"></script>
 
 
 

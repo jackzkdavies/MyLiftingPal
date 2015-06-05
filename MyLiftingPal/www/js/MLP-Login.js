@@ -1,9 +1,9 @@
 try{
     var locationTest = [(window.location.pathname).toLocaleString(), "/index.html"];
     var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
-    
     //Check if already loged in, and/or if login details are saved, if so attempt to login.
     if (mlpObject.getUser().result['success'] == true){
+        var user=mlpObject.getUser().result;
         console.log('Already logged in');
         if(locationTest[0].indexOf('index') > -1){
             window.location.replace("PlusStrength.html");}
@@ -44,7 +44,7 @@ catch(e){
     if(locationTest[0].indexOf('index') <= -1 ){
         window.location.replace("index.html");
     }
-    message.innerHTML = "Can not connect to servers, make sure you are connected to th internet."
+    document.getElementById("ConnectionError").innerHTML="Can not connect to servers, make sure you are connected to the internet.";
     console.log(e+' :Could not create connection with server. Ending Sesson');
     alert(e+' :Could not create connection with server. Ending Sesson');
     throw new Error();  
@@ -167,7 +167,7 @@ function submitSignUpForm(){
     }
 }
 
-//function checkLoginStatus(){
+function checkLoginStatus(){
 //    var user = JSON.parse(localStorage.getItem('user'));
 //    var locationTest = [(window.location.pathname).toLocaleString(), "/index.html"];
 //    
@@ -181,7 +181,7 @@ function submitSignUpForm(){
 //            window.location.replace("index.html");
 //        }
 //    }
-//}
+}
 
 //Code Section for Toggling between signup/login forms
 function toggleForms(){
