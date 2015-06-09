@@ -1,36 +1,19 @@
 //          MLP
 //          Jack Z K Davies 2014 copywrite
 //          www.thesoftengineer.com
-
-var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
-console.log(mlpObject.getUser()['result']['success']);
-var user = JSON.parse(localStorage.getItem('user'));
-var notifications = user['data']['requests'];
-var userid = user['data']['id'];
-var displayUnits  = user['data']['units'];
-if (mlpObject.getUser()['result']['success'] == false){
-    mlpObject.login({username:user['data']['username'],password:JSON.parse(localStorage.getItem('p'))});}
-
-
 var globalExerciseObjs; 
 var globalWorkoutObjs;
 var globalProgramObjs; 
-
 var firstMainPageAddClicked=false;
 var submitDairySearchClass= 'e';
-
 var currentTotals={};
-
 window.localStorage.setItem("lastFriendView", null);
-//var displayUnits = window.localStorage.getItem("displayUnits");
-
 var toggleList={};
 var recordsList={};
 var toggleSpeed=0;
 
 //Code section for setting toggle states
 function toggleListActivate(){
-
     try{
     for (var key in toggleList) {
       if (toggleList.hasOwnProperty(key)) {
@@ -66,7 +49,6 @@ function toggle(divID){
 }
 
 
-
 function toggleDropDownArrow(i){
     if (i.classList.contains('w--open')=== true){
         document.getElementById("dropDownArrow").innerHTML = '<img class="dumbbells" src="images/db.png" alt="">My Training&nbsp;&nbsp<i class="fa fa-caret-down"></i>';
@@ -75,7 +57,6 @@ function toggleDropDownArrow(i){
         document.getElementById("dropDownArrow").innerHTML = '<img class="dumbbells" src="images/db.png" alt="">My Training&nbsp;&nbsp;<i class="fa fa-caret-up"></i>';
     }
 }
-
 
 function checkResults(){
     currentTotals={};
@@ -234,6 +215,7 @@ function currentTotalVolumeCalc(diaryres){
     
 }
 function updateDiaryResults(inputID){
+    loadingModal("Updating Set...");
     try{
         var rep=document.getElementById("updateModalChangeRep").value;
         var set=document.getElementById("updateModalChangeSet").value;
@@ -252,6 +234,7 @@ function updateDiaryResults(inputID){
 }
 
 function diaryRemoveResults(inputID){
+    loadingModal("Removing Results...")
     try{
         mlpObject.removeResults({id:inputID});
         $('#modalEditDiaryResult').modal('hide');
@@ -336,12 +319,14 @@ function diaryModalDelete(inputID){
 }
 
 function deleteModalDiaryResult(inputID){
+    loadingModal("Deleteing Resutls...");
     mlpObject.removeResults({exerciseid:inputID, assigneddate:year+"-"+(month+1)+"-"+date});
     $('#modalDirayDelete').modal('hide');
     checkResults(); 
 }
 
 function addModalDiaryResult(inputID){
+    loadingModal("Adding Set...");
     try{
         var rep=document.getElementById("ModalAddSetRep").value;
         var set=document.getElementById("ModalAddSetSet").value;
@@ -440,15 +425,15 @@ function addWorkoutToDiary(inputID){
 
 
 //Code for modals
-function modalDisplayWorkoutExercies(inputID){
+function diaryModalDisplayWorkoutExercies(inputID){
 
     var searchResult = mlpObject.getWorkouts({id:inputID}).result['data'][0];
     var name = searchResult['name']
     var exercises = searchResult['exercises'];
  
     
-    $("#modalLabelDWE").empty();
-    $("#modalLabelDWE").append(name);
+    $("#modalDisplayWorkoutExerciesHeader").empty();
+    $("#modalDisplayWorkoutExerciesHeader").append(name);
     
     var toAppend='<table><tr style="color: rgb(174, 125, 125); font-weight:bold;" ><td>Exercise</td><td>Weight</td><td>Reps</td><td>Sets</td><td>RPE</td></tr>';
     
@@ -477,12 +462,12 @@ function modalDisplayWorkoutExercies(inputID){
     var buttons='<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
             '<button onclick="addWorkoutToDiary('+inputID+')" type="button" class="btn btn-primary">Add</button>';
     
-    $("#basicModalDWAdd").empty();
-    $("#basicModalDWAdd").append(buttons);
+    $("#modalDisplayWorkoutExerciesFooter").empty();
+    $("#modalDisplayWorkoutExerciesFooter").append(buttons);
     
 
-    $("#modalDWEdetails").empty();
-    $("#modalDWEdetails").append(toAppend);
+    $("#modalDisplayWorkoutExerciesBody").empty();
+    $("#modalDisplayWorkoutExerciesBody").append(toAppend);
     
     var options = {
     "backdrop" : "true",
@@ -524,18 +509,7 @@ function infoDataModal(data){
     $('#addModal').hide();
         
 }
-function loadingModal(data){
-    document.getElementById("loadingModal").innerHTML = "<h6>"+data+"</h6>";
-    var options = {
-    "backdrop" : "true",
-    "show":"true"};
-    $('#addModal').modal('hide');
-    $('#loadingModal').modal(options);
-    setTimeout(function() {
-//        $('#loadingModal').modal('hide');
-    }, 2000);
-    
-}
+
 
 
 function viewFriend(id){
@@ -543,10 +517,6 @@ function viewFriend(id){
     console.log(window.localStorage.getItem("lastFriendView"));
     window.location.replace("friendsProfile.html");
 }
-
-
-
-
 
 
 function mainSearchEx(inp){
@@ -587,7 +557,7 @@ function submitDairySearch(){
     }
     
     if (submitDairySearchClass === 'p'){
-        programSearch();
+        diaryProgramSearch();
     }
     
 }
@@ -742,7 +712,7 @@ function diaryPageWorkoutSeach(){
               if (globalWorkoutObjs.hasOwnProperty(key)) {    
                   
         var useDate=[year,(month+1),date];
-        toAppend += "<tr onClick='modalDisplayWorkoutExercies("+key+")'>";
+        toAppend += "<tr onClick='diaryModalDisplayWorkoutExercies("+key+")'>";
        
 
         for (st in searchTerms){
@@ -775,8 +745,8 @@ function diaryPageWorkoutSeach(){
 }
 
 
-function programSearch(){
-	$("#outerResultsContainer").css({"width": "100%","display":"block","float":"left"});
+function diaryProgramSearch(){
+    $("#outerResultsContainer").css({"width": "100%","display":"block","float":"left"});
     
     //clean up from any past searches
     clearSearchTables();
@@ -811,7 +781,7 @@ function programSearch(){
     
     for (key in globalProgramObjs){    
         if (globalProgramObjs.hasOwnProperty(key)) { 
-            toAppend = "<tr onclick='rightResultsContainerUpdate("+key+")'><td>" + globalProgramObjs[key]['name'] +"</td></tr>";
+            toAppend = "<tr onclick='diaryRightResultsContainerUpdate("+key+")'><td>" + globalProgramObjs[key]['name'] +"</td></tr>";
             $('#searchResultsProgram').append(toAppend);
         }
 
@@ -822,7 +792,6 @@ function programSearch(){
     $('#programSearchTable').DataTable({bFilter: false});
     document.getElementById('programSearchTable').style.display='table';
         
-    console.log(globalProgramObjs);
     
 }
 
@@ -832,7 +801,7 @@ function displayLeftSearchContainer(){
     
 }
 
-function rightResultsContainerUpdate(programId){
+function diaryRightResultsContainerUpdate(programId){
     var name=globalProgramObjs[programId]['name'];
     var duration=globalProgramObjs[programId]['duration'];
     var workouts=globalProgramObjs[programId]['workouts'];
@@ -905,7 +874,7 @@ function rightResultsContainerUpdate(programId){
                 }
             
         }
-     toAppend+='<div style="width:100%"><a href="javascript:updateModalProgramAdd('+programId+','+"'"+name+"'"+');" style="width:60px; margin-bottom: 4px; z-index:10; background-color: rgb(174, 125, 125);color:white" class="btn btn-default btn-circle-main"><i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i></a></div>';
+     toAppend+='<div style="width:100%"><a href="javascript:diaryUpdateModalProgramAdd('+programId+','+"'"+name+"'"+');" style="width:60px; margin-bottom: 4px; z-index:10; background-color: rgb(174, 125, 125);color:white" class="btn btn-default btn-circle-main"><i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i></a></div>';
      toAppend+='<br><h2><i onclick="displayLeftSearchContainer()" class="fa fa-arrow-left"></i></h2>';
     $('#rightResultsContent').empty();
     $('#rightResultsContent').append(toAppend);
@@ -916,7 +885,7 @@ function rightResultsContainerUpdate(programId){
     
 }
 
-function updateModalProgramAdd(pId,programNam){
+function diaryUpdateModalProgramAdd(pId,programNam){
     $('#addModal').modal('hide');
 
     $("#myModalLabelWorkoutAdd").empty();
@@ -942,6 +911,7 @@ function addProgramToDiary(inputID){
     loadingModal("Adding Program...");
     try{
         console.log(mlpObject.addResults({programid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result);
+        checkResults();
     }
     catch(e){
         

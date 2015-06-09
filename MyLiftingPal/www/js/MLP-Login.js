@@ -3,8 +3,11 @@ try{
     var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
     //Check if already loged in, and/or if login details are saved, if so attempt to login.
     if (mlpObject.getUser().result['success'] == true){
-        var user=mlpObject.getUser().result;
-        console.log('Already logged in');
+        var user = mlpObject.getUser().result;
+        var userid = user['data']['id'];
+        var displayUnits  = user['data']['units'];
+        var notifications = user['data']['requests'];
+        alert('Already logged in');
         if(locationTest[0].indexOf('index') > -1){
             window.location.replace("PlusStrength.html");}
     }
@@ -13,6 +16,9 @@ try{
             console.log("Creditials saved, attempting auto login");
             if (mlpObject.login({username:localStorage.getItem('un'),password:localStorage.getItem('pw')}).result["success"] === true){
                 var user = mlpObject.getUser().result;
+                var userid = user['data']['id'];
+                var displayUnits  = user['data']['units'];
+                var notifications = user['data']['requests'];
                 window.localStorage.setItem("user", JSON.stringify(user));
                 if(locationTest[0].indexOf('index') > -1){
                     window.location.replace("PlusStrength.html");  
@@ -67,17 +73,12 @@ function submitLoginForm(){
         //username, password
         if (mlpObject.login({username:lUsername,password:lPassword}).result["success"] === true){
             try{
-                var user = mlpObject.getUser().result;
-                window.localStorage.setItem("user", JSON.stringify(user));
                 window.localStorage.setItem("un", JSON.stringify(lPassword));
                 window.localStorage.setItem("pw", JSON.stringify(lPassword));
-
-                var notifications = user['data']['requests'];
-                window.localStorage.setItem("notifications", JSON.stringify(notifications));
-
+                var user = mlpObject.getUser().result;
+                var userid = user['data']['id'];
                 var displayUnits  = user['data']['units'];
-                window.localStorage.setItem("displayUnits", JSON.stringify(displayUnits));
-
+                var notifications = user['data']['requests'];
                 window.location.replace("PlusStrength.html");
                 }
                 catch(e){

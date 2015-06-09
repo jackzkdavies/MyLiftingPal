@@ -710,24 +710,4 @@ function submitCreateProgrammeForm(){
     }
 }
 
-//function loadingModal(data){
-//    document.getElementById("loadingModal").innerHTML = "<h6>"+data+"</h6>";
-//    var options = {
-//    "backdrop" : "true",
-//    "show":"true"};
-//    $('#loadingModal').modal(options);
-//    
-//    $('#basicModalAddWorkout').modal('hide');
-//    $('#basicModalAddWorkout').hide();
-//	$('#calanderModal').modal('hide');
-//    $('#calanderModal').hide();
-//
-//    
-//    setTimeout(function() {
-//        $('#addModal').modal(options);
-//    
-//        $('#loadingModal').modal('hide');
-//    }, 2000);
-//    
-//}
 

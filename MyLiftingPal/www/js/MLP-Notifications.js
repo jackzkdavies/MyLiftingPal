@@ -1,9 +1,18 @@
 //          MLP
 //          Jack Z K Davies 2014 copywrite
 //          www.thesoftengineer.com
-
-var notifications = user['data']['requests'];
-
+function loadingModal(data){
+    document.getElementById("loadingModal").innerHTML = "<h6>"+data+"</h6>";
+    var options = {
+    "backdrop" : "true",
+    "show":"true"};
+    $('.modal').modal('hide');
+    $('#loadingModal').modal(options);
+    setTimeout(function() {
+        $('#loadingModal').modal('hide');
+    }, 2000);
+    
+}
 function notifcationsModal(){
     var options = {
     "backdrop" : "true",
