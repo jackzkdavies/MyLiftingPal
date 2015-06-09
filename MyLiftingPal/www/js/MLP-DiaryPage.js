@@ -262,35 +262,25 @@ function diaryRemoveResults(inputID){
 
 function diaryEditExercise(inputID){
     var result = mlpObject.selectResults({id:inputID}).result['data'][0];
-    
-
     document.getElementById("updateModalChangeRep").value = result['reps'];
     document.getElementById("updateModalChangeSet").value = result['sets'];
     document.getElementById("updateModalChangeWeight").value = result['weight'];
     document.getElementById("updateModalChangeRPE").value = result['rpe'];
     document.getElementById("updateModalChangeRM").value = result['percentage'];
-    
     document.getElementById("updateResultRemove").innerHTML ='<button onclick="diaryRemoveResults('+inputID+')" type="button" style="background-color:#ff6666;border-color:#ff6666" class="btn btn-primary">Remove</button>';
-    
-    $("#basicModalUpdateButtons").empty();
-
+    $("#modalEditDiaryResultFooter").empty();
     var buttons='<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
             '<button onclick="updateDiaryResults('+inputID+')" type="button" class="btn btn-primary">Update</button>';
-    $("#basicModalUpdateButtons").append(buttons);
-    
+    $("#modalEditDiaryResultFooter").append(buttons); 
     var options = {
     "backdrop" : "true",
     "keyboard":true,
     "show":"true"};
     $('#modalEditDiaryResult').modal(options);
-    
 }
 
 function diaryModalHistory(inputID){
     var records = recordsList[inputID][0];
-    
-    
-    
     for (record in records){
         $("#modalHistoryRecords").empty();
         var toAppend="<h5>Records for current weight</h5>";
@@ -304,18 +294,10 @@ function diaryModalHistory(inputID){
             }
         
         }
-            catch(e){ console.log(e);}
-        
-//        try{
-//            if (typeof records[record]['overall']['max'] !='undefined'){
-//            toAppend ='<p>'+records[record]['overall']['rep']+'RM (estimated): '+records[record]['overall']['max']+displayUnits+'</p><br>';
-//            $("#modalHistoryRecords").append(toAppend);
-//    
-//            }
-//        }
+        catch(e){ console.log(e);
+        }
         var toAppend="<h5>Overal Records</h5>";
-        $("#modalHistoryRecords").append(toAppend);
-        
+        $("#modalHistoryRecords").append(toAppend); 
         try{
             if (typeof records[record]['overall']['max'] !='undefined'){
             toAppend ='<p>Best '+records[record]['overall']['rep']+' RM recorded: '+records[record]['overall']['max']+displayUnits+'</p><br>';
@@ -323,8 +305,8 @@ function diaryModalHistory(inputID){
     
             }
         }
-        catch(e){ console.log(e); }
-
+        catch(e){ console.log(e); 
+        }
         try{
             if (typeof records[record]['backoffs']['best'] !='undefined'){
             toAppend ='<p>Best set volume for '+records[record]['overall']['rep']+' rep sets: '+ records[record]['backoffs']['best'] +displayUnits+'</p><br>';
@@ -332,18 +314,10 @@ function diaryModalHistory(inputID){
     
             }
         }
-        catch(e){ console.log(e);}
-        
-        try{
-//            if(typeof records[record]['history']['sets'] != 'undefined'){
-//            toAppend +='<p>Last time you did' + records[record]['history']['sets']+ 'x' +  records[record]['history']['reps'] + ' using ' + records[record]['history']['weight'] +displayUnits +'</p><br>';
-//            }
+        catch(e){ console.log(e);
         }
-            catch(e){ console.log(e);}
-        }
-        bestVolume(inputID);
-                
-
+    }
+    bestVolume(inputID);
     var options = {
     "backdrop" : "true",
     "show":"true"};
@@ -351,42 +325,34 @@ function diaryModalHistory(inputID){
 }
 
 function diaryModalDelete(inputID){
-    
-    $("#basicModalDeleteButtons").empty();
-//    var delBut = '<button onclick="deleteExercise('+inputId+')" type="button" class="btn btn-primary">Delete</button>';
-//    $("#basicModalAddSetButtons").append(delBut);
-    
-
+    $("#modalDirayDeleteButtons").empty();    
     var buttons='<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
             '<button onclick="deleteModalDiaryResult('+inputID+')" type="button" class="btn btn-primary">Remove</button>';
-    $("#basicModalDeleteButtons").append(buttons);
-    
+    $("#modalDirayDeleteButtons").append(buttons);
     var options = {
     "backdrop" : "true",
     "show":"true"};
-    $('#basicModalDelete').modal(options);
-    
+    $('#modalDirayDelete').modal(options);
 }
 
 function deleteModalDiaryResult(inputID){
     mlpObject.removeResults({exerciseid:inputID, assigneddate:year+"-"+(month+1)+"-"+date});
-    $('#basicModalDelete').modal('hide');
-    checkResults();
-    
+    $('#modalDirayDelete').modal('hide');
+    checkResults(); 
 }
 
 function addModalDiaryResult(inputID){
     try{
-        var rep=document.getElementById("updateModalAddRep").value;
-        var set=document.getElementById("updateModalAddSet").value;
-        var wei=document.getElementById("updateModalAddWeight").value;
-        var rp=document.getElementById("updateModalAddRPE").value;
-        var rm=document.getElementById("updateModalAddRM").value;
+        var rep=document.getElementById("ModalAddSetRep").value;
+        var set=document.getElementById("ModalAddSetSet").value;
+        var wei=document.getElementById("ModalAddSetWeight").value;
+        var rp=document.getElementById("ModalAddSetRPE").value;
+        var rm=document.getElementById("ModalAddSetRM").value;
         
         
         //exerciseid, workoutid, programid, reps, sets, rpe, weight, percentage,assigneddate
         mlpObject.addResults({exerciseid:inputID, reps:rep, sets:set, weight:wei, rpe:rp, percentage:rm, assigneddate:year+"-"+(month+1)+"-"+date});
-        $('#basicModalAddSet').modal('hide');
+        $('#ModalDiaryAddSet').modal('hide');
         checkResults();
     }
     catch(e){}
@@ -417,33 +383,31 @@ function bestVolume(exId){
 }
 
 function diaryModalAddSet(inputID){
-    $("#basicModalAddSetButtons").empty();
-
-
+    $("#ModalAddSetButtons").empty();
     var records = recordsList[inputID[0]][0][0];
-
     var temp = 'myResExNameDiv'+inputID[0]+'Second';
     var rpe = parseFloat((document.getElementById(inputID[1]).childNodes[7]['innerText']).replace("%","")); 
     console.log(rpe);
-    document.getElementById("updateModalAddRep").value = records['overall']['rep'];
-    document.getElementById("updateModalAddSet").value = document.getElementById(temp).childNodes.length +1;
-    document.getElementById("updateModalAddWeight").value = records['amrap']['weight'];
-    document.getElementById("updateModalAddRPE").value = records['amrap']['rpe'];
-    document.getElementById("updateModalAddRM").value = rpe;
+    document.getElementById("ModalAddSetRep").value = records['overall']['rep'];
+    document.getElementById("ModalAddSetSet").value = document.getElementById(temp).childNodes.length +1;
+    document.getElementById("ModalAddSetWeight").value = records['amrap']['weight'];
+    document.getElementById("ModalAddSetRPE").value = records['amrap']['rpe'];
+    document.getElementById("ModalAddSetRM").value = rpe;
 
     var buttons='<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
-            '<button onclick="addModalDiaryResult('+inputID+')" type="button" class="btn btn-primary">Add</button>';
-    $("#basicModalAddSetButtons").append(buttons);
+            '<button id="submitAddSetButton" onclick="addModalDiaryResult('+inputID+')" type="button" class="btn btn-primary">Add</button>';
+    $("#ModalAddSetButtons").append(buttons);
     
     var options = {
     "backdrop" : "true",
     "show":"true"};
-    $('#basicModalAddSet').modal(options);
+    $('#ModalDiaryAddSet').modal(options);
 }
 
-function addExToResults(data){
+function diaryPageAddExToResults(data){
+
     loadingModal("Adding Exercise to Diary...");
-    
+
     var exID = data[0];
     var tdate = (data[1]+"-"+data[2]+"-"+data[3]);
     var rep= data[4];
@@ -453,7 +417,6 @@ function addExToResults(data){
     var per= data[8];
 
     try{
-        //exerciseid, workoutid, programid, reps, sets, rpe, weight, percentage,assigneddate
         mlpObject.addResults({exerciseid:exID,assigneddate:tdate, reps:rep,sets:set, rpe:rp, weight:weig, percentage:per}).result;
         checkResults();
     }
@@ -464,8 +427,7 @@ function addExToResults(data){
 }
 
 function addWorkoutToDiary(inputID){
-    
-    loadingModal("Adding Workout...")
+    loadingModal("Adding Workout...");
     try{
         mlpObject.addResults({workoutid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result;
         $('#modalDisplayWorkoutExercies').modal('hide');
@@ -567,16 +529,10 @@ function loadingModal(data){
     var options = {
     "backdrop" : "true",
     "show":"true"};
-    $('#loadingModal').modal(options);
-    
     $('#addModal').modal('hide');
-    $('#modalDisplayWorkoutExercies').hide();
-    $('#basicModalAddWorkout').hide();
-    
+    $('#loadingModal').modal(options);
     setTimeout(function() {
-        $('#addModal').modal(options);
-    
-        $('#loadingModal').modal('hide');
+//        $('#loadingModal').modal('hide');
     }, 2000);
     
 }
@@ -727,7 +683,7 @@ function dairyPageExSearch(){
                 toAppend += "</td>";
                 
                 toAppend += "<td>";
-                toAppend += '<i class="fa fa-plus-circle" onClick="addExToResults(['+resultData+'])"></i>';
+                toAppend += '<i class="fa fa-plus-circle" onClick="diaryPageAddExToResults(['+resultData+'])"></i>';
                 toAppend += "</td>";
             }
             

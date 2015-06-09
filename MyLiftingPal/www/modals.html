@@ -1,3 +1,6 @@
+<div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true"></div>
+	
+
 <div class="modal fade" id="infoDataModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
 <div class="modal-dialog">
 	<div class="modal-content">
@@ -12,6 +15,7 @@
 	</div>
 </div>
 </div>
+
 <div class="modal fade" id="calanderModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
 <div class="modal-dialog">
 	<div class="modal-content">
@@ -130,28 +134,8 @@
 </div>
 </div>
 
-<div class="modal fade" id="basicModalHistory" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-<div class="modal-dialog">
-	<div class="modal-content">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-			<h4 class="modal-title" id="myModalLabelExerciseAdd"><i class="fa fa-trophy"></i>Records</h4>
-		</div>
-		<div class="modal-body" id="basicModalHistoryBody">
-			<div id="modalHistoryRecords"></div>
-			<div id="bestVolume"></div>
-			<div id="modalHistoryNotes">
-				<textarea class="form-control note" rows="5" placeholder="Write Notes"></textarea>
-			</div>
-		</div>
-		<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		</div>
-	</div>
-</div>
-</div>
-          
-<div class="modal fade" id="basicModalAddSet" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        
+<div class="modal fade" id="ModalDiaryAddSet" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
 <div class="modal-dialog">
 	<div class="modal-content">
 		<div class="modal-header">
@@ -161,59 +145,66 @@
 		<div class="modal-body" id="basicModalNewSetBody">
 			<div style="width:100%;" >
 				<p  class="blackfont">Reps</p>
-				<input id="updateModalAddRep" class="w-input field feild2" type="number" placeholder="1" name="Reps" required="required" data-name="exercisename">
+				<input id="ModalAddSetRep" class="w-input field feild2" type="number" placeholder="1" name="Reps" required="required" data-name="exercisename">
 			</div>
 			<div style="width:100%;" >
 				<p  class="blackfont">Set</p>
-				<input id="updateModalAddSet" class="w-input field feild2" type="number" placeholder="1" name="Set" required="required" data-name="exercisename">
+				<input id="ModalAddSetSet" class="w-input field feild2" type="number" placeholder="1" name="Set" required="required" data-name="exercisename">
 			</div>
 			<div style="width:100%;" >
 				<p  class="blackfont">Weight</p>
-				<input id="updateModalAddWeight" class="w-input field feild2" type="number" placeholder="1" name="Weight" required="required" data-name="exercisename">
+				<input id="ModalAddSetWeight" class="w-input field feild2" type="number" placeholder="1" name="Weight" required="required" data-name="exercisename">
 			</div>
 			<div style="width:100%;" >
 				<p  class="blackfont">Rated Perceived Exertion </p>
-				<input id="updateModalAddRPE" class="w-input field feild2 inputLimit10" type="number" min="1" max="10" value="1" name="RPE" required="required" data-name="exercisename">
+				<input id="ModalAddSetRPE" class="w-input field feild2 inputLimit10" type="number" min="1" max="10" value="1" name="RPE" required="required" data-name="exercisename">
 			</div>
 			<div style="width:100%;" >
 				<p  class="blackfont">%1 Rep Max</p>
-				<input id="updateModalAddRM" class="w-input field feild2 inputLimit100" type="number" value="1" min="1" max="100"  name="%1RM" required="required" data-name="exercisename">
+				<input id="ModalAddSetRM" class="w-input field feild2 inputLimit100" type="number" value="1" min="1" max="100"  name="%1RM" required="required" data-name="exercisename">
 			</div>
 			<script>
-				$("#updateModalAddRep").keyup(function (e) {
+				$("#ModalAddSetRep").keyup(function (e) {
 				   if (e.keyCode == 13) {
-					document.getElementById("updateModalAddSet").focus();
+					document.getElementById("ModalAddSetSet").focus();
 				   }
 			   });
 			   
-				$("#updateModalAddSet").keyup(function (e) {
+				$("#ModalAddSetSet").keyup(function (e) {
 				   if (e.keyCode == 13) {
-					document.getElementById("updateModalAddWeight").focus();
+					document.getElementById("ModalAddSetWeight").focus();
 				   }
 			   });
 			   
-				$("#updateModalAddWeight").keyup(function (e) {
+				$("#ModalAddSetWeight").keyup(function (e) {
 				   if (e.keyCode == 13) {
-					document.getElementById("updateModalAddRPE").focus();
+					document.getElementById("ModalAddSetRPE").focus();
 				   }
 			   });
 			   
-				$("#updateModalAddRPE").keyup(function (e) {
+				$("#ModalAddSetRPE").keyup(function (e) {
 				   if (e.keyCode == 13) {
-					document.getElementById("updateModalAddRM").focus();
+					document.getElementById("ModalAddSetRM").focus();
+				   }
+                            });
+                                $("#ModalAddSetRM").keyup(function (e) {
+				   if (e.keyCode == 13) {
+					document.getElementById("submitAddSetButton").focus();
 				   }
 			   });
 			 </script>
 		</div>
 		<br><br><br>
-		<div id="basicModalAddSetButtons" class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<div id="ModalAddSetButtons" class="modal-footer">
 		</div>
 	</div>
 </div>
 </div>
           
-<div class="modal fade" id="basicModalDelete" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+
+
+<!--Diary Modals-->
+<div class="modal fade" id="modalDirayDelete" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
 <div class="modal-dialog">
 	<div class="modal-content">
 		<div class="modal-header">
@@ -223,20 +214,20 @@
 		<div class="modal-body" id="basicModalDeleteBody">
 			Are you sure you want to delete all sets for this exercise?
 		</div>
-		<div id="basicModalDeleteButtons" class="modal-footer">
+		<div id="modalDirayDeleteButtons" class="modal-footer">
 		</div>
 	</div>
 </div>
 </div>
-          
+
 <div class="modal fade" id="modalEditDiaryResult" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
 <div class="modal-dialog">
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-			<h4 class="modal-title" id="myModalLabelUpdateResult">Update Results</h4>
+			<h4 class="modal-title" id="modalEditDiaryResultHeader">Update Results</h4>
 		</div>
-		<div class="modal-body" id="ModalUpdateResult">
+		<div class="modal-body" id="modalEditDiaryResultBody">
 			<p  class="blackfont">Reps</p>
 			<input id="updateModalChangeRep" class="w-input field feild2" type="number" placeholder="1" name="Reps" required="required" data-name="exercisename">
 			<p  class="blackfont">Set</p>
@@ -275,11 +266,33 @@
 			 <div id="updateResultRemove"></div>
 			<br>
 		</div>
-		<div id="basicModalUpdateButtons" class="modal-footer">
+		<div id="modalEditDiaryResultFooter" class="modal-footer">
 		</div>
 	</div>
 </div>
 </div>
+
+<div class="modal fade" id="basicModalHistory" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+			<h4 class="modal-title" id="myModalLabelExerciseAdd"><i class="fa fa-trophy"></i>Records</h4>
+		</div>
+		<div class="modal-body" id="basicModalHistoryBody">
+			<div id="modalHistoryRecords"></div>
+			<div id="bestVolume"></div>
+			<div id="modalHistoryNotes">
+				<textarea class="form-control note" rows="5" placeholder="Write Notes"></textarea>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
+	</div>
+</div>
+</div>
+  
           
 <div class="modal fade" id="modalDisplayWorkoutExercies" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
 <div class="modal-dialog">
@@ -293,8 +306,6 @@
 	</div>
 </div>
 </div>
-  	<div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true"></div>
-	
 	<div class="modal fade" id="infoDataModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -452,23 +463,6 @@
 </div>
 </div>
 
-<div class="modal fade" id="modalDisplayWorkoutExercies" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-<div class="modal-dialog">
-	<div class="modal-content">
-		<div class="modal-header">
-		<button type="button" class="close" onclick="hideWorkoutShowSearch()" aria-hidden="true"><i class="fa fa-times"></i></button>
-		<h4 class="modal-title" id="workoutDetailsName">Workout Contains</h4>
-		</div>
-		<div class="modal-body" id="modalWorkoutdetails">
-
-		</div>
-		<div id="workoutDetailsButtons" class="modal-footer">
-<!--                            <button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>
-			<button onclick="deleteModalDiaryResult('+inputID+')" type="button" class="btn btn-primary">Confirm</button>-->
-	</div>
-</div>
-</div>
-</div>
 
 <div class="modal fade" id="modalProgramEdit" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
 <div class="modal-dialog">
@@ -673,7 +667,7 @@
                 </div>
             </div>
 			
-			            <div class="modal fade" id="modalWorkoutExerciseEdit" style="overflow-y:auto" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+            <div class="modal fade" id="modalWorkoutExerciseEdit" style="overflow-y:auto" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
