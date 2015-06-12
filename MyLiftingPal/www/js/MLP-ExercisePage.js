@@ -1,23 +1,8 @@
 //          MLP
 //          Jack Z K Davies 2014 copywrite
-//          www.thesoftengineer.com
+//          www.GigaTortoise.com
 
-var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
-console.log(mlpObject.getUser()['result']['success']);
-var user = JSON.parse(localStorage.getItem('user'));
-var notifications = user['data']['requests'];
-var userid = user['data']['id'];
-var displayUnits  = user['data']['units'];
-if (mlpObject.getUser()['result']['success'] == false){
-    console.log(mlpObject.login({username:user['data']['username'],password:JSON.parse(localStorage.getItem('p'))}));}
-
-
-//Global Variables 
 var toggleSpeed = 0
-
-
-
-
 
 function toggle(divID){
     if (!(divID in toggleList)){
@@ -37,37 +22,6 @@ function toggle(divID){
     
     var div="#"+divID;
     $(div).slideToggle(0);
-
-//    var test="#DiaryControls"+divID;
-//    console.log(test);
-//    if (divID.indexOf("Second") != -1) {
-//        $(test).slideToggle(400);
-//}
-}
-
-function checkLoginStatus(){
-//    if ($.cookie("mlpsession") === undefined){
-//        window.location.replace("index.html");
-//    }
-
-var userData = mlpObject.getUser().result;
-        var locationTest = [(window.location.pathname).toLocaleString(), "/index.html"];
-        if (userData["success"] === true){
-
-                if(locationTest[0].indexOf('index') > -1){
-                    window.location.replace("main-page.html"); 
-                }
-                        
-            }
-        else if (userData['errormsg'].indexOf('You are already logged in as') > -1){
-                    window.location.replace("main-page.html");
-                }
-        else{
-
-                if(locationTest[0].indexOf('index') < -1 )
-                    window.location.replace("index.html");
-                
-            }
 }
 
 function toggleDropDownArrow(i){
@@ -448,8 +402,8 @@ function displayMyExercisesDetails(input){
                 '<p style="text-align:left; color:rgb(174, 125, 125);">&nbsp;&nbsp;&nbsp;'+exercise['type']+'</p>'+
                 
                 
-               ' <a href="javascript:updateModalExerciseEdit('+idNum+');" style="border:1px solid transparent" class="btn btn-default btn-circle myexercises-edit">'+
-                '<i style="font-size:40px ;padding-left:5px" class="fa fa-pencil-square-o"></i></a>';
+               ' <a href="javascript:updateModalExerciseEdit('+idNum+');" style="border:1px solid transparent" class="no-background btn btn-default btn-circle myexercises-edit">'+
+                '<i style="font-size:40px ;padding-left:5px" class=" fa fa-pencil-square-o"></i></a>';
      
     
     
@@ -531,13 +485,13 @@ function submitCreateExerciseForm(add){
     }
 }
 
-function submitSearchExcercise(){
+function exercise_submitSearchExcercise(){
     var searchTerms =['name','musclegroup','type'];
-    var searchTerm= (document.getElementById("exercisesearch").value.toString()).trim();
-    document.getElementById("searchresults").innerHTML = "";
+    var searchTerm= (document.getElementById("exercise_exercisesearch").value.toString()).trim();
+    document.getElementById("exercise_searchresults").innerHTML = "";
     document.getElementById("searchResultsHeading").innerHTML="";
     if (searchTerm ===""){
-        $("#searchresults").append("Please enter a keyword");
+        $("#exercise_searchresults").append("Please enter a keyword");
         return;
     }
     globalExerciseObjs={};
@@ -580,15 +534,15 @@ function submitSearchExcercise(){
     }}
     
     try{
-    $("#mytable").dataTable().fnDestroy();
-    $("#searchresults").empty();
+    $("#exercise_table").dataTable().fnDestroy();
+    $("#exercise_searchresults").empty();
     }
     catch(e){console.log(e);}
     
-    $("#searchresults").append(toAppend);
-    $('#mytable').DataTable({bFilter: false});
-    document.getElementById('mytable').style.display='table';
-    document.getElementById('searchResultsHeading').innerHTML='<div style="line-height:50px">Search results for: '+searchTerm+'</div>';
+    $("#exercise_searchresults").append(toAppend);
+    $('#exercise_table').DataTable({bFilter: false});
+    document.getElementById('exercise_table').style.display='table';
+    document.getElementById('exercise_searchResultsHeading').innerHTML='<div style="line-height:50px">Search results for: '+searchTerm+'</div>';
     
     }
     catch(e){console.log(e);}
@@ -646,7 +600,7 @@ function selectedExercise(r){
                 }
                 Append += "</td>";
             }
-            Append +="<td> <span style='color:rgb(174, 125, 125)'> <i class='fa fa-pencil-square-o'></i> </span> </td>";
+            Append +="<td> <span style='color:rgb(174, 125, 125)'> <i class=' fa fa-pencil-square-o'></i> </span> </td>";
     Append +="</tr>";
             
     }

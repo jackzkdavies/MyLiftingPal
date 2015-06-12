@@ -7,55 +7,89 @@
 	<hr>
 </div>
 
+<div id='trash' class="fixed-bottom" >
+	<br>
+		<i class="fa fa-trash-o" style="font-size:70px;"></i>
+	<br><br>
+</div>
+
 <div id="myWorkouts"></div>
 
 <i style="font-size: 40px;" class="fa fa-child"></i>
 <div class="w-tabs" data-duration-in="300" data-duration-out="100">
-  <div class="w-tab-menu w-clearfix">
-        <a class="w-tab-link w--current w-inline-block searchtab" data-w-tab="Search">
-        <div><strong><img class="searchImage2" src="images/search.svg" alt="">Search</strong>
-        </div>
-         </a>
+	<div class="w-tab-menu w-clearfix">
+		<a class="w-tab-link w--current w-inline-block searchtab" data-w-tab="Search">
+		<div><strong><img class="searchImage2" src="images/search.svg" alt="">Search</strong>
+		</div>
+		 </a>
 
-      <a class="w-tab-link w-inline-block createtab" data-w-tab="Create New">
-      <div><strong>Create New Workout</strong>
-      </div>
-    </a>
+	  <a class="w-tab-link w-inline-block createtab" data-w-tab="Create New">
+	  <div><strong>Create New Workout</strong>
+	  </div>
+	</a>
 
-  </div>
+	</div>
+  
+
   <div class="w-tab-content">
     <div class="w-tab-pane w-clearfix" data-w-tab="Create New">
-    <p id="errorCreatingWorkout"></p>
-  <input class="w-input field feild2" id="cWorkoutName" type="text" placeholder="Enter workout name" name="workoutname" required="required" data-name="workoutname">
-              <div id="selectedExerciseToAdd" style="width:100%">
+	
+	<div style="width: 100%; float:left'">
+		<p id="errorCreatingWorkout"></p>
+		<input class="w-input field feild2" id="cWorkoutName" type="text" placeholder="Enter workout name" name="workoutname" required="required" data-name="workoutname">
+		<div id="workout_selectedExerciseToAdd" style="width:100%;float:left; background-color: rgb(235, 232, 228); padding: 10px; margin-bottom: 10px; display:none"></div>
+		<script>
+			$('#workout_selectedExerciseToAdd').sortable();
+			$(function() {
+						
+			$("#workout_selectedExerciseToAdd").sortable({
+			  start: function( event, ui ) {
+			   $("#trash").css({"display":"block"});
+			  }
+			});
+			
+			$('#workout_selectedExerciseToAdd').sortable({
+			  stop: function( event, ui ) {
+			   $("#trash").hide();
+			  }
+			});
 
-              </div>
-              <script>$('#selectedExerciseToAdd').sortable();</script>
+			$('#trash').droppable({
+				drop: function(event, ui) {
+					workout_removeExFromGlobalExIds(ui['draggable'][0].id);
+					$(ui.draggable).remove();
+				}
+			});
+			});
+			
 
-  <hr>
+		</script>
+		
 
-  <div style="width: 100%;">
-  <input style="float:left; margin-right: -38px" class="w-input" id="exercisesearch" type="text" placeholder="Select Exercise to add" name="addexercisetoworkout" required="required" data-name="addexercisetoworkout">
-  <img class="searchImage" onclick="submitSearchExcerciseInWorkout();return false;" src="images/search.svg" alt="Search" onerror="this.src='your.png'">
+
+	</div>
+  <div style="width: 100%; float:left">
+  <input style="float:left; margin-right: -38px" class="w-input" id="workout_exercisesearch" type="text" placeholder="Select Exercise to add" name="addexercisetoworkout" required="required" data-name="addexercisetoworkout">
+  <img class="searchImage" onclick="workout_submitSearchExcerciseInWorkout();return false;" src="images/search.svg" alt="Search" onerror="this.src='your.png'">
   </div>
 
     <script>
     $("#cWorkoutName").keyup(function (e) {
        if (e.keyCode == 13) {
-            document.getElementById("exercisesearch").focus();
+            document.getElementById("workout_exercisesearch").focus();
        }
    });
 
-    $("#exercisesearch").keyup(function (e) {
+    $("#workout_exercisesearch").keyup(function (e) {
        if (e.keyCode == 13) {
-           submitSearchExcerciseInWorkout();
+           workout_submitSearchExcerciseInWorkout();
        }
    });
     </script>
 
-  <p id="searchResultsHeading" class="redFont"></p>
+  <p id="workout_searchresults_heading" class="redFont"></p>
 
-  <table id='mytable' style='display: none; text-align:left; text-shadow: 0px 0px rgba(255, 255, 255, 0);'>
+  <table id='workout_searchtable' style='display: none; text-align:left; text-shadow: 0px 0px rgba(255, 255, 255, 0);'>
       <thead>
           <tr>
               <td style=''>Exercise</td>
@@ -63,7 +97,7 @@
               <td style=''>Type</td>
           </tr>
       </thead>
-      <tbody id ="searchresults">
+      <tbody id ="workout_searchresults">
 
       </tbody>
   </table>
@@ -87,8 +121,7 @@
                });
             </script>
 
-      <div class="searchresultsWorkouts"></div><a class="button addexercisetocurrentday" href="javascript:workoutSeach()"><strong>Submit Search</strong></a>
-
+      <div class="searchresultsWorkouts"></div><a class="button addexercisetocurrentday" href="javascript:workout_workoutSeach()"><strong>Submit Search</strong></a>
       <table id='mytableWorkouts' style='display: none; text-align:left; text-shadow: 0px 0px rgba(255, 255, 255, 0);'>
           <thead>
               <tr>

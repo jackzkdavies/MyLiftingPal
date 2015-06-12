@@ -1,13 +1,21 @@
 try{
     var locationTest = [(window.location.pathname).toLocaleString(), "/index.html"];
     var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
+
+	
+	$( window ).load(function() {
+		if (typeof mlpObject.result['success'] == "undefined"){
+		document.getElementById("ConnectionError").innerHTML="Can not connect to servers, make sure you are connected to the internet.";
+		}
+    });
+
+
     //Check if already loged in, and/or if login details are saved, if so attempt to login.
     if (mlpObject.getUser().result['success'] == true){
         var user = mlpObject.getUser().result;
         var userid = user['data']['id'];
         var displayUnits  = user['data']['units'];
         var notifications = user['data']['requests'];
-        alert('Already logged in');
         if(locationTest[0].indexOf('index') > -1){
             window.location.replace("PlusStrength.html");}
     }

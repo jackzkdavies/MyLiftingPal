@@ -501,7 +501,7 @@
 			<input id="updateModalAddRPE" class="w-input field feild2" type="number" placeholder="1" name="RPE" required="required" data-name="exercisename">
 			<p  class="blackfont">%1RM</p>
 			<input id="updateModalAddRM" class="w-input field feild2" type="number" placeholder="1" name="%1RM" required="required" data-name="exercisename">
-			
+			<p>&nbsp;</p>
 
 		</div>
 		<div id="modalWorkoutExerciseEditControls" class="modal-footer">
@@ -628,31 +628,31 @@
     </div>
   </div>
 </div>
+
+<!-- Workout Page Workout Edit -->
+<div class="modal fade" id="workoutEditModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+		<h4 class="modal-title" id="workoutEditModalHeader"></h4>
+		</div>
+		<div class="modal-body">
+			 <p  class="blackfont">Name</p>
+			 <input id="updateWorkoutName" class="w-input field feild2" type="text" placeholder="New Workout Name" name="exercisename" required="required" data-name="exercisename">
+			 <br>
+			 <hr>
+			  <hr>
+			<div id="workoutEditModalDelete"></div>
 			
-			            <div class="modal fade" id="basicModalEdit" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-                        <h4 class="modal-title" id="myModalLabelWorkoutEdit"></h4>
-                        </div>
-                        <div class="modal-body">
-                             <p  class="blackfont">Name</p>
-                             <input id="updateWorkoutName" class="w-input field feild2" type="text" placeholder="" name="exercisename" required="required" data-name="exercisename">
-                             <br>
-                             <hr>
-                              <hr>
-                            <div id="deleteWorkoutButton"></div>
-                            
-                        </div>
-                        <div id="editCalANDSav" class="modal-footer">
-<!--                            <button type="button" style="color:#77b2c9;" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                            
-                            <button type="button" class="btn btn-primary">Save</button>-->
-                    </div>
-                    </div>
-                </div>
-            </div>
+		</div>
+		<div id="workoutEditModalFooter" class="modal-footer">
+
+	</div>
+	</div>
+</div>
+</div>
+			
 			
             <div class="modal fade" id="modalWorkoutExerciseEdit" style="overflow-y:auto" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                 <div class="modal-dialog">
