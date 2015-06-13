@@ -151,7 +151,6 @@
 	}
 	facebookConnectPlugin.login( ["email"],
 		function (response) { 
-			alert(JSON.stringify(response.authResponse));
 			
             access_token = response.authResponse.accessToken; //get access token
             user_id = response.authResponse.userID; //get FB UID
