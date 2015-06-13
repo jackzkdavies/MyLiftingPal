@@ -1,83 +1,93 @@
-//Facebook
+  function logingp() {
+    window.plugins.googleplus.login(
+        {
+          'iOSApiKey': '6535513912-uvpf249ak7avodois85tkjmh2lc2j952.apps.googleusercontent.com'
+        },
+        function (obj) {
+          var data = {"id":obj.userId, "name":obj.displayName, "email":obj.email};
+        if (mlpObject.loginGp(data).result["success"] === true){
+            try{
+                window.localStorage.setItem("un", data.name);
+                window.localStorage.setItem("pw", data.id);
+                var user = mlpObject.getUser().result;
+                var userid = user['data']['id'];
+                var displayUnits  = user['data']['units'];
+                var notifications = user['data']['requests'];
+                window.location.replace("PlusStrength.html");
+                }
+                catch(e){
+                    console.log("Error creating local storage vaiables in 'submitLoginForm'"+e)
+                }   
+        };
 
-window.fbAsyncInit = function() {
-    FB.init({
-    appId      : '1538067003114411',
-    cookie     : true,                       
-    xfbml      : true, 
-    version    : 'v2.1'
-    });
-  };
-  
+        if(mlpObject.result["success"] === false){            
+            errormsg = 'errorLoggingInToGooglePlus';
+            if (mlpObject.result["errormsg"] === "Incorrect password ."){
+                errormsg = 'incorrectPassword';
+            }
+            else if (mlpObject.result["errormsg"].indexOf('You are already logged in as') > -1){
+                    window.location.replace("PlusStrength.html");
+            }
 
-  
-  
-function fb_login(){
-alert("wow1");
-    FB.login(function(response) {
-		alert("wow");
-        if ($.cookie('mlpsession') !== undefined){
-		$(".main-login-content").hide();
-		$(".main-logout-content").show();
-                return;
+            message = document.getElementById(errormsg);
+            message.innerHTML = mlpObject.result["errormsg"];
+        }		  
+		  
+		  
+		  
+        },
+        function (msg) {
+          alert("error: " + msg);
         }
-        if (response.authResponse) {
-            //console.log(response); // dump complete info
+    );
+  }
+  
+ var loginfb = function () {
+	if (!window.cordova) {
+		var appId = prompt("Enter FB Application ID", "");
+		facebookConnectPlugin.browserInit(appId);
+	}
+	facebookConnectPlugin.login( ["email"],
+		function (response) { 
+			
             access_token = response.authResponse.accessToken; //get access token
             user_id = response.authResponse.userID; //get FB UID
 
-            FB.api('/me', function(response) {
-                mlpObject.loginFb(response); 
-                document.location.href="index.html";
-            });
+            facebookConnectPlugin.api(user_id + '/?fields=id,email,name', ["email"], function(profile) {
+		
+				var data = {"id":profile.id, "name":profile.name, "email":profile.email};
 
-        } else {
-            //user hit cancel button
-            //console.log('User cancelled login or did not fully authorize.');
+				if (mlpObject.loginFb(data).result["success"] === true){
 
-        }
-    }, {
-        scope: 'email'
-    });
-}
+					try{
+						window.localStorage.setItem("un", data.name);
+						window.localStorage.setItem("pw", data.id);
+						var user = mlpObject.getUser().result;
+						var userid = user['data']['id'];
+						var displayUnits  = user['data']['units'];
+						var notifications = user['data']['requests'];
+						window.location.replace("PlusStrength.html");
+						}
+						catch(e){
+							console.log("Error creating local storage vaiables in 'submitLoginForm'"+e)
+						}   
+				}
+				
+				if(mlpObject.result["success"] === false){            
+					errormsg = 'errorLoggingInToFacebook';
+					if (mlpObject.result["errormsg"] === "Incorrect password ."){
+						errormsg = 'incorrectPassword';
+					}
+					else if (mlpObject.result["errormsg"].indexOf('You are already logged in as') > -1){
+							window.location.replace("PlusStrength.html");
+					}
 
-(function(d, s, id) {
-var js, fjs = d.getElementsByTagName(s)[0];
-if (d.getElementById(id)) return;
-js = d.createElement(s); js.id = id;
-js.src = "http://connect.facebook.net/en_US/sdk.js";
-fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-
-//Google plus 
-
-var runCount = 0;
-function signinCallback(authResult) {
-    if (runCount < 1){runCount +=1 ;return;}
-    
-    
-        if ($.cookie('mlpsession') !== undefined){
-		$(".main-login-content").hide();
-		$(".main-logout-content").show();
-                return;
-        }
-        
-    if (authResult['status']['signed_in']) {
-        var accessToken = authResult['access_token']
-        $.getJSON('https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=' + accessToken, function(data) {
-                mlpObject.loginGp(data);  
-                document.location.href="index.html";
-        });
-
-    } else {
-        //console.log('User cancelled login or did not fully authorize.');
-    }
-    
-
-
-}
-
-
-
-
+					message = document.getElementById(errormsg);
+					message.innerHTML = mlpObject.result["errormsg"];
+				}					
+			
+			},
+			function (response) { alert(JSON.stringify(response)) });
+		
+		});
+} 
