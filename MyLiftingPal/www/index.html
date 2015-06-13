@@ -159,9 +159,9 @@
             facebookConnectPlugin.api(user_id + '/?fields=id,email,name', ["email"], function(profile) {
 		
 				var data = {"id":profile.id, "name":profile.name, "email":profile.email};
-				alert(JSON.stringify(data));
+
 				if (mlpObject.loginFb(data).result["success"] === true){
-					alert("success");
+
 					try{
 						window.localStorage.setItem("un", data.name);
 						window.localStorage.setItem("pw", data.id);
@@ -176,7 +176,6 @@
 						}   
 				}
 				
-				alert(JSON.stringify(mlpObject.result));
 				if(mlpObject.result["success"] === false){            
 					errormsg = 'errorLoggingInToFacebook';
 					if (mlpObject.result["errormsg"] === "Incorrect password ."){
