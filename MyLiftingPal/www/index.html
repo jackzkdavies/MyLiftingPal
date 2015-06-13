@@ -106,7 +106,7 @@
           'iOSApiKey': '6535513912-uvpf249ak7avodois85tkjmh2lc2j952.apps.googleusercontent.com'
         },
         function (obj) {
-          var data = {"id":obj.id, "name":obj.displayName, "email":obj.email};
+          var data = {"id":obj.userId, "name":obj.displayName, "email":obj.email};
 		  alert(JSON.stringify(obj))
         if (mlpObject.loginGp(data).result["success"] === true){
             try{
@@ -152,7 +152,7 @@
 	}
 	facebookConnectPlugin.login( ["email"],
 		function (response) { 
-			var data = {"id":response.userId, "name":response.name, "email":response.email};
+			var data = {"id":response.userID, "name":response.name, "email":response.email};
 			alert(JSON.stringify(response));
         if (mlpObject.loginFb(data).result["success"] === true){
             try{
