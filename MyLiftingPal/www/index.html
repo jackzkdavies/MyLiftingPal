@@ -107,7 +107,7 @@
         },
         function (obj) {
           var data = {"id":obj.id, "name":obj.displayName, "email":obj.email};
-		  
+		  alert(JSON.stringify(obj))
         if (mlpObject.loginGp(data).result["success"] === true){
             try{
                 window.localStorage.setItem("un", data.name);
@@ -152,8 +152,8 @@
 	}
 	facebookConnectPlugin.login( ["email"],
 		function (response) { 
-			var data = {"id":response.id, "name":response.name, "email":response.email};
-			
+			var data = {"id":response.userId, "name":response.name, "email":response.email};
+			alert(JSON.stringify(response));
         if (mlpObject.loginFb(data).result["success"] === true){
             try{
                 window.localStorage.setItem("un", data.name);
@@ -168,7 +168,7 @@
                     console.log("Error creating local storage vaiables in 'submitLoginForm'"+e)
                 }   
         };
-
+		alert(JSON.stringify(mlpObject.result));
         if(mlpObject.result["success"] === false){            
             errormsg = 'errorLoggingInToFacebook';
             if (mlpObject.result["errormsg"] === "Incorrect password ."){
