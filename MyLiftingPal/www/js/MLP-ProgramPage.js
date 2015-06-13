@@ -1,14 +1,6 @@
 //          MLP
 //          Jack Z K Davies 2014 copywrite
 //          www.thesoftengineer.com
-var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
-console.log(mlpObject.getUser()['result']['success']);
-var user = JSON.parse(localStorage.getItem('user'));
-var userId = user['data']['id'];
-var notifications = user['data']['requests'];
-var displayUnits  = user['data']['units'];
-if (mlpObject.getUser()['result']['success'] == false){
-    console.log(mlpObject.login({username:user['data']['username'],password:JSON.parse(localStorage.getItem('p'))}));}
 
 //Global Variables 
 var toggleSpeed = window.localStorage.getItem("toggleSpeed");
@@ -92,7 +84,7 @@ var globalWorkoutsToAdd={};
 function addWorkoutToProgramDay(id,name){
 
     
-   $('#modalDisplayWorkoutExercies').modal('hide');
+   $('.modal').modal('hide');
 
 //   var day = lastCallertoWorkoutSearch.replace("newprogramday", "")
    if (lastCallertoWorkoutSearch.indexOf("new") > -1){var res = lastCallertoWorkoutSearch.split("newprogramday");}
@@ -109,8 +101,8 @@ function addWorkoutToProgramDay(id,name){
    var divid= "#"+lastCallertoWorkoutSearch;
    $(divid).val(name);   
 }
-function modalDisplayWorkoutExercies(inputID){
-    $('#modalDisplayWorkoutSearch').modal('hide');
+function program_modalDisplayWorkoutExercies(inputID){
+    /* $('#modalDisplayWorkoutSearch').modal('hide'); */
 
     var searchResult = mlpObject.getWorkouts({id:inputID}).result['data'][0];
     var name = searchResult['name']
@@ -260,13 +252,13 @@ function calanderModal(data){
         gotoCurrent: true
         }).datepicker("setDate", new Date());
 }
-function workoutSearch(){
+function program_workoutSearch(){
     var searchTerms =['name','userid'];
-    var searchTerm= (document.getElementById("workoutsearchterm").value.toString()).trim();
+    var searchTerm= (document.getElementById("program_workoutsearchterm").value.toString()).trim();
 //    document.getElementById("searchresultsWorkouts").innerHTML = "";
-    document.getElementById("searchResultsHeading").innerHTML="";
+    document.getElementById("proram_wourkoutSearchResultsHeading").innerHTML="";
     if (searchTerm ===""){
-        $("#searchresultsWorkouts").append("Please enter a keyword");
+        $("#program_searchresultsWorkouts").append("Please enter a keyword");
         return;
     }
     globalWorkoutObjs={};
@@ -290,7 +282,7 @@ function workoutSearch(){
               if (globalWorkoutObjs.hasOwnProperty(key)) {    
                   
         var useDate=[year,(month+1),date];
-        toAppend += "<tr onClick='modalDisplayWorkoutExercies("+key+")'>";
+        toAppend += "<tr onClick='program_modalDisplayWorkoutExercies("+key+")'>";
        
 
         for (st in searchTerms){
@@ -313,17 +305,17 @@ function workoutSearch(){
     
     try{
     $("#mytable").dataTable().fnDestroy();
-    $("#mytableWorkouts").dataTable().fnDestroy();
+    $("#program_workoutSearchTable").dataTable().fnDestroy();
     $("#searchresults").empty();
-    $("#searchresultsWorkouts").empty();
+    $("#program_searchresultsWorkouts").empty();
     document.getElementById('mytable').style.display='none';
     }
     catch(e){console.log(e);}
     
-    $("#searchresultsWorkouts").append(toAppend);
-    $('#mytableWorkouts').DataTable({bFilter: false});
-    document.getElementById('mytableWorkouts').style.display='table';
-    document.getElementById('searchResultsHeading').innerHTML='<div style="line-height:50px">Search results for workout: '+searchTerm+'</div>';
+    $("#program_searchresultsWorkouts").append(toAppend);
+    $('#program_workoutSearchTable').DataTable({bFilter: false});
+    document.getElementById('program_workoutSearchTable').style.display='table';
+    document.getElementById('proram_wourkoutSearchResultsHeading').innerHTML='<div style="line-height:50px">Search results for workout: '+searchTerm+'</div>';
     
     }
     catch(e){console.log(e);}
@@ -579,18 +571,18 @@ function programClearDay(){
     
 }
 
-function displayWorkoutSearchModal(day,callerid){
+function program_displayWorkoutSearchModal(day,callerid){
     lastCallertoWorkoutSearch = callerid;
     
-    $('#programDay').empty();
-    $('#programDay').append("Update day: " + day);
+    $('#program_modalWorkoutSearchHeader').empty();
+    $('#program_modalWorkoutSearchHeader').append("Update day: " + day);
     
     
     $('#modalProgramEdit').modal('hide');
     var options = {
     "backdrop" : "static",
     "show":"true"};
-    $('#modalDisplayWorkoutSearch').modal(options);
+    $('#program_modalWorkoutSearch').modal(options);
 }
 
 function modalProgramEdit(idNum,duration){
@@ -610,7 +602,7 @@ function modalProgramEdit(idNum,duration){
     function(){
         $("#programWorkouts").empty();
         for (count = 1; count <= $("#updateProgramDuration").val(); count++){
-        $("#programWorkouts").append('<div id="tester" onclick="displayWorkoutSearchModal('+"'"+count+"','"+count+'programday'+idNum+"'"+')" id="'+count+'program'+idNum+'"><p>Day: '+count+'</p><input id="'+count+'programday'+idNum+'" class="w-input" type="text" placeholder="Rest day." name="Program Name" required="required" data-name="programename"></div>');
+        $("#programWorkouts").append('<div id="tester" onclick="program_displayWorkoutSearchModal('+"'"+count+"','"+count+'programday'+idNum+"'"+')" id="'+count+'program'+idNum+'"><p>Day: '+count+'</p><input id="'+count+'programday'+idNum+'" class="w-input" type="text" placeholder="Rest day." name="Program Name" required="required" data-name="programename"></div>');
         for (workout in workouts){
         try{
             var workoutDay = workouts[workout]['day'];
@@ -626,7 +618,7 @@ function modalProgramEdit(idNum,duration){
     );
     
     for (count = 1; count <= duration; count++){
-        $("#programWorkouts").append('<div onclick="displayWorkoutSearchModal('+"'"+count+"','"+count+'programday'+idNum+"'"+')" id="'+count+'program'+idNum+'"><p>Day: '+count+'</p><input id="'+count+'programday'+idNum+'" class="w-input" type="text" placeholder="Rest day." name="Program Name" required="required" data-name="programename"></div>');
+        $("#programWorkouts").append('<div onclick="program_displayWorkoutSearchModal('+"'"+count+"','"+count+'programday'+idNum+"'"+')" id="'+count+'program'+idNum+'"><p>Day: '+count+'</p><input id="'+count+'programday'+idNum+'" class="w-input" type="text" placeholder="Rest day." name="Program Name" required="required" data-name="programename"></div>');
   
     }
         
@@ -681,7 +673,7 @@ var globalWorkoutObjs;
 
 function workoutSeach(){
     var searchTerms =['name','userid'];
-    var searchTerm= (document.getElementById("workoutsearchterm").value.toString()).trim();
+    var searchTerm= (document.getElementById("program_workoutsearchterm").value.toString()).trim();
     document.getElementById("searchresultsWorkouts").innerHTML = "";
     document.getElementById("searchResultsHeading").innerHTML="";
     if (searchTerm ===""){
@@ -709,7 +701,7 @@ function workoutSeach(){
               if (globalWorkoutObjs.hasOwnProperty(key)) {    
                   
         var useDate=[year,(month+1),date];
-        toAppend += "<tr onClick='modalDisplayWorkoutExercies("+key+")'>";
+        toAppend += "<tr onClick='program_modalDisplayWorkoutExercies("+key+")'>";
        
 
         for (st in searchTerms){
@@ -794,30 +786,34 @@ function addProgramToDiary(inputID){
 }
 
 function displayMyPrograms(){
-    var mpo=mlpObject.getPrograms({userid:userId}).result['data'];
+    var mpo=mlpObject.getPrograms({userid:userid}).result['data'];
     $("#myPrograms").empty();
-//    console.log(mpo);
-    for (objects in mpo){
-        
-//        console.log(mwo[objects])
-    var toAppend = "";
-    toAppend +='<div>';
-    toAppend +='<div style="width:70%;float:left" onclick="addMyProgramDetails(' + "'" +'myPrograms'+mpo[objects]['id']+"'"+','+mpo[objects]['duration']+",'"+mpo[objects]["name"]+"'"+')">';
-    toAppend +='<h3 style="text-align:left;;padding: 8px;" >'+mpo[objects]['name'];
-    toAppend +='</h3><p style="margin-top: -20px;  font-size: 10px;margin-left: -50px;">Duration: '+mpo[objects]["duration"]+'Day(s)</p></div>';
-    
-    
-    toAppend +='<a href="javascript:updateModalProgramAdd('+mpo[objects]['id']+",'"+mpo[objects]['name']+"'"+');" class="addingButtonsMain btn btn-default btn-circle-main">';
-    toAppend +='<i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i>';
-    toAppend +='</a>';
-    toAppend +='';
-    toAppend +='<div id="myPrograms'+mpo[objects]['id']+'" style="width: 100%; position: relative" class="tabsdivMyWorkOutsBackAndBis"></div>';
+	if (typeof mpo === "undefined"){
+		$("#myPrograms").append("You currently have no programs to display<hr>");
+	}
+	else{
+		for (objects in mpo){
+			
+	//        console.log(mwo[objects])
+		var toAppend = "";
+		toAppend +='<div>';
+		toAppend +='<div style="width:70%;float:left" onclick="addMyProgramDetails(' + "'" +'myPrograms'+mpo[objects]['id']+"'"+','+mpo[objects]['duration']+",'"+mpo[objects]["name"]+"'"+')">';
+		toAppend +='<h3 style="text-align:left;;padding: 8px;" >'+mpo[objects]['name'];
+		toAppend +='</h3><p style="margin-top: -20px;  font-size: 10px;margin-left: -50px;">Duration: '+mpo[objects]["duration"]+'Day(s)</p></div>';
+		
+		
+		toAppend +='<a href="javascript:updateModalProgramAdd('+mpo[objects]['id']+",'"+mpo[objects]['name']+"'"+');" class="addingButtonsMain btn btn-default btn-circle-main">';
+		toAppend +='<i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i>';
+		toAppend +='</a>';
+		toAppend +='';
+		toAppend +='<div id="myPrograms'+mpo[objects]['id']+'" style="width: 100%; position: relative" class="tabsdivMyWorkOutsBackAndBis"></div>';
 
 
-    toAppend+="</div><hr>";
-    
-    $("#myPrograms").append(toAppend);
-    }
+		toAppend+="</div><hr>";
+		
+		$("#myPrograms").append(toAppend);
+		}	
+	}
 }
 
 //create Program
@@ -1052,7 +1048,7 @@ function submitCreateProgrammeForm(){
 function programDuration(dur){
     $("#newProgramWorkouts").empty();
     for (i = 1; i <= dur; i++){
-        $("#newProgramWorkouts").append('<div onclick="displayWorkoutSearchModal('+"'"+i+"','"+i+'newprogramday'+"'"+')" id="'+i+'newprogram"><p>Day: '+i+'</p><input id="'+i+'newprogramday" class="w-input" type="text" placeholder="Rest day." name="Program Name" required="required" data-name="programename"></div>');
+        $("#newProgramWorkouts").append('<div onclick="program_displayWorkoutSearchModal('+"'"+i+"','"+i+'newprogramday'+"'"+')" id="'+i+'newprogram"><p>Day: '+i+'</p><input id="'+i+'newprogramday" class="w-input" type="text" placeholder="Rest day." name="Program Name" required="required" data-name="programename"></div>');
   
     }
 //    $('#programWorkouts')
