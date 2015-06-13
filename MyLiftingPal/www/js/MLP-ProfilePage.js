@@ -1,16 +1,7 @@
 //          MLP
 //          Jack Z K Davies 2014 copywrite
-//          www.thesoftengineer.com
-var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
-console.log(mlpObject.getUser()['result']['success']);
-var user = JSON.parse(localStorage.getItem('user'));
-var userId = user['data']['id'];
-var notifications = user['data']['requests'];
-var displayUnits  = user['data']['units'];
-if (mlpObject.getUser()['result']['success'] == false){
-    console.log(mlpObject.login({username:user['data']['username'],password:JSON.parse(localStorage.getItem('p'))}));}
-
-var userProfilePhoto = user['data']['dp'];
+//          www.gigatortoise.com
+var userProfilePhoto = user['data']['dp'].replace(/"/g, "");
 
 var userEmail = user['data']['email'];
 
@@ -42,26 +33,11 @@ var units = userInfo['data']['units'];
 
 window.localStorage.setItem("lastFriendView", null);
 //var weight = unserInfo[];
-
+displayUser();
 function displayUser(){
-    
-    $.get(userProfilePhoto+'.jpg')
-    .done(function() { 
-            var dp = '<img class="profilePicture" src="'+userProfilePhoto+'" alt="">';
-            $("#profilePicture").append(dp);
-
-    }).fail(function() { 
-        var dp = '<img class="profilePicture" src="../images/icongp.png" alt="">';
-        $("#profilePicture").append(dp);
-    	
-
-    });
-
-    
+	var dp = '<img class="profilePicture" src="'+userProfilePhoto+'" alt="">';
+	$("#profilePicture").append(dp);
     $("#username").append('<h3>'+username+'</h3>');
-    
-//    $("#userEmail").append(userEmail);
-    
     $("#weight").append(weight+units+'&nbsp;&#x2022;&nbsp;');
     $("#gender").append(gender+'&nbsp;&#x2022;&nbsp;');
     $("#age").append(age+'&nbsp;years strong');

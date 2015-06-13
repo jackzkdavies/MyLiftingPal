@@ -14,6 +14,8 @@
 					$('#exercises').css({'display':'none'})
 					$('#workouts').css({'display':'none'})
 					$('#programs').css({'display':'none'})
+					$('#stats').css({'display':'none'})
+					$('#profile').css({'display':'none'})
 					$(i).css({'display':'block'})
 				}
 				</script>
@@ -22,13 +24,13 @@
 				<h5 data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">  <a  href="javascript:divtoshow('#exercises')"><i class="fa fa-heart"></i> My Exercises</a></h5>
 				<h5 data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">  <a  href="javascript:divtoshow('#workouts')"><i class="fa fa-child"></i> My Workouts</a></h5>
 				<h5 data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">  <a  href="javascript:divtoshow('#programs')"><i class="fa fa-calendar"></i> My Programs</a></h5>
-				<h5>  <a href="stats.html"><i class="fa fa-line-chart"></i> My Stats</a></h5>
+				<h5 data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">  <a  href="javascript:divtoshow('#stats')"><i class="fa fa-line-chart"></i> My Stats</a></h5>
 			  
 
 			
 			</div>
 			<br>
-			<a  href="profile.html">Profile</a> |
+			<a data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" href="javascript:divtoshow('#profile')">Profile</a> |
 			<a  href="settings.html">Settings</a> |
 			<a  href="javascript:logout()">Logout</a>
 			
