@@ -107,7 +107,7 @@
         },
         function (obj) {
           var data = {"id":obj.userId, "name":obj.displayName, "email":obj.email};
-		  alert(JSON.stringify(obj))
+		  alert(JSON.stringify(data))
         if (mlpObject.loginGp(data).result["success"] === true){
             try{
                 window.localStorage.setItem("un", data.name);
@@ -153,8 +153,9 @@
 	facebookConnectPlugin.login( ["email"],
 		function (response) { 
 			var data = {"id":response.userID, "name":response.name, "email":response.email};
-			alert(JSON.stringify(response));
+			alert(JSON.stringify(data));
         if (mlpObject.loginFb(data).result["success"] === true){
+			alert("success");
             try{
                 window.localStorage.setItem("un", data.name);
                 window.localStorage.setItem("pw", data.id);
