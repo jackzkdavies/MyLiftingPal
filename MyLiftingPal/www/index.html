@@ -23,6 +23,8 @@
     <br><br><br>
     <div  class="col-lg-12" style="padding: 10px; "> 
         <h4>Login</h4>
+    <button onclick="logingp()">Login with Google+</button>
+            <button onclick="loginfb();">Login with Facebook</button>	
         <div class="w-form signin-form" id="signindiv" style="display: block;">
         <form class="w-clearfix" name="wf-form-signup-form" data-name="Signup Form" data-redirect="/main-page">
               <p class ="invalidinput" id="usernameNotFound"></p>
@@ -97,6 +99,33 @@
       </div>
     </div>
   </div>
+<script>
+  function logingp() {
+    window.plugins.googleplus.login(
+        {
+          'iOSApiKey': '6535513912-uvpf249ak7avodois85tkjmh2lc2j952.apps.googleusercontent.com'
+        },
+        function (obj) {
+          alert(obj.displayName + ", " + obj.email);
+        },
+        function (msg) {
+          alert("error: " + msg);
+        }
+    );
+  }
+  
+ var loginfb = function () {
+	if (!window.cordova) {
+		var appId = prompt("Enter FB Application ID", "");
+		facebookConnectPlugin.browserInit(appId);
+	}
+	facebookConnectPlugin.login( ["email"],
+		function (response) { alert(JSON.stringify(response)) },
+		function (response) { alert(JSON.stringify(response)) });
+} 
+  
+  </script>
+
 
     <script type="text/javascript" src="js/mlp.js"></script>
     <script type="text/javascript" src="js/MLP-Login.js"></script>
