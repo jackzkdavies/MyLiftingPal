@@ -152,13 +152,13 @@
 	}
 	facebookConnectPlugin.login( ["email"],
 		function (response) { 
-			var data = {"id":response.userID, "name":response.name, "email":response.email};
-			alert(JSON.stringify(data));
-        if (mlpObject.loginFb(data).result["success"] === true){
+			var fbdata = {"id":response["userID"], "name":response["name"], "email":response["email"]};
+			alert(JSON.stringify(fbdata));
+        if (mlpObject.loginFb(fbdata).result["success"] === true){
 			alert("success");
             try{
-                window.localStorage.setItem("un", data.name);
-                window.localStorage.setItem("pw", data.id);
+                window.localStorage.setItem("un", fbdata.name);
+                window.localStorage.setItem("pw", fbdata.id);
                 var user = mlpObject.getUser().result;
                 var userid = user['data']['id'];
                 var displayUnits  = user['data']['units'];
