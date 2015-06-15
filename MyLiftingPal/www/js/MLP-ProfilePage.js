@@ -1,88 +1,104 @@
 //          MLP
 //          Jack Z K Davies 2014 copywrite
 //          www.gigatortoise.com
-var userProfilePhoto = user['data']['dp'].replace(/"/g, "");
 
-var userEmail = user['data']['email'];
+function init_profile_data(){
+	 userProfilePhoto = user['data']['dp'].replace(/"/g, "");
 
-var username = user['data']['username'];
+	 userEmail = user['data']['email'];
 
-var id = user['data']['id'];
+	 username = user['data']['username'];
 
-var dateCreated = user['data']['created'];
+	 id = user['data']['id'];
 
-var userInfo = mlpObject.getUsers({id:id}).result;
+	 dateCreated = user['data']['created'];
 
-var weight = userInfo['data'][7];
+	 userInfo = mlpObject.getUsers({id:id}).result;
 
-var gender = userInfo['data'][8];
+	 weight = userInfo['data'][7];
 
-var age = userInfo['data'][9];
+	 gender = userInfo['data'][8];
 
-var about = userInfo['data'][11];
+	 age = userInfo['data'][9];
 
-var why = userInfo['data'][12];
+	 about = userInfo['data'][11];
 
-var goals = userInfo['data'][13];
+	 why = userInfo['data'][12];
 
-var friends = userInfo['data']['acceptedfriends'];
+	 goals = userInfo['data'][13];
 
-var stats = userInfo['data']['stats'];
+	 friends = userInfo['data']['acceptedfriends'];
 
-var units = userInfo['data']['units'];
+	 stats = userInfo['data']['stats'];
 
-window.localStorage.setItem("lastFriendView", null);
-//var weight = unserInfo[];
-displayUser();
+	 units = userInfo['data']['units'];
+	displayUser();
+}
+
 function displayUser(){
+
 	var dp = '<img class="profilePicture" src="'+userProfilePhoto+'" alt="">';
-	$("#profilePicture").append(dp);
-    $("#username").append('<h3>'+username+'</h3>');
-    $("#weight").append(weight+units+'&nbsp;&#x2022;&nbsp;');
-    $("#gender").append(gender+'&nbsp;&#x2022;&nbsp;');
-    $("#age").append(age+'&nbsp;years strong');
-    
-    document.getElementById('aboutMe').innerHTML='<h6 style="">About '+username+'</h6><p>'+about+'</p>';
-    
-    document.getElementById('why').innerHTML='<h6 style="">Why I lift</h6><p>'+why+'</p>';
-    
-    document.getElementById('goals').innerHTML='<h6 style="">My Goals</h6><p>'+goals+'</p>';
-    
+	document.getElementById('profilepicture').innerHTML=dp;
+	document.getElementById('username').innerHTML='<h3>'+username+'</h3>';
+	document.getElementById('details').innerHTML=weight+units+'&nbsp;•&nbsp;' + gender+'&nbsp;•&nbsp;' +age+'&nbsp;years old';
+	document.getElementById('aboutMe').innerHTML=about;
+	document.getElementById('why').innerHTML="<h5>Why I Lift</h5>"+why;
+	document.getElementById('goals').innerHTML="<h5>My Lifting Goals</h5>"+goals;    
     displayMaxes();
-    
     displayFriends();
 }
 
 function displayMaxes(){
+	document.getElementById('maxes').innerHTML="<h5>Max Lifts</h5>";
     for(lifts in stats){
         var liftName = stats[lifts]['name'];
         var liftWeight = stats[lifts]['onerm'];
         var type = stats[lifts]['type'];
-        $("#maxes").append('<h4>'+liftName+': '+liftWeight+units+' ('+type+')</h4>');
+       $("#maxes").append(liftName+': '+liftWeight+units+' ('+type+')<br>');
     }
 }
 
 function displayFriends(){
+	$("#friends").empty();	   
     for (friend in friends){
         var f ='';
-        f += '<div style="float:left" onclick="viewFriend('+friends[friend]['0']+')"> <img class="friendsProfilePicture" src='+friends[friend]['dp']+' alt=""><br>'+
+        f += '<div style="" onclick="viewFriend('+friends[friend]['0']+')"> <img class="friendsProfilePicture" src='+friends[friend]['dp']+' alt=""><br>'+
                friends[friend][1]+'</div>';
-       console.log(f);
         $("#friends").append(f);
-
     }
-    console.log(friends);
 } 
 
 
 function viewFriend(id){
-    window.localStorage.setItem("lastFriendView", id);
-    console.log(window.localStorage.getItem("lastFriendView"));
-    window.location.replace("friendsProfile.html");
+	init_friends_profile(id);
+	friendsprofile_displayUser();
+	friend_checkIfFriends(id);
+	divtoshow('#friendsprofile');
 }
 function profileEditModal(){
+	$(document).ready(function() {
+		$('#edit-profile-gender').val(gender);
+		$('#ageUpdate').val(age);
+		$('#weightUpdate').val(weight);
+	});
+	document.getElementById('aboutUpdate').innerHTML=about;
+	document.getElementById('whyUpdate').innerHTML=why;
+	document.getElementById('goalsUpdate').innerHTML=goals;
+
     var options = {
         "backdrop" : "true",
         "show":"true"};
     $('#updateProfileModal').modal(options);
 }
+
+function submitProfileUpate(){
+	loadingModal("Updating Profile...");
+	 try{
+		console.log(mlpObject.updateProfile({userid:id, weight:$('#weightUpdate').val(),gender:$('#edit-profile-gender').val(),age:$('#ageUpdate').val(),about:document.getElementById('aboutUpdate').innerHTML,why:document.getElementById('whyUpdate').innerHTML,goals:document.getElementById('goalsUpdate').innerHTML}).result);
+		user = mlpObject.getUser().result;
+		init_profile_data();
+	}
+	catch(e){console.log(e)}
+}
+
+init_profile_data();

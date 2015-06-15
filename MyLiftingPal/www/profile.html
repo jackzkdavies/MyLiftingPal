@@ -9,23 +9,23 @@
 		</div>
 		<div class="modal-body" id="updateProfileBody">
 			<h6>Display Picture URL</h6>
-			<p>Must be 120pxX120px</p>
+			<p>Must be 120px by 120px</p>
 			<input type="url" class="form-control edit-profile-url" placeholder="URL">
 			
 			<h6>Gender</h6>
 				<select class="form-control edit-profile-gender" id="edit-profile-gender">
-				<option>Alien</option>
-				<option>Male</option>
-				<option>Female</option>
-				<option>Other</option>
+				<option value="Alien">Alien</option>
+				<option value="Male">Male</option>
+				<option value="Female">Female</option>
+				<option value="Other">Other</option>
 				</select>
 			<h6>Age</h6>
-				<input type='number'>
+				<input id="ageUpdate" type='number'>
 			 
 			
 				
 			<h6>Weight</h6>
-				<input type='number'>
+				<input id="weightUpdate" type='number'>
 			<h6>About</h6>
 				<textarea class="form-control edit-profile-about" id='aboutUpdate' placeholder="About Me" rows="5"></textarea>
 			<h6>Why</h6>
@@ -33,8 +33,8 @@
 
 			<h6>Goals</h6>
 				<textarea class="form-control edit-profile-about" id='goalsUpdate' placeholder="My Goals" rows="5"></textarea>
-
-			
+		<br>
+			<button type="button" onclick="submitProfileUpate()" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Update</button>
 		</div>
 		<div class="modal-footer" id='profileEditFooter'>
 			<button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -44,53 +44,40 @@
 </div>
         
 
-<div class="w-clearfix">
-<div style='border-radius: 5px; background: linear-gradient( rgba(255, 255, 255, 0.7), rgba(255, 255,255, 0.7) ), url(images/header.jpg) no-repeat center center;background-size: cover;float:left; width:100%'>
-	<div style='float:left;width:30%' id="profilePicture"></div>
-	<div style='float:left;width:70%'>
-		<div style='float:left; width:100%' id="username"></div>
-		<div style='float:left; width:100%' id="userEmail"></div>
-		<br>
-		<div style='float:left; ' id="weight"></div>
-		<div style='float:left; ' id="gender"></div>
-		<div style='float:left; ' id="age"></div>
-	</div>
-</div>
-<div style='  width: 100%; float:left'>
-	<br>
-<a href="javascript:profileEditModal();" class="btn btn-primary edit-profile"><i class="fa fa-pencil-square-o"></i> Edit Profile</a>
-</div>
-<div style='  width: 100%;
-		padding: 10px;
-		border-radius: 3px;
-		margin-top: 10px;
-		float: left;
-		'>
-	
-	<div id='aboutMe'><h5>About Me</h5></div>
-	<br>
-	<div id='why'><h5>Why I Lift</h5></div>
-	<br>
-	<div id='goals'><h5>My Goals</h5></div>
-	
-	
-</div>
-   
 
-<div id='maxes' style='width:100%;float:left'>
-	 <br>
-	<hr style=';  margin-top: 0px;margin-bottom: 0px;border: 0;border-top: 5px solid red;'>
-	<h2 style='color:red'>!!!MAX LIFTS!!!</h2>
-	<hr style=';  margin-top: 0px;margin-bottom: 0px;border: 0;border-top: 5px solid red;'>
 
+
+<section>
+<div class="col-sm-4" id="profilepicture"></div>
+<div class="col-sm-8">
+	<h3 id="username"></h3>
+	<p id="details"></p>
 </div>
-<div style='width:100%;float:left'>
+<br>
+<h2 onclick="profileEditModal()"><i  class="fa fa-cog"></i></h2>
 <br>
 
-<hr style=';  margin-top: 0px;margin-bottom: 0px;border: 0;border-top: 5px solid red;'>
+<div class="col-sm-4" id="achievements">
+	<img id="achievementsaward" src="img/plusstrengthaward.png">
 </div>
+
+<div class="col-sm-8" id="achievements">
+	<p>No achievements received yet.</p>
+</div>
+
+<br>
+<div class="col-sm-12" id='aboutMe'></div>
+<br>
+<div  class="col-sm-12" id='why'><h5>Why I Lift</h5></div>
+<br>
+<div class="col-sm-12" id='goals'><h5>My Goals</h5></div>
+<br>
+<div class="col-sm-12" id='maxes'><h5>Maxes</h5></div>
+<br>
+<hr>
 <h3 style='float:left' >Friends</h3>
-<div style='float:left' id='friends'>
+<div class="col-sm-12"  id='friends'>
 	
 </div>
-</div>
+
+</section>
