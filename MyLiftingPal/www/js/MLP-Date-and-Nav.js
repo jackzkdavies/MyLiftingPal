@@ -98,7 +98,17 @@ function setVarDate(){
     document.getElementById("headerDate").innerHTML = fullDate; 
 	
 	try{
-		checkResults();
+	    if ($('#diary').is(':hidden')) {
+			/* do nothing */
+		} else {
+			checkResults();
+		}
+		
+		if ($('#friendsdiary').is(':hidden')) {
+			/* do nothing */
+		} else {
+			friend_checkResults(friendsId);
+		}
 	}
 	catch(e){}
 
