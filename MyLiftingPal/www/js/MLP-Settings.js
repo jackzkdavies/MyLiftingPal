@@ -135,7 +135,9 @@ function updateUnitPref(){
     var unitPref = document.getElementById("unitPref").value;
     var pref = mlpObject.updateSettings({userid:id,units:unitPref}).result;
     var success = pref['success'];
-    if (success == true){document.getElementById('newUnitPrefMessage').innerHTML="Updated Successfully";}
+    if (success == true){document.getElementById('newUnitPrefMessage').innerHTML="Updated Successfully";
+	displayUnits = unitPref;
+	checkResults();	}
     else{document.getElementById('newUnitPrefMessage').innerHTML="Updated Failed<br>"+pref['errormsg'];}
     
     setTimeout(function(){

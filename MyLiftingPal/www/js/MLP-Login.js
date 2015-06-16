@@ -1,6 +1,6 @@
 try{
-    var locationTest = [(window.location.pathname).toLocaleString(), "/index.html"];
-    var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
+    locationTest = [(window.location.pathname).toLocaleString(), "/index.html"];
+    mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
 
 	
 	$( window ).load(function() {
@@ -12,10 +12,10 @@ try{
 
     //Check if already loged in, and/or if login details are saved, if so attempt to login.
     if (mlpObject.getUser().result['success'] == true){
-        var user = mlpObject.getUser().result;
-        var userid = user['data']['id'];
-        var displayUnits  = user['data']['units'];
-        var notifications = user['data']['requests'];
+        user = mlpObject.getUser().result;
+        userid = user['data']['id'];
+        displayUnits  = user['data']['units'];
+        notifications = user['data']['requests'];
         if(locationTest[0].indexOf('index') > -1){
             window.location.replace("PlusStrength.html");}
     }
@@ -23,10 +23,10 @@ try{
         if(localStorage.getItem('un') != null && localStorage.getItem('pw') != null){
             console.log("Creditials saved, attempting auto login");
             if (mlpObject.login({username:localStorage.getItem('un'),password:localStorage.getItem('pw')}).result["success"] === true){
-                var user = mlpObject.getUser().result;
-                var userid = user['data']['id'];
-                var displayUnits  = user['data']['units'];
-                var notifications = user['data']['requests'];
+                user = mlpObject.getUser().result;
+                userid = user['data']['id'];
+                displayUnits  = user['data']['units'];
+                notifications = user['data']['requests'];
                 window.localStorage.setItem("user", JSON.stringify(user));
                 if(locationTest[0].indexOf('index') > -1){
                     window.location.replace("PlusStrength.html");  
@@ -83,10 +83,10 @@ function submitLoginForm(){
             try{
                 window.localStorage.setItem("un", JSON.stringify(lPassword));
                 window.localStorage.setItem("pw", JSON.stringify(lPassword));
-                var user = mlpObject.getUser().result;
-                var userid = user['data']['id'];
-                var displayUnits  = user['data']['units'];
-                var notifications = user['data']['requests'];
+                user = mlpObject.getUser().result;
+                userid = user['data']['id'];
+                displayUnits  = user['data']['units'];
+                notifications = user['data']['requests'];
                 window.location.replace("PlusStrength.html");
                 }
                 catch(e){

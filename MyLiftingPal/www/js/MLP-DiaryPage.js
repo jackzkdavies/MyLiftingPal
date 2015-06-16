@@ -9,7 +9,7 @@ var submitDairySearchClass= 'e';
 var currentTotals={};
 window.localStorage.setItem("lastFriendView", null);
 var toggleList={};
-var recordsList={};
+recordsList={};
 var toggleSpeed=0;
 
 //Code section for setting toggle states
