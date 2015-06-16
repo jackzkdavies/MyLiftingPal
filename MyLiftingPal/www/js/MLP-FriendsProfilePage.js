@@ -14,17 +14,18 @@ function init_friends_profile(f_id){
 	why = friendsInfo['data'][12];
 	goals = friendsInfo['data'][13];
 	stats = friendsInfo['data']['stats'];
-	units = friendsInfo['data']['units'];
+	friends_units = friendsInfo['data']['units'];
 }
 
 function friendsprofile_displayUser(){
+	divtoshow('#friendsprofile',friendsusername);
 	$('#friendsName').empty();
 	$('#friendsName').append(friendsusername+"'s Profile");
 
 	var dp = '<img class="firindsprofilePicture" src='+userProfilePhoto+' alt="">';
 	document.getElementById('friendsprofilepicture').innerHTML=dp;
 	document.getElementById('friendsusername').innerHTML='<h3>'+friendsusername+'</h3>';
-	document.getElementById('friendsdetails').innerHTML=weight+units+'&nbsp;•&nbsp;' + gender+'&nbsp;•&nbsp;' +age+'&nbsp;years old';
+	document.getElementById('friendsdetails').innerHTML=weight+friends_units+'&nbsp;•&nbsp;' + gender+'&nbsp;•&nbsp;' +age+'&nbsp;years old';
 	document.getElementById('friendsaboutMe').innerHTML=about;
 	document.getElementById('friendswhy').innerHTML="<h5>Why I Lift</h5>"+why;
 	document.getElementById('friendsgoals').innerHTML="<h5>My Lifting Goals</h5>"+goals;    
@@ -38,7 +39,7 @@ function friendsdisplayMaxes(){
 		var liftName = stats[lifts]['name'];
 		var liftWeight = stats[lifts]['onerm'];
 		var type = stats[lifts]['type'];
-		$("#friendsmaxes").append(liftName+': '+liftWeight+units+' ('+type+')<br>');
+		$("#friendsmaxes").append(liftName+': '+liftWeight+friends_units+' ('+type+')<br>');
 	}
 }
 
@@ -54,7 +55,7 @@ function friend_checkIfFriends(inputid){
 	}
 }
 function viewFriendsDiary(){
-	divtoshow('#friendsdiary');
+	divtoshow('#friendsdiary',friendsusername);
 	friend_checkResults(friendsId);
 }
 

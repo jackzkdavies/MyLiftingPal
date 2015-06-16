@@ -3,8 +3,6 @@
 //          www.thesoftengineer.com
 
 //Global Variables 
-var toggleSpeed = window.localStorage.getItem("toggleSpeed");
-var displayUnits = window.localStorage.getItem("displayUnits");
 var lastCallertoWorkoutSearch=null;
 var globalProgramObjs={};
 

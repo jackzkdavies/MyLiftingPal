@@ -64,7 +64,7 @@ function friend_checkResults(f_id){
                             ' </div>'+
                             ' <div class="exerciseWeightDiv">'+
                             friendsDiaryRestults['data'][myRes]['weight']+
-                            displayUnits+'  </div>'+
+                            friends_units+'  </div>'+
                             ' <div class="exerciseRPeDiv">'+
                             friendsDiaryRestults['data'][myRes]['rpe']+
                             ' </div>'+
@@ -91,7 +91,7 @@ function friend_checkResults(f_id){
                             ' </div>'+
                             ' <div class="exerciseWeightDiv">'+
                             friendsDiaryRestults['data'][myRes]['weight']+
-                            displayUnits+'  </div>'+
+                            friends_units+'  </div>'+
                             ' <div class="exerciseRPeDiv">'+
                             friendsDiaryRestults['data'][myRes]['rpe']+
                             ' </div>'+

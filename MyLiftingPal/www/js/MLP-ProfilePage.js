@@ -73,7 +73,6 @@ function viewFriend(id){
 	init_friends_profile(id);
 	friendsprofile_displayUser();
 	friend_checkIfFriends(id);
-	divtoshow('#friendsprofile');
 }
 function profileEditModal(){
 	$(document).ready(function() {

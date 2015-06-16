@@ -1,11 +1,6 @@
 //          MLP
 //          Jack Z K Davies 2014 copywrite
 //          www.thesoftengineer.com
-
-var mlpObject = mlp('f5c31db3b7e2675a43a61a87923955c9');
-var user = JSON.parse(localStorage.getItem('user'));
-var notifications = user['data']['requests'];
-
 function notifcationsModal(){
     var options = {
     "backdrop" : "true",
