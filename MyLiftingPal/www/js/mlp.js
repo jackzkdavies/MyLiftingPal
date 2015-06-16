@@ -236,7 +236,7 @@ function mlp(key){
    };
    
    self.changeResults = function(data){
-       //id, exerciseid, workoutid, programid, reps, sets, rpe, weight, percentage
+       //id, exerciseid, workoutid, programid, reps, sets, rpe, weight, percentage, notes
        self.call('edit','changeresults', data, cb);
            return self;
     };

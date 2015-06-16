@@ -100,4 +100,77 @@ function submitProfileUpate(){
 	catch(e){console.log(e)}
 }
 
+function maxLiftsModal(){
+    var options = {
+        "backdrop" : "true",
+        "show":"true"};
+    $('#editMaxesModal').modal(options);
+
+}
+function editMaxes(){
+
+}
+function profile_submitSearchExcercise(){
+    var searchTerms =['name','musclegroup','type'];
+    var searchTerm= (document.getElementById("profileSearchTerm").value.toString()).trim();
+    document.getElementById("profile_searchresults").innerHTML = "";
+    document.getElementById("profileResultsHeading").innerHTML="";
+    if (searchTerm ===""){
+        $("#exercise_searchresults").append("Please enter a keyword");
+        return;
+    }
+    globalExerciseObjs={};
+    try{  
+    for (st in searchTerms){
+        var data = new Array();
+        data[searchTerms[st]] = searchTerm;
+        var searchResult = mlpObject.getExercises(data).result;
+        if (searchResult['success'] === true){
+            for ( objects in searchResult['data'] ){              
+                globalExerciseObjs[searchResult['data'][objects]['id']]=searchResult['data'][objects];
+            };
+        
+            
+        }
+    }
+    
+    var toAppend="";   
+    
+        for (key in globalExerciseObjs){    
+              if (globalExerciseObjs.hasOwnProperty(key)) {      
+                var tempString = '"'+globalExerciseObjs[key]['name']+'"';
+                toAppend += "<tr onClick='updateModalExerciseAdd("+globalExerciseObjs[key]['id']+","+tempString+")'>";
+        
+        for (st in searchTerms){
+            toAppend += "<td>";
+
+            if (searchTerms[st] === 'userid'){ }
+            else {
+                toAppend += globalExerciseObjs[key][searchTerms[st]];
+            }
+            toAppend += "</td>";
+        }
+        
+        toAppend += "</tr>";
+
+    }}
+    
+    try{
+    $("#profile_exercise_table").dataTable().fnDestroy();
+    $("#profile_searchresults").empty();
+    }
+    catch(e){console.log(e);}
+    
+    $("#profile_searchresults").append(toAppend);
+    $('#profile_exercise_table').DataTable({bFilter: false});
+    document.getElementById('profile_exercise_table').style.display='table';
+    document.getElementById('profileResultsHeading').innerHTML='<div style="line-height:50px">Search results for: '+searchTerm+'</div>';
+    
+    }
+    catch(e){console.log(e);}
+    finally{};
+}
+
+
+
 init_profile_data();

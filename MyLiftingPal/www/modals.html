@@ -1,5 +1,82 @@
 <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true"></div>
-	
+<div class="modal fade" id="updateProfileModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+		<h4 class="modal-title">Update Profile</h4>
+		</div>
+		<div class="modal-body" id="updateProfileBody">
+			<h6>Display Picture URL</h6>
+			<p>Must be 120px by 120px</p>
+			<input type="url" class="form-control edit-profile-url" placeholder="URL">
+			
+			<h6>Gender</h6>
+				<select class="form-control edit-profile-gender" id="edit-profile-gender">
+				<option value="Alien">Alien</option>
+				<option value="Male">Male</option>
+				<option value="Female">Female</option>
+				<option value="Other">Other</option>
+				</select>
+			<h6>Age</h6>
+				<input id="ageUpdate" type='number'>
+			 
+			
+				
+			<h6>Weight</h6>
+				<input id="weightUpdate" type='number'>
+			<h6>About</h6>
+				<textarea class="form-control edit-profile-about" id='aboutUpdate' placeholder="About Me" rows="5"></textarea>
+			<h6>Why</h6>
+				<textarea class="form-control edit-profile-about" id='whyUpdate' placeholder="Why I lift" rows="5"></textarea>
+
+			<h6>Goals</h6>
+				<textarea class="form-control edit-profile-about" id='goalsUpdate' placeholder="My Goals" rows="5"></textarea>
+		<br>
+			<button type="button" onclick="submitProfileUpate()" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Update</button>
+		</div>
+		<div class="modal-footer" id='profileEditFooter'>
+			<button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+	</div>
+	</div>
+</div>
+</div>
+
+<div class="modal fade" id="editMaxesModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h4 class="modal-title" id="editMaxesModalHeader">Add/Edit Max's</h4>
+		</div>
+		<div class="modal-body" id="editMaxesModalBody">
+						<input id="profileSearchTerm" style="float:left; margin-right: -38px" class="w-input"  type="text" placeholder="Select Exercise to add" name="addexercisetoworkout" required="required" data-name="addexercisetoworkout">
+						<script>
+						$("#profileSearchTerm").keyup(function (e) {
+						if (e.keyCode == 13) {
+						profile_submitSearchExcercise();
+						}
+						});
+						</script>
+						
+						<p id="profileResultsHeading"></p>
+						<table id='profile_exercise_table' style='display: none; text-align:left;   text-shadow: 0px 0px rgba(255, 255, 255, 0);'>
+							<thead>
+								<tr>
+									<td style='color:black; font-weight: bold;background-color: white'>Exercise</td>
+									<td style='color:white; font-weight: 650;background-color: #888888;' >info</td>
+									<td style='color:white; font-weight: 650;background-color: #888888; border-radius:0px 3px 0px 0px'>Add</td>
+								</tr>
+							</thead>
+							<tbody id ="profile_searchresults" style='font-size: 12px;'></tbody>
+						</table>
+						<br><br>
+		</div>
+		<div class="modal-footer" id='editMaxesModalFooter'>
+			<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>
+		</div>
+	</div>
+</div>
+</div>
 
 <div class="modal fade" id="infoDataModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
 <div class="modal-dialog">
@@ -283,7 +360,7 @@
 			<div id="modalHistoryRecords"></div>
 			<div id="bestVolume"></div>
 			<div id="modalHistoryNotes">
-				<textarea class="form-control note" rows="5" placeholder="Write Notes"></textarea>
+				<textarea id="modalHistoryNotesContent" class="form-control note" rows="5" placeholder="Write Notes"></textarea>
 			</div>
 		</div>
 		<div class="modal-footer">

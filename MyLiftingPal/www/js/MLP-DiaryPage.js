@@ -1,6 +1,9 @@
 //          MLP
 //          Jack Z K Davies 2014 copywrite
 //          www.thesoftengineer.com
+
+modalHistoryTest = {}
+
 var globalExerciseObjs; 
 var globalWorkoutObjs;
 var globalProgramObjs; 
@@ -79,6 +82,7 @@ function checkResults(){
                 var toAppend ="";
                 var test=[];
                 
+                modalHistoryTest[myDiaryResults['data'][myRes]['id']] = myDiaryResults['data'][myRes]
                 
                 
                 var myResId="myResExNameDiv"+myDiaryResults['data'][myRes]['exerciseid'];
@@ -263,6 +267,20 @@ function diaryEditExercise(inputID){
 }
 
 function diaryModalHistory(inputID){
+
+		for(resultNotes in modalHistoryTest){
+			if(modalHistoryTest[resultNotes]['exerciseid'] == inputID){
+				if (modalHistoryTest[resultNotes]['notes'] != null){
+					$('#modalHistoryNotesContent').val(modalHistoryTest[resultNotes]['notes'])
+				}
+				else{
+					$('#modalHistoryNotesContent').val("");
+				}
+				
+			}
+		}
+
+	currentModalHistoryID = inputID;
     var records = recordsList[inputID][0];
     for (record in records){
         $("#modalHistoryRecords").empty();

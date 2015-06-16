@@ -51,7 +51,15 @@
 </div>
 
     <script>    
-	checkResults();		        
+	checkResults();	
+	$(".note").focusout(function() {
+		for(resultNotes in modalHistoryTest){
+			if(modalHistoryTest[resultNotes]['exerciseid'] == currentModalHistoryID){
+				mlpObject.changeResults({id:modalHistoryTest[resultNotes]['id'], notes:$('#modalHistoryNotesContent').val()});
+			}
+		}
+		checkResults();	
+	});
         var t = false;
         $('.inputLimit10').focus(function () {
             var $this = $(this);
