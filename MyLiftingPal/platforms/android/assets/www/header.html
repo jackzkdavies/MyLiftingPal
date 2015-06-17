@@ -1,0 +1,119 @@
+<nav class="navbar navbar-default navbar-fixed-top" >
+	<div class="container" >
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header page-scroll testBackground" id="logoHeader"  >
+			<img id='mlpLogo' style='height: 35px; margin: 6px;' src="images/mlplogo.png" alt="MyLiftingPal" >
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+			<div>
+				<script>
+				function divtoshow(i,title){
+					$('#diary').css({'display':'none'})
+					$('#exercises').css({'display':'none'})
+					$('#workouts').css({'display':'none'})
+					$('#programs').css({'display':'none'})
+					$('#stats').css({'display':'none'})
+					$('#profile').css({'display':'none'})
+					$('#friendsprofile').css({'display':'none'})
+					$('#friendsdiary').css({'display':'none'})
+					$('#settings').css({'display':'none'})
+					$('#terms').css({'display':'none'})
+					$('#privacy').css({'display':'none'})
+					$('#contact').css({'display':'none'})
+					$(i).css({'display':'block'})
+					document.getElementById('pagename').innerHTML=title;
+				}
+				</script>
+			
+				<h5 data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <a href="javascript:divtoshow('#diary','My Diary')"><i class="fa fa-book"></i> My Diary</a></h5>
+				<h5 data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">  <a  href="javascript:divtoshow('#exercises','Exercises')"><i class="fa fa-heart"></i> My Exercises</a></h5>
+				<h5 data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">  <a  href="javascript:divtoshow('#workouts','Workouts')"><i class="fa fa-child"></i> My Workouts</a></h5>
+				<h5 data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">  <a  href="javascript:divtoshow('#programs','Programs')"><i class="fa fa-calendar"></i> My Programs</a></h5>
+				<h5 data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">  <a  href="javascript:divtoshow('#stats','Stats')"><i class="fa fa-line-chart"></i> My Stats</a></h5>
+			  
+
+			
+			</div>
+			<br>
+			<a data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" href="javascript:divtoshow('#profile','My Profile')">Profile</a> |
+			<a  data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" href="javascript:divtoshow('#settings','Settings')">Settings</a> |
+			<a  href="javascript:logout()">Logout</a>
+			
+			<hr>
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+	<!-- /.container-fluid -->
+	<div style='width: 100%; text-align: center; float:left'>
+		<div style='width: 14%; float:left; padding-top: 12px;'><i onclick="$('#bottomNavCalc').slideToggle();$('#bottomNavStopwatch').hide();$('#bottomNavNotifications').hide();" style="color:#333; font-size: 20px" class="fa fa-calculator"></i></div>
+		<div style='width: 14%; float:left; padding-top: 11px;'><img onclick="$('#bottomNavStopwatch').slideToggle();$('#bottomNavCalc').hide();$('#bottomNavNotifications').hide();" style="height: 24px; margin-top: 0px" src="images/stopwatch.png" alt="STOPWATCH" ></div>
+		<div style='width: 44%; float:left'><h4 id='pagename'>My Diary</h4></div>
+		<div style='width: 14%; float:left; padding-top: 12px;'><p id="numNot"></p><i onclick="notifcationsModal()" style="color:#333; font-size: 20px" class="fa fa-inbox"></i></div>
+		<div style='width: 14%; float:left; padding-top: 9px;'><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<i style="color:#333; font-size: 20px" class="fa fa-bars"></i>
+				</button></div>
+	</div >
+
+	
+	<div id='headerDateDiv'  style='display:none; width: 100%; text-align: center; float:left;  margin-top: -12px;  
+		  border-bottom-style: solid;border-color: rgb(183, 182, 182); border-bottom-width: 1px;'> 
+		<p style="font-size: smaller;  margin-bottom: 1px;" id="headerDate"></p>
+	</div>
+</nav>
+    
+    <nav id='bottomNavStopwatch' class="navbar navbar-default navbar-fixed-bottom" style="display:none; background-color: rgb(226, 218, 203);">
+        <br>
+        <button type="button" class="close" onclick="$('#bottomNavStopwatch').hide();"  aria-hidden="true"><i class="fa fa-times"></i></button>
+        <div><span id="stopwatchTime">00:00:00:000</span></div>
+        <input class="btn btn-default" type="button" id='startStop' value="start" onclick="startStop();">
+        <!--<input type="button" value="stop" onclick="stop();">-->
+        <input class="btn btn-default" type="button" value="reset" onclick="reset();">
+        <br><br>
+    </nav>
+    
+    <nav id='bottomNavNotifications' class="navbar navbar-default navbar-fixed-bottom" style="display:none; background-color: rgb(226, 218, 203);">
+        <br>
+        <div class="container">
+        <p style='font-weight: bold;'>Inbox <button type="button" class="close" onclick="$('#bottomNavCalc').hide();"  aria-hidden="true"><i class="fa fa-times"></i></button><p>
+        <div id="inboxNotifications"></div>
+        <br>
+        </div>
+    </nav>
+	
+    <nav id='bottomNavCalc' class="navbar navbar-default navbar-fixed-bottom" style="display:none; background-color: rgb(226, 218, 203);">
+        
+        <br>
+        <div class="container">
+        <p style='font-weight: bold;'>1RM Calculator <button type="button" class="close" onclick="$('#bottomNavCalc').hide();"  aria-hidden="true"><i class="fa fa-times"></i></button><p>
+        
+        <input id='w' style='width: 40%;float:left' type="number" class="form-control weight-lifted" step="0.01" placeholder="0">
+        <p style='width: 60%;'>Weight</p>
+        <br>
+        <input id='r' style='width: 40%;float:left' type="number" class="inputLimit12 form-control reps-performed" placeholder="0">
+        <p style='width: 60%;'>Reps (1-12)</p>
+        
+        <input class="btn btn-default" type="button" value="Calculate" onclick="rmcalc()">
+        <p id='rmResult'></p>
+        <br>
+        </div>
+    </nav>
+	
+
+<br><br><br>
+
+<p id="date"  onchange="" onClick="slideToggleCalender()">  </p>      
+<div class="calender"  id="date-Picker" style="display: none;" onClick="setVarDate()"></div>
+
+<script>
+	$('#date-Picker').datepicker({
+	format: "dd/mm/yyyy",
+	orientation: "top",
+	keyboardNavigation: false,
+	calendarWeeks: true,
+	todayHighlight: true,
+	gotoCurrent: true
+	}).datepicker("setDate", new Date());
+	setVarDate();
+</script>

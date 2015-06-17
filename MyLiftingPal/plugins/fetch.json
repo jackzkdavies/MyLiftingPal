@@ -1,8 +1,0 @@
-{
-    "com.phonegap.plugins.facebookconnect": {
-        "source": {
-            "type": "registry",
-            "id": "com.phonegap.plugins.facebookconnect"
-        }
-    }
-}

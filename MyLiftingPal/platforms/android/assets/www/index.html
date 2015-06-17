@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html data-wf-site="54697ee94e26f780049e790b" data-wf-page="54697ee94e26f780049e790d">
+<head>
+    <meta charset="utf-8">
+    <title>PlusStrength - Login/Sign up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/webflow.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/myliftingpal.webflow.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    
+<script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    
+</head>
+<body>
+    <img src="images/mlplogored.png" alt="PlusStrength">
+	<h4 id="ConnectionError"></h4>
+    
+    <div  class="col-lg-12" style="padding: 10px; "> 
+        <h4>Start tracking today!</h4>
+		<br><br>
+		
+	<img	style="width:30%" src="img/Google.png" alt="Google+" onclick="logingp()">
+	<img	style="width:30%" src="img/Facebook.png" alt="Google+" onclick="loginfb();">
+	<br><br><br>
+<!--     <button onclick="logingp()">Login with Google+</button>
+	<button onclick="loginfb();">Login with Facebook</button>	 -->
+			
+			
+			
+        <div class="w-form signin-form" id="signindiv" style="display: block;">
+        <form class="w-clearfix" name="wf-form-signup-form" data-name="Signup Form" data-redirect="/main-page">
+              <p class ="invalidinput" id="usernameNotFound"></p>
+              <input class="w-input field feild2" id="signInUsername" type="text" placeholder="Enter your username" name="username" required="required" data-name="username">
+              <p class ="invalidinput" id="incorrectPassword"></p>
+              <input class="w-input field" id="signInPassword" type="password" placeholder="Enter your password" name="password" data-name="password" required="required">
+              <a class="w-button button" href="javascript: submitLoginForm()">login</a>
+            </form>
+            <script>
+                $("#signInUsername").keyup(function (e) {
+                   if (e.keyCode == 13) {
+                        document.getElementById("signInPassword").focus();
+                   }
+               });
+               
+                $("#signInPassword").keyup(function (e) {
+                   if (e.keyCode == 13) {
+                       submitLoginForm();
+                   }
+               });
+            </script>
+              <br>
+              <h4>New user?</h4>
+          <a class="button signup" href="javascript: toggleForms()"><span>sign up</span></a>
+          </div>
+
+        <div class="w-form sign-up-form" id="signupdiv" style="display: none;" >
+            <form class="w-clearfix" name="wf-form-signup-form" data-name="Signup Form">
+                <p class ="invalidinput" id="invalidemailresponse"></p>
+                <input class="w-input field feild2" id="email" type="email" placeholder="Enter your email adress" name="email" required="required" data-name="email" >
+                <p class ="invalidinput" id="invalidusernameresponse"></p>
+                <input class="w-input field feild2" id="username" type="text" placeholder="Select username" name="username" required="required" data-name="username" onclick="checkEmailaddress(); return false;">
+                <p class ="invalidinput" id="invalidpasswordmatch"></p>
+                <input class="w-input field feild2" id="password" name="signuppw1" type="password" placeholder="Select your Password" name="password" required="required" data-name="password" onclick="checkEmailaddress(); return false;">
+                <input class="w-input field" id="passwordconfirm" type="password" placeholder="Re-enter your password" name="passwordconfirm" data-name="passwordconfirm" required="required" onclick="checkEmailaddress(); return false;" onkeyup="checkPassword(); return false;">
+                <a class="w-button button" href="javascript: submitSignUpForm()">sign up</a>
+            </form>
+            <script>
+                $("#email").keyup(function (e) {
+                   if (e.keyCode == 13) {
+                        document.getElementById("username").focus();
+                   }
+               });                
+               $("#username").keyup(function (e) {
+                   if (e.keyCode == 13) {
+                        document.getElementById("password").focus();
+                   }
+               });
+                $("#password").keyup(function (e) {
+                   if (e.keyCode == 13) {
+                        document.getElementById("passwordconfirm").focus();
+                   }
+               });
+               
+                $("#passwordconfirm").keyup(function (e) {
+                   if (e.keyCode == 13) {
+                       submitSignUpForm();
+                   }
+               });
+            </script>
+            <br><br>
+            <a class="button backbutton" href="javascript: toggleForms()">return</a>
+        </div>
+        <br><br>
+    </div>
+    <br><br>
+    
+  <div class="color-section">
+    <div class="w-container">
+      <div class="footer-section">
+        <div class="copyright">© 2015 Plus Strength. All rights reserved.&nbsp;</div>
+      </div>
+    </div>
+  </div>
+
+    <script type="text/javascript" src="js/mlp.js"></script>
+    <script type="text/javascript" src="js/MLP-Login.js"></script>
+    <script type="text/javascript" src="js/webflow.js"></script>
+    <script type="text/javascript" src="js/auth.js"></script>
+  <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+</body>
+</html>
