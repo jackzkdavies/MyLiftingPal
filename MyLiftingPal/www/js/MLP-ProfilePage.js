@@ -93,7 +93,7 @@ function profileEditModal(){
 function submitProfileUpate(){
 	loadingModal("Updating Profile...");
 	 try{
-		console.log(mlpObject.updateProfile({userid:id, weight:$('#weightUpdate').val(),gender:$('#edit-profile-gender').val(),age:$('#ageUpdate').val(),about:document.getElementById('aboutUpdate').innerHTML,why:document.getElementById('whyUpdate').innerHTML,goals:document.getElementById('goalsUpdate').innerHTML}).result);
+		console.log(mlpObject.updateProfile({userid:id, weight:$('#weightUpdate').val(),gender:$('#edit-profile-gender').val(),age:$('#ageUpdate').val(),about:$('#aboutUpdate').val(),why:$('#whyUpdate').val(),goals:$('#goalsUpdate').val()}).result);
 		user = mlpObject.getUser().result;
 		init_profile_data();
 	}

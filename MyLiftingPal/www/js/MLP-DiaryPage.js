@@ -580,7 +580,7 @@ function clearSearchTables(){
     
         $("#mytable").dataTable().fnDestroy();
         $("#mytableWorkouts").dataTable().fnDestroy();
-        $("#programSearchTable").dataTable().fnDestroy();
+        $("#diary_programSearchTable").dataTable().fnDestroy();
         
         
         $("#searchresults").empty();
@@ -589,7 +589,7 @@ function clearSearchTables(){
         
         document.getElementById('mytable').style.display='none';
         document.getElementById('mytableWorkouts').style.display='none';
-        document.getElementById('programSearchTable').style.display='none';
+        document.getElementById('diary_programSearchTable').style.display='none';
     }
     catch(e){
         console.log(e);
@@ -797,13 +797,13 @@ function diaryProgramSearch(){
         
 
     
-    $('#programSearchTable').DataTable({bFilter: false});
-    document.getElementById('programSearchTable').style.display='table';
+    $('#diary_programSearchTable').DataTable({bFilter: false});
+    document.getElementById('diary_programSearchTable').style.display='table';
         
     
 }
 
-function displayLeftSearchContainer(){
+function diaryDisplayLeftSearchContainer(){
     $("#leftResultsContainer").css({"width": "100%","display":"block"});
     $("#rightResultsContainer").css({"width": "0px","display":"none", "overflow": "hidden"});
     
@@ -815,7 +815,7 @@ function diaryRightResultsContainerUpdate(programId){
     var workouts=globalProgramObjs[programId]['workouts'];
     console.log(globalProgramObjs);
     $('#rightSearchResultsName').empty();
-    $('#rightSearchResultsName').append('<hr><h3>'+name+'</h3><h2><i onclick="displayLeftSearchContainer()"class="fa fa-arrow-left"></i></h2>');
+    $('#rightSearchResultsName').append('<hr><h3>'+name+'</h3><h2><i onclick="diaryDisplayLeftSearchContainer()"class="fa fa-arrow-left"></i></h2>');
     
     toAppend='';
     if (typeof workouts === null){
@@ -883,7 +883,7 @@ function diaryRightResultsContainerUpdate(programId){
             
         }
      toAppend+='<div style="width:100%"><a href="javascript:diaryUpdateModalProgramAdd('+programId+','+"'"+name+"'"+');" style="width:60px; margin-bottom: 4px; z-index:10; background-color: rgb(0, 94, 134);color:white" class="btn btn-default btn-circle-main"><i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i></a></div>';
-     toAppend+='<br><h2><i onclick="displayLeftSearchContainer()" class="fa fa-arrow-left"></i></h2>';
+     toAppend+='<br><h2><i onclick="diaryDisplayLeftSearchContainer()" class="fa fa-arrow-left"></i></h2>';
     $('#rightResultsContent').empty();
     $('#rightResultsContent').append(toAppend);
     

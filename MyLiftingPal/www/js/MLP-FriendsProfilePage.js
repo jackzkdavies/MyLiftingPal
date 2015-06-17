@@ -7,13 +7,13 @@ function init_friends_profile(f_id){
 	userProfilePhoto = friendsInfo['data']['dp'];
 	friendsusername = friendsInfo['data']['username'];
 	friendsId = f_id;
-	weight = friendsInfo['data'][7];
-	gender = friendsInfo['data'][8];
-	age = friendsInfo['data'][9];
-	about = friendsInfo['data'][11];
-	why = friendsInfo['data'][12];
-	goals = friendsInfo['data'][13];
-	stats = friendsInfo['data']['stats'];
+	friendsWeight = friendsInfo['data'][7];
+	friendsGender = friendsInfo['data'][8];
+	friendsAge = friendsInfo['data'][9];
+	friendsAbout = friendsInfo['data'][11];
+	friendsWhy = friendsInfo['data'][12];
+	friendsGoals = friendsInfo['data'][13];
+	friendsStats = friendsInfo['data']['stats'];
 	friends_units = friendsInfo['data']['units'];
 }
 
@@ -25,21 +25,21 @@ function friendsprofile_displayUser(){
 	var dp = '<img class="firindsprofilePicture" src='+userProfilePhoto+' alt="">';
 	document.getElementById('friendsprofilepicture').innerHTML=dp;
 	document.getElementById('friendsusername').innerHTML='<h3>'+friendsusername+'</h3>';
-	document.getElementById('friendsdetails').innerHTML=weight+friends_units+'&nbsp;•&nbsp;' + gender+'&nbsp;•&nbsp;' +age+'&nbsp;years old';
-	document.getElementById('friendsaboutMe').innerHTML=about;
-	document.getElementById('friendswhy').innerHTML="<h5>Why I Lift</h5>"+why;
-	document.getElementById('friendsgoals').innerHTML="<h5>My Lifting Goals</h5>"+goals;    
+	document.getElementById('friendsdetails').innerHTML=friendsWeight+friends_units+'&nbsp;•&nbsp;' + friendsGender+'&nbsp;•&nbsp;' +friendsAge+'&nbsp;years old';
+	document.getElementById('friendsaboutMe').innerHTML=friendsAbout;
+	document.getElementById('friendswhy').innerHTML="<h5>Why I Lift</h5>"+friendsWhy;
+	document.getElementById('friendsgoals').innerHTML="<h5>My Lifting Goals</h5>"+friendsGoals;    
 	friendsdisplayMaxes();
 
 }
 
 function friendsdisplayMaxes(){
 	$("#friendsmaxes").empty();
-	for(lifts in stats){
-		var liftName = stats[lifts]['name'];
-		var liftWeight = stats[lifts]['onerm'];
-		var type = stats[lifts]['type'];
-		$("#friendsmaxes").append(liftName+': '+liftWeight+friends_units+' ('+type+')<br>');
+	for(lifts in friendsStats){
+		var liftName = friendsStats[lifts]['name'];
+		var liftfriendsWeight = friendsStats[lifts]['onerm'];
+		var type = friendsStats[lifts]['type'];
+		$("#friendsmaxes").append(liftName+': '+liftfriendsWeight+friends_units+' ('+type+')<br>');
 	}
 }
 

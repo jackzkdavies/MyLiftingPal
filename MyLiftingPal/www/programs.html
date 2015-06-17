@@ -58,7 +58,7 @@
 	  
 	  
 	<div class="w-tab-pane w--tab-active w-clearfix" data-w-tab="Search">
-	  <input class="w-input seachexerciseinput" id="programseachterm" type="text" placeholder="Search Existing Programs" name="workoutsearch" required="required" data-name="workoutsearch">
+	  <input class="w-input seachexerciseinput" id="program_programseachterm" type="text" placeholder="Search Existing Programs" name="workoutsearch" required="required" data-name="workoutsearch">
 		<script>
 			$("#programseachterm").keyup(function (e) {
 			   if (e.keyCode == 13) {
@@ -70,23 +70,23 @@
 		  <div style="width: 100%"><a class="button addexercisetocurrentday" href="javascript:programSearch()"><strong>Submit Search</strong></a></div>
 		  
 	   
-	  <div id="outerResultsContainer" style=";width: 100%;background-color: ;float:left">
-			<div id="leftResultsContainer" style="height:100%;width: 100%;float:left;background-color:">
-				<table id='programSearchTable' style='display: none; text-align:left; text-shadow: 0px 0px rgba(255, 255, 255, 0);'>
+	  <div id="program_outerResultsContainer" style=";width: 100%;background-color: ;float:left">
+			<div id="program_leftResultsContainer" style="height:100%;width: 100%;float:left;background-color:">
+				<table id='program_programSearchTable' style='display: none; text-align:left; text-shadow: 0px 0px rgba(255, 255, 255, 0);'>
 					<thead>
 						<tr>
 							<td style='color:black; font-weight: bold;text-align: center'>Name</td>
 						</tr>
 					</thead>
-					<tbody id ="searchResultsProgram">
+					<tbody id ="program_searchResultsProgram">
 
 					</tbody>
 				</table>
 			</div>
 
-			<div id="rightResultsContainer" style="height:100%;width: 0%;float:left;background-color: ">
-				<p id="rightSearchResultsName"></p>
-				<div id='rightResultsContent'></div>
+			<div id="program_rightResultsContainer" style="height:100%;width: 0%;float:left;background-color: ">
+				<p id="program_rightSearchResultsName"></p>
+				<div id='program_rightResultsContent'></div>
 
 			</div>
 		  

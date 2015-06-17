@@ -324,15 +324,15 @@ function programSearch(){
     
     //clean up from any past searches
     try{
-        $("#programSearchTable").dataTable().fnDestroy();
-        $("#searchResultsProgram").empty();
-        document.getElementById('programSearchTable').style.display='none';
+        $("#program_programSearchTable").dataTable().fnDestroy();
+        $("#program_searchResultsProgram").empty();
+        document.getElementById('program_programSearchTable').style.display='none';
     }
     catch(e){console.log(e);}
     
     
     var searchTerms =['name','userid'];
-    var searchTerm= (document.getElementById("programseachterm").value.toString()).trim();
+    var searchTerm= (document.getElementById("program_programseachterm").value.toString()).trim();
     
     if (searchTerm ===""){
         $("#failedProgramSearch").append("Please enter a search term");
@@ -361,22 +361,22 @@ function programSearch(){
     for (key in globalProgramObjs){    
         if (globalProgramObjs.hasOwnProperty(key)) { 
             toAppend = "<tr onclick='rightResultsContainerUpdate("+key+")'><td>" + globalProgramObjs[key]['name'] +"</td></tr>";
-            $('#searchResultsProgram').append(toAppend);
+            $('#program_searchResultsProgram').append(toAppend);
         }
 
     }
         
 
     
-    $('#programSearchTable').DataTable({bFilter: false});
-    document.getElementById('programSearchTable').style.display='table';
+    $('#program_programSearchTable').DataTable({bFilter: false});
+    document.getElementById('program_programSearchTable').style.display='table';
         
     console.log(globalProgramObjs);
     
 }
 function displayLeftSearchContainer(){
-    $("#leftResultsContainer").css({"width": "100%","display":"block"});
-    $("#rightResultsContainer").css({"width": "0px","display":"none", "overflow": "hidden"});
+    $("#program_leftResultsContainer").css({"width": "100%","display":"block"});
+    $("#program_rightResultsContainer").css({"width": "0px","display":"none", "overflow": "hidden"});
     
 }
 
@@ -385,8 +385,8 @@ function rightResultsContainerUpdate(programId){
     var duration=globalProgramObjs[programId]['duration'];
     var workouts=globalProgramObjs[programId]['workouts'];
     console.log(globalProgramObjs);
-    $('#rightSearchResultsName').empty();
-    $('#rightSearchResultsName').append('<hr><h3>'+name+'</h3><h2><i onclick="displayLeftSearchContainer()"class="fa fa-arrow-left"></i></h2>');
+    $('#program_rightSearchResultsName').empty();
+    $('#program_rightSearchResultsName').append('<hr><h3>'+name+'</h3><h2><i onclick="displayLeftSearchContainer()"class="fa fa-arrow-left"></i></h2>');
     
     toAppend='';
     if (typeof workouts === null){
@@ -455,11 +455,11 @@ function rightResultsContainerUpdate(programId){
         }
      toAppend+='<div style="width:100%"><a href="javascript:updateModalProgramAdd('+programId+','+"'"+name+"'"+');" class="addingButtonsMain btn btn-default btn-circle-main"><i class="fa fa-plus fa-2x" style="line-height: 1.9 !important"></i></a></div>';
      toAppend+='<br><h2><i onclick="displayLeftSearchContainer()" class="fa fa-arrow-left"></i></h2>';
-    $('#rightResultsContent').empty();
-    $('#rightResultsContent').append(toAppend);
+    $('#program_rightResultsContent').empty();
+    $('#program_rightResultsContent').append(toAppend);
     
-    $("#rightResultsContainer").css({"width": "100%","display":"block"});
-    $("#leftResultsContainer").css({"width": "0px", "overflow": "hidden","display":"none"});
+    $("#program_rightResultsContainer").css({"width": "100%","display":"block"});
+    $("#program_leftResultsContainer").css({"width": "0px", "overflow": "hidden","display":"none"});
 
     
 }
