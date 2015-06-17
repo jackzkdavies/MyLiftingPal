@@ -62,6 +62,7 @@ function toggleDropDownArrow(i){
 }
 
 function checkResults(){
+modalHistoryTest={};
     currentTotals={};
     var firstDiv=true;
     var test = [];
