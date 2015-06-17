@@ -430,29 +430,18 @@ function diaryPageAddExToResults(data){
     }
 }
 
-function addWorkoutToDiary(inputID){
-    loadingModal("Adding Workout...");
-    try{
-        mlpObject.addResults({workoutid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result;
-        $('#modalDisplayWorkoutExercies').modal('hide');
-        checkResults();
-    }
-    catch(e){
-        
-    } 
-}
 
 
 //Code for modals
-function diaryModalDisplayWorkoutExercies(inputID){
+function diarydiarymodalDisplayWorkoutExercies(inputID){
 
     var searchResult = mlpObject.getWorkouts({id:inputID}).result['data'][0];
     var name = searchResult['name']
     var exercises = searchResult['exercises'];
  
     
-    $("#modalDisplayWorkoutExerciesHeader").empty();
-    $("#modalDisplayWorkoutExerciesHeader").append(name);
+    $("#diarymodalDisplayWorkoutExerciesHeader").empty();
+    $("#diarymodalDisplayWorkoutExerciesHeader").append(name);
     
     var toAppend='<table><tr style="color: rgb(0, 94, 134); font-weight:bold;" ><td>Exercise</td><td>Weight</td><td>Reps</td><td>Sets</td><td>RPE</td></tr>';
     
@@ -481,17 +470,17 @@ function diaryModalDisplayWorkoutExercies(inputID){
     var buttons='<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>'+
             '<button onclick="addWorkoutToDiary('+inputID+')" type="button" class="btn btn-primary">Add</button>';
     
-    $("#modalDisplayWorkoutExerciesFooter").empty();
-    $("#modalDisplayWorkoutExerciesFooter").append(buttons);
+    $("#diarymodalDisplayWorkoutExerciesFooter").empty();
+    $("#diarymodalDisplayWorkoutExerciesFooter").append(buttons);
     
 
-    $("#modalDisplayWorkoutExerciesBody").empty();
-    $("#modalDisplayWorkoutExerciesBody").append(toAppend);
+    $("#diarymodalDisplayWorkoutExerciesBody").empty();
+    $("#diarymodalDisplayWorkoutExerciesBody").append(toAppend);
     
     var options = {
     "backdrop" : "true",
     "show":"true"};
-    $('#modalDisplayWorkoutExercies').modal(options);
+    $('#diarymodalDisplayWorkoutExercies').modal(options);
 }
 
 //Code for search section on diary page
@@ -731,7 +720,7 @@ function diaryPageWorkoutSeach(){
               if (globalWorkoutObjs.hasOwnProperty(key)) {    
                   
         var useDate=[year,(month+1),date];
-        toAppend += "<tr onClick='diaryModalDisplayWorkoutExercies("+key+")'>";
+        toAppend += "<tr onClick='diarydiarymodalDisplayWorkoutExercies("+key+")'>";
        
 
         for (st in searchTerms){

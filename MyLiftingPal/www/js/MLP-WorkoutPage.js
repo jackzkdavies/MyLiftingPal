@@ -374,6 +374,8 @@ function addWorkoutToDiary(inputID){
 	loadingModal("Adding Workout To Diary...")
     try{
         console.log(mlpObject.addResults({workoutid:inputID, assigneddate:year+"-"+(month+1)+"-"+date}).result);
+		$('#diarymodalDisplayWorkoutExercies').modal('hide');
+        checkResults();
     }
     catch(e){
         
