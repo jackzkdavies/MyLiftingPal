@@ -34,7 +34,7 @@ try{
             }
             else{
                 console.log('Auto Login Failed, Returning to login page.')
-                alert('Auto Login Failed, Returning to login page.');
+                //alert('Auto Login Failed, Returning to login page.');
                 localStorage.clear();
                 setTimeout(function () {
                     if(locationTest[0].indexOf('index') <= -1 ){
@@ -60,7 +60,7 @@ catch(e){
     }
     document.getElementById("ConnectionError").innerHTML="Can not connect to servers, make sure you are connected to the internet.";
     console.log(e+' :Could not create connection with server. Ending Sesson');
-    alert(e+' :Could not create connection with server. Ending Sesson');
+    //alert(e+' :Could not create connection with server. Ending Sesson');
     throw new Error();  
      
 }

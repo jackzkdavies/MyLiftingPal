@@ -104,7 +104,7 @@ modalHistoryTest={};
                             toAppend +="<div style=''></div>"; 
                         }
                         else{
-                            toAppend +="<div style=''><hr style='width:100%;float:left;  border-top:3px solid rgb(0, 94, 134); margin-top: 20px; */' /></div>"; 
+                            toAppend +="<div style=''><hr style='width:100%;float:left;  border-top:3px solid rgb(51, 51, 51); margin-top: 20px; */' /></div>"; 
                         }
                         }
                         toAppend += '<div style="width:100%; float:left">'+
